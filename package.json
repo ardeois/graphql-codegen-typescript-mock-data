@@ -23,7 +23,7 @@
     ],
     "dependencies": {
         "@graphql-codegen/plugin-helpers": "^1.8.1",
-        "faker": "Marak/faker.js",
+        "casual": "^1.6.2",
         "graphql": "^14.5.8"
     },
     "devDependencies": {

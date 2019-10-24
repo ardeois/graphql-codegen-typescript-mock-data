@@ -1,5 +1,5 @@
 import { printSchema, parse, visit, ASTKindToNode, NamedTypeNode, TypeNode, VisitFn } from 'graphql';
-import faker from 'faker';
+import casual from 'casual';
 import { toPascalCase, PluginFunction } from '@graphql-codegen/plugin-helpers';
 
 const toMockName = (name: string) => {
@@ -32,21 +32,21 @@ const getNamedType = (
         return '';
     }
 
-    faker.seed(hashedString(typeName + fieldName));
+    casual.seed(hashedString(typeName + fieldName));
     const name = namedType.name.value;
     switch (name) {
         case 'String':
-            return `'${faker.lorem.word()}'`;
+            return `'${casual.word}'`;
         case 'Float':
-            return faker.random.number({ min: 0, max: 10, precision: 0.01 });
+            return Math.round(casual.double(0, 10) * 100) / 100;
         case 'ID':
-            return `'${faker.random.uuid()}'`;
+            return `'${casual.uuid}'`;
         case 'Boolean':
-            return faker.random.boolean();
+            return casual.boolean;
         case 'Int':
-            return faker.random.number({ min: 0, max: 9999 });
+            return casual.integer(0, 9999);
         case 'Date':
-            return `'${faker.date.past().toISOString()}'`;
+            return `'${new Date(casual.unix_time).toISOString()}'`;
         default:
             const foundType = types.find(enumType => enumType.name === name);
             if (foundType) {
