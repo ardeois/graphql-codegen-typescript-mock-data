@@ -2,55 +2,9 @@ import { printSchema, parse, visit, ASTKindToNode, NamedTypeNode, TypeNode, Visi
 import faker from 'faker';
 import { toPascalCase, PluginFunction } from '@graphql-codegen/plugin-helpers';
 
-const mockBuilderHelper = `
-function lowerFirst(value: string) {
-    return value.replace(/^\\w/, c => c.toLowerCase());
-}
-
-/**
- * Creates a new mock object for use on mock providers, or unit tests.
- * @param {T} obj Initial object from which mock will be created
- * @returns {T} Object with auto-generated methods \`withPropertyName\`
- * for each property \`propertyName\` of the initial object.
- * @note Will failed to create accessors for optional TypeScript properties
- * like \`propertyName?: boolean\` that will result in no property created in JavaScript.
- */
-export function mockBuilder<T extends Object>(obj: T): T & any {
-    let proxy = new Proxy(obj, {
-        get: (target: T, key: keyof T) => {
-            if (typeof key === 'string' && key.startsWith('with') && !(key in target)) {
-                // It's a builder property \`withXxxx\` we dynamically create the setter function
-                let property = key.substring(4);
-                property = property in target ? property : lowerFirst(property);
-                if (property in target) {
-                    return function(value: any) {
-                        // Property is a simple value
-                        // @ts-ignore
-                        target[property] = value;
-                        return proxy;
-                    };
-                } else {
-                    throw \`Property '\${property}' doesn't exist for object \${target.constructor.name ||
-    typeof target}\`;
-                }
-            }
-            return target[key];
-        }
-    });
-
-    return proxy;
-}`;
-
 const toMockName = (name: string) => {
     const isVowel = name.match(/^[AEIO]/);
     return isVowel ? `an${name}` : `a${name}`;
-};
-
-const capitalize = (s: unknown) => {
-    if (typeof s !== 'string') {
-        return '';
-    }
-    return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
 const hashedString = (value: string) => {
@@ -131,7 +85,7 @@ const generateMockValue = (
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TypescriptMocksPluginConfig {
-    typesFile: string;
+    typesFile?: string;
 }
 
 interface TypeItem {
@@ -197,20 +151,12 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 typeName,
                 mockFn: () => {
                     const mockFields = fields ? fields.map(({ mockFn }: any) => mockFn(typeName)).join('\n') : '';
-                    const fieldNames = fields ? fields.map(({ name }) => name) : [];
-
-                    const mockInterface = `interface ${typeName}Mock extends ${typeName} {
-    ${fieldNames
-        .map(name => `with${capitalize(name)}: (value: ${typeName}['${name}']) => ${typeName}Mock;`)
-        .join('\n    ')}
-}`;
 
                     return `
-${mockInterface}
-
-export const ${toMockName(typeName)} = (): ${typeName}Mock => {
-    return mockBuilder<${typeName}>({
+export const ${toMockName(typeName)} = (overrides?: Partial<${typeName}>): ${typeName} => {
+    return {
 ${mockFields}
+        ...overrides
     });
 };`;
                 },
@@ -220,7 +166,7 @@ ${mockFields}
 
     const result: any = visit(astNode, { leave: visitor });
     const definitions = result.definitions.filter((definition: any) => !!definition);
-    const typesFile = config.typesFile.replace(/\.[\w]+$/, '');
+    const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
     const typeImports = definitions
         .map(({ typeName }: { typeName: string }) => typeName)
         .filter((typeName: string) => !!typeName);
@@ -233,8 +179,6 @@ ${mockFields}
 import { ${typeImports.join(', ')} } from '${typesFile}';\n`
         : '';
 
-    return `${typesFileImport}
-${mockBuilderHelper}
-${mockFns.map((mockFn: Function) => mockFn()).join('\n')}
+    return `${typesFileImport}${mockFns.map((mockFn: Function) => mockFn()).join('\n')}
 `;
 };

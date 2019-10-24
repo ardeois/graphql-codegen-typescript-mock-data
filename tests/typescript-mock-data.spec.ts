@@ -25,9 +25,16 @@ it('can be called', async () => {
 });
 
 it('should generate mock data functions', async () => {
+    const result = await plugin(testSchema, [], {});
+
+    expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data functions with external types file import', async () => {
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
-    // @ts-ignore
+    expect(result).toContain("import { Avatar, User } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
