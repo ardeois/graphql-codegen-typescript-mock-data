@@ -1,0 +1,58 @@
+{
+    "name": "graphql-codegen-typescript-mock-data",
+    "version": "0.0.1",
+    "description": "GraphQL Codegen plugin for building mock data",
+    "main": "dist/commonjs/index.js",
+    "module": "dist/esnext/index.js",
+    "typings": "dist/esnext/index.d.ts",
+    "repository": "http://github.com/LandrAudio/graphql-codegen-typescript-mocks",
+    "author": {
+        "name": "Corentin Ardeois",
+        "email": "cardeois@landr.com",
+        "url": "https://github.com/ardeois"
+    },
+    "license": "MIT",
+    "keywords": [
+        "graphql",
+        "codegen",
+        "graphql-codegen",
+        "plugin",
+        "typescript",
+        "mocks",
+        "fakes"
+    ],
+    "dependencies": {
+        "@graphql-codegen/plugin-helpers": "^1.8.1",
+        "faker": "Marak/faker.js",
+        "graphql": "^14.5.8"
+    },
+    "devDependencies": {
+        "@graphql-codegen/testing": "^1.8.2",
+        "@types/faker": "^4.1.6",
+        "@types/jest": "^24.0.19",
+        "@typescript-eslint/eslint-plugin": "^1.4.2",
+        "@typescript-eslint/parser": "^1.4.2",
+        "eslint": "6.0.0",
+        "eslint-config-landr": "0.1.0",
+        "eslint-config-prettier": "^4.1.0",
+        "eslint-plugin-import": "^2.17.2",
+        "eslint-plugin-jest": "^22.20.0",
+        "eslint-plugin-prettier": "^3.0.1",
+        "graphql-toolkit": "^0.5.19-beta.0",
+        "jest": "^24.9.0",
+        "prettier": "^1.18.2",
+        "prettier-config-landr": "^0.0.6",
+        "ts-jest": "^24.1.0",
+        "typescript": "^3.3.3333"
+    },
+    "sideEffects": false,
+    "scripts": {
+        "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
+        "test": "jest"
+    },
+    "files": [
+        "dist/**/*",
+        "LICENCE",
+        "README.md"
+    ]
+}

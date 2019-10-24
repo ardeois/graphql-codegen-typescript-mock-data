@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should generate mock data functions 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
+import { Avatar, User } from './types/graphql';
+
+
+function lowerFirst(value: string) {
+    return value.replace(/^\\\\w/, c => c.toLowerCase());
+}
+
+/**
+ * Creates a new mock object for use on mock providers, or unit tests.
+ * @param {T} obj Initial object from which mock will be created
+ * @returns {T} Object with auto-generated methods \`withPropertyName\`
+ * for each property \`propertyName\` of the initial object.
+ * @note Will failed to create accessors for optional TypeScript properties
+ * like \`propertyName?: boolean\` that will result in no property created in JavaScript.
+ */
+export function mockBuilder<T extends Object>(obj: T): T & any {
+    let proxy = new Proxy(obj, {
+        get: (target: T, key: keyof T) => {
+            if (typeof key === 'string' && key.startsWith('with') && !(key in target)) {
+                // It's a builder property \`withXxxx\` we dynamically create the setter function
+                let property = key.substring(4);
+                property = property in target ? property : lowerFirst(property);
+                if (property in target) {
+                    return function(value: any) {
+                        // Property is a simple value
+                        // @ts-ignore
+                        target[property] = value;
+                        return proxy;
+                    };
+                } else {
+                    throw \`Property '\${property}' doesn't exist for object \${target.constructor.name ||
+    typeof target}\`;
+                }
+            }
+            return target[key];
+        }
+    });
+
+    return proxy;
+}
+
+interface AvatarMock extends Avatar {
+    withId: (value: Avatar['id']) => AvatarMock;
+    withUrl: (value: Avatar['url']) => AvatarMock;
+}
+
+export const anAvatar = (): AvatarMock => {
+    return mockBuilder<Avatar>({
+        id: '1550ff93-cd31-49b4-bc38-ef1cb68bdc38',
+        url: 'aliquid',
+    });
+};
+
+interface UserMock extends User {
+    withId: (value: User['id']) => UserMock;
+    withLogin: (value: User['login']) => UserMock;
+    withAvatar: (value: User['avatar']) => UserMock;
+}
+
+export const aUser = (): UserMock => {
+    return mockBuilder<User>({
+        id: 'b5756f00-51a6-422a-9a7d-c13ee6a63750',
+        login: 'libero',
+        avatar: anAvatar(),
+    });
+};
+"
+`;
