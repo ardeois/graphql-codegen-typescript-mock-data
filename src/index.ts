@@ -157,7 +157,7 @@ export const ${toMockName(typeName)} = (overrides?: Partial<${typeName}>): ${typ
     return {
 ${mockFields}
         ...overrides
-    });
+    };
 };`;
                 },
             };
