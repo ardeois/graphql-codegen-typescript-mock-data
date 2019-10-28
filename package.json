@@ -1,11 +1,14 @@
 {
     "name": "graphql-codegen-typescript-mock-data",
-    "version": "0.0.1",
+    "version": "0.0.1-beta",
     "description": "GraphQL Codegen plugin for building mock data",
     "main": "dist/commonjs/index.js",
     "module": "dist/esnext/index.js",
     "typings": "dist/esnext/index.d.ts",
-    "repository": "http://github.com/LandrAudio/graphql-codegen-typescript-mocks",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ardeois/graphql-codegen-typescript-mock-data"
+    },
     "author": {
         "name": "Corentin Ardeois",
         "email": "corentin.ardeois@gmail.com",
@@ -27,12 +30,13 @@
         "graphql": "^14.5.8"
     },
     "devDependencies": {
+        "@auto-it/conventional-commits": "^7.12.3",
         "@graphql-codegen/testing": "^1.8.2",
         "@types/faker": "^4.1.6",
         "@types/jest": "^24.0.19",
         "@typescript-eslint/eslint-plugin": "^1.4.2",
         "@typescript-eslint/parser": "^1.4.2",
-        "auto": "^7.12.2",
+        "auto": "^7.12.3",
         "eslint": "6.0.0",
         "eslint-config-landr": "0.1.0",
         "eslint-config-prettier": "^4.1.0",
@@ -49,7 +53,8 @@
     "sideEffects": false,
     "scripts": {
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
-        "test": "jest"
+        "test": "jest",
+        "release": "auto shipit"
     },
     "files": [
         "dist/**/*",

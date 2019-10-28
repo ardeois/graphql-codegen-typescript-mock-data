@@ -2,17 +2,20 @@
 # yarn lockfile v1
 
 
-"@atomist/slack-messages@~1.1.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@atomist/slack-messages/-/slack-messages-1.1.1.tgz#9de42932e89065fb4fe4842978ca2d1ed3424cea"
-  integrity sha512-m2OzlTDbhvzK4hgswH9Lx0cdpq1AntXu53Klz5RGkFfuoDvKsnlU7tmtVfNWtUiP0zZbGtrb/BZYH7aB6TRnMA==
-
-"@auto-it/core@^7.12.2":
-  version "7.12.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/core/-/core-7.12.2.tgz#1b070829a5f9b3df64fbbee8f5eaf613d3ca4941"
-  integrity sha512-H1JtXElJ0HVMnnHA6ZYTC00EsRV+gISPqtmRwJLXMqtn9bDGFOQw9lLNrmOA0Uab4NUTGD2c6x3ZSYH5Zlai8w==
+"@auto-it/conventional-commits@^7.12.3":
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@auto-it/conventional-commits/-/conventional-commits-7.12.3.tgz#9ea966cfde6ee5ebe3c1e73c3af549f783ad80b0"
+  integrity sha512-naGOWJS5SYWaWfv1Bb1NH16UP46yhyR/aFEAV8x2GPGKuzLFTiMKulU/WS8Y/DNxnzf8MNfmk0lVmhUMs4aZmw==
   dependencies:
-    "@atomist/slack-messages" "~1.1.0"
+    "@auto-it/core" "^7.12.3"
+    parse-commit-message "4.0.0"
+    tslib "1.10.0"
+
+"@auto-it/core@^7.12.3":
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@auto-it/core/-/core-7.12.3.tgz#d7211b5edd31620f0e2fa1a16660a599c84c354f"
+  integrity sha512-qvxD6QxEjQmx5L0/S4Pq3suzq5Jgof/jqZ862yYE9XgzidSd5kaAV380lMdEghU98pkImnHNq1KEGl5cmZJ6yw==
+  dependencies:
     "@octokit/graphql" "^4.0.0"
     "@octokit/plugin-enterprise-compatibility" "^1.1.1"
     "@octokit/plugin-retry" "^2.2.0"
@@ -38,12 +41,12 @@
     typescript-memoize "^1.0.0-alpha.3"
     url-join "^4.0.0"
 
-"@auto-it/npm@^7.12.2":
-  version "7.12.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/npm/-/npm-7.12.2.tgz#0400848044896c091a19200a54e2e92187f3817e"
-  integrity sha512-1m+0jIa7qxf2PfextFA5FcMzvsmrXyn+wVGv24pnjc9yzA/3l7KTrMn1023PO5HNTFjzpsj/vh1P71sPTK9umQ==
+"@auto-it/npm@^7.12.3":
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@auto-it/npm/-/npm-7.12.3.tgz#981c33415b71cf9af0940c86450fbba9bc7c9399"
+  integrity sha512-9197U26Hmy129jKRM9pDOvP0c5UA+97VIDuMQUxU1jv6ejxSOiXBaafsn0E7q7nRgQZoUFsTYkx1xIP4BPVOCQ==
   dependencies:
-    "@auto-it/core" "^7.12.2"
+    "@auto-it/core" "^7.12.3"
     env-ci "^4.1.1"
     get-monorepo-packages "^1.1.0"
     parse-author "^2.0.0"
@@ -55,12 +58,12 @@
     url-join "^4.0.0"
     user-home "^2.0.0"
 
-"@auto-it/released@^7.12.2":
-  version "7.12.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/released/-/released-7.12.2.tgz#0f0c821c5cbe9913da21b307e16fd2bea249b285"
-  integrity sha512-crEM4muvbzpT4eOqPwTqV4V+eYfI6vuqYBsu8On4sOJDFb2JGlg8Gp6L6Y/2qzG9strycJDfhSOhvANIXYID1A==
+"@auto-it/released@^7.12.3":
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@auto-it/released/-/released-7.12.3.tgz#e2f7ddd750193d4a534225adb6adeec0263d3b92"
+  integrity sha512-RUMdmoiCgIdNJ73oAwZxAllTO370Upq+x6PKL1kAtArvC6Ow9zgAgPBrwGs4VEByjlCbTSgiVaZHfzHh3TAeKw==
   dependencies:
-    "@auto-it/core" "^7.12.2"
+    "@auto-it/core" "^7.12.3"
     deepmerge "^4.0.0"
     tslib "1.10.0"
 
@@ -985,14 +988,14 @@ author-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/author-regex/-/author-regex-1.0.0.tgz#d08885be6b9bbf9439fe087c76287245f0a81450"
   integrity sha1-0IiFvmubv5Q5/gh8dihyRfCoFFA=
 
-auto@^7.12.2:
-  version "7.12.2"
-  resolved "https://registry.yarnpkg.com/auto/-/auto-7.12.2.tgz#8dac5704254f5675aaa408089d7d0dac3d9e1f2b"
-  integrity sha512-DJw/BQM2Xlh/GFzwIh2x97D+32cq5lxaqzO7GCfQ8VnpAquhxtlovFJXm4Y7E+bN3WgGyVIb9wxROllnV6EEyw==
+auto@^7.12.3:
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/auto/-/auto-7.12.3.tgz#afab0ec9b759a98c37a780c9c11cb6f37254475c"
+  integrity sha512-IdgUoDdQ95rozAEJKEF7D5a/1v1iPk6FMxicVPruUueaQd7Xfymv2CTJJBOPAEfuqL5TkAL00L2WQrgLetnpNw==
   dependencies:
-    "@auto-it/core" "^7.12.2"
-    "@auto-it/npm" "^7.12.2"
-    "@auto-it/released" "^7.12.2"
+    "@auto-it/core" "^7.12.3"
+    "@auto-it/npm" "^7.12.3"
+    "@auto-it/released" "^7.12.3"
     chalk "^2.4.2"
     command-line-application "^0.9.3"
     dedent "^0.7.0"
@@ -4134,6 +4137,11 @@ parse-author@^2.0.0:
   integrity sha1-00YL8d3Q367tQtp1QkLmX7aEqB8=
   dependencies:
     author-regex "^1.0.0"
+
+parse-commit-message@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-4.0.0.tgz#e24d53231c720224a96086ac33c8e9e0a3dae557"
+  integrity sha512-i06BJjUoGvIGJaiaLKW4WEM9V8+b98dLxxXCmK5mM2egKMnP29kTlweW2uMnwVJjG0v0W7kPGt/K4sSZVlLmvA==
 
 parse-github-url@1.0.2:
   version "1.0.2"

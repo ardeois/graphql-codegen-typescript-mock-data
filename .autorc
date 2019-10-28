@@ -1,0 +1,6 @@
+{
+  "owner": "ardeois",
+  "plugins": [
+    "conventional-commits"
+  ]
+}
