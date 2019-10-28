@@ -39,10 +39,16 @@ jobs: # a collection of steps
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
       - run:
           name: Publish package
-          command: npm publish
+          command: yarn release
 
 workflows:
   version: 2
-  build_and_test:
+  build_and_publish:
     jobs:
       - build
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build

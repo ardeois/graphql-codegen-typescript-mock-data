@@ -5,10 +5,7 @@
     "main": "dist/commonjs/index.js",
     "module": "dist/esnext/index.js",
     "typings": "dist/esnext/index.d.ts",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ardeois/graphql-codegen-typescript-mock-data"
-    },
+    "repository": "ardeois/graphql-codegen-typescript-mock-data",
     "author": {
         "name": "Corentin Ardeois",
         "email": "corentin.ardeois@gmail.com",
@@ -54,7 +51,9 @@
     "scripts": {
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
         "test": "jest",
-        "release": "auto shipit"
+        "version": "yarn version `auto version` -m 'Bump version to: %s [skip ci]'",
+        "publish": "yarn publish && git push --follow-tags --set-upstream origin $branch",
+        "release": "auto changelog && yarn version && yarn publish && auto release"
     },
     "files": [
         "dist/**/*",
