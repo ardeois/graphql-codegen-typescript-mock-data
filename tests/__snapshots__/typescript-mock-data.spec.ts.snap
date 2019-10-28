@@ -4,19 +4,19 @@ exports[`should generate mock data functions 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: '1550ff93-cd31-49b4-bc38-ef1cb68bdc38',
+        id: '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: 'aliquid',
         ...overrides
-    });
+    };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        id: 'b5756f00-51a6-422a-9a7d-c13ee6a63750',
+        id: 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
         login: 'libero',
         avatar: anAvatar(),
         ...overrides
-    });
+    };
 };
 "
 `;
@@ -27,19 +27,19 @@ import { Avatar, User } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: '1550ff93-cd31-49b4-bc38-ef1cb68bdc38',
+        id: '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: 'aliquid',
         ...overrides
-    });
+    };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        id: 'b5756f00-51a6-422a-9a7d-c13ee6a63750',
+        id: 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
         login: 'libero',
         avatar: anAvatar(),
         ...overrides
-    });
+    };
 };
 "
 `;
