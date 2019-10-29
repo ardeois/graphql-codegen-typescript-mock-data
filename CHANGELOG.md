@@ -1,3 +1,15 @@
+# v0.1.1 (Tue Oct 29 2019)
+
+#### 🐛  Bug Fix
+
+- fix: move graphql to peer dependencies [#4](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/4) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.1.0 (Tue Oct 29 2019)
 
 #### 🚀  Enhancement
