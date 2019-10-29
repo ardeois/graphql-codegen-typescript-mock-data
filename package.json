@@ -1,6 +1,6 @@
 {
     "name": "graphql-codegen-typescript-mock-data",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "GraphQL Codegen plugin for building mock data",
     "main": "dist/commonjs/index.js",
     "module": "dist/esnext/index.js",
@@ -51,7 +51,7 @@
     "scripts": {
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
         "test": "jest",
-        "auto:version": "yarn version --`auto version` -m 'Bump version to: %s [skip ci]'",
+        "auto:version": "yarn version --`auto version` --message 'Bump version to: %s [skip ci]'",
         "auto:publish": "yarn publish && git push --follow-tags --set-upstream origin $CIRCLE_BRANCH",
         "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release"
     },
