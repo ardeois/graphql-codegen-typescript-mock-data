@@ -1,3 +1,15 @@
+# v0.1.0 (Tue Oct 29 2019)
+
+#### 🚀  Enhancement
+
+- build: first release [#3](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/3) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.0.5 (Tue Oct 29 2019)
 
 
