@@ -1,6 +1,6 @@
 import '@graphql-codegen/testing';
 
-import { buildSchema, print } from 'graphql';
+import { buildSchema } from 'graphql';
 import { plugin } from '../src';
 
 const testSchema = buildSchema(/* GraphQL */ `
@@ -17,6 +17,16 @@ const testSchema = buildSchema(/* GraphQL */ `
 
     type Query {
         user: User!
+    }
+
+    input UpdateUserInput {
+        id: ID!
+        login: String
+        avatar: Avatar
+    }
+
+    type Mutation {
+        updateUser(user: UpdateUserInput): User
     }
 `);
 
@@ -35,6 +45,6 @@ it('should generate mock data functions with external types file import', async 
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { Avatar, User } from './types/graphql';");
+    expect(result).toContain("import { Avatar, Mutation, UpdateUserInput, User } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });

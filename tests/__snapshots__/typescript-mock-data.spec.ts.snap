@@ -10,6 +10,22 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: aUser(),
+        ...overrides
+    };
+};
+
+export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: 'qui',
+        avatar: anAvatar(),
+        ...overrides
+    };
+};
+
 export const aUser = (overrides?: Partial<User>): User => {
     return {
         id: 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
@@ -23,12 +39,28 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
-import { Avatar, User } from './types/graphql';
+import { Avatar, Mutation, UpdateUserInput, User } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: 'aliquid',
+        ...overrides
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: aUser(),
+        ...overrides
+    };
+};
+
+export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: 'qui',
+        avatar: anAvatar(),
         ...overrides
     };
 };
