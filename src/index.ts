@@ -83,7 +83,16 @@ const generateMockValue = (
     }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+const getMockString = (typeName: string, fields: string) => {
+    return `
+export const ${toMockName(typeName)} = (overrides?: Partial<${typeName}>): ${typeName} => {
+    return {
+${fields}
+        ...overrides
+    };
+};`;
+}
+
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
 }
@@ -138,6 +147,22 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
+        InputObjectTypeDefinition: node => {
+            const fieldName = node.name.value;
+
+            return {
+                typeName: fieldName,
+                mockFn: () => {
+                    const mockFields = node.fields ? node.fields.map((field) => {
+                        const value = generateMockValue(fieldName, field.name.value, types, field.type);
+
+                        return `        ${field.name.value}: ${value},`;
+                    }).join('\n') : '';
+
+                    return getMockString(fieldName, mockFields);
+                },
+            };
+        },
         ObjectTypeDefinition: node => {
             // This function triggered per each type
             const typeName = node.name.value;
@@ -152,13 +177,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: () => {
                     const mockFields = fields ? fields.map(({ mockFn }: any) => mockFn(typeName)).join('\n') : '';
 
-                    return `
-export const ${toMockName(typeName)} = (overrides?: Partial<${typeName}>): ${typeName} => {
-    return {
-${mockFields}
-        ...overrides
-    };
-};`;
+                    return getMockString(typeName, mockFields);
                 },
             };
         },
