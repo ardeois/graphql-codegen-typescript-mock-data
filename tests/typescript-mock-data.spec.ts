@@ -45,6 +45,6 @@ it('should generate mock data functions with external types file import', async 
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { Avatar, Mutation, UpdateUserInput, User } from './types/graphql';");
+    expect(result).toContain("import { Avatar, UpdateUserInput, User } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });

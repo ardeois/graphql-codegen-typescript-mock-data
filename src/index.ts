@@ -167,7 +167,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             // This function triggered per each type
             const typeName = node.name.value;
 
-            if (typeName === 'Query') {
+            if (typeName === 'Query' || typeName === 'Mutation') {
                 return null;
             }
 
