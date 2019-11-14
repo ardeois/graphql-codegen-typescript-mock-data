@@ -1,3 +1,15 @@
+# v0.1.2 (Thu Nov 14 2019)
+
+#### 🐛  Bug Fix
+
+- fix: handle input-object-type definitions [#5](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/5) ([@YevheniiMelikov](https://github.com/YevheniiMelikov))
+
+#### Authors: 1
+
+- Yevhenii Melikov ([@YevheniiMelikov](https://github.com/YevheniiMelikov))
+
+---
+
 # v0.1.1 (Tue Oct 29 2019)
 
 #### 🐛  Bug Fix
