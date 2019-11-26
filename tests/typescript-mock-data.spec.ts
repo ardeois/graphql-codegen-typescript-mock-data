@@ -48,3 +48,11 @@ it('should generate mock data functions with external types file import', async 
     expect(result).toContain("import { Avatar, UpdateUserInput, User } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
+
+it('should generate mock data with typename if addTypename is true', async () => {
+    const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts', addTypename: true });
+
+    expect(result).toBeDefined();
+    expect(result).toContain("import { Avatar, UpdateUserInput, User } from './types/graphql';");
+    expect(result).toMatchSnapshot();
+});
