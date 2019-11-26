@@ -1,3 +1,15 @@
+# v0.1.3 (Tue Nov 26 2019)
+
+#### 🐛  Bug Fix
+
+- fix: add __typename property [#6](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/6) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.1.2 (Thu Nov 14 2019)
 
 #### 🐛  Bug Fix
