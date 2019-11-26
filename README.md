@@ -14,6 +14,10 @@
 
 Defines the file path containing all GraphQL types. This file can also be generated through graphql-codgen
 
+### addTypename (`boolean`, defaultValue: `false`)
+
+Adds `__typename` property to mock data
+
 ## Example of usage
 
 **codegen.yml**
