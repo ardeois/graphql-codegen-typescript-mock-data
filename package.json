@@ -45,7 +45,9 @@
         "eslint-plugin-prettier": "^3.1.2",
         "graphql": "^14.0.0",
         "graphql-toolkit": "^0.7.5",
+        "husky": "^4.2.3",
         "jest": "^25.2.7",
+        "lint-staged": "^10.1.1",
         "prettier": "^2.0.2",
         "prettier-config-landr": "^0.0.7",
         "ts-jest": "^25.3.1",
@@ -56,13 +58,27 @@
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
         "test": "jest",
         "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit",
+        "prettify": "prettier --config ./.prettierrc.js --write",
         "auto:version": "yarn version --`auto version` --message 'Bump version to: %s [skip ci]'",
         "auto:publish": "yarn publish && git push --follow-tags --set-upstream origin $CIRCLE_BRANCH",
         "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release"
     },
+    "lint-staged": {
+        "*.{js,ts,tsx}": [
+            "eslint --quiet --fix"
+        ],
+        "*.{json,md,html}": [
+            "prettier --write"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "files": [
         "dist/**/*",
-        "LICENCE",
+        "LICENSE",
         "README.md"
     ]
 }
