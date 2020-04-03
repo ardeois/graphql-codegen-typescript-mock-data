@@ -1,3 +1,15 @@
+# v0.1.4 (Fri Apr 03 2020)
+
+#### 🐛 Bug Fix
+
+- Fixes broken dependency `toPascalCase` [#7](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/7) ([@keesvanlierop](https://github.com/keesvanlierop))
+
+#### Authors: 1
+
+- Kees van Lierop ([@keesvanlierop](https://github.com/keesvanlierop))
+
+---
+
 # v0.1.3 (Tue Nov 26 2019)
 
 #### 🐛  Bug Fix
