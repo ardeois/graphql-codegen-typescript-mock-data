@@ -1,14 +1,17 @@
 import { printSchema, parse, visit, ASTKindToNode, NamedTypeNode, TypeNode, VisitFn } from 'graphql';
 import casual from 'casual';
 import { PluginFunction } from '@graphql-codegen/plugin-helpers';
-import { pascalCase } from 'pascal-case';	
+import { pascalCase } from 'pascal-case';
 
-export function toPascalCase(str: string) {	
-  if (str.charAt(0) === '_') {	
-    return str.replace(/^(_*)(.*)/, (_match, underscorePrefix, typeName) => `${underscorePrefix}${pascalCase(typeName || '')}`);	
-  }	
+export function toPascalCase(str: string) {
+    if (str.charAt(0) === '_') {
+        return str.replace(
+            /^(_*)(.*)/,
+            (_match, underscorePrefix, typeName) => `${underscorePrefix}${pascalCase(typeName || '')}`,
+        );
+    }
 
-  return pascalCase(str || '');	
+    return pascalCase(str || '');
 }
 
 const toMockName = (name: string) => {
@@ -22,7 +25,7 @@ const hashedString = (value: string) => {
         return hash;
     }
     for (let i = 0; i < value.length; i++) {
-        let char = value.charCodeAt(i);
+        const char = value.charCodeAt(i);
         // eslint-disable-next-line no-bitwise
         hash = (hash << 5) - hash + char;
         // eslint-disable-next-line no-bitwise
@@ -56,14 +59,15 @@ const getNamedType = (
             return casual.integer(0, 9999);
         case 'Date':
             return `'${new Date(casual.unix_time).toISOString()}'`;
-        default:
-            const foundType = types.find(enumType => enumType.name === name);
+        default: {
+            const foundType = types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
                 switch (foundType.type) {
-                    case 'enum':
+                    case 'enum': {
                         // It's an enum
                         const value = foundType.values ? foundType.values[0] : '';
                         return `${foundType.name}.${toPascalCase(value)}`;
+                    }
                     case 'union':
                         // Return the first union type node.
                         return getNamedType(typeName, fieldName, types, foundType.types && foundType.types[0]);
@@ -72,6 +76,7 @@ const getNamedType = (
                 }
             }
             return `${toMockName(name)}()`;
+        }
     }
 };
 
@@ -86,9 +91,10 @@ const generateMockValue = (
             return getNamedType(typeName, fieldName, types, currentType as NamedTypeNode);
         case 'NonNullType':
             return generateMockValue(typeName, fieldName, types, currentType.type);
-        case 'ListType':
+        case 'ListType': {
             const value = generateMockValue(typeName, fieldName, types, currentType.type);
             return `[${value}]`;
+        }
     }
 };
 
@@ -126,19 +132,19 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
-        EnumTypeDefinition: node => {
+        EnumTypeDefinition: (node) => {
             const name = node.name.value;
             if (!types.find((enumType: TypeItem) => enumType.name === name)) {
                 types.push({
                     name,
                     type: 'enum',
-                    values: node.values ? node.values.map(node => node.name.value) : [],
+                    values: node.values ? node.values.map((node) => node.name.value) : [],
                 });
             }
         },
-        UnionTypeDefinition: node => {
+        UnionTypeDefinition: (node) => {
             const name = node.name.value;
-            if (!types.find(enumType => enumType.name === name)) {
+            if (!types.find((enumType) => enumType.name === name)) {
                 types.push({
                     name,
                     type: 'union',
@@ -146,7 +152,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 });
             }
         },
-        FieldDefinition: node => {
+        FieldDefinition: (node) => {
             const fieldName = node.name.value;
 
             return {
@@ -158,7 +164,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
-        InputObjectTypeDefinition: node => {
+        InputObjectTypeDefinition: (node) => {
             const fieldName = node.name.value;
 
             return {
@@ -166,7 +172,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: () => {
                     const mockFields = node.fields
                         ? node.fields
-                              .map(field => {
+                              .map((field) => {
                                   const value = generateMockValue(fieldName, field.name.value, types, field.type);
 
                                   return `        ${field.name.value}: ${value},`;
@@ -178,7 +184,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
-        ObjectTypeDefinition: node => {
+        ObjectTypeDefinition: (node) => {
             // This function triggered per each type
             const typeName = node.name.value;
 
