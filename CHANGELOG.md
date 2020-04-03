@@ -1,3 +1,15 @@
+# v0.2.1 (Fri Apr 03 2020)
+
+#### 🐛 Bug Fix
+
+- fix: add precommit hooks [#11](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/11) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.2.0 (Fri Apr 03 2020)
 
 #### 🚀 Enhancement
