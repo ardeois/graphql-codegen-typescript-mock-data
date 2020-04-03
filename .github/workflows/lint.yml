@@ -1,0 +1,18 @@
+name: lint
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker://borales/yarn:latest
+        with:
+          args: 'install'
+      - name: test
+        uses: docker://borales/yarn:latest
+        with:
+          cmd: 'lint'

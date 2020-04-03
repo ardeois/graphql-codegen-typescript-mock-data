@@ -86,3 +86,22 @@ const user = aUser({ login: 'johndoe' });
 
 // will create a user object with `login` property overridden to `johndoe`
 ```
+
+### Contributing
+
+Feel free to open issues and pull requests. We're always welcome support from the community.
+
+To run this project locally:
+
+- Use Node >= 10
+- Make sure that you have the latest Yarn version (https://yarnpkg.com/lang/en/docs/install/)
+- Clone this repo using `git clone`
+- Run `yarn`
+- Run `yarn build` to build the package
+- Run `yarn test` to make sure everything works
+
+### License
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg?maxAge=2592000)](https://raw.githubusercontent.com/apollostack/apollo-ios/master/LICENSE)
+
+MIT
