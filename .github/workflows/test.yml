@@ -15,4 +15,4 @@ jobs:
       - name: test
         uses: docker://borales/yarn:latest
         with:
-          cmd: 'test'
+          args: 'test'
