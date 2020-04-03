@@ -1,9 +1,9 @@
-name: test
+name: lint
 
 on: [push]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -12,7 +12,7 @@ jobs:
       - uses: docker://borales/yarn:latest
         with:
           args: 'install'
-      - name: test
+      - name: lint
         uses: docker://borales/yarn:latest
         with:
-          args: 'test'
+          args: 'lint'
