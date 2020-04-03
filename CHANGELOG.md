@@ -1,3 +1,15 @@
+# v0.2.0 (Fri Apr 03 2020)
+
+#### 🚀 Enhancement
+
+- feat: update all dependencies [#10](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/10) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.1.4 (Fri Apr 03 2020)
 
 #### 🐛 Bug Fix
