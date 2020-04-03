@@ -4,25 +4,25 @@ exports[`should generate mock data functions 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
-        get url() { return overrides && overrides.url ? overrides.url : 'aliquid'},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
+        get url() { return overrides && 'url' in overrides ? overrides.url! : 'aliquid'},
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
-        get login() { return overrides && overrides.login ? overrides.login : 'qui'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'qui'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
-        get login() { return overrides && overrides.login ? overrides.login : 'libero'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
-        get status() { return overrides && overrides.status ? overrides.status : Status.ONLINE},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'libero'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
+        get status() { return overrides && 'status' in overrides ? overrides.status! : Status.ONLINE},
     };
 };
 "
@@ -34,25 +34,25 @@ import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
-        get url() { return overrides && overrides.url ? overrides.url : 'aliquid'},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
+        get url() { return overrides && 'url' in overrides ? overrides.url! : 'aliquid'},
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
-        get login() { return overrides && overrides.login ? overrides.login : 'qui'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'qui'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
-        get login() { return overrides && overrides.login ? overrides.login : 'libero'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
-        get status() { return overrides && overrides.status ? overrides.status : Status.ONLINE},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'libero'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
+        get status() { return overrides && 'status' in overrides ? overrides.status! : Status.ONLINE},
     };
 };
 "
@@ -64,25 +64,25 @@ import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
-        get url() { return overrides && overrides.url ? overrides.url : 'aliquid'},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
+        get url() { return overrides && 'url' in overrides ? overrides.url! : 'aliquid'},
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
-        get login() { return overrides && overrides.login ? overrides.login : 'qui'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'qui'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
-        get login() { return overrides && overrides.login ? overrides.login : 'libero'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
-        get status() { return overrides && overrides.status ? overrides.status : Status.Online},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'libero'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
+        get status() { return overrides && 'status' in overrides ? overrides.status! : Status.Online},
     };
 };
 "
@@ -95,26 +95,26 @@ import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         __typename: 'Avatar',
-        get id() { return overrides && overrides.id ? overrides.id : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
-        get url() { return overrides && overrides.url ? overrides.url : 'aliquid'},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
+        get url() { return overrides && 'url' in overrides ? overrides.url! : 'aliquid'},
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        get id() { return overrides && overrides.id ? overrides.id : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
-        get login() { return overrides && overrides.login ? overrides.login : 'qui'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'qui'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
         __typename: 'User',
-        get id() { return overrides && overrides.id ? overrides.id : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
-        get login() { return overrides && overrides.login ? overrides.login : 'libero'},
-        get avatar() { return overrides && overrides.avatar ? overrides.avatar : anAvatar()},
-        get status() { return overrides && overrides.status ? overrides.status : Status.ONLINE},
+        get id() { return overrides && 'id' in overrides ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
+        get login() { return overrides && 'login' in overrides ? overrides.login! : 'libero'},
+        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
+        get status() { return overrides && 'status' in overrides ? overrides.status! : Status.ONLINE},
     };
 };
 "
