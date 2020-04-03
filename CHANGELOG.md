@@ -1,3 +1,15 @@
+# v0.1.5 (Fri Apr 03 2020)
+
+#### ⚠️  Pushed to `master`
+
+- feat: update all dependencies ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.1.4 (Fri Apr 03 2020)
 
 #### 🐛 Bug Fix
