@@ -1,6 +1,15 @@
 import { printSchema, parse, visit, ASTKindToNode, NamedTypeNode, TypeNode, VisitFn } from 'graphql';
 import casual from 'casual';
-import { toPascalCase, PluginFunction } from '@graphql-codegen/plugin-helpers';
+import { PluginFunction } from '@graphql-codegen/plugin-helpers';
+import { pascalCase } from 'pascal-case';	
+
+export function toPascalCase(str: string) {	
+  if (str.charAt(0) === '_') {	
+    return str.replace(/^(_*)(.*)/, (_match, underscorePrefix, typeName) => `${underscorePrefix}${pascalCase(typeName || '')}`);	
+  }	
+
+  return pascalCase(str || '');	
+}
 
 const toMockName = (name: string) => {
     const isVowel = name.match(/^[AEIO]/);
