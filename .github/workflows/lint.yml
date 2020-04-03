@@ -3,7 +3,7 @@ name: lint
 on: [push]
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
