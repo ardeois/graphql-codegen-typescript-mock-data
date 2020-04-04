@@ -18,7 +18,7 @@ Defines the file path containing all GraphQL types. This file can also be genera
 
 Adds `__typename` property to mock data
 
-### enumValues (`string`, defaultValue: `upper-case#upperCase`)
+### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
 
 Change the case of the enums. Accept `upper-case#upperCase` or `pascal-case#pascalCase`
 
@@ -37,7 +37,7 @@ generates:
     plugins:
       - 'graphql-codegen-typescript-mock-data':
           typesFile: '../generated-types.ts'
-          enumValues: pascal-case#pascalCase
+          enumValues: upper-case#upperCase
 ```
 
 ## Example or generated code
@@ -46,34 +46,34 @@ Given the following schema:
 
 ```graphql
 type Avatar {
-    id: ID!
-    url: String!
+  id: ID!
+  url: String!
 }
 
 type User {
-    id: ID!
-    login: String!
-    avatar: Avatar
-    status: Status!
+  id: ID!
+  login: String!
+  avatar: Avatar
+  status: Status!
 }
 
 type Query {
-    user: User!
+  user: User!
 }
 
 input UpdateUserInput {
-    id: ID!
-    login: String
-    avatar: Avatar
+  id: ID!
+  login: String
+  avatar: Avatar
 }
 
 enum Status {
-    ONLINE
-    OFFLINE
+  ONLINE
+  OFFLINE
 }
 
 type Mutation {
-    updateUser(user: UpdateUserInput): User
+  updateUser(user: UpdateUserInput): User
 }
 ```
 
@@ -81,27 +81,27 @@ The code generated will look like:
 
 ```typescript
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        get id() { return overrides && 'id' in overrides ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38'},
-        get url() { return overrides && 'url' in overrides ? overrides.url! : 'aliquid'},
-    };
+  return {
+    id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+    url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+  };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        get id() { return overrides && 'id' in overrides ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc'},
-        get login() { return overrides && 'login' in overrides ? overrides.login! : 'qui'},
-        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
-    };
+  return {
+    id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+    login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+    avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+  };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
-    return {
-        get id() { return overrides && 'id' in overrides ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750'},
-        get login() { return overrides && 'login' in overrides ? overrides.login! : 'libero'},
-        get avatar() { return overrides && 'avatar' in overrides ? overrides.avatar! : anAvatar()},
-        get status() { return overrides && 'status' in overrides ? overrides.status! : Status.ONLINE},
-    };
+  return {
+    id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+    login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+    avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+  };
 };
 ```
 
@@ -114,3 +114,22 @@ const user = aUser({ login: 'johndoe' });
 
 // will create a user object with `login` property overridden to `johndoe`
 ```
+
+### Contributing
+
+Feel free to open issues and pull requests. We're always welcome support from the community.
+
+To run this project locally:
+
+- Use Node >= 10
+- Make sure that you have the latest Yarn version (https://yarnpkg.com/lang/en/docs/install/)
+- Clone this repo using `git clone`
+- Run `yarn`
+- Run `yarn build` to build the package
+- Run `yarn test` to make sure everything works
+
+### License
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg?maxAge=2592000)](https://raw.githubusercontent.com/apollostack/apollo-ios/master/LICENSE)
+
+MIT

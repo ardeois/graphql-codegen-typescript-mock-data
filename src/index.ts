@@ -31,7 +31,7 @@ const hashedString = (value: string) => {
         return hash;
     }
     for (let i = 0; i < value.length; i++) {
-        let char = value.charCodeAt(i);
+        const char = value.charCodeAt(i);
         // eslint-disable-next-line no-bitwise
         hash = (hash << 5) - hash + char;
         // eslint-disable-next-line no-bitwise
@@ -66,14 +66,15 @@ const getNamedType = (
             return casual.integer(0, 9999);
         case 'Date':
             return `'${new Date(casual.unix_time).toISOString()}'`;
-        default:
-            const foundType = types.find(enumType => enumType.name === name);
+        default: {
+            const foundType = types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
                 switch (foundType.type) {
-                    case 'enum':
+                    case 'enum': {
                         // It's an enum
                         const value = foundType.values ? foundType.values[0] : '';
                         return `${foundType.name}.${updateTextCase(value, enumValues)}`;
+                    }
                     case 'union':
                         // Return the first union type node.
                         return getNamedType(
@@ -88,6 +89,7 @@ const getNamedType = (
                 }
             }
             return `${toMockName(name)}()`;
+        }
     }
 };
 
@@ -95,17 +97,18 @@ const generateMockValue = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
-    currentType: TypeNode,
     enumValues: EnumValuesTypes,
+    currentType: TypeNode,
 ): string | number | boolean => {
     switch (currentType.kind) {
         case 'NamedType':
             return getNamedType(typeName, fieldName, types, enumValues, currentType as NamedTypeNode);
         case 'NonNullType':
-            return generateMockValue(typeName, fieldName, types, currentType.type, enumValues);
-        case 'ListType':
-            const value = generateMockValue(typeName, fieldName, types, currentType.type, enumValues);
+            return generateMockValue(typeName, fieldName, types, enumValues, currentType.type);
+        case 'ListType': {
+            const value = generateMockValue(typeName, fieldName, types, enumValues, currentType.type);
             return `[${value}]`;
+        }
     }
 };
 
@@ -141,23 +144,23 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
-    const enumValues = config.enumValues || 'upper-case#upperCase';
+    const enumValues = config.enumValues || 'pascal-case#pascalCase';
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
-        EnumTypeDefinition: node => {
+        EnumTypeDefinition: (node) => {
             const name = node.name.value;
             if (!types.find((enumType: TypeItem) => enumType.name === name)) {
                 types.push({
                     name,
                     type: 'enum',
-                    values: node.values ? node.values.map(node => node.name.value) : [],
+                    values: node.values ? node.values.map((node) => node.name.value) : [],
                 });
             }
         },
-        UnionTypeDefinition: node => {
+        UnionTypeDefinition: (node) => {
             const name = node.name.value;
-            if (!types.find(enumType => enumType.name === name)) {
+            if (!types.find((enumType) => enumType.name === name)) {
                 types.push({
                     name,
                     type: 'union',
@@ -165,19 +168,19 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 });
             }
         },
-        FieldDefinition: node => {
+        FieldDefinition: (node) => {
             const fieldName = node.name.value;
 
             return {
                 name: fieldName,
                 mockFn: (typeName: string) => {
-                    const value = generateMockValue(typeName, fieldName, types, node.type, enumValues);
+                    const value = generateMockValue(typeName, fieldName, types, enumValues, node.type);
 
-                    return `        ${fieldName}: overrides && '${fieldName}' in overrides ? overrides.${fieldName}! : ${value},`;
+                    return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
                 },
             };
         },
-        InputObjectTypeDefinition: node => {
+        InputObjectTypeDefinition: (node) => {
             const fieldName = node.name.value;
 
             return {
@@ -185,16 +188,16 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: () => {
                     const mockFields = node.fields
                         ? node.fields
-                              .map(field => {
+                              .map((field) => {
                                   const value = generateMockValue(
                                       fieldName,
                                       field.name.value,
                                       types,
-                                      field.type,
                                       enumValues,
+                                      field.type,
                                   );
 
-                                  return `        ${field.name.value}: overrides && '${field.name.value}' in overrides ? overrides.${field.name.value}! : ${value},`;
+                                  return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
                               })
                               .join('\n')
                         : '';
@@ -203,7 +206,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
-        ObjectTypeDefinition: node => {
+        ObjectTypeDefinition: (node) => {
             // This function triggered per each type
             const typeName = node.name.value;
 

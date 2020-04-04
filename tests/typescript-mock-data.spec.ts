@@ -73,3 +73,14 @@ it('should generate mock data with pascalCase enum if enumValues is "pascal-case
     expect(result).toContain("import { Avatar, UpdateUserInput, User, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
+
+it('should generate mock data with upperCase enum if enumValues is "upper-case#upperCase"', async () => {
+    const result = await plugin(testSchema, [], {
+        enumValues: 'upper-case#upperCase',
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain("import { Avatar, UpdateUserInput, User, Status } from './types/graphql';");
+    expect(result).toMatchSnapshot();
+});
