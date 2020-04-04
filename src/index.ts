@@ -173,7 +173,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: (typeName: string) => {
                     const value = generateMockValue(typeName, fieldName, types, node.type, enumValues);
 
-                    return `        get ${fieldName}() { return overrides && '${fieldName}' in overrides ? overrides.${fieldName}! : ${value}},`;
+                    return `        ${fieldName}: overrides && '${fieldName}' in overrides ? overrides.${fieldName}! : ${value},`;
                 },
             };
         },
@@ -194,7 +194,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       enumValues,
                                   );
 
-                                  return `        get ${field.name.value}() { return overrides && '${field.name.value}' in overrides ? overrides.${field.name.value}! : ${value}},`;
+                                  return `        ${field.name.value}: overrides && '${field.name.value}' in overrides ? overrides.${field.name.value}! : ${value},`;
                               })
                               .join('\n')
                         : '';
