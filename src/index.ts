@@ -237,7 +237,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     // We generate it after having visited because we need to distinct types from enums
     const mockFns = definitions.map(({ mockFn }: any) => mockFn).filter((mockFn: Function) => !!mockFn);
     const typesFileImport = typesFile
-        ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
+        ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { ${typeImports.join(', ')} } from '${typesFile}';\n`
         : '';
 
