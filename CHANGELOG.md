@@ -1,3 +1,15 @@
+# v0.3.1 (Sun Apr 05 2020)
+
+#### 🐛 Bug Fix
+
+- fix: disable eslint rule `no-prototype-builtins` [#12](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/12) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.3.0 (Sun Apr 05 2020)
 
 #### 🚀 Enhancement
