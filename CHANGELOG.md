@@ -1,3 +1,15 @@
+# v0.3.0 (Sun Apr 05 2020)
+
+#### 🚀 Enhancement
+
+- Bugfix/Feature: pascalCase; Bugfix: recursive nesting [#9](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/9) ([@bohdanbirdie](https://github.com/bohdanbirdie))
+
+#### Authors: 1
+
+- Bohdan Ptyts ([@bohdanbirdie](https://github.com/bohdanbirdie))
+
+---
+
 # v0.2.1 (Fri Apr 03 2020)
 
 #### 🐛 Bug Fix
