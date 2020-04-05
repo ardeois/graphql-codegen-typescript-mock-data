@@ -117,7 +117,7 @@ const user = aUser({ login: 'johndoe' });
 
 ### Contributing
 
-Feel free to open issues and pull requests. We're always welcome support from the community.
+Feel free to open issues and pull requests. We always welcome support from the community.
 
 To run this project locally:
 
