@@ -4,27 +4,25 @@ exports[`should generate mock data functions 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: 'aliquid',
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        id: '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: 'qui',
-        avatar: anAvatar(),
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        id: 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        login: 'libero',
-        avatar: anAvatar(),
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
     };
 };
 "
@@ -32,31 +30,59 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
-import { Avatar, UpdateUserInput, User } from './types/graphql';
+import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: 'aliquid',
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        id: '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: 'qui',
-        avatar: anAvatar(),
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        id: 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        login: 'libero',
-        avatar: anAvatar(),
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+    };
+};
+"
+`;
+
+exports[`should generate mock data with pascalCase enum if enumValues is "pascal-case#pascalCase" 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
+import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
     };
 };
 "
@@ -64,33 +90,61 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 exports[`should generate mock data with typename if addTypename is true 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
-import { Avatar, UpdateUserInput, User } from './types/graphql';
+import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         __typename: 'Avatar',
-        id: '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: 'aliquid',
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
 export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        id: '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: 'qui',
-        avatar: anAvatar(),
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
         __typename: 'User',
-        id: 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        login: 'libero',
-        avatar: anAvatar(),
-        ...overrides
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+    };
+};
+"
+`;
+
+exports[`should generate mock data with upperCase enum if enumValues is "upper-case#upperCase" 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars */
+import { Avatar, UpdateUserInput, User, Status } from './types/graphql';
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.ONLINE,
     };
 };
 "

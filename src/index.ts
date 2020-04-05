@@ -2,21 +2,27 @@ import { printSchema, parse, visit, ASTKindToNode, NamedTypeNode, TypeNode, Visi
 import casual from 'casual';
 import { PluginFunction } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
+import { upperCase } from 'upper-case';
 
-export function toPascalCase(str: string) {
-    if (str.charAt(0) === '_') {
-        return str.replace(
-            /^(_*)(.*)/,
-            (_match, underscorePrefix, typeName) => `${underscorePrefix}${pascalCase(typeName || '')}`,
-        );
-    }
-
-    return pascalCase(str || '');
-}
+type EnumValuesTypes = 'upper-case#upperCase' | 'pascal-case#pascalCase';
 
 const toMockName = (name: string) => {
     const isVowel = name.match(/^[AEIO]/);
     return isVowel ? `an${name}` : `a${name}`;
+};
+
+const updateTextCase = (str: string, enumValues: EnumValuesTypes) => {
+    const convert = (value: string) =>
+        enumValues === 'upper-case#upperCase' ? upperCase(value || '') : pascalCase(value || '');
+
+    if (str.charAt(0) === '_') {
+        return str.replace(
+            /^(_*)(.*)/,
+            (_match, underscorePrefix, typeName) => `${underscorePrefix}${convert(typeName)}`,
+        );
+    }
+
+    return convert(str);
 };
 
 const hashedString = (value: string) => {
@@ -38,6 +44,7 @@ const getNamedType = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
+    enumValues: EnumValuesTypes,
     namedType?: NamedTypeNode,
 ): string | number | boolean => {
     if (!namedType) {
@@ -66,11 +73,17 @@ const getNamedType = (
                     case 'enum': {
                         // It's an enum
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${foundType.name}.${toPascalCase(value)}`;
+                        return `${foundType.name}.${updateTextCase(value, enumValues)}`;
                     }
                     case 'union':
                         // Return the first union type node.
-                        return getNamedType(typeName, fieldName, types, foundType.types && foundType.types[0]);
+                        return getNamedType(
+                            typeName,
+                            fieldName,
+                            types,
+                            enumValues,
+                            foundType.types && foundType.types[0],
+                        );
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
@@ -84,15 +97,16 @@ const generateMockValue = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
+    enumValues: EnumValuesTypes,
     currentType: TypeNode,
 ): string | number | boolean => {
     switch (currentType.kind) {
         case 'NamedType':
-            return getNamedType(typeName, fieldName, types, currentType as NamedTypeNode);
+            return getNamedType(typeName, fieldName, types, enumValues, currentType as NamedTypeNode);
         case 'NonNullType':
-            return generateMockValue(typeName, fieldName, types, currentType.type);
+            return generateMockValue(typeName, fieldName, types, enumValues, currentType.type);
         case 'ListType': {
-            const value = generateMockValue(typeName, fieldName, types, currentType.type);
+            const value = generateMockValue(typeName, fieldName, types, enumValues, currentType.type);
             return `[${value}]`;
         }
     }
@@ -104,13 +118,13 @@ const getMockString = (typeName: string, fields: string, addTypename = false) =>
 export const ${toMockName(typeName)} = (overrides?: Partial<${typeName}>): ${typeName} => {
     return {${typename}
 ${fields}
-        ...overrides
     };
 };`;
 };
 
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
+    enumValues?: EnumValuesTypes;
     addTypename?: boolean;
 }
 
@@ -118,7 +132,7 @@ interface TypeItem {
     name: string;
     type: string;
     values?: string[];
-    types?: ReadonlyArray<NamedTypeNode>;
+    types?: readonly NamedTypeNode[];
 }
 
 type VisitorType = { [K in keyof ASTKindToNode]?: VisitFn<ASTKindToNode[keyof ASTKindToNode], ASTKindToNode[K]> };
@@ -129,6 +143,8 @@ type VisitorType = { [K in keyof ASTKindToNode]?: VisitFn<ASTKindToNode[keyof AS
 export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, documents, config) => {
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
+
+    const enumValues = config.enumValues || 'pascal-case#pascalCase';
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -158,9 +174,9 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             return {
                 name: fieldName,
                 mockFn: (typeName: string) => {
-                    const value = generateMockValue(typeName, fieldName, types, node.type);
+                    const value = generateMockValue(typeName, fieldName, types, enumValues, node.type);
 
-                    return `        ${fieldName}: ${value},`;
+                    return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
                 },
             };
         },
@@ -173,9 +189,15 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     const mockFields = node.fields
                         ? node.fields
                               .map((field) => {
-                                  const value = generateMockValue(fieldName, field.name.value, types, field.type);
+                                  const value = generateMockValue(
+                                      fieldName,
+                                      field.name.value,
+                                      types,
+                                      enumValues,
+                                      field.type,
+                                  );
 
-                                  return `        ${field.name.value}: ${value},`;
+                                  return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
                               })
                               .join('\n')
                         : '';

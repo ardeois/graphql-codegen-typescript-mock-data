@@ -18,6 +18,10 @@ Defines the file path containing all GraphQL types. This file can also be genera
 
 Adds `__typename` property to mock data
 
+### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
+
+Change the case of the enums. Accept `upper-case#upperCase` or `pascal-case#pascalCase`
+
 ## Example of usage
 
 **codegen.yml**
@@ -33,6 +37,7 @@ generates:
     plugins:
       - 'graphql-codegen-typescript-mock-data':
           typesFile: '../generated-types.ts'
+          enumValues: upper-case#upperCase
 ```
 
 ## Example or generated code
@@ -49,10 +54,26 @@ type User {
   id: ID!
   login: String!
   avatar: Avatar
+  status: Status!
 }
 
 type Query {
   user: User!
+}
+
+input UpdateUserInput {
+  id: ID!
+  login: String
+  avatar: Avatar
+}
+
+enum Status {
+  ONLINE
+  OFFLINE
+}
+
+type Mutation {
+  updateUser(user: UpdateUserInput): User
 }
 ```
 
@@ -61,18 +82,25 @@ The code generated will look like:
 ```typescript
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
   return {
-    id: '1550ff93-cd31-49b4-bc38-ef1cb68bdc38',
-    url: 'aliquid',
-    ...overrides,
+    id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+    url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+  };
+};
+
+export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+  return {
+    id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+    login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+    avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
   };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
   return {
-    id: 'b5756f00-51a6-422a-9a7d-c13ee6a63750',
-    login: 'libero',
-    avatar: anAvatar(),
-    ...overrides,
+    id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+    login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+    avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
   };
 };
 ```

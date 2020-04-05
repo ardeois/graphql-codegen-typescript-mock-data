@@ -24,10 +24,11 @@
     "dependencies": {
         "@graphql-codegen/plugin-helpers": "^1.13.1",
         "casual": "^1.6.2",
-        "pascal-case": "^3.1.1"
+        "pascal-case": "^3.1.1",
+        "upper-case": "^2.0.1"
     },
     "peerDependencies": {
-        "graphql": "^14.0.0"
+        "graphql": "^14.6.0"
     },
     "devDependencies": {
         "@auto-it/conventional-commits": "^9.25.0",
