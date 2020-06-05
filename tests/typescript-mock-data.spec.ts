@@ -94,9 +94,8 @@ it('should generate mock data with pascalCase types by default', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain('AbcType');
-    expect(result).toContain('anAbcType');
     expect(result).not.toContain('ABCType');
-    expect(result).not.toContain('anABCType');
+    expect(result).not.toContain('ABCTYPE');
 });
 
 it('should generate mock data with upperCase types if typenameValues is "upper-case#upperCase"', async () => {
@@ -106,9 +105,17 @@ it('should generate mock data with upperCase types if typenameValues is "upper-c
 
     expect(result).toBeDefined();
     expect(result).toContain('ABCTYPE');
-    expect(result).toContain('anABCTYPE');
     expect(result).not.toContain('AbcType');
-    expect(result).not.toContain('anAbcType');
     expect(result).not.toContain('ABCType');
-    expect(result).not.toContain('anABCType');
+});
+
+it('should generate mock data with as-is types if typenameValues is "keep"', async () => {
+    const result = await plugin(testSchema, [], {
+        typenameValues: 'keep',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain('ABCType');
+    expect(result).not.toContain('AbcType');
+    expect(result).not.toContain('ABCTYPE');
 });
