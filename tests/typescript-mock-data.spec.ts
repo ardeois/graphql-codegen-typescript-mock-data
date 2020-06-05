@@ -89,12 +89,12 @@ it('should generate mock data with upperCase enum if enumValues is "upper-case#u
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with pascalCase types', async () => {
+it('should generate mock data with pascalCase types by default', async () => {
     const result = await plugin(testSchema, [], {});
 
     expect(result).toBeDefined();
-    expect(result).toContain('ABCType');
-    expect(result).toContain('anABCType');
-    expect(result).not.toContain('AbcType');
-    expect(result).not.toContain('anAbcType');
+    expect(result).toContain('AbcType');
+    expect(result).toContain('anAbcType');
+    expect(result).not.toContain('ABCType');
+    expect(result).not.toContain('anABCType');
 });
