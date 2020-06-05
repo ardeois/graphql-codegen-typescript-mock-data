@@ -25,8 +25,8 @@ const toMockName = (name: string) => {
     return isVowel ? `an${name}` : `a${name}`;
 };
 
-const updateTextCase = (str: string, enumValues: NamingConvention) => {
-    const convert = createNameConverter(enumValues);
+const updateTextCase = (str: string, enumValuesConvention: NamingConvention) => {
+    const convert = createNameConverter(enumValuesConvention);
 
     if (str.charAt(0) === '_') {
         return str.replace(
@@ -57,7 +57,7 @@ const getNamedType = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
-    enumValues: NamingConvention,
+    enumValuesConvention: NamingConvention,
     namedType?: NamedTypeNode,
 ): string | number | boolean => {
     if (!namedType) {
@@ -86,7 +86,7 @@ const getNamedType = (
                     case 'enum': {
                         // It's an enum
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${foundType.name}.${updateTextCase(value, enumValues)}`;
+                        return `${foundType.name}.${updateTextCase(value, enumValuesConvention)}`;
                     }
                     case 'union':
                         // Return the first union type node.
@@ -94,7 +94,7 @@ const getNamedType = (
                             typeName,
                             fieldName,
                             types,
-                            enumValues,
+                            enumValuesConvention,
                             foundType.types && foundType.types[0],
                         );
                     default:
@@ -110,23 +110,28 @@ const generateMockValue = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
-    enumValues: NamingConvention,
+    enumValuesConvention: NamingConvention,
     currentType: TypeNode,
 ): string | number | boolean => {
     switch (currentType.kind) {
         case 'NamedType':
-            return getNamedType(typeName, fieldName, types, enumValues, currentType as NamedTypeNode);
+            return getNamedType(typeName, fieldName, types, enumValuesConvention, currentType as NamedTypeNode);
         case 'NonNullType':
-            return generateMockValue(typeName, fieldName, types, enumValues, currentType.type);
+            return generateMockValue(typeName, fieldName, types, enumValuesConvention, currentType.type);
         case 'ListType': {
-            const value = generateMockValue(typeName, fieldName, types, enumValues, currentType.type);
+            const value = generateMockValue(typeName, fieldName, types, enumValuesConvention, currentType.type);
             return `[${value}]`;
         }
     }
 };
 
-const getMockString = (typeName: string, fields: string, typenameValues: NamingConvention, addTypename = false) => {
-    const casedName = createNameConverter(typenameValues)(typeName);
+const getMockString = (
+    typeName: string,
+    fields: string,
+    typenamesConvention: NamingConvention,
+    addTypename = false,
+) => {
+    const casedName = createNameConverter(typenamesConvention)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     return `
 export const ${toMockName(casedName)} = (overrides?: Partial<${casedName}>): ${casedName} => {
@@ -139,7 +144,7 @@ ${fields}
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
     enumValues?: NamingConvention;
-    typenameValues?: NamingConvention;
+    typenames?: NamingConvention;
     addTypename?: boolean;
 }
 
@@ -159,8 +164,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
-    const enumValues = config.enumValues || 'pascal-case#pascalCase';
-    const typenameValues = config.typenameValues || 'pascal-case#pascalCase';
+    const enumValuesConvention = config.enumValues || 'pascal-case#pascalCase';
+    const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -190,7 +195,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             return {
                 name: fieldName,
                 mockFn: (typeName: string) => {
-                    const value = generateMockValue(typeName, fieldName, types, enumValues, node.type);
+                    const value = generateMockValue(typeName, fieldName, types, enumValuesConvention, node.type);
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
                 },
@@ -209,7 +214,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       fieldName,
                                       field.name.value,
                                       types,
-                                      enumValues,
+                                      enumValuesConvention,
                                       field.type,
                                   );
 
@@ -218,7 +223,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                               .join('\n')
                         : '';
 
-                    return getMockString(fieldName, mockFields, typenameValues, false);
+                    return getMockString(fieldName, mockFields, typenamesConvention, false);
                 },
             };
         },
@@ -236,7 +241,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: () => {
                     const mockFields = fields ? fields.map(({ mockFn }: any) => mockFn(typeName)).join('\n') : '';
 
-                    return getMockString(typeName, mockFields, typenameValues, !!config.addTypename);
+                    return getMockString(typeName, mockFields, typenamesConvention, !!config.addTypename);
                 },
             };
         },
