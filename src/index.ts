@@ -57,6 +57,7 @@ const getNamedType = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
+    typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
     namedType?: NamedTypeNode,
 ): string | number | boolean => {
@@ -85,8 +86,9 @@ const getNamedType = (
                 switch (foundType.type) {
                     case 'enum': {
                         // It's an enum
+                        const typenameConverter = createNameConverter(typenamesConvention);
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${foundType.name}.${updateTextCase(value, enumValuesConvention)}`;
+                        return `${typenameConverter(foundType.name)}.${updateTextCase(value, enumValuesConvention)}`;
                     }
                     case 'union':
                         // Return the first union type node.
@@ -94,6 +96,7 @@ const getNamedType = (
                             typeName,
                             fieldName,
                             types,
+                            typenamesConvention,
                             enumValuesConvention,
                             foundType.types && foundType.types[0],
                         );
@@ -110,16 +113,38 @@ const generateMockValue = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
+    typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
     currentType: TypeNode,
 ): string | number | boolean => {
     switch (currentType.kind) {
         case 'NamedType':
-            return getNamedType(typeName, fieldName, types, enumValuesConvention, currentType as NamedTypeNode);
+            return getNamedType(
+                typeName,
+                fieldName,
+                types,
+                typenamesConvention,
+                enumValuesConvention,
+                currentType as NamedTypeNode,
+            );
         case 'NonNullType':
-            return generateMockValue(typeName, fieldName, types, enumValuesConvention, currentType.type);
+            return generateMockValue(
+                typeName,
+                fieldName,
+                types,
+                typenamesConvention,
+                enumValuesConvention,
+                currentType.type,
+            );
         case 'ListType': {
-            const value = generateMockValue(typeName, fieldName, types, enumValuesConvention, currentType.type);
+            const value = generateMockValue(
+                typeName,
+                fieldName,
+                types,
+                typenamesConvention,
+                enumValuesConvention,
+                currentType.type,
+            );
             return `[${value}]`;
         }
     }
@@ -195,7 +220,14 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             return {
                 name: fieldName,
                 mockFn: (typeName: string) => {
-                    const value = generateMockValue(typeName, fieldName, types, enumValuesConvention, node.type);
+                    const value = generateMockValue(
+                        typeName,
+                        fieldName,
+                        types,
+                        typenamesConvention,
+                        enumValuesConvention,
+                        node.type,
+                    );
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
                 },
@@ -214,6 +246,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       fieldName,
                                       field.name.value,
                                       types,
+                                      typenamesConvention,
                                       enumValuesConvention,
                                       field.type,
                                   );
