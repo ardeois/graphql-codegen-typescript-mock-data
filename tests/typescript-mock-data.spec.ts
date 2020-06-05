@@ -33,6 +33,7 @@ const testSchema = buildSchema(/* GraphQL */ `
     enum Status {
         ONLINE
         OFFLINE
+        isAFK
     }
 
     type Mutation {
@@ -87,6 +88,17 @@ it('should generate mock data with upperCase enum if enumValues is "upper-case#u
     expect(result).toBeDefined();
     expect(result).toContain("import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with as-is enum if enumValues is "keep"', async () => {
+    const result = await plugin(testSchema, [], {
+        enumValues: 'keep',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain('isAFK');
+    expect(result).not.toContain('isAfK');
+    expect(result).not.toContain('ISAFK');
 });
 
 it('should generate mock data with pascalCase types by default', async () => {
