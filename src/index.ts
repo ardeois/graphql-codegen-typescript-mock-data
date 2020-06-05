@@ -4,16 +4,24 @@ import { PluginFunction } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 
-type EnumValuesTypes = 'upper-case#upperCase' | 'pascal-case#pascalCase';
+type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase';
+
+const createNameConverter = (convention: NamingConvention) => (value: string) => {
+    switch (convention) {
+        case 'upper-case#upperCase':
+            return upperCase(value || '');
+        case 'pascal-case#pascalCase':
+            return pascalCase(value || '');
+    }
+};
 
 const toMockName = (name: string) => {
     const isVowel = name.match(/^[AEIO]/);
     return isVowel ? `an${name}` : `a${name}`;
 };
 
-const updateTextCase = (str: string, enumValues: EnumValuesTypes) => {
-    const convert = (value: string) =>
-        enumValues === 'upper-case#upperCase' ? upperCase(value || '') : pascalCase(value || '');
+const updateTextCase = (str: string, enumValues: NamingConvention) => {
+    const convert = createNameConverter(enumValues);
 
     if (str.charAt(0) === '_') {
         return str.replace(
@@ -44,7 +52,7 @@ const getNamedType = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
-    enumValues: EnumValuesTypes,
+    enumValues: NamingConvention,
     namedType?: NamedTypeNode,
 ): string | number | boolean => {
     if (!namedType) {
@@ -97,7 +105,7 @@ const generateMockValue = (
     typeName: string,
     fieldName: string,
     types: TypeItem[],
-    enumValues: EnumValuesTypes,
+    enumValues: NamingConvention,
     currentType: TypeNode,
 ): string | number | boolean => {
     switch (currentType.kind) {
@@ -113,9 +121,11 @@ const generateMockValue = (
 };
 
 const getMockString = (typeName: string, fields: string, addTypename = false) => {
-    const typename = addTypename ? `\n        __typename: '${typeName}',` : '';
+    const typeNamingConvention: NamingConvention = 'pascal-case#pascalCase';
+    const casedName = createNameConverter(typeNamingConvention)(typeName);
+    const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     return `
-export const ${toMockName(typeName)} = (overrides?: Partial<${typeName}>): ${typeName} => {
+export const ${toMockName(casedName)} = (overrides?: Partial<${casedName}>): ${casedName} => {
     return {${typename}
 ${fields}
     };
@@ -124,7 +134,7 @@ ${fields}
 
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
-    enumValues?: EnumValuesTypes;
+    enumValues?: NamingConvention;
     addTypename?: boolean;
 }
 
