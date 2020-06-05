@@ -20,6 +20,10 @@ const testSchema = buildSchema(/* GraphQL */ `
         user: User!
     }
 
+    type ABCType {
+        abc: String!
+    }
+
     input UpdateUserInput {
         id: ID!
         login: String
@@ -83,4 +87,12 @@ it('should generate mock data with upperCase enum if enumValues is "upper-case#u
     expect(result).toBeDefined();
     expect(result).toContain("import { Avatar, UpdateUserInput, User, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with pascalCase types', async () => {
+    const result = await plugin(testSchema, [], {});
+
+    expect(result).toBeDefined();
+    expect(result).toContain('ABCType');
+    expect(result).not.toContain('AbcType');
 });
