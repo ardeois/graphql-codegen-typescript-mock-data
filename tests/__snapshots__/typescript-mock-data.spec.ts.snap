@@ -2,7 +2,7 @@
 
 exports[`should generate mock data functions 1`] = `
 "
-export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
@@ -38,7 +38,7 @@ exports[`should generate mock data functions with external types file import 1`]
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
-export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
@@ -74,7 +74,7 @@ exports[`should generate mock data with pascalCase enum if enumValues is "pascal
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
-export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
@@ -110,9 +110,9 @@ exports[`should generate mock data with typename if addTypename is true 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
-export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        __typename: 'ABCType',
+        __typename: 'AbcType',
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
@@ -149,7 +149,7 @@ exports[`should generate mock data with upperCase enum if enumValues is "upper-c
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';
 
-export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
