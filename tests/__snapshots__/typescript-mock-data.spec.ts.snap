@@ -2,6 +2,12 @@
 
 exports[`should generate mock data functions 1`] = `
 "
+export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
