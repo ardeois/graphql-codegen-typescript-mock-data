@@ -94,5 +94,7 @@ it('should generate mock data with pascalCase types', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain('ABCType');
+    expect(result).toContain('anABCType');
     expect(result).not.toContain('AbcType');
+    expect(result).not.toContain('anAbcType');
 });
