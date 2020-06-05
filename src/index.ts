@@ -4,13 +4,18 @@ import { PluginFunction } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 
-type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase';
+type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
 const createNameConverter = (convention: NamingConvention) => (value: string) => {
     switch (convention) {
         case 'upper-case#upperCase':
             return upperCase(value || '');
         case 'pascal-case#pascalCase':
+            return pascalCase(value || '');
+        case 'keep':
+            return value;
+        default:
+            // default to pascal case in case of unknown values
             return pascalCase(value || '');
     }
 };
