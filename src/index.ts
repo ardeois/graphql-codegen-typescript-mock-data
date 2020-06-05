@@ -120,9 +120,8 @@ const generateMockValue = (
     }
 };
 
-const getMockString = (typeName: string, fields: string, addTypename = false) => {
-    const typeNamingConvention: NamingConvention = 'pascal-case#pascalCase';
-    const casedName = createNameConverter(typeNamingConvention)(typeName);
+const getMockString = (typeName: string, fields: string, typenameValues: NamingConvention, addTypename = false) => {
+    const casedName = createNameConverter(typenameValues)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     return `
 export const ${toMockName(casedName)} = (overrides?: Partial<${casedName}>): ${casedName} => {
@@ -135,6 +134,7 @@ ${fields}
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
     enumValues?: NamingConvention;
+    typenameValues?: NamingConvention;
     addTypename?: boolean;
 }
 
@@ -155,6 +155,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
     const enumValues = config.enumValues || 'pascal-case#pascalCase';
+    const typenameValues = config.typenameValues || 'pascal-case#pascalCase';
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -212,7 +213,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                               .join('\n')
                         : '';
 
-                    return getMockString(fieldName, mockFields, false);
+                    return getMockString(fieldName, mockFields, typenameValues, false);
                 },
             };
         },
@@ -230,7 +231,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: () => {
                     const mockFields = fields ? fields.map(({ mockFn }: any) => mockFn(typeName)).join('\n') : '';
 
-                    return getMockString(typeName, mockFields, !!config.addTypename);
+                    return getMockString(typeName, mockFields, typenameValues, !!config.addTypename);
                 },
             };
         },
