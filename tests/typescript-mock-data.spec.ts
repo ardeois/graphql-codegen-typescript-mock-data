@@ -14,6 +14,7 @@ const testSchema = buildSchema(/* GraphQL */ `
         login: String!
         avatar: Avatar
         status: Status!
+        abcStatus: ABCStatus
     }
 
     type Query {
@@ -33,7 +34,10 @@ const testSchema = buildSchema(/* GraphQL */ `
     enum Status {
         ONLINE
         OFFLINE
-        isAFK
+    }
+
+    enum ABCStatus {
+        hasABCStatus
     }
 
     type Mutation {
@@ -56,7 +60,9 @@ it('should generate mock data functions with external types file import', async 
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';");
+    expect(result).toContain(
+        "import { ABCType, Avatar, UpdateUserInput, User, ABCStatus, Status } from './types/graphql';",
+    );
     expect(result).toMatchSnapshot();
 });
 
@@ -64,50 +70,35 @@ it('should generate mock data with typename if addTypename is true', async () =>
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts', addTypename: true });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
 
 it('should generate mock data with pascalCase enum if enumValues is "pascal-case#pascalCase"', async () => {
-    const result = await plugin(testSchema, [], {
-        enumValues: 'pascal-case#pascalCase',
-        typesFile: './types/graphql.ts',
-    });
+    const result = await plugin(testSchema, [], { enumValues: 'pascal-case#pascalCase' });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
 
 it('should generate mock data with upperCase enum if enumValues is "upper-case#upperCase"', async () => {
-    const result = await plugin(testSchema, [], {
-        enumValues: 'upper-case#upperCase',
-        typesFile: './types/graphql.ts',
-    });
+    const result = await plugin(testSchema, [], { enumValues: 'upper-case#upperCase' });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { ABCType, Avatar, UpdateUserInput, User, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
 
 it('should generate mock data with as-is enum if enumValues is "keep"', async () => {
-    const result = await plugin(testSchema, [], {
-        enumValues: 'keep',
-    });
+    const result = await plugin(testSchema, [], { enumValues: 'keep' });
 
     expect(result).toBeDefined();
-    expect(result).toContain('isAFK');
-    expect(result).not.toContain('isAfK');
-    expect(result).not.toContain('ISAFK');
+    expect(result).toMatchSnapshot();
 });
 
 it('should generate mock data with pascalCase types by default', async () => {
     const result = await plugin(testSchema, [], {});
 
     expect(result).toBeDefined();
-    expect(result).toContain('AbcType');
-    expect(result).not.toContain('ABCType');
-    expect(result).not.toContain('ABCTYPE');
+    expect(result).toMatchSnapshot();
 });
 
 it('should generate mock data with upperCase types if typenames is "upper-case#upperCase"', async () => {
@@ -116,9 +107,7 @@ it('should generate mock data with upperCase types if typenames is "upper-case#u
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain('ABCTYPE');
-    expect(result).not.toContain('AbcType');
-    expect(result).not.toContain('ABCType');
+    expect(result).toMatchSnapshot();
 });
 
 it('should generate mock data with as-is types if typenames is "keep"', async () => {
@@ -127,7 +116,5 @@ it('should generate mock data with as-is types if typenames is "keep"', async ()
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain('ABCType');
-    expect(result).not.toContain('AbcType');
-    expect(result).not.toContain('ABCTYPE');
+    expect(result).toMatchSnapshot();
 });
