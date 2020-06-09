@@ -10,10 +10,10 @@ const createNameConverter = (convention: NamingConvention) => (value: string) =>
     switch (convention) {
         case 'upper-case#upperCase':
             return upperCase(value || '');
-        case 'pascal-case#pascalCase':
-            return pascalCase(value || '');
         case 'keep':
             return value;
+        case 'pascal-case#pascalCase':
+        // fallthrough
         default:
             // default to pascal case in case of unknown values
             return pascalCase(value || '');
