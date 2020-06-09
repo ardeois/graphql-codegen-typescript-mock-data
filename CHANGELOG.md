@@ -1,3 +1,15 @@
+# v0.4.1 (Tue Jun 09 2020)
+
+#### 🐛 Bug Fix
+
+- fix: add support for custom scalar [#19](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/19) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.4.0 (Tue Jun 09 2020)
 
 #### 🚀 Enhancement
