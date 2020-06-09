@@ -1,3 +1,16 @@
+# v0.4.0 (Tue Jun 09 2020)
+
+#### 🚀 Enhancement
+
+- Issue #16: default typename casing to pascalCase and add configuration option [#18](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/18) ([@mdazy](https://github.com/mdazy) matthieu.dazy@emerson.com)
+
+#### Authors: 2
+
+- [@mdazy](https://github.com/mdazy)
+- Matthieu Dazy (matthieu.dazy@emerson.com)
+
+---
+
 # v0.3.1 (Sun Apr 05 2020)
 
 #### 🐛 Bug Fix
