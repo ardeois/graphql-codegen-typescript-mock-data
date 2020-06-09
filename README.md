@@ -20,7 +20,11 @@ Adds `__typename` property to mock data
 
 ### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
 
-Change the case of the enums. Accept `upper-case#upperCase` or `pascal-case#pascalCase`
+Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
+
+### typenames (`string`, defaultValue: `pascal-case#pascalCase`)
+
+Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
 
 ## Example of usage
 
@@ -38,6 +42,7 @@ generates:
       - 'graphql-codegen-typescript-mock-data':
           typesFile: '../generated-types.ts'
           enumValues: upper-case#upperCase
+          typenames: keep
 ```
 
 ## Example or generated code
