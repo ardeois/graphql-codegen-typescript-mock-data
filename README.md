@@ -20,7 +20,7 @@ Adds `__typename` property to mock data
 
 ### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
 
-Change sthe case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
+Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
 
 ### typenames (`string`, defaultValue: `pascal-case#pascalCase`)
 
