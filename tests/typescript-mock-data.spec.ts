@@ -14,7 +14,7 @@ const testSchema = buildSchema(/* GraphQL */ `
         login: String!
         avatar: Avatar
         status: Status!
-        abcStatus: ABCStatus
+        customStatus: ABCStatus
     }
 
     type Query {
@@ -37,7 +37,7 @@ const testSchema = buildSchema(/* GraphQL */ `
     }
 
     enum ABCStatus {
-        hasABCStatus
+        hasXYZStatus
     }
 
     type Mutation {
@@ -67,54 +67,89 @@ it('should generate mock data functions with external types file import', async 
 });
 
 it('should generate mock data with typename if addTypename is true', async () => {
-    const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts', addTypename: true });
+    const result = await plugin(testSchema, [], { addTypename: true });
 
     expect(result).toBeDefined();
+    expect(result).toContain('__typename');
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with pascalCase enum if enumValues is "pascal-case#pascalCase"', async () => {
-    const result = await plugin(testSchema, [], { enumValues: 'pascal-case#pascalCase' });
-
-    expect(result).toBeDefined();
-    expect(result).toMatchSnapshot();
-});
-
-it('should generate mock data with upperCase enum if enumValues is "upper-case#upperCase"', async () => {
-    const result = await plugin(testSchema, [], { enumValues: 'upper-case#upperCase' });
-
-    expect(result).toBeDefined();
-    expect(result).toMatchSnapshot();
-});
-
-it('should generate mock data with as-is enum if enumValues is "keep"', async () => {
-    const result = await plugin(testSchema, [], { enumValues: 'keep' });
-
-    expect(result).toBeDefined();
-    expect(result).toMatchSnapshot();
-});
-
-it('should generate mock data with pascalCase types by default', async () => {
+it('should generate mock data with pascalCase enum values by default', async () => {
     const result = await plugin(testSchema, [], {});
 
     expect(result).toBeDefined();
+    expect(result).toContain('HasXyzStatus');
+    expect(result).not.toContain('hasXYZStatus');
+    expect(result).not.toContain('HASXYZSTATUS');
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with upperCase types if typenames is "upper-case#upperCase"', async () => {
-    const result = await plugin(testSchema, [], {
-        typenames: 'upper-case#upperCase',
-    });
+it('should generate mock data with pascalCase enum values if enumValues is "pascal-case#pascalCase"', async () => {
+    const result = await plugin(testSchema, [], { enumValues: 'pascal-case#pascalCase' });
 
     expect(result).toBeDefined();
+    expect(result).toContain('HasXyzStatus');
+    expect(result).not.toContain('hasXYZStatus');
+    expect(result).not.toContain('HASXYZSTATUS');
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with as-is types if typenames is "keep"', async () => {
-    const result = await plugin(testSchema, [], {
-        typenames: 'keep',
-    });
+it('should generate mock data with upperCase enum values if enumValues is "upper-case#upperCase"', async () => {
+    const result = await plugin(testSchema, [], { enumValues: 'upper-case#upperCase' });
 
     expect(result).toBeDefined();
+    expect(result).not.toContain('HasXyzStatus');
+    expect(result).not.toContain('hasXYZStatus');
+    expect(result).toContain('HASXYZSTATUS');
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with as-is enum values if enumValues is "keep"', async () => {
+    const result = await plugin(testSchema, [], { enumValues: 'keep' });
+
+    expect(result).toBeDefined();
+    expect(result).not.toContain('HasXyzStatus');
+    expect(result).toContain('hasXYZStatus');
+    expect(result).not.toContain('HASXYZSTATUS');
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with pascalCase types and enums by default', async () => {
+    const result = await plugin(testSchema, [], {});
+
+    expect(result).toBeDefined();
+    expect(result).toMatch(/Abc(Type|Status)/);
+    expect(result).not.toMatch(/ABC(Type|Status)/);
+    expect(result).not.toMatch(/ABC(TYPE|STATUS)/);
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with pascalCase enum values if typenames is "pascal-case#pascalCase"', async () => {
+    const result = await plugin(testSchema, [], { typenames: 'pascal-case#pascalCase' });
+
+    expect(result).toBeDefined();
+    expect(result).toMatch(/Abc(Type|Status)/);
+    expect(result).not.toMatch(/ABC(Type|Status)/);
+    expect(result).not.toMatch(/ABC(TYPE|STATUS)/);
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with upperCase types and enums if typenames is "upper-case#upperCase"', async () => {
+    const result = await plugin(testSchema, [], { typenames: 'upper-case#upperCase' });
+
+    expect(result).toBeDefined();
+    expect(result).not.toMatch(/Abc(Type|Status)/);
+    expect(result).not.toMatch(/ABC(Type|Status)/);
+    expect(result).toMatch(/ABC(TYPE|STATUS)/);
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with as-is types and enums if typenames is "keep"', async () => {
+    const result = await plugin(testSchema, [], { typenames: 'keep' });
+
+    expect(result).toBeDefined();
+    expect(result).not.toMatch(/Abc(Type|Status)/);
+    expect(result).toMatch(/ABC(Type|Status)/);
+    expect(result).not.toMatch(/ABC(TYPE|STATUS)/);
     expect(result).toMatchSnapshot();
 });
