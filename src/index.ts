@@ -100,6 +100,10 @@ const getNamedType = (
                             enumValuesConvention,
                             foundType.types && foundType.types[0],
                         );
+                    case 'scalar':
+                        // it's a scalar, let's use a string as a value.
+                        // This could be improved with a custom scalar definition in the config
+                        return `'${casual.word}'`;
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
@@ -175,7 +179,7 @@ export interface TypescriptMocksPluginConfig {
 
 interface TypeItem {
     name: string;
-    type: string;
+    type: 'enum' | 'scalar' | 'union';
     values?: string[];
     types?: readonly NamedTypeNode[];
 }
@@ -278,6 +282,15 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
+        ScalarTypeDefinition: (node) => {
+            const name = node.name.value;
+            if (!types.find((enumType) => enumType.name === name)) {
+                types.push({
+                    name,
+                    type: 'scalar',
+                });
+            }
+        },
     };
 
     const result: any = visit(astNode, { leave: visitor });
@@ -286,7 +299,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const typeImports = definitions
         .map(({ typeName }: { typeName: string }) => typeName)
         .filter((typeName: string) => !!typeName);
-    typeImports.push(...types.map(({ name }) => name));
+    typeImports.push(...types.filter(({ type }) => type !== 'scalar').map(({ name }) => name));
     // List of function that will generate the mock.
     // We generate it after having visited because we need to distinct types from enums
     const mockFns = definitions.map(({ mockFn }: any) => mockFn).filter((mockFn: Function) => !!mockFn);
