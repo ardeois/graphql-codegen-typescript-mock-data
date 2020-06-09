@@ -4,6 +4,9 @@ import { buildSchema } from 'graphql';
 import { plugin } from '../src';
 
 const testSchema = buildSchema(/* GraphQL */ `
+    scalar Date
+    scalar AnyObject
+
     type Avatar {
         id: ID!
         url: String!
@@ -11,10 +14,12 @@ const testSchema = buildSchema(/* GraphQL */ `
 
     type User {
         id: ID!
+        creationDate: Date!
         login: String!
         avatar: Avatar
         status: Status!
         customStatus: ABCStatus
+        scalarValue: AnyObject!
     }
 
     type Query {
@@ -53,6 +58,16 @@ it('should generate mock data functions', async () => {
     const result = await plugin(testSchema, [], {});
 
     expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data functions with scalars', async () => {
+    const result = await plugin(testSchema, [], {});
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',",
+    );
     expect(result).toMatchSnapshot();
 });
 
