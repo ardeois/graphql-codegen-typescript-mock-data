@@ -60,6 +60,7 @@ const getNamedType = (
     typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
     namedType?: NamedTypeNode,
+    customScalars?: ScalarMap,
 ): string | number | boolean => {
     if (!namedType) {
         return '';
@@ -101,9 +102,15 @@ const getNamedType = (
                             foundType.types && foundType.types[0],
                         );
                     case 'scalar':
-                        // it's a scalar, let's use a string as a value.
-                        // This could be improved with a custom scalar definition in the config
-                        return `'${casual.word}'`;
+                        // it's a scalar, let's use a string as a value if there is no custom
+                        // mapping for this particular scalar
+                        if (!customScalars || !customScalars[foundType.name]) {
+                            return `'${casual.word}'`;
+                        }
+
+                        // If there is a mapping to a `casual` type, then use this
+                        const value = casual[customScalars[foundType.name]];
+                        return typeof value === 'function' ? value() : value;
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
@@ -120,6 +127,7 @@ const generateMockValue = (
     typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
     currentType: TypeNode,
+    customScalars: ScalarMap,
 ): string | number | boolean => {
     switch (currentType.kind) {
         case 'NamedType':
@@ -130,6 +138,7 @@ const generateMockValue = (
                 typenamesConvention,
                 enumValuesConvention,
                 currentType as NamedTypeNode,
+                customScalars,
             );
         case 'NonNullType':
             return generateMockValue(
@@ -139,6 +148,7 @@ const generateMockValue = (
                 typenamesConvention,
                 enumValuesConvention,
                 currentType.type,
+                customScalars,
             );
         case 'ListType': {
             const value = generateMockValue(
@@ -148,6 +158,7 @@ const generateMockValue = (
                 typenamesConvention,
                 enumValuesConvention,
                 currentType.type,
+                customScalars,
             );
             return `[${value}]`;
         }
@@ -170,11 +181,14 @@ ${fields}
 };`;
 };
 
+type ScalarMap = { [name: string]: keyof (Casual.Casual | Casual.functions) };
+
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
     enumValues?: NamingConvention;
     typenames?: NamingConvention;
     addTypename?: boolean;
+    scalars?: ScalarMap;
 }
 
 interface TypeItem {
@@ -231,6 +245,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         typenamesConvention,
                         enumValuesConvention,
                         node.type,
+                        config.scalars,
                     );
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -253,6 +268,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       typenamesConvention,
                                       enumValuesConvention,
                                       field.type,
+                                      config.scalars,
                                   );
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
