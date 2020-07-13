@@ -18,6 +18,11 @@ Defines the file path containing all GraphQL types. This file can also be genera
 
 Adds `__typename` property to mock data
 
+### prefix (`string`, defaultValue: `a` for constants & `an` for vowels)
+
+The prefix to add to the mock function name. Cannot be empty since it will clash with the associated
+typescript definition from `@graphql-codegen/typescript`
+
 ### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
 
 Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
