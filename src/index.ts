@@ -109,8 +109,9 @@ const getNamedType = (
                         }
 
                         // If there is a mapping to a `casual` type, then use this
-                        const value = casual[customScalars[foundType.name]];
-                        return typeof value === 'function' ? value() : value;
+                        const embeddedGenerator = casual[customScalars[foundType.name]];
+                        const value = typeof embeddedGenerator === 'function' ? embeddedGenerator() : embeddedGenerator;
+                        return typeof value === 'string' ? `'${value}'` : value;
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
