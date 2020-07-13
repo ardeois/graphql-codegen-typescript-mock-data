@@ -168,3 +168,12 @@ it('should generate mock data with as-is types and enums if typenames is "keep"'
     expect(result).not.toMatch(/ABC(TYPE|STATUS)/);
     expect(result).toMatchSnapshot();
 });
+
+it('should generate the `casual` data for a particular scalar mapping', async () => {
+    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'email' } });
+
+    const emailRegex = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+    expect(result).toBeDefined();
+    expect(emailRegex.test(result as string)).toBeTruthy();
+    expect(result).toMatchSnapshot();
+});

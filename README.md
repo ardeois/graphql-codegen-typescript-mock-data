@@ -26,6 +26,12 @@ Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pasc
 
 Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
 
+### scalars (`{ [Scalar: string]: keyof Casual.Casual | Casual.functions }`, defaultValue: `undefined`)
+
+Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
+ [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
+ function key)
+
 ## Example of usage
 
 **codegen.yml**
@@ -43,6 +49,8 @@ generates:
           typesFile: '../generated-types.ts'
           enumValues: upper-case#upperCase
           typenames: keep
+          scalars:
+            AWSTimestamp: unix_time # gets translated to casual.unix_time
 ```
 
 ## Example or generated code
@@ -50,6 +58,8 @@ generates:
 Given the following schema:
 
 ```graphql
+scalar AWSTimestamp
+
 type Avatar {
   id: ID!
   url: String!
@@ -60,6 +70,7 @@ type User {
   login: String!
   avatar: Avatar
   status: Status!
+  updatedAt: AWSTimestamp
 }
 
 type Query {
@@ -106,6 +117,7 @@ export const aUser = (overrides?: Partial<User>): User => {
     login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
     avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+    updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 1458071232,
   };
 };
 ```
