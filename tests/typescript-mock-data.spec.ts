@@ -178,9 +178,9 @@ it('should correctly generate the `casual` data for a scalar mapping of type str
 });
 
 it('should correctly generate the `casual` data for a non-string scalar mapping', async () => {
-    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'timezone' } });
+    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'rgb_array' } });
 
     expect(result).toBeDefined();
-    expect(result).toContain('America/Maceio');
+    expect(result).toContain(JSON.stringify([41, 98, 185]));
     expect(result).toMatchSnapshot();
 });
