@@ -480,7 +480,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : Mohamed.Nader@Kiehn.io,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'Mohamed.Nader@Kiehn.io',
     };
 };
 "
