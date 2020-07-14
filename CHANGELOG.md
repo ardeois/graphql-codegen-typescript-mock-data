@@ -1,3 +1,16 @@
+# v0.5.0 (Tue Jul 14 2020)
+
+#### 🚀 Enhancement
+
+- feat:  add `scalars` config option for custom GraphQL [scalar -> casual] mappings [#21](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/21) ([@3nvi](https://github.com/3nvi) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Aggelos Arvanitakis ([@3nvi](https://github.com/3nvi))
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.4.2 (Tue Jul 14 2020)
 
 #### 🐛 Bug Fix
