@@ -1,8 +1,10 @@
-import { printSchema, parse, visit, ASTKindToNode, NamedTypeNode, TypeNode, VisitFn } from 'graphql';
+import { ASTKindToNode, NamedTypeNode, parse, printSchema, TypeNode, visit, VisitFn } from 'graphql';
 import casual from 'casual';
 import { PluginFunction } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
+import { sentenceCase } from 'sentence-case';
+import a from 'indefinite';
 
 type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
@@ -20,12 +22,12 @@ const createNameConverter = (convention: NamingConvention) => (value: string) =>
     }
 };
 
-const toMockName = (name: string, prefix?: string) => {
+const toMockName = (typedName: string, casedName: string, prefix?: string) => {
     if (prefix) {
-        return `${prefix}${name}`;
+        return `${prefix}${casedName}`;
     }
-    const isVowel = name.match(/^[AEIO]/);
-    return isVowel ? `an${name}` : `a${name}`;
+    const firstWord = sentenceCase(typedName).split(' ')[0];
+    return `${a(firstWord, { articleOnly: true })}${casedName}`;
 };
 
 const updateTextCase = (str: string, enumValuesConvention: NamingConvention) => {
@@ -130,7 +132,7 @@ const getNamedType = (
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
-            return `${toMockName(name, prefix)}()`;
+            return `${toMockName(name, name, prefix)}()`;
         }
     }
 };
@@ -194,7 +196,7 @@ const getMockString = (
     const casedName = createNameConverter(typenamesConvention)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     return `
-export const ${toMockName(casedName, prefix)} = (overrides?: Partial<${casedName}>): ${casedName} => {
+export const ${toMockName(typeName, casedName, prefix)} = (overrides?: Partial<${casedName}>): ${casedName} => {
     return {${typename}
 ${fields}
     };

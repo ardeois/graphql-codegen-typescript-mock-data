@@ -24,7 +24,9 @@
     "dependencies": {
         "@graphql-codegen/plugin-helpers": "^1.13.1",
         "casual": "^1.6.2",
+        "indefinite": "^2.3.2",
         "pascal-case": "^3.1.1",
+        "sentence-case": "^3.0.3",
         "upper-case": "^2.0.1"
     },
     "peerDependencies": {
