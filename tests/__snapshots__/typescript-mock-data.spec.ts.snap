@@ -52,7 +52,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -89,7 +89,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -126,7 +126,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -165,7 +165,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -202,7 +202,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -239,7 +239,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -276,7 +276,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -313,7 +313,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -350,7 +350,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -387,7 +387,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -424,7 +424,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -463,7 +463,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -501,7 +501,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
@@ -538,7 +538,7 @@ export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
     };
 };
 
-export const aUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
+export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
