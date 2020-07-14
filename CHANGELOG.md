@@ -1,3 +1,15 @@
+# v1.0.0 (Tue Jul 14 2020)
+
+#### 💥 Breaking Change
+
+- feat: use `indefinite` to find the correct article [#26](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/26) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v0.5.0 (Tue Jul 14 2020)
 
 #### 🚀 Enhancement
