@@ -20,7 +20,10 @@ const createNameConverter = (convention: NamingConvention) => (value: string) =>
     }
 };
 
-const toMockName = (name: string) => {
+const toMockName = (name: string, prefix?: string) => {
+    if (prefix) {
+        return `${prefix}${name}`;
+    }
     const isVowel = name.match(/^[AEIO]/);
     return isVowel ? `an${name}` : `a${name}`;
 };
@@ -59,6 +62,7 @@ const getNamedType = (
     types: TypeItem[],
     typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
+    prefix?: string,
     namedType?: NamedTypeNode,
     customScalars?: ScalarMap,
 ): string | number | boolean => {
@@ -99,9 +103,10 @@ const getNamedType = (
                             types,
                             typenamesConvention,
                             enumValuesConvention,
+                            prefix,
                             foundType.types && foundType.types[0],
                         );
-                    case 'scalar':
+                    case 'scalar': {
                         // it's a scalar, let's use a string as a value if there is no custom
                         // mapping for this particular scalar
                         if (!customScalars || !customScalars[foundType.name]) {
@@ -120,11 +125,12 @@ const getNamedType = (
                             return `${JSON.stringify(value)}`;
                         }
                         return value;
+                    }
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
-            return `${toMockName(name)}()`;
+            return `${toMockName(name, prefix)}()`;
         }
     }
 };
@@ -135,6 +141,7 @@ const generateMockValue = (
     types: TypeItem[],
     typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
+    prefix: string | undefined,
     currentType: TypeNode,
     customScalars: ScalarMap,
 ): string | number | boolean => {
@@ -146,6 +153,7 @@ const generateMockValue = (
                 types,
                 typenamesConvention,
                 enumValuesConvention,
+                prefix,
                 currentType as NamedTypeNode,
                 customScalars,
             );
@@ -156,6 +164,7 @@ const generateMockValue = (
                 types,
                 typenamesConvention,
                 enumValuesConvention,
+                prefix,
                 currentType.type,
                 customScalars,
             );
@@ -166,6 +175,7 @@ const generateMockValue = (
                 types,
                 typenamesConvention,
                 enumValuesConvention,
+                prefix,
                 currentType.type,
                 customScalars,
             );
@@ -179,11 +189,12 @@ const getMockString = (
     fields: string,
     typenamesConvention: NamingConvention,
     addTypename = false,
+    prefix,
 ) => {
     const casedName = createNameConverter(typenamesConvention)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     return `
-export const ${toMockName(casedName)} = (overrides?: Partial<${casedName}>): ${casedName} => {
+export const ${toMockName(casedName, prefix)} = (overrides?: Partial<${casedName}>): ${casedName} => {
     return {${typename}
 ${fields}
     };
@@ -197,6 +208,7 @@ export interface TypescriptMocksPluginConfig {
     enumValues?: NamingConvention;
     typenames?: NamingConvention;
     addTypename?: boolean;
+    prefix?: string;
     scalars?: ScalarMap;
 }
 
@@ -253,6 +265,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         types,
                         typenamesConvention,
                         enumValuesConvention,
+                        config.prefix,
                         node.type,
                         config.scalars,
                     );
@@ -276,6 +289,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       types,
                                       typenamesConvention,
                                       enumValuesConvention,
+                                      config.prefix,
                                       field.type,
                                       config.scalars,
                                   );
@@ -285,7 +299,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                               .join('\n')
                         : '';
 
-                    return getMockString(fieldName, mockFields, typenamesConvention, false);
+                    return getMockString(fieldName, mockFields, typenamesConvention, false, config.prefix);
                 },
             };
         },
@@ -303,7 +317,13 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 mockFn: () => {
                     const mockFields = fields ? fields.map(({ mockFn }: any) => mockFn(typeName)).join('\n') : '';
 
-                    return getMockString(typeName, mockFields, typenamesConvention, !!config.addTypename);
+                    return getMockString(
+                        typeName,
+                        mockFields,
+                        typenamesConvention,
+                        !!config.addTypename,
+                        config.prefix,
+                    );
                 },
             };
         },

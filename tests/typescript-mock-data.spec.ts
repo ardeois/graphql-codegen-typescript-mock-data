@@ -169,6 +169,15 @@ it('should generate mock data with as-is types and enums if typenames is "keep"'
     expect(result).toMatchSnapshot();
 });
 
+it('should add custom prefix if the `prefix` config option is specified', async () => {
+    const result = await plugin(testSchema, [], { prefix: 'mock' });
+
+    expect(result).toBeDefined();
+    expect(result).toMatch(/const mockUser/);
+    expect(result).not.toMatch(/const aUser/);
+    expect(result).toMatchSnapshot();
+});
+
 it('should correctly generate the `casual` data for a scalar mapping of type string', async () => {
     const result = await plugin(testSchema, [], { scalars: { AnyObject: 'email' } });
 

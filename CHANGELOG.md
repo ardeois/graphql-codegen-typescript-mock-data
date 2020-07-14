@@ -1,3 +1,15 @@
+# v0.4.2 (Tue Jul 14 2020)
+
+#### 🐛 Bug Fix
+
+- feat: allow users to specify the `prefix` of mock builders [#25](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/25) ([@3nvi](https://github.com/3nvi))
+
+#### Authors: 1
+
+- Aggelos Arvanitakis ([@3nvi](https://github.com/3nvi))
+
+---
+
 # v0.4.1 (Tue Jun 09 2020)
 
 #### 🐛 Bug Fix
