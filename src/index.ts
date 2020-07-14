@@ -64,6 +64,7 @@ const getNamedType = (
     enumValuesConvention: NamingConvention,
     prefix?: string,
     namedType?: NamedTypeNode,
+    customScalars?: ScalarMap,
 ): string | number | boolean => {
     if (!namedType) {
         return '';
@@ -105,10 +106,26 @@ const getNamedType = (
                             prefix,
                             foundType.types && foundType.types[0],
                         );
-                    case 'scalar':
-                        // it's a scalar, let's use a string as a value.
-                        // This could be improved with a custom scalar definition in the config
-                        return `'${casual.word}'`;
+                    case 'scalar': {
+                        // it's a scalar, let's use a string as a value if there is no custom
+                        // mapping for this particular scalar
+                        if (!customScalars || !customScalars[foundType.name]) {
+                            return `'${casual.word}'`;
+                        }
+
+                        // If there is a mapping to a `casual` type, then use it and make sure
+                        // to call it if it's a function
+                        const embeddedGenerator = casual[customScalars[foundType.name]];
+                        const value = typeof embeddedGenerator === 'function' ? embeddedGenerator() : embeddedGenerator;
+
+                        if (typeof value === 'string') {
+                            return `'${value}'`;
+                        }
+                        if (typeof value === 'object') {
+                            return `${JSON.stringify(value)}`;
+                        }
+                        return value;
+                    }
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
@@ -126,6 +143,7 @@ const generateMockValue = (
     enumValuesConvention: NamingConvention,
     prefix: string | undefined,
     currentType: TypeNode,
+    customScalars: ScalarMap,
 ): string | number | boolean => {
     switch (currentType.kind) {
         case 'NamedType':
@@ -137,6 +155,7 @@ const generateMockValue = (
                 enumValuesConvention,
                 prefix,
                 currentType as NamedTypeNode,
+                customScalars,
             );
         case 'NonNullType':
             return generateMockValue(
@@ -147,6 +166,7 @@ const generateMockValue = (
                 enumValuesConvention,
                 prefix,
                 currentType.type,
+                customScalars,
             );
         case 'ListType': {
             const value = generateMockValue(
@@ -157,6 +177,7 @@ const generateMockValue = (
                 enumValuesConvention,
                 prefix,
                 currentType.type,
+                customScalars,
             );
             return `[${value}]`;
         }
@@ -180,12 +201,15 @@ ${fields}
 };`;
 };
 
+type ScalarMap = { [name: string]: keyof (Casual.Casual | Casual.functions) };
+
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
     enumValues?: NamingConvention;
     typenames?: NamingConvention;
     addTypename?: boolean;
     prefix?: string;
+    scalars?: ScalarMap;
 }
 
 interface TypeItem {
@@ -243,6 +267,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         enumValuesConvention,
                         config.prefix,
                         node.type,
+                        config.scalars,
                     );
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -266,6 +291,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       enumValuesConvention,
                                       config.prefix,
                                       field.type,
+                                      config.scalars,
                                   );
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;

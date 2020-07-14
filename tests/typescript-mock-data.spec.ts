@@ -177,3 +177,19 @@ it('should add custom prefix if the `prefix` config option is specified', async 
     expect(result).not.toMatch(/const aUser/);
     expect(result).toMatchSnapshot();
 });
+
+it('should correctly generate the `casual` data for a scalar mapping of type string', async () => {
+    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'email' } });
+
+    expect(result).toBeDefined();
+    expect(result).toContain('Mohamed.Nader@Kiehn.io');
+    expect(result).toMatchSnapshot();
+});
+
+it('should correctly generate the `casual` data for a non-string scalar mapping', async () => {
+    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'rgb_array' } });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(JSON.stringify([41, 98, 185]));
+    expect(result).toMatchSnapshot();
+});
