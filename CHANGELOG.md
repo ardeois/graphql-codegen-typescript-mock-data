@@ -1,3 +1,15 @@
+# (Fri Jul 17 2020)
+
+#### 🐛 Bug Fix
+
+- doc: update mock name [#27](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/27) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.0.0 (Tue Jul 14 2020)
 
 #### 💥 Breaking Change
