@@ -34,8 +34,8 @@ Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pasc
 ### scalars (`{ [Scalar: string]: keyof Casual.Casual | Casual.functions }`, defaultValue: `undefined`)
 
 Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
- [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
- function key)
+[casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
+function key)
 
 ## Example of usage
 
@@ -108,7 +108,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
   };
 };
 
-export const aUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
   return {
     id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
     login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
