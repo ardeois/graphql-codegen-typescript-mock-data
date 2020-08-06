@@ -193,3 +193,12 @@ it('should correctly generate the `casual` data for a non-string scalar mapping'
     expect(result).toContain(JSON.stringify([41, 98, 185]));
     expect(result).toMatchSnapshot();
 });
+
+it('should add typesPrefix to all types when option is specified', async () => {
+    const result = await plugin(testSchema, [], { typesPrefix: 'Api.' });
+
+    expect(result).toBeDefined();
+    expect(result).toMatch(/: Api.User/);
+    expect(result).not.toMatch(/: User/);
+    expect(result).toMatchSnapshot();
+});

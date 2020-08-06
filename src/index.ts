@@ -192,11 +192,16 @@ const getMockString = (
     typenamesConvention: NamingConvention,
     addTypename = false,
     prefix,
+    typesPrefix = '',
 ) => {
     const casedName = createNameConverter(typenamesConvention)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     return `
-export const ${toMockName(typeName, casedName, prefix)} = (overrides?: Partial<${casedName}>): ${casedName} => {
+export const ${toMockName(
+        typeName,
+        casedName,
+        prefix,
+    )} = (overrides?: Partial<${typesPrefix}${casedName}>): ${typesPrefix}${casedName} => {
     return {${typename}
 ${fields}
     };
@@ -212,6 +217,7 @@ export interface TypescriptMocksPluginConfig {
     addTypename?: boolean;
     prefix?: string;
     scalars?: ScalarMap;
+    typesPrefix?: string;
 }
 
 interface TypeItem {
@@ -301,7 +307,14 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                               .join('\n')
                         : '';
 
-                    return getMockString(fieldName, mockFields, typenamesConvention, false, config.prefix);
+                    return getMockString(
+                        fieldName,
+                        mockFields,
+                        typenamesConvention,
+                        false,
+                        config.prefix,
+                        config.typesPrefix,
+                    );
                 },
             };
         },
@@ -325,6 +338,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         typenamesConvention,
                         !!config.addTypename,
                         config.prefix,
+                        config.typesPrefix,
                     );
                 },
             };
