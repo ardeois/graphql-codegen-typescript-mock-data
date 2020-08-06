@@ -37,6 +37,29 @@ Allows you to define mappings for your custom scalars. Allows you to map any Gra
 [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
 function key)
 
+### typesPrefix (`string`, defaultValue: '')
+
+Useful if you have globally exported types under a certain namespace.
+e.g If the types file is something like this
+
+```
+declare namespace Api {
+ type User {
+  ...
+ }
+}
+```
+
+Setting the typesPrefix to `Api.` will create the following mock data
+
+```
+export const aUser = (overrides?: Partial<Api.User>): Api.User => {
+```
+
+Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
+[casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
+function key)
+
 ## Example of usage
 
 **codegen.yml**
