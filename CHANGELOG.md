@@ -1,3 +1,15 @@
+# v1.1.0 (Mon Aug 10 2020)
+
+#### 🚀 Enhancement
+
+- Add config for prefixing types [#29](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/29) ([@RicardoTrindade](https://github.com/RicardoTrindade))
+
+#### Authors: 1
+
+- Ricardo Trindade ([@RicardoTrindade](https://github.com/RicardoTrindade))
+
+---
+
 # (Fri Jul 17 2020)
 
 #### 🐛 Bug Fix
