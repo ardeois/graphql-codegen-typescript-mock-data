@@ -56,10 +56,6 @@ Setting the typesPrefix to `Api.` will create the following mock data
 export const aUser = (overrides?: Partial<Api.User>): Api.User => {
 ```
 
-Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
-[casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
-function key)
-
 ## Example of usage
 
 **codegen.yml**
