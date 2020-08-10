@@ -1,6 +1,6 @@
 {
     "name": "graphql-codegen-typescript-mock-data",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "GraphQL Codegen plugin for building mock data",
     "main": "dist/commonjs/index.js",
     "module": "dist/esnext/index.js",
@@ -39,7 +39,7 @@
         "@types/jest": "^25.1.5",
         "@typescript-eslint/eslint-plugin": "^2.26.0",
         "@typescript-eslint/parser": "^2.26.0",
-        "auto": "^9.47.0",
+        "auto": "^9.50.0",
         "eslint": "6.8.0",
         "eslint-config-landr": "0.2.1",
         "eslint-config-prettier": "^6.10.1",
