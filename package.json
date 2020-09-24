@@ -59,7 +59,7 @@
     "sideEffects": false,
     "scripts": {
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
-        "test": "jest",
+        "test": "TZ=UTC jest",
         "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit",
         "prettify": "prettier --config ./.prettierrc.js --write",
         "auto:version": "yarn version --`auto version` --message 'Bump version to: %s [skip ci]'",

@@ -31,11 +31,45 @@ Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pasc
 
 Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
 
-### scalars (`{ [Scalar: string]: keyof Casual.Casual | Casual.functions }`, defaultValue: `undefined`)
+### scalars (`{ [Scalar: string]: ScalarDefinition }`, defaultValue: `undefined`)
 
 Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
 [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
-function key)
+function key) with optional arguments
+
+Examples
+**With arguments**
+
+```
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: # gets translated to casual.date('YYYY-MM-DD')
+          generator: date
+          arguments: 'YYYY-MM-DD'
+```
+
+**With multiple arguments**
+
+```
+plugins:
+  - typescript-mock-data:
+      scalars:
+        PaginatedAmount: # gets translated to casual.date(-100, 100)
+          generator: integer
+          arguments:
+            - -100
+            - 100
+```
+
+**Shorthand if you don't have arguments**
+
+```
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date # gets translated to casual.date()
+```
 
 ### typesPrefix (`string`, defaultValue: '')
 
@@ -69,7 +103,7 @@ generates:
       - 'typescript'
   src/mocks/generated-mocks.ts:
     plugins:
-      - 'graphql-codegen-typescript-mock-data':
+      - typescript-mock-data:
           typesFile: '../generated-types.ts'
           enumValues: upper-case#upperCase
           typenames: keep
@@ -155,6 +189,18 @@ const user = aUser({ login: 'johndoe' });
 
 // will create a user object with `login` property overridden to `johndoe`
 ```
+
+### Dealing with Timezone
+
+If some properties use generated dates, the result could different depending on the timezone of your machine.
+
+To force a timezone, you can set environment variable `TZ`:
+
+```bash
+TZ=UTC graphql-codegen
+```
+
+This will force the timezone to `UTC`, whatever the timezone of your machine or CI
 
 ### Contributing
 
