@@ -55,7 +55,7 @@ plugins:
 plugins:
   - typescript-mock-data:
       scalars:
-        PaginatedAmount: # gets translated to casual.date(-100, 100)
+        PaginatedAmount: # gets translated to casual.integer(-100, 100)
           generator: integer
           arguments:
             - -100
