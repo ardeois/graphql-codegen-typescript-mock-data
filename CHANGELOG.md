@@ -1,3 +1,15 @@
+# v1.2.1 (Thu Sep 24 2020)
+
+#### ⚠️ Pushed to `master`
+
+- docs: fix typo ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.2.0 (Thu Sep 24 2020)
 
 #### 🚀 Enhancement
