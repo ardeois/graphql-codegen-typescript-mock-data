@@ -58,6 +58,16 @@ const hashedString = (value: string) => {
     return hash;
 };
 
+const getScalarDefinition = (value: ScalarDefinition | ScalarGeneratorName): ScalarDefinition => {
+    if (typeof value === 'string') {
+        return {
+            generator: value,
+            arguments: [],
+        };
+    }
+    return value;
+};
+
 const getNamedType = (
     typeName: string,
     fieldName: string,
@@ -85,8 +95,6 @@ const getNamedType = (
             return casual.boolean;
         case 'Int':
             return casual.integer(0, 9999);
-        case 'Date':
-            return `'${new Date(casual.unix_time).toISOString()}'`;
         default: {
             const foundType = types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
@@ -109,16 +117,26 @@ const getNamedType = (
                             foundType.types && foundType.types[0],
                         );
                     case 'scalar': {
+                        const customScalar = customScalars ? getScalarDefinition(customScalars[foundType.name]) : null;
                         // it's a scalar, let's use a string as a value if there is no custom
                         // mapping for this particular scalar
-                        if (!customScalars || !customScalars[foundType.name]) {
+                        if (!customScalar || !customScalar.generator) {
+                            if (foundType.name === 'Date') {
+                                return `'${new Date(casual.unix_time).toISOString()}'`;
+                            }
                             return `'${casual.word}'`;
                         }
 
                         // If there is a mapping to a `casual` type, then use it and make sure
                         // to call it if it's a function
-                        const embeddedGenerator = casual[customScalars[foundType.name]];
-                        const value = typeof embeddedGenerator === 'function' ? embeddedGenerator() : embeddedGenerator;
+                        const embeddedGenerator = casual[customScalar.generator];
+                        const generatorArgs: unknown[] = Array.isArray(customScalar.arguments)
+                            ? customScalar.arguments
+                            : [customScalar.arguments];
+                        const value =
+                            typeof embeddedGenerator === 'function'
+                                ? embeddedGenerator(...generatorArgs)
+                                : embeddedGenerator;
 
                         if (typeof value === 'string') {
                             return `'${value}'`;
@@ -208,7 +226,15 @@ ${fields}
 };`;
 };
 
-type ScalarMap = { [name: string]: keyof (Casual.Casual | Casual.functions) };
+type ScalarGeneratorName = keyof Casual.Casual | keyof Casual.functions;
+type ScalarDefinition = {
+    generator: ScalarGeneratorName;
+    arguments: unknown;
+};
+
+type ScalarMap = {
+    [name: string]: ScalarGeneratorName | ScalarDefinition;
+};
 
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;

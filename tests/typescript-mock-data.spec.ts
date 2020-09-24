@@ -194,6 +194,36 @@ it('should correctly generate the `casual` data for a non-string scalar mapping'
     expect(result).toMatchSnapshot();
 });
 
+it('should correctly generate the `casual` data for a function with arguments scalar mapping', async () => {
+    const result = await plugin(testSchema, [], {
+        scalars: {
+            AnyObject: {
+                generator: 'date',
+                arguments: ['YYYY-MM-DD'],
+            },
+        },
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain("'1977-06-26'");
+    expect(result).toMatchSnapshot();
+});
+
+it('should correctly generate the `casual` data for a function with one argument scalar mapping', async () => {
+    const result = await plugin(testSchema, [], {
+        scalars: {
+            AnyObject: {
+                generator: 'date',
+                arguments: 'YYYY-MM-DD',
+            },
+        },
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain("'1977-06-26'");
+    expect(result).toMatchSnapshot();
+});
+
 it('should add typesPrefix to all types when option is specified', async () => {
     const result = await plugin(testSchema, [], { typesPrefix: 'Api.' });
 
