@@ -3,4 +3,5 @@ module.exports = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },
+    globalSetup: './tests/circular-mocks/create-mocks.ts',
 };

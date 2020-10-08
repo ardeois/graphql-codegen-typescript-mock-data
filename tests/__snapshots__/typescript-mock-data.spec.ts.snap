@@ -670,3 +670,44 @@ export const aUSER = (overrides?: Partial<USER>): USER => {
 };
 "
 `;
+
+exports[`should use relationshipsToOmit argument to terminate circular relationships with terminateCircularRelationships enabled 1`] = `
+"
+export const anAbcType = (overrides?: Partial<AbcType>, relationshipsToOmit: Set<string> = new Set()): AbcType => {
+    relationshipsToOmit.add('AbcType');
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>, relationshipsToOmit: Set<string> = new Set()): Avatar => {
+    relationshipsToOmit.add('Avatar');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, relationshipsToOmit: Set<string> = new Set()): UpdateUserInput => {
+    relationshipsToOmit.add('UpdateUserInput');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>, relationshipsToOmit: Set<string> = new Set()): User => {
+    relationshipsToOmit.add('User');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+    };
+};
+"
+`;
