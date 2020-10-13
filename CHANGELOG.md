@@ -1,3 +1,15 @@
+# v1.3.0 (Tue Oct 13 2020)
+
+#### 🚀 Enhancement
+
+- Add terminateCircularRelationships option [#31](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/31) ([@ford-outreach](https://github.com/ford-outreach))
+
+#### Authors: 1
+
+- Ford Filer ([@ford-outreach](https://github.com/ford-outreach))
+
+---
+
 # v1.2.1 (Thu Sep 24 2020)
 
 #### ⚠️ Pushed to `master`
