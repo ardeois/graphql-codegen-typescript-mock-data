@@ -74,6 +74,7 @@ const getNamedType = (
     types: TypeItem[],
     typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
+    terminateCircularRelationships: boolean,
     prefix?: string,
     namedType?: NamedTypeNode,
     customScalars?: ScalarMap,
@@ -113,6 +114,7 @@ const getNamedType = (
                             types,
                             typenamesConvention,
                             enumValuesConvention,
+                            terminateCircularRelationships,
                             prefix,
                             foundType.types && foundType.types[0],
                         );
@@ -150,7 +152,15 @@ const getNamedType = (
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
-            return `${toMockName(name, name, prefix)}()`;
+            if (terminateCircularRelationships) {
+                return `relationshipsToOmit.has('${name}') ? {} as ${name} : ${toMockName(
+                    name,
+                    name,
+                    prefix,
+                )}({}, relationshipsToOmit)`;
+            } else {
+                return `${toMockName(name, name, prefix)}()`;
+            }
         }
     }
 };
@@ -161,6 +171,7 @@ const generateMockValue = (
     types: TypeItem[],
     typenamesConvention: NamingConvention,
     enumValuesConvention: NamingConvention,
+    terminateCircularRelationships: boolean,
     prefix: string | undefined,
     currentType: TypeNode,
     customScalars: ScalarMap,
@@ -173,6 +184,7 @@ const generateMockValue = (
                 types,
                 typenamesConvention,
                 enumValuesConvention,
+                terminateCircularRelationships,
                 prefix,
                 currentType as NamedTypeNode,
                 customScalars,
@@ -184,6 +196,7 @@ const generateMockValue = (
                 types,
                 typenamesConvention,
                 enumValuesConvention,
+                terminateCircularRelationships,
                 prefix,
                 currentType.type,
                 customScalars,
@@ -195,6 +208,7 @@ const generateMockValue = (
                 types,
                 typenamesConvention,
                 enumValuesConvention,
+                terminateCircularRelationships,
                 prefix,
                 currentType.type,
                 customScalars,
@@ -208,22 +222,38 @@ const getMockString = (
     typeName: string,
     fields: string,
     typenamesConvention: NamingConvention,
+    terminateCircularRelationships: boolean,
     addTypename = false,
     prefix,
     typesPrefix = '',
 ) => {
     const casedName = createNameConverter(typenamesConvention)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
-    return `
+
+    if (terminateCircularRelationships) {
+        return `
 export const ${toMockName(
-        typeName,
-        casedName,
-        prefix,
-    )} = (overrides?: Partial<${typesPrefix}${casedName}>): ${typesPrefix}${casedName} => {
+            typeName,
+            casedName,
+            prefix,
+        )} = (overrides?: Partial<${typesPrefix}${casedName}>, relationshipsToOmit: Set<string> = new Set()): ${typesPrefix}${casedName} => {
+    relationshipsToOmit.add('${casedName}');
     return {${typename}
 ${fields}
     };
 };`;
+    } else {
+        return `
+export const ${toMockName(
+            typeName,
+            casedName,
+            prefix,
+        )} = (overrides?: Partial<${typesPrefix}${casedName}>): ${typesPrefix}${casedName} => {
+    return {${typename}
+${fields}
+    };
+};`;
+    }
 };
 
 type ScalarGeneratorName = keyof Casual.Casual | keyof Casual.functions;
@@ -243,6 +273,7 @@ export interface TypescriptMocksPluginConfig {
     addTypename?: boolean;
     prefix?: string;
     scalars?: ScalarMap;
+    terminateCircularRelationships?: boolean;
     typesPrefix?: string;
 }
 
@@ -299,6 +330,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         types,
                         typenamesConvention,
                         enumValuesConvention,
+                        !!config.terminateCircularRelationships,
                         config.prefix,
                         node.type,
                         config.scalars,
@@ -323,6 +355,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       types,
                                       typenamesConvention,
                                       enumValuesConvention,
+                                      !!config.terminateCircularRelationships,
                                       config.prefix,
                                       field.type,
                                       config.scalars,
@@ -337,6 +370,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         fieldName,
                         mockFields,
                         typenamesConvention,
+                        !!config.terminateCircularRelationships,
                         false,
                         config.prefix,
                         config.typesPrefix,
@@ -362,6 +396,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         typeName,
                         mockFields,
                         typenamesConvention,
+                        !!config.terminateCircularRelationships,
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,

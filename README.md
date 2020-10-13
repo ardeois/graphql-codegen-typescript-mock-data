@@ -18,6 +18,11 @@ Defines the file path containing all GraphQL types. This file can also be genera
 
 Adds `__typename` property to mock data
 
+### terminateCircularRelationships (`boolean`, defaultValue: `false`)
+
+When enabled, prevents circular relationships from triggering infinite recursion. After the first resolution of a
+specific type in a particular call stack, subsequent resolutions will return an empty object cast to the correct type.
+
 ### prefix (`string`, defaultValue: `a` for constants & `an` for vowels)
 
 The prefix to add to the mock function name. Cannot be empty since it will clash with the associated
