@@ -2,6 +2,18 @@
 
 #### 🐛 Bug Fix
 
+- docs: fix license link [#34](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/34) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
+# (Tue Oct 13 2020)
+
+#### 🐛 Bug Fix
+
 - fix: add codeql analysis [#32](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/32) ([@ardeois](https://github.com/ardeois))
 
 #### Authors: 1
