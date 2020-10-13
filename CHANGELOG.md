@@ -1,3 +1,15 @@
+# (Tue Oct 13 2020)
+
+#### 🐛 Bug Fix
+
+- fix: add codeql analysis [#32](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/32) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.3.1 (Tue Oct 13 2020)
 
 #### 🐛 Bug Fix
