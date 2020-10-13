@@ -1,3 +1,15 @@
+# v1.3.1 (Tue Oct 13 2020)
+
+#### 🐛 Bug Fix
+
+- fix: update dependencies [#33](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/33) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.3.0 (Tue Oct 13 2020)
 
 #### 🚀 Enhancement
