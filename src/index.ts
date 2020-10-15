@@ -229,6 +229,7 @@ const getMockString = (
 ) => {
     const casedName = createNameConverter(typenamesConvention)(typeName);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
+    const typenameReturnType = addTypename ? `{ __typename: '${casedName}' } & ` : '';
 
     if (terminateCircularRelationships) {
         return `
@@ -236,7 +237,7 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${typesPrefix}${casedName}>, relationshipsToOmit: Set<string> = new Set()): ${typesPrefix}${casedName} => {
+        )} = (overrides?: Partial<${typesPrefix}${casedName}>, relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${typesPrefix}${casedName} => {
     relationshipsToOmit.add('${casedName}');
     return {${typename}
 ${fields}
@@ -248,7 +249,7 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${typesPrefix}${casedName}>): ${typesPrefix}${casedName} => {
+        )} = (overrides?: Partial<${typesPrefix}${casedName}>): ${typenameReturnType}${typesPrefix}${casedName} => {
     return {${typename}
 ${fields}
     };

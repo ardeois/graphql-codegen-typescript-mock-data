@@ -559,14 +559,14 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 exports[`should generate mock data with typename if addTypename is true 1`] = `
 "
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+export const anAbcType = (overrides?: Partial<AbcType>): { __typename: 'AbcType' } & AbcType => {
     return {
         __typename: 'AbcType',
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+export const anAvatar = (overrides?: Partial<Avatar>): { __typename: 'Avatar' } & Avatar => {
     return {
         __typename: 'Avatar',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
@@ -582,7 +582,7 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
-export const aUser = (overrides?: Partial<User>): User => {
+export const aUser = (overrides?: Partial<User>): { __typename: 'User' } & User => {
     return {
         __typename: 'User',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
