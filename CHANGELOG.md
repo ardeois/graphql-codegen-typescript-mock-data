@@ -1,3 +1,15 @@
+# v1.3.4 (Thu Oct 15 2020)
+
+#### 🐛 Bug Fix
+
+- fix: add __typename to return type [#35](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/35) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # (Tue Oct 13 2020)
 
 #### 🐛 Bug Fix
