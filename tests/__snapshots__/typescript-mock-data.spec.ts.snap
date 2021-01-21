@@ -222,7 +222,7 @@ export const aUser = (overrides?: Partial<User>): User => {
 "
 `;
 
-exports[`should correctly generate the default custom value of scalar 1`] = `
+exports[`should correctly use custom generator as default value 1`] = `
 "
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
