@@ -132,6 +132,11 @@ const getNamedType = (
                         // If there is a mapping to a `casual` type, then use it and make sure
                         // to call it if it's a function
                         const embeddedGenerator = casual[customScalar.generator];
+
+                        if (!embeddedGenerator && customScalar.generator) {
+                            return customScalar.generator;
+                        }
+
                         const generatorArgs: unknown[] = Array.isArray(customScalar.arguments)
                             ? customScalar.arguments
                             : [customScalar.arguments];
@@ -257,7 +262,7 @@ ${fields}
     }
 };
 
-type ScalarGeneratorName = keyof Casual.Casual | keyof Casual.functions;
+type ScalarGeneratorName = keyof Casual.Casual | keyof Casual.functions | string;
 type ScalarDefinition = {
     generator: ScalarGeneratorName;
     arguments: unknown;
