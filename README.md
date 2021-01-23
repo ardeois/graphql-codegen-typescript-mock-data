@@ -76,6 +76,19 @@ plugins:
         Date: date # gets translated to casual.date()
 ```
 
+**Scalar custom value generator**
+
+```yaml
+plugins:
+  - add: "import { arrayBufferGenerator } from '../generators';"
+  - typescript-mock-data:
+      typesFile: '../generated-types.ts'
+      enumValues: upper-case#upperCase
+      typenames: keep
+      scalars:
+        ArrayBuffer: arrayBufferGenerator()
+```
+
 ### typesPrefix (`string`, defaultValue: '')
 
 Useful if you have globally exported types under a certain namespace.
@@ -114,28 +127,6 @@ generates:
           typenames: keep
           scalars:
             AWSTimestamp: unix_time # gets translated to casual.unix_time
-```
-
-## Scalar custom value generator
-
-**codegen.yml**
-
-```yaml
-overwrite: true
-schema: schema.graphql
-generates:
-  src/generated-types.ts:
-    plugins:
-      - 'typescript'
-  src/mocks/generated-mocks.ts:
-    plugins:
-      - add: "import { arrayBufferGenerator } from '../generators';"
-      - typescript-mock-data:
-          typesFile: '../generated-types.ts'
-          enumValues: upper-case#upperCase
-          typenames: keep
-          scalars:
-            ArrayBuffer: arrayBufferGenerator()
 ```
 
 ## Example or generated code
