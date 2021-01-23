@@ -76,7 +76,7 @@ plugins:
         Date: date # gets translated to casual.date()
 ```
 
-**Scalar custom value generator**
+**Custom value generator**
 
 ```yaml
 plugins:
