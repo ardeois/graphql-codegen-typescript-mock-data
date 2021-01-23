@@ -82,9 +82,6 @@ plugins:
 plugins:
   - add: "import { arrayBufferGenerator } from '../generators';"
   - typescript-mock-data:
-      typesFile: '../generated-types.ts'
-      enumValues: upper-case#upperCase
-      typenames: keep
       scalars:
         ArrayBuffer: arrayBufferGenerator()
 ```
