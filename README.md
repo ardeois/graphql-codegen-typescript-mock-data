@@ -76,6 +76,16 @@ plugins:
         Date: date # gets translated to casual.date()
 ```
 
+**Custom value generator**
+
+```yaml
+plugins:
+  - add: "import { arrayBufferGenerator } from '../generators';"
+  - typescript-mock-data:
+      scalars:
+        ArrayBuffer: arrayBufferGenerator()
+```
+
 ### typesPrefix (`string`, defaultValue: '')
 
 Useful if you have globally exported types under a certain namespace.

@@ -224,6 +224,21 @@ it('should correctly generate the `casual` data for a function with one argument
     expect(result).toMatchSnapshot();
 });
 
+it('should correctly use custom generator as default value', async () => {
+    const result = await plugin(testSchema, [], {
+        scalars: {
+            AnyObject: {
+                generator: 'myValueGenerator()',
+                arguments: [],
+            },
+        },
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain('myValueGenerator()');
+    expect(result).toMatchSnapshot();
+});
+
 it('should add typesPrefix to all types when option is specified', async () => {
     const result = await plugin(testSchema, [], { typesPrefix: 'Api.' });
 
