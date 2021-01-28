@@ -1,3 +1,21 @@
+# v1.4.0 (Thu Jan 28 2021)
+
+#### 🚀 Enhancement
+
+- Added support for custom generator function [#39](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/39) ([@marucjmar](https://github.com/marucjmar) [@ardeois](https://github.com/ardeois))
+
+#### 🐛 Bug Fix
+
+- build(deps): bump ini from 1.3.5 to 1.3.8 [#37](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/37) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Marcin Lazar ([@marucjmar](https://github.com/marucjmar))
+
+---
+
 # v1.3.4 (Thu Oct 15 2020)
 
 #### 🐛 Bug Fix
