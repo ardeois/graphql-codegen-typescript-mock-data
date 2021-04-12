@@ -424,10 +424,11 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const result: any = visit(astNode, { leave: visitor });
     const definitions = result.definitions.filter((definition: any) => !!definition);
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
+    const typenameConverter = createNameConverter(typenamesConvention);
     const typeImports = definitions
-        .map(({ typeName }: { typeName: string }) => typeName)
+        .map(({ typeName }: { typeName: string }) => typenameConverter(typeName))
         .filter((typeName: string) => !!typeName);
-    typeImports.push(...types.filter(({ type }) => type !== 'scalar').map(({ name }) => name));
+    typeImports.push(...types.filter(({ type }) => type !== 'scalar').map(({ name }) => typenameConverter(name)));
     // List of function that will generate the mock.
     // We generate it after having visited because we need to distinct types from enums
     const mockFns = definitions.map(({ mockFn }: any) => mockFn).filter((mockFn: Function) => !!mockFn);

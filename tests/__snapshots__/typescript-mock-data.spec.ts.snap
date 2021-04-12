@@ -298,7 +298,7 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ABCType, Avatar, UpdateUserInput, User, ABCStatus, Status } from './types/graphql';
+import { AbcType, Avatar, UpdateUserInput, User, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -558,7 +558,9 @@ export const aUser = (overrides?: Partial<User>): User => {
 `;
 
 exports[`should generate mock data with pascalCase types and enums by default 1`] = `
-"
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { AbcType, Avatar, UpdateUserInput, User, AbcStatus, Status } from './types/graphql';
+
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
