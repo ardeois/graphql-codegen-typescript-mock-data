@@ -76,7 +76,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { ABCType, Avatar, UpdateUserInput, User, ABCStatus, Status } from './types/graphql';",
+        "import { AbcType, Avatar, UpdateUserInput, User, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -130,7 +130,7 @@ it('should generate mock data with as-is enum values if enumValues is "keep"', a
 });
 
 it('should generate mock data with pascalCase types and enums by default', async () => {
-    const result = await plugin(testSchema, [], {});
+    const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
     expect(result).toMatch(/Abc(Type|Status)/);
