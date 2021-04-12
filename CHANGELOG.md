@@ -1,3 +1,15 @@
+# v1.5.0 (Mon Apr 12 2021)
+
+#### 🚀 Enhancement
+
+- fix: update type case in `import` [#43](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/43) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.4.1 (Wed Mar 31 2021)
 
 #### 🐛 Bug Fix
