@@ -1,3 +1,15 @@
+# v1.5.1 (Tue Apr 13 2021)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump gitlog from 4.0.3 to 4.0.4 [#44](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/44) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v1.5.0 (Mon Apr 12 2021)
 
 #### 🚀 Enhancement
