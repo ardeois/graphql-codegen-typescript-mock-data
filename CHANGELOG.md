@@ -1,3 +1,15 @@
+# v1.5.3 (Tue May 11 2021)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump hosted-git-info from 2.8.8 to 2.8.9 [#46](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/46) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v1.5.2 (Tue May 11 2021)
 
 #### 🐛 Bug Fix
