@@ -1,3 +1,15 @@
+# v1.5.4 (Wed May 12 2021)
+
+#### 🐛 Bug Fix
+
+- fix: update graphql peer dependency [#47](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/47) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.5.3 (Tue May 11 2021)
 
 #### 🐛 Bug Fix
