@@ -410,6 +410,26 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
+        InterfaceTypeDefinition: (node) => {
+            const typeName = node.name.value;
+            const { fields } = node;
+            return {
+                typeName,
+                mockFn: () => {
+                    const mockFields = fields ? fields.map(({ mockFn }: any) => mockFn(typeName)).join('\n') : '';
+
+                    return getMockString(
+                        typeName,
+                        mockFields,
+                        typenamesConvention,
+                        !!config.terminateCircularRelationships,
+                        !!config.addTypename,
+                        config.prefix,
+                        config.typesPrefix,
+                    );
+                },
+            };
+        },
         ScalarTypeDefinition: (node) => {
             const name = node.name.value;
             if (!types.find((enumType) => enumType.name === name)) {
