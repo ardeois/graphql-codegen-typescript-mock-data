@@ -2,6 +2,18 @@
 
 #### 🔩 Dependency Updates
 
+- build(deps): bump ws from 7.2.3 to 7.4.6 [#49](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/49) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
+# (Thu Jun 10 2021)
+
+#### 🔩 Dependency Updates
+
 - build(deps): bump glob-parent from 5.1.1 to 5.1.2 [#50](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/50) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 1
