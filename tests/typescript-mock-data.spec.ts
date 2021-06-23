@@ -12,7 +12,7 @@ const testSchema = buildSchema(/* GraphQL */ `
         url: String!
     }
 
-    type User {
+    type User implements WithAvatar {
         id: ID!
         creationDate: Date!
         login: String!
@@ -20,6 +20,11 @@ const testSchema = buildSchema(/* GraphQL */ `
         status: Status!
         customStatus: ABCStatus
         scalarValue: AnyObject!
+    }
+
+    interface WithAvatar {
+        id: ID!
+        avatar: Avatar
     }
 
     type Query {
@@ -76,7 +81,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, UpdateUserInput, User, AbcStatus, Status } from './types/graphql';",
+        "import { AbcType, Avatar, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
