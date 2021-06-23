@@ -1,3 +1,16 @@
+# v1.5.7 (Wed Jun 23 2021)
+
+#### 🐛 Bug Fix
+
+- feat: add support for interface type [#48](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/48) ([@aki77](https://github.com/aki77) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- [@aki77](https://github.com/aki77)
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # (Thu Jun 10 2021)
 
 #### 🔩 Dependency Updates
