@@ -89,7 +89,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -305,7 +305,7 @@ it('should add enumsPrefix to imports', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -330,7 +330,7 @@ it('should not merge imports into one if typesPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';",
+        "import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -343,7 +343,7 @@ it('should not merge imports into one if enumsPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });

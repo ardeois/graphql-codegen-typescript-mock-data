@@ -21,6 +21,18 @@ export const mockCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCa
     };
 };
 
+export const mockMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : mockUser(),
+    };
+};
+
+export const mockQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : mockUser(),
+    };
+};
+
 export const mockUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -73,6 +85,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -106,7 +130,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should add enumsPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -124,6 +148,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -181,6 +217,18 @@ export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.Ca
     };
 };
 
+export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -230,6 +278,18 @@ export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -287,6 +347,18 @@ export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.Ca
     };
 };
 
+export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -336,6 +408,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -391,6 +475,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -440,6 +536,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -495,6 +603,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -544,6 +664,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -599,6 +731,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -632,7 +776,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -650,6 +794,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -705,6 +861,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -754,6 +922,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -809,6 +989,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -861,6 +1053,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -894,7 +1098,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data with PascalCase types and enums by default 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -912,6 +1116,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -967,6 +1183,18 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseT
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -1016,6 +1244,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const acamelCaseThing = (overrides?: Partial<camelCaseThing>): camelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -1074,6 +1314,20 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): { __typena
     };
 };
 
+export const aMutation = (overrides?: Partial<Mutation>): { __typename: 'Mutation' } & Mutation => {
+    return {
+        __typename: 'Mutation',
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): { __typename: 'Query' } & Query => {
+    return {
+        __typename: 'Query',
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -1125,6 +1379,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -1180,6 +1446,18 @@ export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASET
     };
 };
 
+export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
+    };
+};
+
+export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
+    };
+};
+
 export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -1213,7 +1491,7 @@ export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
 
 exports[`should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase" 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ABCTYPE, AVATAR, CAMELCASETHING, UPDATEUSERINPUT, USER, WITHAVATAR, ABCSTATUS, STATUS } from './types/graphql';
+import { ABCTYPE, AVATAR, CAMELCASETHING, MUTATION, QUERY, UPDATEUSERINPUT, USER, WITHAVATAR, ABCSTATUS, STATUS } from './types/graphql';
 
 export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
     return {
@@ -1231,6 +1509,18 @@ export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
 export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASETHING => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
+    };
+};
+
+export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
     };
 };
 
@@ -1267,7 +1557,7 @@ export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
 
 exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -1285,6 +1575,18 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -1321,7 +1623,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';
+import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<ApiAbcType>): ApiAbcType => {
     return {
@@ -1339,6 +1641,18 @@ export const anAvatar = (overrides?: Partial<ApiAvatar>): ApiAvatar => {
 export const aCamelCaseThing = (overrides?: Partial<ApiCamelCaseThing>): ApiCamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<ApiMutation>): ApiMutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<ApiQuery>): ApiQuery => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
     };
 };
 
@@ -1394,6 +1708,20 @@ export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, relationshi
     relationshipsToOmit.add('CamelCaseThing');
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>, relationshipsToOmit: Set<string> = new Set()): Mutation => {
+    relationshipsToOmit.add('Mutation');
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>, relationshipsToOmit: Set<string> = new Set()): Query => {
+    relationshipsToOmit.add('Query');
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
     };
 };
 
