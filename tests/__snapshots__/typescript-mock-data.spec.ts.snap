@@ -15,6 +15,12 @@ export const mockAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const mockCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const mockUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -32,6 +38,7 @@ export const mockUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : mockCamelCaseThing(),
     };
 };
 
@@ -59,6 +66,12 @@ export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -76,6 +89,7 @@ export const aUser = (overrides?: Partial<Api.User>): Api.User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -103,6 +117,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -120,6 +140,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : '1977-06-26',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -147,6 +168,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -164,6 +191,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : '1977-06-26',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -191,6 +219,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -208,6 +242,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : [41,98,185],
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -235,6 +270,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -252,6 +293,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'Mohamed.Nader@Kiehn.io',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -279,6 +321,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -296,6 +344,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : myValueGenerator(),
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -323,6 +372,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -340,6 +395,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -354,7 +410,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -366,6 +422,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
@@ -386,6 +448,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -413,6 +476,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -430,6 +499,213 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with PascalCase enum values by default 1`] = `
+"
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with PascalCase enum values if enumValues is "pascal-case#pascalCase" 1`] = `
+"
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with PascalCase enum values if typenames is "pascal-case#pascalCase" 1`] = `
+"
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with PascalCase types and enums by default 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -457,6 +733,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -474,6 +756,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.ONLINE,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.hasXYZStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -501,6 +784,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const acamelCaseThing = (overrides?: Partial<camelCaseThing>): camelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -518,184 +807,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-    };
-};
-
-export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-"
-`;
-
-exports[`should generate mock data with pascalCase enum values by default 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-
-export const aUser = (overrides?: Partial<User>): User => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-    };
-};
-
-export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-"
-`;
-
-exports[`should generate mock data with pascalCase enum values if enumValues is "pascal-case#pascalCase" 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-
-export const aUser = (overrides?: Partial<User>): User => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-    };
-};
-
-export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-"
-`;
-
-exports[`should generate mock data with pascalCase enum values if typenames is "pascal-case#pascalCase" 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-
-export const aUser = (overrides?: Partial<User>): User => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-    };
-};
-
-export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-"
-`;
-
-exports[`should generate mock data with pascalCase types and enums by default 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-    };
-};
-
-export const aUser = (overrides?: Partial<User>): User => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : acamelCaseThing(),
     };
 };
 
@@ -725,6 +837,13 @@ export const anAvatar = (overrides?: Partial<Avatar>): { __typename: 'Avatar' } 
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): { __typename: 'CamelCaseThing' } & CamelCaseThing => {
+    return {
+        __typename: 'CamelCaseThing',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -743,6 +862,7 @@ export const aUser = (overrides?: Partial<User>): { __typename: 'User' } & User 
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -771,6 +891,12 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
@@ -788,6 +914,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.ONLINE,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HASXYZSTATUS,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
     };
 };
 
@@ -815,11 +942,17 @@ export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
     };
 };
 
+export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASETHING => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
     };
 };
 
@@ -828,17 +961,18 @@ export const aUSER = (overrides?: Partial<USER>): USER => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
         creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : STATUS.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
     };
 };
 
 export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
     };
 };
 "
@@ -861,6 +995,13 @@ export const anAvatar = (overrides?: Partial<Avatar>, relationshipsToOmit: Set<s
     };
 };
 
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, relationshipsToOmit: Set<string> = new Set()): CamelCaseThing => {
+    relationshipsToOmit.add('CamelCaseThing');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, relationshipsToOmit: Set<string> = new Set()): UpdateUserInput => {
     relationshipsToOmit.add('UpdateUserInput');
     return {
@@ -880,6 +1021,7 @@ export const aUser = (overrides?: Partial<User>, relationshipsToOmit: Set<string
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('camelCaseThing') ? {} as camelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
     };
 };
 

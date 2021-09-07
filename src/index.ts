@@ -85,6 +85,7 @@ const getNamedType = (
 
     casual.seed(hashedString(typeName + fieldName));
     const name = namedType.name.value;
+    const casedName = createNameConverter(typenamesConvention)(name);
     switch (name) {
         case 'String':
             return `'${casual.word}'`;
@@ -160,11 +161,11 @@ const getNamedType = (
             if (terminateCircularRelationships) {
                 return `relationshipsToOmit.has('${name}') ? {} as ${name} : ${toMockName(
                     name,
-                    name,
+                    casedName,
                     prefix,
                 )}({}, relationshipsToOmit)`;
             } else {
-                return `${toMockName(name, name, prefix)}()`;
+                return `${toMockName(name, casedName, prefix)}()`;
             }
         }
     }

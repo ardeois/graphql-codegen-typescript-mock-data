@@ -20,11 +20,16 @@ const testSchema = buildSchema(/* GraphQL */ `
         status: Status!
         customStatus: ABCStatus
         scalarValue: AnyObject!
+        camelCaseThing: camelCaseThing
     }
 
     interface WithAvatar {
         id: ID!
         avatar: Avatar
+    }
+
+    type camelCaseThing {
+        id: ID!
     }
 
     type Query {
@@ -81,7 +86,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -94,7 +99,7 @@ it('should generate mock data with typename if addTypename is true', async () =>
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with pascalCase enum values by default', async () => {
+it('should generate mock data with PascalCase enum values by default', async () => {
     const result = await plugin(testSchema, [], {});
 
     expect(result).toBeDefined();
@@ -104,7 +109,15 @@ it('should generate mock data with pascalCase enum values by default', async () 
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with pascalCase enum values if enumValues is "pascal-case#pascalCase"', async () => {
+it('should reference mock data functions with PascalCase names even if type names are camelCase', async () => {
+    const result = await plugin(testSchema, [], { prefix: 'mock' });
+
+    expect(result).toBeDefined();
+    expect(result).toContain('mockCamelCaseThing');
+    expect(result).not.toContain('mockcamelCaseThing');
+});
+
+it('should generate mock data with PascalCase enum values if enumValues is "pascal-case#pascalCase"', async () => {
     const result = await plugin(testSchema, [], { enumValues: 'pascal-case#pascalCase' });
 
     expect(result).toBeDefined();
@@ -134,7 +147,7 @@ it('should generate mock data with as-is enum values if enumValues is "keep"', a
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with pascalCase types and enums by default', async () => {
+it('should generate mock data with PascalCase types and enums by default', async () => {
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
@@ -144,7 +157,7 @@ it('should generate mock data with pascalCase types and enums by default', async
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with pascalCase enum values if typenames is "pascal-case#pascalCase"', async () => {
+it('should generate mock data with PascalCase enum values if typenames is "pascal-case#pascalCase"', async () => {
     const result = await plugin(testSchema, [], { typenames: 'pascal-case#pascalCase' });
 
     expect(result).toBeDefined();
