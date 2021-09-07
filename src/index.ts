@@ -253,17 +253,24 @@ const getImportTypes = ({
     enumsPrefix: string;
 }) => {
     const typenameConverter = createNameConverter(typenamesConvention);
-    const typeImports = definitions
-        .filter(({ typeName }: { typeName: string }) => !!typeName)
-        .map(({ typeName }: { typeName: string }) => typenameConverter(typeName, typesPrefix));
-    const enumTypes = types
-        .filter(({ type }) => type === 'enum')
-        .map(({ name }) => typenameConverter(name, enumsPrefix));
+    const typeImports = typesPrefix?.endsWith('.')
+        ? [typesPrefix.slice(0, -1)]
+        : definitions
+              .filter(({ typeName }: { typeName: string }) => !!typeName)
+              .map(({ typeName }: { typeName: string }) => typenameConverter(typeName, typesPrefix));
+    const enumTypes = enumsPrefix?.endsWith('.')
+        ? [enumsPrefix.slice(0, -1)]
+        : types.filter(({ type }) => type === 'enum').map(({ name }) => typenameConverter(name, enumsPrefix));
 
     typeImports.push(...enumTypes);
+
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
     return typesFile
         ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ${typeImports.join(', ')} } from '${typesFile}';\n`
+import { ${typeImports.filter(onlyUnique).join(', ')} } from '${typesFile}';\n`
         : '';
 };
 

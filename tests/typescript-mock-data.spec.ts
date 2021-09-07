@@ -284,9 +284,7 @@ it('should add typesPrefix to imports', async () => {
     const result = await plugin(testSchema, [], { typesPrefix: 'Api.', typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, AbcStatus, Status } from './types/graphql';",
-    );
+    expect(result).toContain("import { Api, AbcStatus, Status } from './types/graphql';");
     expect(result).toMatchSnapshot();
 });
 
@@ -307,7 +305,7 @@ it('should add enumsPrefix to imports', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api.AbcStatus, Api.Status } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -320,8 +318,32 @@ it('should add typesPrefix and enumsPrefix to imports', async () => {
     });
 
     expect(result).toBeDefined();
+    expect(result).toContain("import { Api } from './types/graphql';");
+    expect(result).toMatchSnapshot();
+});
+
+it('should not merge imports into one if typesPrefix does not contain dots', async () => {
+    const result = await plugin(testSchema, [], {
+        typesPrefix: 'Api',
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, Api.AbcStatus, Api.Status } from './types/graphql';",
+        "import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should not merge imports into one if enumsPrefix does not contain dots', async () => {
+    const result = await plugin(testSchema, [], {
+        enumsPrefix: 'Api',
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });

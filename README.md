@@ -111,7 +111,7 @@ Similar to `typesPrefix`, but for enum types
 
 ```
 declare namespace Api {
- type User {
+ enum Status {
   ...
  }
 }

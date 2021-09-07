@@ -106,7 +106,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should add enumsPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api.AbcStatus, Api.Status } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -160,7 +160,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should add typesPrefix and enumsPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, Api.AbcStatus, Api.Status } from './types/graphql';
+import { Api } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
     return {
@@ -266,7 +266,7 @@ export const aWithAvatar = (overrides?: Partial<Api.WithAvatar>): Api.WithAvatar
 
 exports[`should add typesPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, AbcStatus, Status } from './types/graphql';
+import { Api, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
     return {
@@ -1260,6 +1260,114 @@ export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+    };
+};
+"
+`;
+
+exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : ApiStatus.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ApiAbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';
+
+export const anAbcType = (overrides?: Partial<ApiAbcType>): ApiAbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<ApiAvatar>): ApiAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<ApiCamelCaseThing>): ApiCamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<ApiUpdateUserInput>): ApiUpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<ApiUser>): ApiUser => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<ApiWithAvatar>): ApiWithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 "
