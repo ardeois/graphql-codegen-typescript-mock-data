@@ -1,3 +1,15 @@
+# v1.5.8 (Tue Sep 07 2021)
+
+#### 🐛 Bug Fix
+
+- fix: wrong generation of typenames [#53](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/53) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.5.7 (Wed Jun 23 2021)
 
 #### 🐛 Bug Fix
