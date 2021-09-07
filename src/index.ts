@@ -22,19 +22,21 @@ type Options<T = TypeNode> = {
     customScalars?: ScalarMap;
 };
 
-const createNameConverter = (convention: NamingConvention) => (value: string, prefix = '') => {
-    switch (convention) {
-        case 'upper-case#upperCase':
-            return `${prefix}${upperCase(value || '')}`;
-        case 'keep':
-            return `${prefix}${value}`;
-        case 'pascal-case#pascalCase':
-        // fallthrough
-        default:
-            // default to pascal case in case of unknown values
-            return `${prefix}${pascalCase(value || '')}`;
-    }
-};
+const createNameConverter =
+    (convention: NamingConvention) =>
+    (value: string, prefix = '') => {
+        switch (convention) {
+            case 'upper-case#upperCase':
+                return `${prefix}${upperCase(value || '')}`;
+            case 'keep':
+                return `${prefix}${value}`;
+            case 'pascal-case#pascalCase':
+            // fallthrough
+            default:
+                // default to pascal case in case of unknown values
+                return `${prefix}${pascalCase(value || '')}`;
+        }
+    };
 
 const toMockName = (typedName: string, casedName: string, prefix?: string) => {
     if (prefix) {
