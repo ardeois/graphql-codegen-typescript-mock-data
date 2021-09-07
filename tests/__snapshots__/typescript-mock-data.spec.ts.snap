@@ -39,6 +39,7 @@ export const mockUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : mockCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : mockAvatar(),
     };
 };
 
@@ -46,6 +47,166 @@ export const mockWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : mockAvatar(),
+    };
+};
+"
+`;
+
+exports[`should add enumsPrefix to all enums when option is specified 1`] = `
+"
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Api.Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : Api.AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should add enumsPrefix to imports 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api.AbcStatus, Api.Status } from './types/graphql';
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Api.Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : Api.AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should add typesPrefix and enumsPrefix to imports 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, Api.AbcStatus, Api.Status } from './types/graphql';
+
+export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<Api.User>): Api.User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Api.Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : Api.AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<Api.WithAvatar>): Api.WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 "
@@ -90,6 +251,7 @@ export const aUser = (overrides?: Partial<Api.User>): Api.User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -143,6 +305,7 @@ export const aUser = (overrides?: Partial<Api.User>): Api.User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -194,6 +357,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : '1977-06-26',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -245,6 +409,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : '1977-06-26',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -296,6 +461,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : [41,98,185],
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -347,6 +513,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'Mohamed.Nader@Kiehn.io',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -398,6 +565,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : myValueGenerator(),
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -449,6 +617,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -502,6 +671,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -553,6 +723,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -604,6 +775,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -655,6 +827,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -706,6 +879,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -759,6 +933,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -810,6 +985,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.hasXYZStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -861,6 +1037,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : acamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -916,6 +1093,7 @@ export const aUser = (overrides?: Partial<User>): { __typename: 'User' } & User 
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -968,6 +1146,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HASXYZSTATUS,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
     };
 };
 
@@ -1019,6 +1198,7 @@ export const aUSER = (overrides?: Partial<USER>): USER => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAVATAR(),
     };
 };
 
@@ -1072,6 +1252,7 @@ export const aUSER = (overrides?: Partial<USER>): USER => {
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAVATAR(),
     };
 };
 
@@ -1128,6 +1309,7 @@ export const aUser = (overrides?: Partial<User>, relationshipsToOmit: Set<string
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('camelCaseThing') ? {} as camelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
     };
 };
 
