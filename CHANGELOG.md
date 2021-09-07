@@ -1,3 +1,15 @@
+# v1.6.0 (Tue Sep 07 2021)
+
+#### 🚀 Enhancement
+
+- feat: add enumsPrefix option [#56](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/56) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.5.10 (Tue Sep 07 2021)
 
 #### 🐛 Bug Fix
