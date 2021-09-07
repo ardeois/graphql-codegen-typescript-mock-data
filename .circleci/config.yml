@@ -6,7 +6,7 @@
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:10
+    - image: circleci/node:14
 
 version: 2.1 # use CircleCI 2.1
 jobs: # a collection of steps
