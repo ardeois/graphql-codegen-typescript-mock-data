@@ -99,7 +99,7 @@ declare namespace Api {
 }
 ```
 
-Setting the typesPrefix to `Api.` will create the following mock data
+Setting the `typesPrefix` to `Api.` will create the following mock data
 
 ```
 export const aUser = (overrides?: Partial<Api.User>): Api.User => {

@@ -276,6 +276,16 @@ it('should add typesPrefix to all types when option is specified', async () => {
     expect(result).toMatchSnapshot();
 });
 
+it('should add typesPrefix to imports', async () => {
+    const result = await plugin(testSchema, [], { typesPrefix: 'Api.', typesFile: './types/graphql.ts' });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, AbcStatus, Status } from './types/graphql';",
+    );
+    expect(result).toMatchSnapshot();
+});
+
 it('should use relationshipsToOmit argument to terminate circular relationships with terminateCircularRelationships enabled', async () => {
     const result = await plugin(testSchema, [], { terminateCircularRelationships: true });
 
