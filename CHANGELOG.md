@@ -1,3 +1,15 @@
+# (Tue Sep 07 2021)
+
+#### 🔩 Dependency Updates
+
+- build(deps): bump path-parse from 1.0.6 to 1.0.7 [#52](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/52) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v1.5.8 (Tue Sep 07 2021)
 
 #### 🐛 Bug Fix
