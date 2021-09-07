@@ -1,3 +1,15 @@
+# v1.7.0 (Tue Sep 07 2021)
+
+#### 🚀 Enhancement
+
+- fix: generate Query and Mutation mocks [#57](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/57) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.6.0 (Tue Sep 07 2021)
 
 #### 🚀 Enhancement
