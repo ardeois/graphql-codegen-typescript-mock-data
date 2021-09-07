@@ -17,6 +17,7 @@ type Options<T = TypeNode> = {
     terminateCircularRelationships: boolean;
     prefix: string | undefined;
     typesPrefix: string;
+    enumsPrefix: string;
     currentType: T;
     customScalars?: ScalarMap;
 };
@@ -108,7 +109,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         // It's an enum
                         const typenameConverter = createNameConverter(opts.typenamesConvention);
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${typenameConverter(foundType.name)}.${updateTextCase(
+                        return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${updateTextCase(
                             value,
                             opts.enumValuesConvention,
                         )}`;
@@ -242,23 +243,34 @@ const getImportTypes = ({
     types,
     typesFile,
     typesPrefix,
+    enumsPrefix,
 }: {
     typenamesConvention: NamingConvention;
     definitions: any;
     types: TypeItem[];
     typesFile: string;
     typesPrefix: string;
+    enumsPrefix: string;
 }) => {
     const typenameConverter = createNameConverter(typenamesConvention);
-    const enumTypes = types.filter(({ type }) => type === 'enum');
-    const typeImports = definitions
-        .filter(({ typeName }: { typeName: string }) => !!typeName)
-        .map(({ typeName }: { typeName: string }) => typenameConverter(typeName, typesPrefix));
+    const typeImports = typesPrefix?.endsWith('.')
+        ? [typesPrefix.slice(0, -1)]
+        : definitions
+              .filter(({ typeName }: { typeName: string }) => !!typeName)
+              .map(({ typeName }: { typeName: string }) => typenameConverter(typeName, typesPrefix));
+    const enumTypes = enumsPrefix?.endsWith('.')
+        ? [enumsPrefix.slice(0, -1)]
+        : types.filter(({ type }) => type === 'enum').map(({ name }) => typenameConverter(name, enumsPrefix));
 
-    typeImports.push(...enumTypes.map(({ name }) => typenameConverter(name)));
+    typeImports.push(...enumTypes);
+
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
     return typesFile
         ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ${typeImports.join(', ')} } from '${typesFile}';\n`
+import { ${typeImports.filter(onlyUnique).join(', ')} } from '${typesFile}';\n`
         : '';
 };
 
@@ -281,6 +293,7 @@ export interface TypescriptMocksPluginConfig {
     scalars?: ScalarMap;
     terminateCircularRelationships?: boolean;
     typesPrefix?: string;
+    enumsPrefix?: string;
 }
 
 interface TypeItem {
@@ -339,6 +352,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         terminateCircularRelationships: !!config.terminateCircularRelationships,
                         prefix: config.prefix,
                         typesPrefix: config.typesPrefix,
+                        enumsPrefix: config.enumsPrefix,
                         currentType: node.type,
                         customScalars: config.scalars,
                     });
@@ -365,6 +379,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       terminateCircularRelationships: !!config.terminateCircularRelationships,
                                       prefix: config.prefix,
                                       typesPrefix: config.typesPrefix,
+                                      enumsPrefix: config.enumsPrefix,
                                       currentType: field.type,
                                       customScalars: config.scalars,
                                   });
@@ -453,6 +468,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         types,
         typesFile,
         typesPrefix: config.typesPrefix,
+        enumsPrefix: config.enumsPrefix,
     });
     // List of function that will generate the mock.
     // We generate it after having visited because we need to distinct types from enums

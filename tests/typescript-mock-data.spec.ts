@@ -21,6 +21,7 @@ const testSchema = buildSchema(/* GraphQL */ `
         customStatus: ABCStatus
         scalarValue: AnyObject!
         camelCaseThing: camelCaseThing
+        unionThing: UnionThing
     }
 
     interface WithAvatar {
@@ -58,6 +59,8 @@ const testSchema = buildSchema(/* GraphQL */ `
     type Mutation {
         updateUser(user: UpdateUserInput): User
     }
+
+    union UnionThing = Avatar | camelCaseThing
 `);
 
 it('can be called', async () => {
@@ -273,6 +276,7 @@ it('should add typesPrefix to all types when option is specified', async () => {
     expect(result).toBeDefined();
     expect(result).toMatch(/: Api.User/);
     expect(result).not.toMatch(/: User/);
+    expect(result).not.toMatch(/: Api.AbcStatus/);
     expect(result).toMatchSnapshot();
 });
 
@@ -280,8 +284,66 @@ it('should add typesPrefix to imports', async () => {
     const result = await plugin(testSchema, [], { typesPrefix: 'Api.', typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
+    expect(result).toContain("import { Api, AbcStatus, Status } from './types/graphql';");
+    expect(result).toMatchSnapshot();
+});
+
+it('should add enumsPrefix to all enums when option is specified', async () => {
+    const result = await plugin(testSchema, [], { enumsPrefix: 'Api.' });
+
+    expect(result).toBeDefined();
+    expect(result).toMatch(/: Api.AbcStatus/);
+    expect(result).toMatch(/: Api.Status/);
+    expect(result).not.toMatch(/: AbcStatus/);
+    expect(result).not.toMatch(/: Status/);
+    expect(result).not.toMatch(/: Api.User/);
+    expect(result).toMatchSnapshot();
+});
+
+it('should add enumsPrefix to imports', async () => {
+    const result = await plugin(testSchema, [], { enumsPrefix: 'Api.', typesFile: './types/graphql.ts' });
+
+    expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, AbcStatus, Status } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should add typesPrefix and enumsPrefix to imports', async () => {
+    const result = await plugin(testSchema, [], {
+        enumsPrefix: 'Api.',
+        typesPrefix: 'Api.',
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain("import { Api } from './types/graphql';");
+    expect(result).toMatchSnapshot();
+});
+
+it('should not merge imports into one if typesPrefix does not contain dots', async () => {
+    const result = await plugin(testSchema, [], {
+        typesPrefix: 'Api',
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should not merge imports into one if enumsPrefix does not contain dots', async () => {
+    const result = await plugin(testSchema, [], {
+        enumsPrefix: 'Api',
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { AbcType, Avatar, CamelCaseThing, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });

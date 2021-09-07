@@ -105,6 +105,26 @@ Setting the `typesPrefix` to `Api.` will create the following mock data
 export const aUser = (overrides?: Partial<Api.User>): Api.User => {
 ```
 
+### enumsPrefix (`string`, defaultValue: '')
+
+Similar to `typesPrefix`, but for enum types
+
+```
+declare namespace Api {
+ enum Status {
+  ...
+ }
+}
+```
+
+Setting the `enumsPrefix` to `Api.` will create the following mock data
+
+```
+export const aUser = (overrides?: Partial<User>): User => {
+   status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Api.Status.Online,
+}
+```
+
 ## Example of usage
 
 **codegen.yml**
