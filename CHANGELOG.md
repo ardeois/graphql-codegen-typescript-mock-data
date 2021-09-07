@@ -1,3 +1,15 @@
+# v1.5.10 (Tue Sep 07 2021)
+
+#### 🐛 Bug Fix
+
+- fix(typesPrefix): use typesPrefix in imports [#55](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/55) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # (Tue Sep 07 2021)
 
 #### 🔩 Dependency Updates
