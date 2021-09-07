@@ -8,17 +8,30 @@ import a from 'indefinite';
 
 type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
-const createNameConverter = (convention: NamingConvention) => (value: string) => {
+type Options<T = TypeNode> = {
+    typeName: string;
+    fieldName: string;
+    types: TypeItem[];
+    typenamesConvention: NamingConvention;
+    enumValuesConvention: NamingConvention;
+    terminateCircularRelationships: boolean;
+    prefix: string | undefined;
+    typesPrefix: string;
+    currentType: T;
+    customScalars?: ScalarMap;
+};
+
+const createNameConverter = (convention: NamingConvention) => (value: string, prefix = '') => {
     switch (convention) {
         case 'upper-case#upperCase':
-            return upperCase(value || '');
+            return `${prefix}${upperCase(value || '')}`;
         case 'keep':
-            return value;
+            return `${prefix}${value}`;
         case 'pascal-case#pascalCase':
         // fallthrough
         default:
             // default to pascal case in case of unknown values
-            return pascalCase(value || '');
+            return `${prefix}${pascalCase(value || '')}`;
     }
 };
 
@@ -68,24 +81,14 @@ const getScalarDefinition = (value: ScalarDefinition | ScalarGeneratorName): Sca
     return value;
 };
 
-const getNamedType = (
-    typeName: string,
-    fieldName: string,
-    types: TypeItem[],
-    typenamesConvention: NamingConvention,
-    enumValuesConvention: NamingConvention,
-    terminateCircularRelationships: boolean,
-    prefix?: string,
-    namedType?: NamedTypeNode,
-    customScalars?: ScalarMap,
-): string | number | boolean => {
-    if (!namedType) {
+const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean => {
+    if (!opts.currentType) {
         return '';
     }
 
-    casual.seed(hashedString(typeName + fieldName));
-    const name = namedType.name.value;
-    const casedName = createNameConverter(typenamesConvention)(name);
+    casual.seed(hashedString(opts.typeName + opts.fieldName));
+    const name = opts.currentType.name.value;
+    const casedName = createNameConverter(opts.typenamesConvention)(name);
     switch (name) {
         case 'String':
             return `'${casual.word}'`;
@@ -98,29 +101,28 @@ const getNamedType = (
         case 'Int':
             return casual.integer(0, 9999);
         default: {
-            const foundType = types.find((enumType: TypeItem) => enumType.name === name);
+            const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
                 switch (foundType.type) {
                     case 'enum': {
                         // It's an enum
-                        const typenameConverter = createNameConverter(typenamesConvention);
+                        const typenameConverter = createNameConverter(opts.typenamesConvention);
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${typenameConverter(foundType.name)}.${updateTextCase(value, enumValuesConvention)}`;
+                        return `${typenameConverter(foundType.name)}.${updateTextCase(
+                            value,
+                            opts.enumValuesConvention,
+                        )}`;
                     }
                     case 'union':
                         // Return the first union type node.
-                        return getNamedType(
-                            typeName,
-                            fieldName,
-                            types,
-                            typenamesConvention,
-                            enumValuesConvention,
-                            terminateCircularRelationships,
-                            prefix,
-                            foundType.types && foundType.types[0],
-                        );
+                        return getNamedType({
+                            ...opts,
+                            currentType: foundType.types && foundType.types[0],
+                        });
                     case 'scalar': {
-                        const customScalar = customScalars ? getScalarDefinition(customScalars[foundType.name]) : null;
+                        const customScalar = opts.customScalars
+                            ? getScalarDefinition(opts.customScalars[foundType.name])
+                            : null;
                         // it's a scalar, let's use a string as a value if there is no custom
                         // mapping for this particular scalar
                         if (!customScalar || !customScalar.generator) {
@@ -158,67 +160,36 @@ const getNamedType = (
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
-            if (terminateCircularRelationships) {
+            if (opts.terminateCircularRelationships) {
                 return `relationshipsToOmit.has('${name}') ? {} as ${name} : ${toMockName(
                     name,
                     casedName,
-                    prefix,
+                    opts.prefix,
                 )}({}, relationshipsToOmit)`;
             } else {
-                return `${toMockName(name, casedName, prefix)}()`;
+                return `${toMockName(name, casedName, opts.prefix)}()`;
             }
         }
     }
 };
 
-const generateMockValue = (
-    typeName: string,
-    fieldName: string,
-    types: TypeItem[],
-    typenamesConvention: NamingConvention,
-    enumValuesConvention: NamingConvention,
-    terminateCircularRelationships: boolean,
-    prefix: string | undefined,
-    currentType: TypeNode,
-    customScalars: ScalarMap,
-): string | number | boolean => {
-    switch (currentType.kind) {
+const generateMockValue = (opts: Options): string | number | boolean => {
+    switch (opts.currentType.kind) {
         case 'NamedType':
-            return getNamedType(
-                typeName,
-                fieldName,
-                types,
-                typenamesConvention,
-                enumValuesConvention,
-                terminateCircularRelationships,
-                prefix,
-                currentType as NamedTypeNode,
-                customScalars,
-            );
+            return getNamedType({
+                ...opts,
+                currentType: opts.currentType as NamedTypeNode,
+            });
         case 'NonNullType':
-            return generateMockValue(
-                typeName,
-                fieldName,
-                types,
-                typenamesConvention,
-                enumValuesConvention,
-                terminateCircularRelationships,
-                prefix,
-                currentType.type,
-                customScalars,
-            );
+            return generateMockValue({
+                ...opts,
+                currentType: opts.currentType.type,
+            });
         case 'ListType': {
-            const value = generateMockValue(
-                typeName,
-                fieldName,
-                types,
-                typenamesConvention,
-                enumValuesConvention,
-                terminateCircularRelationships,
-                prefix,
-                currentType.type,
-                customScalars,
-            );
+            const value = generateMockValue({
+                ...opts,
+                currentType: opts.currentType.type,
+            });
             return `[${value}]`;
         }
     }
@@ -233,7 +204,9 @@ const getMockString = (
     prefix,
     typesPrefix = '',
 ) => {
-    const casedName = createNameConverter(typenamesConvention)(typeName);
+    const typenameConverter = createNameConverter(typenamesConvention);
+    const casedName = typenameConverter(typeName);
+    const casedNameWithPrefix = typenameConverter(typeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
     const typenameReturnType = addTypename ? `{ __typename: '${casedName}' } & ` : '';
 
@@ -243,7 +216,7 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${typesPrefix}${casedName}>, relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${typesPrefix}${casedName} => {
+        )} = (overrides?: Partial<${casedNameWithPrefix}>, relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${casedNameWithPrefix} => {
     relationshipsToOmit.add('${casedName}');
     return {${typename}
 ${fields}
@@ -255,12 +228,38 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${typesPrefix}${casedName}>): ${typenameReturnType}${typesPrefix}${casedName} => {
+        )} = (overrides?: Partial<${casedNameWithPrefix}>): ${typenameReturnType}${casedNameWithPrefix} => {
     return {${typename}
 ${fields}
     };
 };`;
     }
+};
+
+const getImportTypes = ({
+    typenamesConvention,
+    definitions,
+    types,
+    typesFile,
+    typesPrefix,
+}: {
+    typenamesConvention: NamingConvention;
+    definitions: any;
+    types: TypeItem[];
+    typesFile: string;
+    typesPrefix: string;
+}) => {
+    const typenameConverter = createNameConverter(typenamesConvention);
+    const enumTypes = types.filter(({ type }) => type === 'enum');
+    const typeImports = definitions
+        .filter(({ typeName }: { typeName: string }) => !!typeName)
+        .map(({ typeName }: { typeName: string }) => typenameConverter(typeName, typesPrefix));
+
+    typeImports.push(...enumTypes.map(({ name }) => typenameConverter(name)));
+    return typesFile
+        ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { ${typeImports.join(', ')} } from '${typesFile}';\n`
+        : '';
 };
 
 type ScalarGeneratorName = keyof Casual.Casual | keyof Casual.functions | string;
@@ -331,17 +330,18 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             return {
                 name: fieldName,
                 mockFn: (typeName: string) => {
-                    const value = generateMockValue(
+                    const value = generateMockValue({
                         typeName,
                         fieldName,
                         types,
                         typenamesConvention,
                         enumValuesConvention,
-                        !!config.terminateCircularRelationships,
-                        config.prefix,
-                        node.type,
-                        config.scalars,
-                    );
+                        terminateCircularRelationships: !!config.terminateCircularRelationships,
+                        prefix: config.prefix,
+                        typesPrefix: config.typesPrefix,
+                        currentType: node.type,
+                        customScalars: config.scalars,
+                    });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
                 },
@@ -356,17 +356,18 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     const mockFields = node.fields
                         ? node.fields
                               .map((field) => {
-                                  const value = generateMockValue(
-                                      fieldName,
-                                      field.name.value,
+                                  const value = generateMockValue({
+                                      typeName: fieldName,
+                                      fieldName: field.name.value,
                                       types,
                                       typenamesConvention,
                                       enumValuesConvention,
-                                      !!config.terminateCircularRelationships,
-                                      config.prefix,
-                                      field.type,
-                                      config.scalars,
-                                  );
+                                      terminateCircularRelationships: !!config.terminateCircularRelationships,
+                                      prefix: config.prefix,
+                                      typesPrefix: config.typesPrefix,
+                                      currentType: field.type,
+                                      customScalars: config.scalars,
+                                  });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
                               })
@@ -442,21 +443,20 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         },
     };
 
-    const result: any = visit(astNode, { leave: visitor });
+    const result = visit(astNode, { leave: visitor });
     const definitions = result.definitions.filter((definition: any) => !!definition);
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
-    const typenameConverter = createNameConverter(typenamesConvention);
-    const typeImports = definitions
-        .map(({ typeName }: { typeName: string }) => typenameConverter(typeName))
-        .filter((typeName: string) => !!typeName);
-    typeImports.push(...types.filter(({ type }) => type !== 'scalar').map(({ name }) => typenameConverter(name)));
+
+    const typesFileImport = getImportTypes({
+        typenamesConvention,
+        definitions,
+        types,
+        typesFile,
+        typesPrefix: config.typesPrefix,
+    });
     // List of function that will generate the mock.
     // We generate it after having visited because we need to distinct types from enums
     const mockFns = definitions.map(({ mockFn }: any) => mockFn).filter((mockFn: Function) => !!mockFn);
-    const typesFileImport = typesFile
-        ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ${typeImports.join(', ')} } from '${typesFile}';\n`
-        : '';
 
     return `${typesFileImport}${mockFns.map((mockFn: Function) => mockFn()).join('\n')}
 `;

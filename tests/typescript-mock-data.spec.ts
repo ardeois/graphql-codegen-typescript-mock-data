@@ -177,6 +177,16 @@ it('should generate mock data with upperCase types and enums if typenames is "up
     expect(result).toMatchSnapshot();
 });
 
+it('should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase"', async () => {
+    const result = await plugin(testSchema, [], { typenames: 'upper-case#upperCase', typesFile: './types/graphql.ts' });
+
+    expect(result).toBeDefined();
+    expect(result).not.toMatch(/Abc(Type|Status)/);
+    expect(result).not.toMatch(/ABC(Type|Status)/);
+    expect(result).toMatch(/ABC(TYPE|STATUS)/);
+    expect(result).toMatchSnapshot();
+});
+
 it('should generate mock data with as-is types and enums if typenames is "keep"', async () => {
     const result = await plugin(testSchema, [], { typenames: 'keep' });
 
@@ -263,6 +273,16 @@ it('should add typesPrefix to all types when option is specified', async () => {
     expect(result).toBeDefined();
     expect(result).toMatch(/: Api.User/);
     expect(result).not.toMatch(/: User/);
+    expect(result).toMatchSnapshot();
+});
+
+it('should add typesPrefix to imports', async () => {
+    const result = await plugin(testSchema, [], { typesPrefix: 'Api.', typesFile: './types/graphql.ts' });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { Api.AbcType, Api.Avatar, Api.CamelCaseThing, Api.UpdateUserInput, Api.User, Api.WithAvatar, AbcStatus, Status } from './types/graphql';",
+    );
     expect(result).toMatchSnapshot();
 });
 
