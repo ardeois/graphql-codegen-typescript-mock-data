@@ -1,3 +1,15 @@
+# v1.7.2 (Tue Sep 21 2021)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump semver-regex from 3.1.2 to 3.1.3 [#59](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/59) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v1.7.1 (Tue Sep 07 2021)
 
 #### 🐛 Bug Fix
