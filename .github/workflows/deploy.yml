@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{secrets.GH_ADMIN_TOKEN}}
       - name: Fetch tags
         run: git fetch --tags
       - name: setup-node
