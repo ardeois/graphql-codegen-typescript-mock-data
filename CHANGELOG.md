@@ -1,3 +1,15 @@
+# v1.8.0 (Wed Oct 20 2021)
+
+#### 🚀 Enhancement
+
+- feat: add `typesTransformUnderscore` config option [#61](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/61) ([@VilhelmNielsen](https://github.com/VilhelmNielsen))
+
+#### Authors: 1
+
+- Sebastian Vilhelm Nielsen ([@VilhelmNielsen](https://github.com/VilhelmNielsen))
+
+---
+
 # v1.7.2 (Tue Sep 21 2021)
 
 #### 🐛 Bug Fix
