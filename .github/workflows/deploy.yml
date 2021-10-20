@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: Fetch tags
+        run: git fetch --tags
       - name: setup-node
         uses: actions/setup-node@v1
         with:
