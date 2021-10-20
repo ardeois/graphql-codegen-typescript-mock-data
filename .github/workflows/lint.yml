@@ -1,6 +1,9 @@
 name: lint
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   lint:
