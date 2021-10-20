@@ -1,3 +1,15 @@
+# v1.8.3 (Wed Oct 20 2021)
+
+#### 🐛 Bug Fix
+
+- fix: rename master branch to main [#63](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/63) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.8.1 (Wed Oct 20 2021)
 
 #### ⚠️ Pushed to `master`
