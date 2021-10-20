@@ -1,6 +1,9 @@
 name: test
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - master
 
 jobs:
   test:
@@ -8,11 +11,22 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: docker://borales/yarn:latest
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup-node
+        uses: actions/setup-node@v1
         with:
-          args: 'install'
+          node-version: '14.x'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: install
+        run: yarn install
       - name: test
-        uses: docker://borales/yarn:latest
-        with:
-          args: 'test'
+        run: yarn test

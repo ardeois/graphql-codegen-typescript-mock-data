@@ -498,8 +498,10 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     });
     // List of function that will generate the mock.
     // We generate it after having visited because we need to distinct types from enums
-    const mockFns = definitions.map(({ mockFn }: any) => mockFn).filter((mockFn: Function) => !!mockFn);
+    const mockFns = definitions
+        .map(({ mockFn }: { mockFn: () => string }) => mockFn)
+        .filter((mockFn: () => string) => !!mockFn);
 
-    return `${typesFileImport}${mockFns.map((mockFn: Function) => mockFn()).join('\n')}
+    return `${typesFileImport}${mockFns.map((mockFn: () => string) => mockFn()).join('\n')}
 `;
 };

@@ -1,9 +1,12 @@
-name: lint
+name: build
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - master
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -25,5 +28,5 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install
         run: yarn install
-      - name: lint
-        run: yarn lint
+      - name: build
+        run: yarn build
