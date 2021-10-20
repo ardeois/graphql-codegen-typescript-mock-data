@@ -3,7 +3,7 @@ name: lint
 on:
   push:
     branches-ignore:
-      - master
+      - main
 
 jobs:
   lint:
