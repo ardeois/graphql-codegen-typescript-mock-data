@@ -1,12 +1,12 @@
-name: test
+name: deploy
 
 on:
   push:
-    branches-ignore:
+    branches:
       - master
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -28,5 +28,9 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install
         run: yarn install
-      - name: test
-        run: yarn test
+      - name: build
+        run: yarn build
+      - name: release
+        run: yarn release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
