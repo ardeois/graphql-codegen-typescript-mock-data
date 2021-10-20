@@ -2,49 +2,10 @@
 
 exports[`should add custom prefix if the \`prefix\` config option is specified 1`] = `
 "
-export const mockAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const mockAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const mockCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const mockMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : mockUser(),
-    };
-};
-
-export const mockPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const mockQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : mockUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : mockPrefixedResponse(),
-    };
-};
-
-export const mockUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : mockAvatar(),
     };
 };
 
@@ -68,54 +29,54 @@ export const mockWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : mockAvatar(),
     };
 };
-"
-`;
 
-exports[`should add enumsPrefix to all enums when option is specified 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+export const mockCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+export const mockPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const mockAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const mockUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : mockAvatar(),
+    };
+};
+
+export const mockMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : mockUser(),
+    };
+};
+
+export const mockQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : mockUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : mockPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should add enumsPrefix to all enums when option is specified 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -137,6 +98,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -144,51 +144,12 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should add enumsPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
+import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -210,6 +171,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -219,49 +219,10 @@ exports[`should add typesPrefix and enumsPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { Api } from './types/graphql';
 
-export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -285,33 +246,10 @@ export const aWithAvatar = (overrides?: Partial<Api.WithAvatar>): Api.WithAvatar
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should add typesPrefix to all types when option is specified 1`] = `
-"
-export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -321,10 +259,9 @@ export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Ap
     };
 };
 
-export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
+export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -333,6 +270,30 @@ export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should add typesPrefix to all types when option is specified 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -354,6 +315,45 @@ export const aWithAvatar = (overrides?: Partial<Api.WithAvatar>): Api.WithAvatar
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -363,49 +363,10 @@ exports[`should add typesPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { Api, AbcStatus, Status } from './types/graphql';
 
-export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -429,54 +390,54 @@ export const aWithAvatar = (overrides?: Partial<Api.WithAvatar>): Api.WithAvatar
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should correctly generate the \`casual\` data for a function with arguments scalar mapping 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>): Api.CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api.UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
         prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
+"
+`;
 
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+exports[`should correctly generate the \`casual\` data for a function with arguments scalar mapping 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -498,6 +459,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -505,49 +505,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should correctly generate the \`casual\` data for a function with one argument scalar mapping 1`] = `
 "
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -571,33 +532,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should correctly generate the \`casual\` data for a non-string scalar mapping 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -607,10 +545,9 @@ export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): Prefix
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -619,6 +556,30 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should correctly generate the \`casual\` data for a non-string scalar mapping 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -642,33 +603,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should correctly generate the \`casual\` data for a scalar mapping of type string 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -678,10 +616,9 @@ export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): Prefix
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -690,6 +627,30 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should correctly generate the \`casual\` data for a scalar mapping of type string 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -713,33 +674,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should correctly use custom generator as default value 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -749,10 +687,9 @@ export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): Prefix
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -761,6 +698,30 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should correctly use custom generator as default value 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -784,33 +745,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should generate mock data functions 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -820,10 +758,9 @@ export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): Prefix
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -832,6 +769,30 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data functions 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -853,6 +814,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -860,51 +860,12 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
+import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -926,6 +887,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -933,49 +933,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data functions with scalars 1`] = `
 "
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -997,6 +958,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -1004,49 +1004,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data with PascalCase enum values by default 1`] = `
 "
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -1068,6 +1029,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -1075,49 +1075,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data with PascalCase enum values if enumValues is "pascal-case#pascalCase" 1`] = `
 "
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -1139,6 +1100,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -1146,49 +1146,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data with PascalCase enum values if typenames is "pascal-case#pascalCase" 1`] = `
 "
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -1210,6 +1171,45 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 "
@@ -1217,51 +1217,12 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data with PascalCase types and enums by default 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
+import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
-    };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -1285,33 +1246,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should generate mock data with as-is enum values if enumValues is "keep" 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -1321,10 +1259,9 @@ export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): Prefix
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -1333,6 +1270,30 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with as-is enum values if enumValues is "keep" 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1356,27 +1317,30 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should generate mock data with as-is types and enums if typenames is "keep" 1`] = `
-"
-export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const acamelCaseThing = (overrides?: Partial<camelCaseThing>): camelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
@@ -1386,24 +1350,21 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
-export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixed_Response(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
+"
+`;
 
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+exports[`should generate mock data with as-is types and enums if typenames is "keep" 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1427,52 +1388,22 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should generate mock data with typename if addTypename is true 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): { __typename: 'AbcType' } & AbcType => {
+export const acamelCaseThing = (overrides?: Partial<camelCaseThing>): camelCaseThing => {
     return {
-        __typename: 'AbcType',
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): { __typename: 'Avatar' } & Avatar => {
-    return {
-        __typename: 'Avatar',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): { __typename: 'CamelCaseThing' } & CamelCaseThing => {
-    return {
-        __typename: 'CamelCaseThing',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>): { __typename: 'Mutation' } & Mutation => {
+export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
     return {
-        __typename: 'Mutation',
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): { __typename: 'PrefixedResponse' } & PrefixedResponse => {
-    return {
-        __typename: 'PrefixedResponse',
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): { __typename: 'Query' } & Query => {
+export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
     return {
-        __typename: 'Query',
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -1481,6 +1412,31 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixed_Response(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with typename if addTypename is true 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): { __typename: 'Avatar' } & Avatar => {
+    return {
+        __typename: 'Avatar',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1506,46 +1462,25 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): { __typename: 'Wit
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should generate mock data with upperCase enum values if enumValues is "upper-case#upperCase" 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): { __typename: 'CamelCaseThing' } & CamelCaseThing => {
     return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
+        __typename: 'CamelCaseThing',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): { __typename: 'PrefixedResponse' } & PrefixedResponse => {
     return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
+        __typename: 'PrefixedResponse',
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): { __typename: 'AbcType' } & AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        __typename: 'AbcType',
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -1554,6 +1489,32 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): { __typename: 'Mutation' } & Mutation => {
+    return {
+        __typename: 'Mutation',
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): { __typename: 'Query' } & Query => {
+    return {
+        __typename: 'Query',
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with upperCase enum values if enumValues is "upper-case#upperCase" 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1577,179 +1538,10 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
-
-exports[`should generate mock data with upperCase types and enums if typenames is "upper-case#upperCase" 1`] = `
-"
-export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASETHING => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
-    };
-};
-
-export const aPREFIXED_RESPONSE = (overrides?: Partial<PREFIXED_RESPONSE>): PREFIXED_RESPONSE => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPREFIXED_RESPONSE(),
-    };
-};
-
-export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
-    };
-};
-
-export const aUSER = (overrides?: Partial<USER>): USER => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : STATUS.Online,
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
-        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAVATAR(),
-    };
-};
-
-export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
-    };
-};
-"
-`;
-
-exports[`should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase" 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ABCTYPE, AVATAR, CAMELCASETHING, MUTATION, PREFIXED_RESPONSE, QUERY, UPDATEUSERINPUT, USER, WITHAVATAR, ABCSTATUS, STATUS } from './types/graphql';
-
-export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASETHING => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
-    };
-};
-
-export const aPREFIXED_RESPONSE = (overrides?: Partial<PREFIXED_RESPONSE>): PREFIXED_RESPONSE => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
-    };
-};
-
-export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPREFIXED_RESPONSE(),
-    };
-};
-
-export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
-    };
-};
-
-export const aUSER = (overrides?: Partial<USER>): USER => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : STATUS.Online,
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
-        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
-        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAVATAR(),
-    };
-};
-
-export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
-    };
-};
-"
-`;
-
-exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
-    };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
     };
 };
 
@@ -1759,10 +1551,9 @@ export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): Prefix
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
@@ -1771,6 +1562,176 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with upperCase types and enums if typenames is "upper-case#upperCase" 1`] = `
+"
+export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUSER = (overrides?: Partial<USER>): USER => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : STATUS.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAVATAR(),
+    };
+};
+
+export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+    };
+};
+
+export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASETHING => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPREFIXED_RESPONSE = (overrides?: Partial<PREFIXED_RESPONSE>): PREFIXED_RESPONSE => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+    };
+};
+
+export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
+    };
+};
+
+export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPREFIXED_RESPONSE(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase" 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { AVATAR, USER, WITHAVATAR, CAMELCASETHING, PREFIXED_RESPONSE, ABCTYPE, UPDATEUSERINPUT, MUTATION, QUERY, ABCSTATUS, STATUS } from './types/graphql';
+
+export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUSER = (overrides?: Partial<USER>): USER => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : STATUS.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : ABCSTATUS.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCAMELCASETHING(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAVATAR(),
+    };
+};
+
+export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+    };
+};
+
+export const aCAMELCASETHING = (overrides?: Partial<CAMELCASETHING>): CAMELCASETHING => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPREFIXED_RESPONSE = (overrides?: Partial<PREFIXED_RESPONSE>): PREFIXED_RESPONSE => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEUSERINPUT => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAVATAR(),
+    };
+};
+
+export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
+    };
+};
+
+export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPREFIXED_RESPONSE(),
+    };
+};
+"
+`;
+
+exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus } from './types/graphql';
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1794,56 +1755,56 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiPrefixedResponse, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<ApiAbcType>): ApiAbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<ApiAvatar>): ApiAvatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<ApiCamelCaseThing>): ApiCamelCaseThing => {
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<ApiMutation>): ApiMutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<ApiPrefixedResponse>): ApiPrefixedResponse => {
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<ApiQuery>): ApiQuery => {
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
         prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
+"
+`;
 
-export const anUpdateUserInput = (overrides?: Partial<ApiUpdateUserInput>): ApiUpdateUserInput => {
+exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status } from './types/graphql';
+
+export const anAvatar = (overrides?: Partial<ApiAvatar>): ApiAvatar => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
-        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1867,56 +1828,56 @@ export const aWithAvatar = (overrides?: Partial<ApiWithAvatar>): ApiWithAvatar =
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should preserve underscores if transformUnderscore is false 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, Prefixed_Response, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+export const aCamelCaseThing = (overrides?: Partial<ApiCamelCaseThing>): ApiCamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
-    };
-};
-
-export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
+export const aPrefixedResponse = (overrides?: Partial<ApiPrefixedResponse>): ApiPrefixedResponse => {
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>): Query => {
+export const anAbcType = (overrides?: Partial<ApiAbcType>): ApiAbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixed_Response(),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+export const anUpdateUserInput = (overrides?: Partial<ApiUpdateUserInput>): ApiUpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<ApiMutation>): ApiMutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<ApiQuery>): ApiQuery => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should preserve underscores if transformUnderscore is false 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -1940,61 +1901,55 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
-"
-`;
 
-exports[`should use relationshipsToOmit argument to terminate circular relationships with terminateCircularRelationships enabled 1`] = `
-"
-export const anAbcType = (overrides?: Partial<AbcType>, relationshipsToOmit: Set<string> = new Set()): AbcType => {
-    relationshipsToOmit.add('AbcType');
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
-    };
-};
-
-export const anAvatar = (overrides?: Partial<Avatar>, relationshipsToOmit: Set<string> = new Set()): Avatar => {
-    relationshipsToOmit.add('Avatar');
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
-    };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, relationshipsToOmit: Set<string> = new Set()): CamelCaseThing => {
-    relationshipsToOmit.add('CamelCaseThing');
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>, relationshipsToOmit: Set<string> = new Set()): Mutation => {
-    relationshipsToOmit.add('Mutation');
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
-    };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, relationshipsToOmit: Set<string> = new Set()): PrefixedResponse => {
-    relationshipsToOmit.add('PrefixedResponse');
+export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>, relationshipsToOmit: Set<string> = new Set()): Query => {
-    relationshipsToOmit.add('Query');
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('Prefixed_Response') ? {} as Prefixed_Response : aPrefixedResponse({}, relationshipsToOmit),
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, relationshipsToOmit: Set<string> = new Set()): UpdateUserInput => {
-    relationshipsToOmit.add('UpdateUserInput');
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixed_Response(),
+    };
+};
+"
+`;
+
+exports[`should use relationshipsToOmit argument to terminate circular relationships with terminateCircularRelationships enabled 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>, relationshipsToOmit: Set<string> = new Set()): Avatar => {
+    relationshipsToOmit.add('Avatar');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
@@ -2018,6 +1973,51 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>, relationshipsToOmit
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, relationshipsToOmit: Set<string> = new Set()): CamelCaseThing => {
+    relationshipsToOmit.add('CamelCaseThing');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, relationshipsToOmit: Set<string> = new Set()): PrefixedResponse => {
+    relationshipsToOmit.add('PrefixedResponse');
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>, relationshipsToOmit: Set<string> = new Set()): AbcType => {
+    relationshipsToOmit.add('AbcType');
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, relationshipsToOmit: Set<string> = new Set()): UpdateUserInput => {
+    relationshipsToOmit.add('UpdateUserInput');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>, relationshipsToOmit: Set<string> = new Set()): Mutation => {
+    relationshipsToOmit.add('Mutation');
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>, relationshipsToOmit: Set<string> = new Set()): Query => {
+    relationshipsToOmit.add('Query');
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('Prefixed_Response') ? {} as Prefixed_Response : aPrefixedResponse({}, relationshipsToOmit),
     };
 };
 "
