@@ -20,21 +20,34 @@ type Options<T = TypeNode> = {
     enumsPrefix: string;
     currentType: T;
     customScalars?: ScalarMap;
+    transformUnderscore: boolean;
+};
+
+const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
+    if (transformUnderscore) {
+        return fn(value);
+    }
+
+    return value
+        .split('_')
+        .map((s) => fn(s))
+        .join('_');
 };
 
 const createNameConverter =
-    (convention: NamingConvention) =>
+    (convention: NamingConvention, transformUnderscore: boolean) =>
     (value: string, prefix = '') => {
         switch (convention) {
-            case 'upper-case#upperCase':
-                return `${prefix}${upperCase(value || '')}`;
+            case 'upper-case#upperCase': {
+                return `${prefix}${convertName(value, (s) => upperCase(s || ''), transformUnderscore)}`;
+            }
             case 'keep':
                 return `${prefix}${value}`;
             case 'pascal-case#pascalCase':
             // fallthrough
             default:
                 // default to pascal case in case of unknown values
-                return `${prefix}${pascalCase(value || '')}`;
+                return `${prefix}${convertName(value, (s) => pascalCase(s || ''), transformUnderscore)}`;
         }
     };
 
@@ -46,8 +59,8 @@ const toMockName = (typedName: string, casedName: string, prefix?: string) => {
     return `${a(firstWord, { articleOnly: true })}${casedName}`;
 };
 
-const updateTextCase = (str: string, enumValuesConvention: NamingConvention) => {
-    const convert = createNameConverter(enumValuesConvention);
+const updateTextCase = (str: string, enumValuesConvention: NamingConvention, transformUnderscore: boolean) => {
+    const convert = createNameConverter(enumValuesConvention, transformUnderscore);
 
     if (str.charAt(0) === '_') {
         return str.replace(
@@ -91,7 +104,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
 
     casual.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
-    const casedName = createNameConverter(opts.typenamesConvention)(name);
+    const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String':
             return `'${casual.word}'`;
@@ -109,11 +122,15 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                 switch (foundType.type) {
                     case 'enum': {
                         // It's an enum
-                        const typenameConverter = createNameConverter(opts.typenamesConvention);
+                        const typenameConverter = createNameConverter(
+                            opts.typenamesConvention,
+                            opts.transformUnderscore,
+                        );
                         const value = foundType.values ? foundType.values[0] : '';
                         return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${updateTextCase(
                             value,
                             opts.enumValuesConvention,
+                            opts.transformUnderscore,
                         )}`;
                     }
                     case 'union':
@@ -206,8 +223,9 @@ const getMockString = (
     addTypename = false,
     prefix,
     typesPrefix = '',
+    transformUnderscore: boolean,
 ) => {
-    const typenameConverter = createNameConverter(typenamesConvention);
+    const typenameConverter = createNameConverter(typenamesConvention, transformUnderscore);
     const casedName = typenameConverter(typeName);
     const casedNameWithPrefix = typenameConverter(typeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
@@ -246,6 +264,7 @@ const getImportTypes = ({
     typesFile,
     typesPrefix,
     enumsPrefix,
+    transformUnderscore,
 }: {
     typenamesConvention: NamingConvention;
     definitions: any;
@@ -253,8 +272,9 @@ const getImportTypes = ({
     typesFile: string;
     typesPrefix: string;
     enumsPrefix: string;
+    transformUnderscore: boolean;
 }) => {
-    const typenameConverter = createNameConverter(typenamesConvention);
+    const typenameConverter = createNameConverter(typenamesConvention, transformUnderscore);
     const typeImports = typesPrefix?.endsWith('.')
         ? [typesPrefix.slice(0, -1)]
         : definitions
@@ -296,6 +316,7 @@ export interface TypescriptMocksPluginConfig {
     terminateCircularRelationships?: boolean;
     typesPrefix?: string;
     enumsPrefix?: string;
+    transformUnderscore?: boolean;
 }
 
 interface TypeItem {
@@ -316,6 +337,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
 
     const enumValuesConvention = config.enumValues || 'pascal-case#pascalCase';
     const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
+    const transformUnderscore = config.transformUnderscore ?? true;
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -357,6 +379,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         enumsPrefix: config.enumsPrefix,
                         currentType: node.type,
                         customScalars: config.scalars,
+                        transformUnderscore,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -384,6 +407,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       enumsPrefix: config.enumsPrefix,
                                       currentType: field.type,
                                       customScalars: config.scalars,
+                                      transformUnderscore,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
@@ -399,6 +423,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         false,
                         config.prefix,
                         config.typesPrefix,
+                        transformUnderscore,
                     );
                 },
             };
@@ -421,6 +446,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,
+                        transformUnderscore,
                     );
                 },
             };
@@ -441,6 +467,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,
+                        transformUnderscore,
                     );
                 },
             };
@@ -467,6 +494,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         typesFile,
         typesPrefix: config.typesPrefix,
         enumsPrefix: config.enumsPrefix,
+        transformUnderscore: transformUnderscore,
     });
     // List of function that will generate the mock.
     // We generate it after having visited because we need to distinct types from enums

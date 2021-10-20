@@ -27,9 +27,16 @@ export const mockMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const mockPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const mockQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : mockUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : mockPrefixedResponse(),
     };
 };
 
@@ -91,9 +98,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -130,7 +144,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should add enumsPrefix to imports 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -157,9 +171,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -223,9 +244,16 @@ export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -287,9 +315,16 @@ export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -353,9 +388,16 @@ export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>): Api.PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -417,9 +459,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -481,9 +530,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -545,9 +601,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -609,9 +672,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -673,9 +743,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -737,9 +814,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -776,7 +860,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data functions with external types file import 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -803,9 +887,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -867,9 +958,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -931,9 +1029,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -995,9 +1100,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1059,9 +1171,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1098,7 +1217,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should generate mock data with PascalCase types and enums by default 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -1125,9 +1244,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1189,9 +1315,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1253,9 +1386,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixed_Response(),
     };
 };
 
@@ -1321,10 +1461,18 @@ export const aMutation = (overrides?: Partial<Mutation>): { __typename: 'Mutatio
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): { __typename: 'PrefixedResponse' } & PrefixedResponse => {
+    return {
+        __typename: 'PrefixedResponse',
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): { __typename: 'Query' } & Query => {
     return {
         __typename: 'Query',
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1388,9 +1536,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1452,9 +1607,16 @@ export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
     };
 };
 
+export const aPREFIXED_RESPONSE = (overrides?: Partial<PREFIXED_RESPONSE>): PREFIXED_RESPONSE => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPREFIXED_RESPONSE(),
     };
 };
 
@@ -1491,7 +1653,7 @@ export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
 
 exports[`should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase" 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ABCTYPE, AVATAR, CAMELCASETHING, MUTATION, QUERY, UPDATEUSERINPUT, USER, WITHAVATAR, ABCSTATUS, STATUS } from './types/graphql';
+import { ABCTYPE, AVATAR, CAMELCASETHING, MUTATION, PREFIXED_RESPONSE, QUERY, UPDATEUSERINPUT, USER, WITHAVATAR, ABCSTATUS, STATUS } from './types/graphql';
 
 export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
     return {
@@ -1518,9 +1680,16 @@ export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
     };
 };
 
+export const aPREFIXED_RESPONSE = (overrides?: Partial<PREFIXED_RESPONSE>): PREFIXED_RESPONSE => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUSER(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPREFIXED_RESPONSE(),
     };
 };
 
@@ -1557,7 +1726,7 @@ export const aWITHAVATAR = (overrides?: Partial<WITHAVATAR>): WITHAVATAR => {
 
 exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';
+import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     return {
@@ -1584,9 +1753,16 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1623,7 +1799,7 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
 
 exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
 "/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';
+import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiPrefixedResponse, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';
 
 export const anAbcType = (overrides?: Partial<ApiAbcType>): ApiAbcType => {
     return {
@@ -1650,9 +1826,16 @@ export const aMutation = (overrides?: Partial<ApiMutation>): ApiMutation => {
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<ApiPrefixedResponse>): ApiPrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<ApiQuery>): ApiQuery => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
     };
 };
 
@@ -1679,6 +1862,79 @@ export const aUser = (overrides?: Partial<ApiUser>): ApiUser => {
 };
 
 export const aWithAvatar = (overrides?: Partial<ApiWithAvatar>): ApiWithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+"
+`;
+
+exports[`should preserve underscores if transformUnderscore is false 1`] = `
+"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
+import { AbcType, Avatar, CamelCaseThing, Mutation, Prefixed_Response, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixed_Response(),
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
@@ -1718,10 +1974,18 @@ export const aMutation = (overrides?: Partial<Mutation>, relationshipsToOmit: Se
     };
 };
 
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, relationshipsToOmit: Set<string> = new Set()): PrefixedResponse => {
+    relationshipsToOmit.add('PrefixedResponse');
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>, relationshipsToOmit: Set<string> = new Set()): Query => {
     relationshipsToOmit.add('Query');
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('Prefixed_Response') ? {} as Prefixed_Response : aPrefixedResponse({}, relationshipsToOmit),
     };
 };
 

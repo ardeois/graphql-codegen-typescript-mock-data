@@ -35,6 +35,11 @@ const testSchema = buildSchema(/* GraphQL */ `
 
     type Query {
         user: User!
+        prefixed_query: Prefixed_Response!
+    }
+
+    type Prefixed_Response {
+        ping: String!
     }
 
     type ABCType {
@@ -89,7 +94,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -305,7 +310,7 @@ it('should add enumsPrefix to imports', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, Api } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -330,7 +335,7 @@ it('should not merge imports into one if typesPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';",
+        "import { ApiAbcType, ApiAvatar, ApiCamelCaseThing, ApiMutation, ApiPrefixedResponse, ApiQuery, ApiUpdateUserInput, ApiUser, ApiWithAvatar, AbcStatus, Status } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -343,7 +348,7 @@ it('should not merge imports into one if enumsPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { AbcType, Avatar, CamelCaseThing, Mutation, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';",
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, PrefixedResponse, Query, UpdateUserInput, User, WithAvatar, ApiAbcStatus, ApiStatus } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -355,5 +360,21 @@ it('should use relationshipsToOmit argument to terminate circular relationships 
     expect(result).toMatch(/relationshipsToOmit.add\('User'\)/);
     expect(result).toMatch(/relationshipsToOmit.has\('Avatar'\) \? {} as Avatar : anAvatar\({}, relationshipsToOmit\)/);
     expect(result).not.toMatch(/: anAvatar\(\)/);
+    expect(result).toMatchSnapshot();
+});
+
+it('should preserve underscores if transformUnderscore is false', async () => {
+    const result = await plugin(testSchema, [], {
+        transformUnderscore: false,
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { AbcType, Avatar, CamelCaseThing, Mutation, Prefixed_Response, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
+    );
+    expect(result).toContain(
+        'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
+    );
     expect(result).toMatchSnapshot();
 });
