@@ -1,3 +1,15 @@
+# v1.8.1 (Wed Oct 20 2021)
+
+#### ⚠️ Pushed to `master`
+
+- fix: update failing build ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.8.0 (Wed Oct 20 2021)
 
 #### 🚀 Enhancement
