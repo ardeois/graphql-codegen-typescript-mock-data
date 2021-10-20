@@ -365,7 +365,7 @@ it('should use relationshipsToOmit argument to terminate circular relationships 
 
 it('should preserve underscores if transformUnderscore is false', async () => {
     const result = await plugin(testSchema, [], {
-        typesTransformUnderscore: false,
+        transformUnderscore: false,
         typesFile: './types/graphql.ts',
     });
 

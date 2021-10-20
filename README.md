@@ -125,7 +125,7 @@ export const aUser = (overrides?: Partial<User>): User => {
 }
 ```
 
-### typesTransformUnderscore (`boolean`, defaultValue: `true`)
+### transformUnderscore (`boolean`, defaultValue: `true`)
 
 When disabled, underscores will be retained for type names when the case is changed. It has no effect if `typenames` is set to `keep`.
 
