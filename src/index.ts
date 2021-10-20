@@ -59,8 +59,8 @@ const toMockName = (typedName: string, casedName: string, prefix?: string) => {
     return `${a(firstWord, { articleOnly: true })}${casedName}`;
 };
 
-const updateTextCase = (str: string, enumValuesConvention: NamingConvention) => {
-    const convert = createNameConverter(enumValuesConvention, true);
+const updateTextCase = (str: string, enumValuesConvention: NamingConvention, transformUnderscore: boolean) => {
+    const convert = createNameConverter(enumValuesConvention, transformUnderscore);
 
     if (str.charAt(0) === '_') {
         return str.replace(
@@ -130,6 +130,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${updateTextCase(
                             value,
                             opts.enumValuesConvention,
+                            opts.transformUnderscore,
                         )}`;
                     }
                     case 'union':
@@ -222,8 +223,9 @@ const getMockString = (
     addTypename = false,
     prefix,
     typesPrefix = '',
+    transformUnderscore: boolean,
 ) => {
-    const typenameConverter = createNameConverter(typenamesConvention, true);
+    const typenameConverter = createNameConverter(typenamesConvention, transformUnderscore);
     const casedName = typenameConverter(typeName);
     const casedNameWithPrefix = typenameConverter(typeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
@@ -421,6 +423,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         false,
                         config.prefix,
                         config.typesPrefix,
+                        transformUnderscore,
                     );
                 },
             };
@@ -443,6 +446,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,
+                        transformUnderscore,
                     );
                 },
             };
@@ -463,6 +467,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,
+                        transformUnderscore,
                     );
                 },
             };

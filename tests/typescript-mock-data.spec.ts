@@ -373,5 +373,8 @@ it('should preserve underscores if transformUnderscore is false', async () => {
     expect(result).toContain(
         "import { AbcType, Avatar, CamelCaseThing, Mutation, Prefixed_Response, Query, UpdateUserInput, User, WithAvatar, AbcStatus, Status } from './types/graphql';",
     );
+    expect(result).toContain(
+        'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
+    );
     expect(result).toMatchSnapshot();
 });

@@ -1899,7 +1899,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
