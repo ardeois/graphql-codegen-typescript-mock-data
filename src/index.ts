@@ -130,7 +130,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${updateTextCase(
                             value,
                             opts.enumValuesConvention,
-                            opts.transformUnderscore,
+                            true,
                         )}`;
                     }
                     case 'union':
