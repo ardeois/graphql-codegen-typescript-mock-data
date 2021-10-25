@@ -1,3 +1,15 @@
+# v1.8.4 (Mon Oct 25 2021)
+
+#### 🐛 Bug Fix
+
+- fix: update github build triggers [#65](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/65) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.8.3 (Wed Oct 20 2021)
 
 #### 🐛 Bug Fix
