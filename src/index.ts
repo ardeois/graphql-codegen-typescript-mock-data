@@ -228,8 +228,8 @@ const getMockString = (
     const typenameConverter = createNameConverter(typenamesConvention, transformUnderscore);
     const casedName = typenameConverter(typeName);
     const casedNameWithPrefix = typenameConverter(typeName, typesPrefix);
-    const typename = addTypename ? `\n        __typename: '${casedName}',` : '';
-    const typenameReturnType = addTypename ? `{ __typename: '${casedName}' } & ` : '';
+    const typename = addTypename ? `\n        __typename: '${typeName}',` : '';
+    const typenameReturnType = addTypename ? `{ __typename: '${typeName}' } & ` : '';
 
     if (terminateCircularRelationships) {
         return `

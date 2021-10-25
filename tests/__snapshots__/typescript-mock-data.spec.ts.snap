@@ -1463,23 +1463,23 @@ export const aWithAvatar = (overrides?: Partial<WithAvatar>): { __typename: 'Wit
     };
 };
 
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): { __typename: 'CamelCaseThing' } & CamelCaseThing => {
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): { __typename: 'camelCaseThing' } & CamelCaseThing => {
     return {
-        __typename: 'CamelCaseThing',
+        __typename: 'camelCaseThing',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): { __typename: 'PrefixedResponse' } & PrefixedResponse => {
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): { __typename: 'Prefixed_Response' } & PrefixedResponse => {
     return {
-        __typename: 'PrefixedResponse',
+        __typename: 'Prefixed_Response',
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const anAbcType = (overrides?: Partial<AbcType>): { __typename: 'AbcType' } & AbcType => {
+export const anAbcType = (overrides?: Partial<AbcType>): { __typename: 'ABCType' } & AbcType => {
     return {
-        __typename: 'AbcType',
+        __typename: 'ABCType',
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
