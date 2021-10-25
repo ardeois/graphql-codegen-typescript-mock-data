@@ -1,3 +1,16 @@
+# v1.8.5 (Mon Oct 25 2021)
+
+#### 🐛 Bug Fix
+
+- fix: don't recase `__typename` [#64](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/64) ([@VilhelmNielsen](https://github.com/VilhelmNielsen) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Sebastian Vilhelm Nielsen ([@VilhelmNielsen](https://github.com/VilhelmNielsen))
+
+---
+
 # v1.8.4 (Mon Oct 25 2021)
 
 #### 🐛 Bug Fix
