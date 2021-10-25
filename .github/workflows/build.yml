@@ -1,9 +1,8 @@
 name: build
 
 on:
-  push:
-    branches-ignore:
-      - main
+  pull_request:
+    types: [assigned, edited, opened, synchronize, reopened]
 
 jobs:
   build:
