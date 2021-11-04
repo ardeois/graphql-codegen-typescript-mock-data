@@ -1,3 +1,15 @@
+# v2.0.0 (Thu Nov 04 2021)
+
+#### 💥 Breaking Change
+
+- feat: remove eslint-disable line [#68](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/68) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v1.8.5 (Mon Oct 25 2021)
 
 #### 🐛 Bug Fix
