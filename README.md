@@ -129,7 +129,7 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 When disabled, underscores will be retained for type names when the case is changed. It has no effect if `typenames` is set to `keep`.
 
-## Example of usage
+## Examples of usage
 
 **codegen.yml**
 
@@ -150,7 +150,30 @@ generates:
             AWSTimestamp: unix_time # gets translated to casual.unix_time
 ```
 
-## Example or generated code
+### With `eslint-disable` rule
+
+**codegen.yml**
+
+```yaml
+overwrite: true
+schema: schema.graphql
+generates:
+  src/generated-types.ts:
+    plugins:
+      - 'typescript'
+  src/mocks/generated-mocks.ts:
+    plugins:
+      - add:
+          content: '/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */'
+      - typescript-mock-data:
+          typesFile: '../generated-types.ts'
+          enumValues: upper-case#upperCase
+          typenames: keep
+          scalars:
+            AWSTimestamp: unix_time # gets translated to casual.unix_time
+```
+
+## Example of generated code
 
 Given the following schema:
 

@@ -290,10 +290,7 @@ const getImportTypes = ({
         return self.indexOf(value) === index;
     }
 
-    return typesFile
-        ? `/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ${typeImports.filter(onlyUnique).join(', ')} } from '${typesFile}';\n`
-        : '';
+    return typesFile ? `import { ${typeImports.filter(onlyUnique).join(', ')} } from '${typesFile}';\n` : '';
 };
 
 type ScalarGeneratorName = keyof Casual.Casual | keyof Casual.functions | string;
