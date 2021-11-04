@@ -143,8 +143,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should add enumsPrefix to imports 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -216,8 +215,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should add typesPrefix and enumsPrefix to imports 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Api } from './types/graphql';
+"import { Api } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
     return {
@@ -360,8 +358,7 @@ export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
 `;
 
 exports[`should add typesPrefix to imports 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Api, AbcStatus, Status } from './types/graphql';
+"import { Api, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Api.Avatar>): Api.Avatar => {
     return {
@@ -859,8 +856,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate mock data functions with external types file import 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -1216,8 +1212,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate mock data with PascalCase types and enums by default 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -1652,8 +1647,7 @@ export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
 `;
 
 exports[`should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase" 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { AVATAR, USER, WITHAVATAR, CAMELCASETHING, PREFIXED_RESPONSE, ABCTYPE, UPDATEUSERINPUT, MUTATION, QUERY, ABCSTATUS, STATUS } from './types/graphql';
+"import { AVATAR, USER, WITHAVATAR, CAMELCASETHING, PREFIXED_RESPONSE, ABCTYPE, UPDATEUSERINPUT, MUTATION, QUERY, ABCSTATUS, STATUS } from './types/graphql';
 
 export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
     return {
@@ -1725,8 +1719,7 @@ export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
 `;
 
 exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -1798,8 +1791,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status } from './types/graphql';
+"import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<ApiAvatar>): ApiAvatar => {
     return {
@@ -1871,8 +1863,7 @@ export const aQuery = (overrides?: Partial<ApiQuery>): ApiQuery => {
 `;
 
 exports[`should preserve underscores if transformUnderscore is false 1`] = `
-"/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
-import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
