@@ -1954,7 +1954,7 @@ export const aUser = (overrides?: Partial<User>, relationshipsToOmit: Set<string
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('camelCaseThing') ? {} as camelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('CamelCaseThing') ? {} as CamelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
         unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
     };
 };
@@ -2008,7 +2008,7 @@ export const aQuery = (overrides?: Partial<Query>, relationshipsToOmit: Set<stri
     relationshipsToOmit.add('Query');
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('Prefixed_Response') ? {} as Prefixed_Response : aPrefixedResponse({}, relationshipsToOmit),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('PrefixedResponse') ? {} as PrefixedResponse : aPrefixedResponse({}, relationshipsToOmit),
     };
 };
 "
