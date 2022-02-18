@@ -1,3 +1,16 @@
+# v2.1.0 (Fri Feb 18 2022)
+
+#### 🚀 Enhancement
+
+- fix: #69 [#71](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/71) ([@bokuweb](https://github.com/bokuweb) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- bokuweb ([@bokuweb](https://github.com/bokuweb))
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.0.0 (Thu Nov 04 2021)
 
 #### 💥 Breaking Change
