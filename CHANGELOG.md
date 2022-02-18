@@ -1,3 +1,15 @@
+# v2.1.1 (Fri Feb 18 2022)
+
+#### ⚠️ Pushed to `main`
+
+- feat: dependency update ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.1.0 (Fri Feb 18 2022)
 
 #### 🚀 Enhancement
