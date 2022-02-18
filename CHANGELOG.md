@@ -1,3 +1,16 @@
+# v2.1.2 (Fri Feb 18 2022)
+
+#### 🐛 Bug Fix
+
+- fix: wrong type generated when terminateCircularRelationships is true [#70](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/70) ([@BenStirrup](https://github.com/BenStirrup) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Benjamin Stirrup ([@BenStirrup](https://github.com/BenStirrup))
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.1.1 (Fri Feb 18 2022)
 
 #### ⚠️ Pushed to `main`
