@@ -22,7 +22,7 @@
         "fakes"
     ],
     "dependencies": {
-        "@graphql-codegen/plugin-helpers": "^1.17.9",
+        "@graphql-codegen/plugin-helpers": "^2.4.1",
         "casual": "^1.6.2",
         "indefinite": "^2.4.1",
         "pascal-case": "^3.1.1",
@@ -30,7 +30,7 @@
         "upper-case": "^2.0.1"
     },
     "peerDependencies": {
-        "graphql": "^14.6.0 || ^15.0.0"
+        "graphql": "^14.6.0 || ^15.0.0 || ^16.0.0"
     },
     "devDependencies": {
         "@auto-it/conventional-commits": "^10.32.1",
@@ -46,7 +46,7 @@
         "eslint-plugin-import": "^2.25.2",
         "eslint-plugin-jest": "^25.2.2",
         "eslint-plugin-prettier": "^4.0.0",
-        "graphql": "^15.6.1",
+        "graphql": "^16.3.0",
         "husky": "^7.0.0",
         "jest": "^27.3.1",
         "lint-staged": "^11.2.3",

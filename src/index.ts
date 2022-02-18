@@ -1,6 +1,6 @@
-import { ASTKindToNode, NamedTypeNode, parse, printSchema, TypeNode, visit, VisitFn } from 'graphql';
+import { ASTKindToNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
 import casual from 'casual';
-import { PluginFunction } from '@graphql-codegen/plugin-helpers';
+import { PluginFunction, oldVisit } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 import { sentenceCase } from 'sentence-case';
@@ -212,6 +212,8 @@ const generateMockValue = (opts: Options): string | number | boolean => {
             });
             return `[${value}]`;
         }
+        default:
+            throw new Error('unreached');
     }
 };
 
@@ -322,6 +324,23 @@ interface TypeItem {
     values?: string[];
     types?: readonly NamedTypeNode[];
 }
+
+type VisitFn<TAnyNode, TVisitedNode = TAnyNode> = (
+    /** The current node being visiting. */
+    node: TVisitedNode,
+    /** The index or key to this node from the parent node or Array. */
+    key: string | number | undefined,
+    /** The parent immediately above this node, which may be an Array. */
+    parent: TAnyNode | ReadonlyArray<TAnyNode> | undefined,
+    /** The key path to get to this node from the root node. */
+    path: ReadonlyArray<string | number>,
+    /**
+     * All nodes and Arrays visited before reaching parent of this node.
+     * These correspond to array indices in `path`.
+     * Note: ancestors includes arrays which contain the parent of visited node.
+     */
+    ancestors: ReadonlyArray<TAnyNode | ReadonlyArray<TAnyNode>>,
+) => any;
 
 type VisitorType = { [K in keyof ASTKindToNode]?: VisitFn<ASTKindToNode[keyof ASTKindToNode], ASTKindToNode[K]> };
 
@@ -480,7 +499,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         },
     };
 
-    const result = visit(astNode, { leave: visitor });
+    const result = oldVisit(astNode, { leave: visitor });
     const definitions = result.definitions.filter((definition: any) => !!definition);
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
 
