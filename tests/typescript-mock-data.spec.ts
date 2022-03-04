@@ -22,6 +22,7 @@ const testSchema = buildSchema(/* GraphQL */ `
         scalarValue: AnyObject!
         camelCaseThing: camelCaseThing
         unionThing: UnionThing
+        prefixedEnum: Prefixed_Enum
     }
 
     interface WithAvatar {
@@ -54,6 +55,10 @@ const testSchema = buildSchema(/* GraphQL */ `
     enum Status {
         ONLINE
         OFFLINE
+    }
+
+    enum Prefixed_Enum {
+        PREFIXED_VALUE
     }
 
     union UnionThing = Avatar | camelCaseThing
@@ -94,7 +99,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -289,7 +294,8 @@ it('should add typesPrefix to imports', async () => {
     const result = await plugin(testSchema, [], { typesPrefix: 'Api.', typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
-    expect(result).toContain("import { Api, AbcStatus, Status } from './types/graphql';");
+    expect(result).toContain("import { Api, AbcStatus, Status, PrefixedEnum } from './types/graphql';");
+
     expect(result).toMatchSnapshot();
 });
 
@@ -335,7 +341,7 @@ it('should not merge imports into one if typesPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status } from './types/graphql';",
+        "import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -348,7 +354,7 @@ it('should not merge imports into one if enumsPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -371,10 +377,13 @@ it('should preserve underscores if transformUnderscore is false', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
     );
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
+    );
+    expect(result).toContain(
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,",
     );
     expect(result).toMatchSnapshot();
 });
