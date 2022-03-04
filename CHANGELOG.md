@@ -1,3 +1,15 @@
+# v2.1.4 (Fri Mar 04 2022)
+
+#### 🐛 Bug Fix
+
+- fix: update dependencies [#76](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/76) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.1.3 (Fri Mar 04 2022)
 
 #### 🐛 Bug Fix
