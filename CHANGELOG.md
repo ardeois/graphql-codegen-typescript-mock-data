@@ -1,3 +1,15 @@
+# v2.1.3 (Fri Mar 04 2022)
+
+#### 🐛 Bug Fix
+
+- fix: never preserve underscores for enum values [#75](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/75) ([@VilhelmNielsen](https://github.com/VilhelmNielsen))
+
+#### Authors: 1
+
+- Sebastian Vilhelm Nielsen ([@VilhelmNielsen](https://github.com/VilhelmNielsen))
+
+---
+
 # v2.1.2 (Fri Feb 18 2022)
 
 #### 🐛 Bug Fix
