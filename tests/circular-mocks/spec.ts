@@ -1,4 +1,4 @@
-import { aB, aC, anA } from './mocks';
+import { aB, aC, aD, anA } from './mocks';
 
 it('should terminate circular relationships when terminateCircularRelationships is true', () => {
     const a = anA();
@@ -9,4 +9,7 @@ it('should terminate circular relationships when terminateCircularRelationships 
 
     const c = aC();
     expect(c).toEqual({ aCollection: [{ B: { A: {} }, C: {} }] });
+
+    const d = aD();
+    expect(d).toEqual({ A: { B: { A: {} }, C: { aCollection: [{}] } }, B: { A: { B: {}, C: { aCollection: [{}] } } } });
 });
