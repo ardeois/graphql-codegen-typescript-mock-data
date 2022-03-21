@@ -10,3 +10,8 @@ export type B = {
 export type C = {
     aCollection: A[];
 };
+
+export type D = {
+    A: A;
+    B: B;
+};

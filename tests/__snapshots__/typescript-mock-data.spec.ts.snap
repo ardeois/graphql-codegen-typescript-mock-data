@@ -1963,80 +1963,80 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 
 exports[`should use relationshipsToOmit argument to terminate circular relationships with terminateCircularRelationships enabled 1`] = `
 "
-export const anAvatar = (overrides?: Partial<Avatar>, relationshipsToOmit: Set<string> = new Set()): Avatar => {
-    relationshipsToOmit.add('Avatar');
+export const anAvatar = (overrides?: Partial<Avatar>, _relationshipsToOmit: Array<string> = []): Avatar => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'Avatar']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
     };
 };
 
-export const aUser = (overrides?: Partial<User>, relationshipsToOmit: Set<string> = new Set()): User => {
-    relationshipsToOmit.add('User');
+export const aUser = (overrides?: Partial<User>, _relationshipsToOmit: Array<string> = []): User => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'User']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
         creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.find((type)=>type==='Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('CamelCaseThing') ? {} as CamelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
-        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.find((type)=>type==='CamelCaseThing') ? {} as CamelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : relationshipsToOmit.find((type)=>type==='Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
         prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
     };
 };
 
-export const aWithAvatar = (overrides?: Partial<WithAvatar>, relationshipsToOmit: Set<string> = new Set()): WithAvatar => {
-    relationshipsToOmit.add('WithAvatar');
+export const aWithAvatar = (overrides?: Partial<WithAvatar>, _relationshipsToOmit: Array<string> = []): WithAvatar => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'WithAvatar']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.find((type)=>type==='Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
     };
 };
 
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, relationshipsToOmit: Set<string> = new Set()): CamelCaseThing => {
-    relationshipsToOmit.add('CamelCaseThing');
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, _relationshipsToOmit: Array<string> = []): CamelCaseThing => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'CamelCaseThing']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
     };
 };
 
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, relationshipsToOmit: Set<string> = new Set()): PrefixedResponse => {
-    relationshipsToOmit.add('PrefixedResponse');
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, _relationshipsToOmit: Array<string> = []): PrefixedResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PrefixedResponse']);
     return {
         ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
     };
 };
 
-export const anAbcType = (overrides?: Partial<AbcType>, relationshipsToOmit: Set<string> = new Set()): AbcType => {
-    relationshipsToOmit.add('AbcType');
+export const anAbcType = (overrides?: Partial<AbcType>, _relationshipsToOmit: Array<string> = []): AbcType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'AbcType']);
     return {
         abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
     };
 };
 
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, relationshipsToOmit: Set<string> = new Set()): UpdateUserInput => {
-    relationshipsToOmit.add('UpdateUserInput');
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, _relationshipsToOmit: Array<string> = []): UpdateUserInput => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'UpdateUserInput']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.find((type)=>type==='Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
     };
 };
 
-export const aMutation = (overrides?: Partial<Mutation>, relationshipsToOmit: Set<string> = new Set()): Mutation => {
-    relationshipsToOmit.add('Mutation');
+export const aMutation = (overrides?: Partial<Mutation>, _relationshipsToOmit: Array<string> = []): Mutation => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'Mutation']);
     return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.find((type)=>type==='User') ? {} as User : aUser({}, relationshipsToOmit),
     };
 };
 
-export const aQuery = (overrides?: Partial<Query>, relationshipsToOmit: Set<string> = new Set()): Query => {
-    relationshipsToOmit.add('Query');
+export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<string> = []): Query => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'Query']);
     return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('PrefixedResponse') ? {} as PrefixedResponse : aPrefixedResponse({}, relationshipsToOmit),
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.find((type)=>type==='User') ? {} as User : aUser({}, relationshipsToOmit),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.find((type)=>type==='PrefixedResponse') ? {} as PrefixedResponse : aPrefixedResponse({}, relationshipsToOmit),
     };
 };
 "

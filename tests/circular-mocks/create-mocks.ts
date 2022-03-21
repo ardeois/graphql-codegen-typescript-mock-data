@@ -13,6 +13,10 @@ export default async () => {
         type C {
             aCollection: [A!]!
         }
+        type D {
+            A: A!
+            B: B!
+        }
     `);
 
     const output = await plugin(circularSchema, [], { typesFile: './types.ts', terminateCircularRelationships: true });
