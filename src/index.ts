@@ -181,7 +181,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                 }
             }
             if (opts.terminateCircularRelationships) {
-                return `relationshipsToOmit.find((type)=>type==='${casedName}') ? {} as ${casedName} : ${toMockName(
+                return `relationshipsToOmit.includes('${casedName}') ? {} as ${casedName} : ${toMockName(
                     name,
                     casedName,
                     opts.prefix,

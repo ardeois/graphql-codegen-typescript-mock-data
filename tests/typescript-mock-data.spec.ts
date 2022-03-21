@@ -365,7 +365,7 @@ it('should use relationshipsToOmit argument to terminate circular relationships 
     expect(result).toBeDefined();
     expect(result).toMatch(/const relationshipsToOmit = \(\[..._relationshipsToOmit, 'User']\)/);
     expect(result).toMatch(
-        /relationshipsToOmit.find\(\(type\)=>type==='Avatar'\) \? {} as Avatar : anAvatar\({}, relationshipsToOmit\)/,
+        /relationshipsToOmit.includes\('Avatar'\) \? {} as Avatar : anAvatar\({}, relationshipsToOmit\)/,
     );
     expect(result).not.toMatch(/: anAvatar\(\)/);
     expect(result).toMatchSnapshot();
