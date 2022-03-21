@@ -1,3 +1,16 @@
+# v2.2.0 (Mon Mar 21 2022)
+
+#### 🚀 Enhancement
+
+- feat: relationshipsToOmit bug when terminateCircularRelationships is true [#78](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/78) ([@Jonghakseo](https://github.com/Jonghakseo) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- JongHak Seo ([@Jonghakseo](https://github.com/Jonghakseo))
+
+---
+
 # v2.1.4 (Fri Mar 04 2022)
 
 #### 🐛 Bug Fix
