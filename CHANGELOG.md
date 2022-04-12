@@ -1,3 +1,15 @@
+# v2.2.3 (Tue Apr 12 2022)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump moment from 2.24.0 to 2.29.2 [#80](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/80) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v2.2.2 (Tue Apr 12 2022)
 
 #### 🐛 Bug Fix
