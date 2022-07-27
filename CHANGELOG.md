@@ -1,3 +1,15 @@
+# v2.2.4 (Wed Jul 27 2022)
+
+#### 🐛 Bug Fix
+
+- fix: add tslib dependency [#83](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/83) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.2.3 (Tue Apr 12 2022)
 
 #### 🐛 Bug Fix
