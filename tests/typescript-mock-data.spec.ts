@@ -389,3 +389,10 @@ it('should preserve underscores if transformUnderscore is false', async () => {
     );
     expect(result).toMatchSnapshot();
 });
+
+it('should generates dynamic mocks', async () => {
+    const result = await plugin(testSchema, [], { dynamic: true });
+
+    expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+});

@@ -21,6 +21,7 @@ type Options<T = TypeNode> = {
     currentType: T;
     customScalars?: ScalarMap;
     transformUnderscore: boolean;
+    dynamic?: boolean;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -102,20 +103,22 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         return '';
     }
 
-    casual.seed(hashedString(opts.typeName + opts.fieldName));
+    if (!opts.dynamic) casual.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String':
-            return `'${casual.word}'`;
+            return opts.dynamic ? `casual.word` : `'${casual.word}'`;
         case 'Float':
-            return Math.round(casual.double(0, 10) * 100) / 100;
+            return opts.dynamic
+                ? `Math.round(casual.double(0, 10) * 100) / 100`
+                : Math.round(casual.double(0, 10) * 100) / 100;
         case 'ID':
-            return `'${casual.uuid}'`;
+            return opts.dynamic ? `casual.uuid` : `'${casual.uuid}'`;
         case 'Boolean':
-            return casual.boolean;
+            return opts.dynamic ? `casual.boolean` : casual.boolean;
         case 'Int':
-            return casual.integer(0, 9999);
+            return opts.dynamic ? `casual.integer(0, 9999)` : casual.integer(0, 9999);
         default: {
             const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
@@ -147,9 +150,11 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         // mapping for this particular scalar
                         if (!customScalar || !customScalar.generator) {
                             if (foundType.name === 'Date') {
-                                return `'${new Date(casual.unix_time).toISOString()}'`;
+                                return opts.dynamic
+                                    ? `new Date(casual.unix_time).toISOString()`
+                                    : `'${new Date(casual.unix_time).toISOString()}'`;
                             }
-                            return `'${casual.word}'`;
+                            return opts.dynamic ? `casual.word` : `'${casual.word}'`;
                         }
 
                         // If there is a mapping to a `casual` type, then use it and make sure
@@ -163,6 +168,11 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         const generatorArgs: unknown[] = Array.isArray(customScalar.arguments)
                             ? customScalar.arguments
                             : [customScalar.arguments];
+                        if (opts.dynamic) {
+                            return `casual['${customScalar.generator}']${
+                                typeof embeddedGenerator === 'function' ? `(...${JSON.stringify(generatorArgs)})` : ''
+                            }`;
+                        }
                         const value =
                             typeof embeddedGenerator === 'function'
                                 ? embeddedGenerator(...generatorArgs)
@@ -316,6 +326,7 @@ export interface TypescriptMocksPluginConfig {
     typesPrefix?: string;
     enumsPrefix?: string;
     transformUnderscore?: boolean;
+    dynamic?: boolean;
 }
 
 interface TypeItem {
@@ -396,6 +407,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         currentType: node.type,
                         customScalars: config.scalars,
                         transformUnderscore,
+                        dynamic: config.dynamic,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -424,6 +436,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       currentType: field.type,
                                       customScalars: config.scalars,
                                       transformUnderscore,
+                                      dynamic: config.dynamic,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
@@ -518,6 +531,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .map(({ mockFn }: { mockFn: () => string }) => mockFn)
         .filter((mockFn: () => string) => !!mockFn);
 
-    return `${typesFileImport}${mockFns.map((mockFn: () => string) => mockFn()).join('\n')}
+    return `${typesFileImport}${config.dynamic ? `import casual from 'casual'\n` : ''}${mockFns
+        .map((mockFn: () => string) => mockFn())
+        .join('\n')}
 `;
 };
