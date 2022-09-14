@@ -398,7 +398,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         transformUnderscore,
                     });
 
-                    return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
+                    return `        ${fieldName}: overrides?.${fieldName} || ${value},`;
                 },
             };
         },
@@ -426,7 +426,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       transformUnderscore,
                                   });
 
-                                  return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
+                                  return `        ${field.name.value}: overrides?.${field.name.value} || ${value},`;
                               })
                               .join('\n')
                         : '';
