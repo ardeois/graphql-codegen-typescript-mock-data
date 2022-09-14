@@ -533,6 +533,6 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
 
     return `${typesFileImport}${config.dynamic ? `import casual from 'casual'\n` : ''}${mockFns
         .map((mockFn: () => string) => mockFn())
-        .join('\n')}
+        .join('\n')}${config.dynamic ? `\n\nexport const seedMocks = (seed: string) => casual.seed(seed)` : ''}
 `;
 };
