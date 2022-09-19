@@ -207,9 +207,10 @@ const generateMockValue = (opts: Options): string | number | boolean => {
                 currentType: opts.currentType.type,
             });
         case 'ListType': {
-            const listElements = Array.from({ length: opts.listElementCount }, () =>
+            const listElements = Array.from({ length: opts.listElementCount }, (_, index) =>
                 generateMockValue({
                     ...opts,
+                    fieldName: opts.fieldName + index,
                     currentType: (opts.currentType as ListTypeNode).type,
                 }),
             );

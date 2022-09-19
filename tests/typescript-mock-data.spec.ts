@@ -42,6 +42,10 @@ const testSchema = buildSchema(/* GraphQL */ `
         abc: String!
     }
 
+    type ListType {
+        stringList: [String!]!
+    }
+
     input UpdateUserInput {
         id: ID!
         login: String
@@ -99,7 +103,7 @@ it('should generate mock data functions with external types file import', async 
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -316,7 +320,7 @@ it('should add enumsPrefix to imports', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -341,7 +345,7 @@ it('should not merge imports into one if typesPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
+        "import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiListType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -354,7 +358,7 @@ it('should not merge imports into one if enumsPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -379,13 +383,38 @@ it('should preserve underscores if transformUnderscore is false', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
     );
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
     expect(result).toContain(
         "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate single list element', async () => {
+    const result = await plugin(testSchema, [], {
+        typesFile: './types/graphql.ts',
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id']",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate multiple list elements', async () => {
+    const result = await plugin(testSchema, [], {
+        typesFile: './types/graphql.ts',
+        listElementCount: 3,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis']",
     );
     expect(result).toMatchSnapshot();
 });
