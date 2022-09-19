@@ -28,6 +28,10 @@ specific type in a particular call stack, subsequent resolutions will return an 
 The prefix to add to the mock function name. Cannot be empty since it will clash with the associated
 typescript definition from `@graphql-codegen/typescript`
 
+### listElementCount (`number`, defaultValue: `1`)
+
+How many elements should be generated for lists. For example, with `listElementCount: 3` a schema field `names: [String!]!` would generate `3` names in each mock.
+
 ### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
 
 Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
