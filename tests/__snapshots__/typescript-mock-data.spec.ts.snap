@@ -795,8 +795,10 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
-exports[`should generate dynamic mocks 1`] = `
+exports[`should generate dynamic values in mocks 1`] = `
 "import casual from 'casual'
+
+casual.seed(0);
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -866,7 +868,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
     };
 };
 
-export const seedMocks = (seed: string) => casual.seed(seed)
+export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
 
