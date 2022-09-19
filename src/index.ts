@@ -534,7 +534,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .join('\n');
 
     let mockFile = '';
-    if (config.dynamicValues) mockFile += "import casual from 'casual'\n";
+    if (config.dynamicValues) mockFile += "import casual from 'casual';\n";
     mockFile += typesFileImport;
     if (config.dynamicValues) mockFile += '\ncasual.seed(0);\n';
     mockFile += mockFns;

@@ -796,7 +796,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate dynamic values in mocks 1`] = `
-"import casual from 'casual'
+"import casual from 'casual';
 
 casual.seed(0);
 

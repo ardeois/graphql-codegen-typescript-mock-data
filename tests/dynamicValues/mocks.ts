@@ -1,4 +1,4 @@
-import casual from 'casual'
+import casual from 'casual';
 import { A, B } from './types';
 
 casual.seed(0);
