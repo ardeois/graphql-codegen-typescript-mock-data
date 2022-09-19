@@ -913,6 +913,12 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
     };
 };
 
+export const aListType = (overrides?: Partial<ListType>): ListType => {
+    return {
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : [casual.word],
+    };
+};
+
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
