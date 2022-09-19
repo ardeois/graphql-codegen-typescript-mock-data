@@ -394,6 +394,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
     expect(result).toMatchSnapshot();
 });
 
+
 it('should generate single list element', async () => {
     const result = await plugin(testSchema, [], {
         typesFile: './types/graphql.ts',
@@ -416,5 +417,11 @@ it('should generate multiple list elements', async () => {
     expect(result).toContain(
         "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis']",
     );
+});
+
+it('should generate dynamic values in mocks', async () => {
+    const result = await plugin(testSchema, [], { dynamicValues: true });
+
+    expect(result).toBeDefined();
     expect(result).toMatchSnapshot();
 });

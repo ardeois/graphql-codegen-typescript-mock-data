@@ -1,3 +1,15 @@
+# v2.3.0 (Mon Sep 19 2022)
+
+#### 🚀 Enhancement
+
+- feat: dynamic generation mode [#86](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/86) ([@JimmyPaolini](https://github.com/JimmyPaolini))
+
+#### Authors: 1
+
+- Jimmy Paolini ([@JimmyPaolini](https://github.com/JimmyPaolini))
+
+---
+
 # (Thu Jul 28 2022)
 
 #### 🔩 Dependency Updates

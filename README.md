@@ -133,6 +133,10 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 When disabled, underscores will be retained for type names when the case is changed. It has no effect if `typenames` is set to `keep`.
 
+### dynamicValues (`boolean`, defaultValue: `false`)
+
+When enabled, values will be generated dynamically when the mock function is called rather than statically when the mock function is generated. The values are generated consistently from a [casual seed](https://github.com/boo1ean/casual#seeding) that can be manually configured using the generated `seedMocks(seed: number)` function, as shown in [this test](https://github.com/JimmyPaolini/graphql-codegen-typescript-mock-data/blob/dynamic-mode/tests/dynamicValues/spec.ts#L13).
+
 ## Examples of usage
 
 **codegen.yml**
