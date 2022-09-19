@@ -1,3 +1,15 @@
+# v2.4.0 (Mon Sep 19 2022)
+
+#### 🚀 Enhancement
+
+- feat: listElementCount option [#88](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/88) ([@JimmyPaolini](https://github.com/JimmyPaolini))
+
+#### Authors: 1
+
+- Jimmy Paolini ([@JimmyPaolini](https://github.com/JimmyPaolini))
+
+---
+
 # v2.3.0 (Mon Sep 19 2022)
 
 #### 🚀 Enhancement
