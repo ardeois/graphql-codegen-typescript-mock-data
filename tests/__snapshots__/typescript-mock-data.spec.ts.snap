@@ -795,6 +795,83 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
+exports[`should generate dynamic values in mocks 1`] = `
+"import casual from 'casual';
+
+casual.seed(0);
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : casual.word,
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : new Date(casual.unix_time).toISOString(),
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : casual.word,
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : casual.word,
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : casual.word,
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : casual.word,
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : casual.word,
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+
+export const seedMocks = (seed: number) => casual.seed(seed);
+"
+`;
+
 exports[`should generate mock data functions 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {

@@ -15,5 +15,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # generated test file
-/tests/circular-mocks/mocks.ts
+/tests/**/mocks.ts
 

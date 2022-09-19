@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should generate dynamic values when dynamicValues is true 1`] = `
+Object {
+  "id": "99bd9d8d-79a6-474e-8f46-6cc8796ed151",
+  "obj": Object {
+    "bool": false,
+    "flt": 3.68,
+    "int": 202,
+  },
+  "str": "est",
+}
+`;
+
+exports[`should generate dynamic values when dynamicValues is true 2`] = `
+Object {
+  "id": "ec2ddf7c-d78c-4a1b-a928-ec816742cb73",
+  "obj": Object {
+    "bool": true,
+    "flt": 0.19,
+    "int": 1352,
+  },
+  "str": "similique",
+}
+`;
