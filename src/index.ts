@@ -1,4 +1,4 @@
-import { ASTKindToNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
+import { ASTKindToNode, ListTypeNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
 import casual from 'casual';
 import { PluginFunction, oldVisit } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
@@ -21,6 +21,7 @@ type Options<T = TypeNode> = {
     currentType: T;
     customScalars?: ScalarMap;
     transformUnderscore: boolean;
+    listElementCount?: number;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -206,11 +207,13 @@ const generateMockValue = (opts: Options): string | number | boolean => {
                 currentType: opts.currentType.type,
             });
         case 'ListType': {
-            const value = generateMockValue({
-                ...opts,
-                currentType: opts.currentType.type,
-            });
-            return `[${value}]`;
+            const listElements = Array.from({ length: opts.listElementCount }, () =>
+                generateMockValue({
+                    ...opts,
+                    currentType: (opts.currentType as ListTypeNode).type,
+                }),
+            );
+            return `[${listElements.join(', ')}]`;
         }
         default:
             throw new Error('unreached');
@@ -316,6 +319,7 @@ export interface TypescriptMocksPluginConfig {
     typesPrefix?: string;
     enumsPrefix?: string;
     transformUnderscore?: boolean;
+    listElementCount?: number;
 }
 
 interface TypeItem {
@@ -354,6 +358,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const enumValuesConvention = config.enumValues || 'pascal-case#pascalCase';
     const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
     const transformUnderscore = config.transformUnderscore ?? true;
+    const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -396,6 +401,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         currentType: node.type,
                         customScalars: config.scalars,
                         transformUnderscore,
+                        listElementCount,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
