@@ -37,7 +37,6 @@
     "devDependencies": {
         "@auto-it/conventional-commits": "^10.33.0",
         "@graphql-codegen/testing": "^1.17.7",
-        "@types/faker": "^5.5.9",
         "@types/jest": "^27.0.2",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
