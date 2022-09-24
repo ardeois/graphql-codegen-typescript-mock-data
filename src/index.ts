@@ -5,6 +5,7 @@ import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
+import { faker } from '@faker-js/faker';
 
 type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
@@ -104,22 +105,24 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         return '';
     }
 
-    if (!opts.dynamicValues) casual.seed(hashedString(opts.typeName + opts.fieldName));
+    if (!opts.dynamicValues) faker.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String':
-            return opts.dynamicValues ? `casual.word` : `'${casual.word}'`;
+            return opts.dynamicValues ? `faker.lorem.word()` : `'${faker.lorem.word()}'`;
         case 'Float':
             return opts.dynamicValues
-                ? `Math.round(casual.double(0, 10) * 100) / 100`
-                : Math.round(casual.double(0, 10) * 100) / 100;
+                ? `faker.datatype.float({ min: 0, max: 10, precision: 0.1 })`
+                : faker.datatype.float({ min: 0, max: 10, precision: 0.1 });
         case 'ID':
-            return opts.dynamicValues ? `casual.uuid` : `'${casual.uuid}'`;
+            return opts.dynamicValues ? `faker.datatype.uuid()` : `'${faker.datatype.uuid()}'`;
         case 'Boolean':
-            return opts.dynamicValues ? `casual.boolean` : casual.boolean;
+            return opts.dynamicValues ? `faker.datatype.boolean()` : faker.datatype.boolean();
         case 'Int':
-            return opts.dynamicValues ? `casual.integer(0, 9999)` : casual.integer(0, 9999);
+            return opts.dynamicValues
+                ? `faker.datatype.number({ min: 0, max: 9999 })`
+                : faker.datatype.number({ min: 0, max: 9999 });
         default: {
             const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
@@ -152,10 +155,10 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         if (!customScalar || !customScalar.generator) {
                             if (foundType.name === 'Date') {
                                 return opts.dynamicValues
-                                    ? `new Date(casual.unix_time).toISOString()`
-                                    : `'${new Date(casual.unix_time).toISOString()}'`;
+                                    ? `faker.date.past().toISOString()`
+                                    : `'${faker.date.past().toISOString()}'`;
                             }
-                            return opts.dynamicValues ? `casual.word` : `'${casual.word}'`;
+                            return opts.dynamicValues ? `faker.lorem.word()` : `'${faker.lorem.word()}'`;
                         }
 
                         // If there is a mapping to a `casual` type, then use it and make sure
