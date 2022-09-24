@@ -544,11 +544,11 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .join('\n');
 
     let mockFile = '';
-    if (config.dynamicValues) mockFile += "import casual from 'casual';\n";
+    if (config.dynamicValues) mockFile += "import { faker } from '@faker-js/faker';\n";
     mockFile += typesFileImport;
-    if (config.dynamicValues) mockFile += '\ncasual.seed(0);\n';
+    if (config.dynamicValues) mockFile += '\nfaker.seed(0);\n';
     mockFile += mockFns;
-    if (config.dynamicValues) mockFile += '\n\nexport const seedMocks = (seed: number) => casual.seed(seed);';
+    if (config.dynamicValues) mockFile += '\n\nexport const seedMocks = (seed: number) => faker.seed(seed);';
     mockFile += '\n';
     return mockFile;
 };
