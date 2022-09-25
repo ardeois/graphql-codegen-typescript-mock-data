@@ -105,7 +105,11 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         return '';
     }
 
-    if (!opts.dynamicValues) faker.seed(hashedString(opts.typeName + opts.fieldName));
+    if (!opts.dynamicValues) {
+        const hashed = hashedString(opts.typeName + opts.fieldName);
+        faker.seed(hashed);
+        casual.seed(hashed);
+    }
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
