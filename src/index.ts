@@ -155,8 +155,8 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         if (!customScalar || !customScalar.generator) {
                             if (foundType.name === 'Date') {
                                 return opts.dynamicValues
-                                    ? `faker.date.past().toISOString()`
-                                    : `'${faker.date.past().toISOString()}'`;
+                                    ? `faker.date.past(1, new Date(2022, 0)).toISOString()`
+                                    : `'${faker.date.past(1, new Date(2022, 0)).toISOString()}'`;
                             }
                             return opts.dynamicValues ? `faker.lorem.word()` : `'${faker.lorem.word()}'`;
                         }
