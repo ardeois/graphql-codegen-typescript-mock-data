@@ -135,7 +135,7 @@ When disabled, underscores will be retained for type names when the case is chan
 
 ### dynamicValues (`boolean`, defaultValue: `false`)
 
-When enabled, values will be generated dynamically when the mock function is called rather than statically when the mock function is generated. The values are generated consistently from a [casual seed](https://github.com/boo1ean/casual#seeding) that can be manually configured using the generated `seedMocks(seed: number)` function, as shown in [this test](https://github.com/JimmyPaolini/graphql-codegen-typescript-mock-data/blob/dynamic-mode/tests/dynamicValues/spec.ts#L13).
+When enabled, values will be generated dynamically when the mock function is called rather than statically when the mock function is generated. The values are generated consistently from a [faker seed](https://github.com/faker-js/faker#%EF%B8%8F-setting-a-randomness-seed) that can be manually configured using the generated `seedMocks(seed: number)` function, as shown in [this test](https://github.com/JimmyPaolini/graphql-codegen-typescript-mock-data/blob/dynamic-mode/tests/dynamicValues/spec.ts#L13).
 
 ## Examples of usage
 
