@@ -5,6 +5,7 @@ import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
+import { CasualMockValueGenerator } from './mockValueGenerator';
 
 type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
@@ -107,19 +108,18 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     if (!opts.dynamicValues) casual.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
+    const mockValueGenerator = new CasualMockValueGenerator({ dynamicValues: opts.dynamicValues });
     switch (name) {
         case 'String':
-            return opts.dynamicValues ? `casual.word` : `'${casual.word}'`;
+            return mockValueGenerator.word();
         case 'Float':
-            return opts.dynamicValues
-                ? `Math.round(casual.double(0, 10) * 100) / 100`
-                : Math.round(casual.double(0, 10) * 100) / 100;
+            return mockValueGenerator.float();
         case 'ID':
-            return opts.dynamicValues ? `casual.uuid` : `'${casual.uuid}'`;
+            return mockValueGenerator.uuid();
         case 'Boolean':
-            return opts.dynamicValues ? `casual.boolean` : casual.boolean;
+            return mockValueGenerator.boolean();
         case 'Int':
-            return opts.dynamicValues ? `casual.integer(0, 9999)` : casual.integer(0, 9999);
+            return mockValueGenerator.integer();
         default: {
             const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
@@ -151,11 +151,9 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         // mapping for this particular scalar
                         if (!customScalar || !customScalar.generator) {
                             if (foundType.name === 'Date') {
-                                return opts.dynamicValues
-                                    ? `new Date(casual.unix_time).toISOString()`
-                                    : `'${new Date(casual.unix_time).toISOString()}'`;
+                                return mockValueGenerator.date();
                             }
-                            return opts.dynamicValues ? `casual.word` : `'${casual.word}'`;
+                            return mockValueGenerator.word();
                         }
 
                         // If there is a mapping to a `casual` type, then use it and make sure
