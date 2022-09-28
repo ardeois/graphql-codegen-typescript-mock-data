@@ -2,6 +2,7 @@ import fs from 'fs';
 import { plugin } from '../src';
 import circularRelationshipsSchema from './terminateCircularRelationships/schema';
 import dynamicValuesSchema from './dynamicValues/schema';
+import generateLibrarySchema from './generateLibrary/schema';
 
 export default async () => {
     const terminateCircularRelationshipsMocks = await plugin(circularRelationshipsSchema, [], {
@@ -15,4 +16,11 @@ export default async () => {
         dynamicValues: true,
     });
     fs.writeFileSync('./tests/dynamicValues/mocks.ts', dynamicValuesMocks.toString());
+
+    const generateWithFakerMocks = await plugin(generateLibrarySchema, [], {
+        typesFile: '../types.ts',
+        dynamicValues: true,
+        generateLibrary: 'faker',
+    });
+    fs.writeFileSync('./tests/generateLibrary/faker/mocks.ts', generateWithFakerMocks.toString());
 };

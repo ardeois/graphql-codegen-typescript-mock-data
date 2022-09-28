@@ -24,6 +24,7 @@ type Options<T = TypeNode> = {
     transformUnderscore: boolean;
     listElementCount?: number;
     dynamicValues?: boolean;
+    generateLibrary: 'casual' | 'faker';
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -106,7 +107,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     }
 
     const mockValueGenerator = setupMockValueGenerator({
-        generateLibrary: 'casual',
+        generateLibrary: opts.generateLibrary,
         dynamicValues: opts.dynamicValues,
     });
     if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
@@ -333,6 +334,7 @@ export interface TypescriptMocksPluginConfig {
     transformUnderscore?: boolean;
     listElementCount?: number;
     dynamicValues?: boolean;
+    generateLibrary?: 'casual' | 'faker';
 }
 
 interface TypeItem {
@@ -372,6 +374,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
     const transformUnderscore = config.transformUnderscore ?? true;
     const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
+    const generateLibrary = config.generateLibrary || 'casual';
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -416,6 +419,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         transformUnderscore,
                         listElementCount,
                         dynamicValues: config.dynamicValues,
+                        generateLibrary,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -445,6 +449,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       customScalars: config.scalars,
                                       transformUnderscore,
                                       dynamicValues: config.dynamicValues,
+                                      generateLibrary,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
@@ -540,7 +545,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .filter((mockFn: () => string) => !!mockFn)
         .map((mockFn: () => string) => mockFn())
         .join('\n');
-    const functionTokens = setupFunctionTokens('casual');
+    const functionTokens = setupFunctionTokens(generateLibrary);
 
     let mockFile = '';
     if (config.dynamicValues) mockFile += `${functionTokens.import}\n`;
