@@ -18,7 +18,12 @@ type MockValueGeneratorOptions = {
 
 type FunctionTokens = Record<'import' | 'seed' | 'seedFunction', string>;
 
-export class CasualMockValueGenerator implements MockValueGenerator {
+type SetupMockValueGeneratorOptions = {
+    generateLibrary: 'casual' | 'faker';
+    dynamicValues: boolean;
+};
+
+class CasualMockValueGenerator implements MockValueGenerator {
     dynamicValues: boolean;
 
     constructor(opts: MockValueGeneratorOptions) {
@@ -40,13 +45,13 @@ export class CasualMockValueGenerator implements MockValueGenerator {
     seed = (seed: number) => casual.seed(seed);
 }
 
-export const casualFunctionTokens: FunctionTokens = {
+const casualFunctionTokens: FunctionTokens = {
     import: `import casual from 'casual';`,
     seed: 'casual.seed(0);',
     seedFunction: 'export const seedMocks = (seed: number) => casual.seed(seed);',
 };
 
-export class FakerMockValueGenerator implements MockValueGenerator {
+class FakerMockValueGenerator implements MockValueGenerator {
     dynamicValues: boolean;
 
     constructor(opts: MockValueGeneratorOptions) {
@@ -68,8 +73,29 @@ export class FakerMockValueGenerator implements MockValueGenerator {
     seed = (seed: number) => faker.seed(seed);
 }
 
-export const fakerFunctionTokens: FunctionTokens = {
+const fakerFunctionTokens: FunctionTokens = {
     import: `import { faker } from '@faker-js/faker';`,
     seed: 'faker.seed(0);',
     seedFunction: 'export const seedMocks = (seed: number) => faker.seed(seed);',
+};
+
+export const setupMockValueGenerator = ({
+    generateLibrary,
+    dynamicValues,
+}: SetupMockValueGeneratorOptions): MockValueGenerator => {
+    switch (generateLibrary) {
+        case 'casual':
+            return new CasualMockValueGenerator({ dynamicValues });
+        case 'faker':
+            return new FakerMockValueGenerator({ dynamicValues });
+    }
+};
+
+export const setupFunctionTokens = (generateLibrary: 'casual' | 'faker'): FunctionTokens => {
+    switch (generateLibrary) {
+        case 'casual':
+            return casualFunctionTokens;
+        case 'faker':
+            return fakerFunctionTokens;
+    }
 };
