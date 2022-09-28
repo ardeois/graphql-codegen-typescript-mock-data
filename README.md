@@ -137,6 +137,11 @@ When disabled, underscores will be retained for type names when the case is chan
 
 When enabled, values will be generated dynamically when the mock function is called rather than statically when the mock function is generated. The values are generated consistently from a [casual seed](https://github.com/boo1ean/casual#seeding) that can be manually configured using the generated `seedMocks(seed: number)` function, as shown in [this test](https://github.com/JimmyPaolini/graphql-codegen-typescript-mock-data/blob/dynamic-mode/tests/dynamicValues/spec.ts#L13).
 
+### generateLibrary (`'casual' | 'faker'`, defaultValue: `'casual'`)
+
+Select a library to generate mock values. The default is [casual](https://github.com/boo1ean/casual), Other options include [faker](https://github.com/faker-js/faker).
+casual dependents on Node API and cannot be executed in a browser. faker is useful when you want to use a mock function with the dynamicValues option enabled in the browser.
+
 ## Examples of usage
 
 **codegen.yml**
