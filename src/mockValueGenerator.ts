@@ -8,11 +8,14 @@ interface MockValueGenerator {
     integer: () => number | string;
     float: () => number | string;
     date: () => string;
+    seed: (seed: number) => void;
 }
 
 type MockValueGeneratorOptions = {
     dynamicValues: boolean;
 };
+
+type FunctionTokens = Record<'import' | 'seed' | 'seedFunction', string>;
 
 export class CasualMockValueGenerator implements MockValueGenerator {
     dynamicValues: boolean;
@@ -33,4 +36,11 @@ export class CasualMockValueGenerator implements MockValueGenerator {
         this.dynamicValues
             ? `new Date(casual.unix_time).toISOString()`
             : `'${new Date(casual.unix_time).toISOString()}'`;
+    seed = (seed: number) => casual.seed(seed);
 }
+
+export const casualFunctionTokens: FunctionTokens = {
+    import: `import casual from 'casual';`,
+    seed: 'casual.seed(0);',
+    seedFunction: 'export const seedMocks = (seed: number) => casual.seed(seed);',
+};

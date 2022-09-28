@@ -5,7 +5,7 @@ import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
-import { CasualMockValueGenerator } from './mockValueGenerator';
+import { casualFunctionTokens, CasualMockValueGenerator } from './mockValueGenerator';
 
 type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
@@ -105,10 +105,10 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         return '';
     }
 
-    if (!opts.dynamicValues) casual.seed(hashedString(opts.typeName + opts.fieldName));
+    const mockValueGenerator = new CasualMockValueGenerator({ dynamicValues: opts.dynamicValues });
+    if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
-    const mockValueGenerator = new CasualMockValueGenerator({ dynamicValues: opts.dynamicValues });
     switch (name) {
         case 'String':
             return mockValueGenerator.word();
@@ -539,11 +539,11 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .join('\n');
 
     let mockFile = '';
-    if (config.dynamicValues) mockFile += "import casual from 'casual';\n";
+    if (config.dynamicValues) mockFile += `${casualFunctionTokens.import}\n`;
     mockFile += typesFileImport;
-    if (config.dynamicValues) mockFile += '\ncasual.seed(0);\n';
+    if (config.dynamicValues) mockFile += `\n${casualFunctionTokens.seed}\n`;
     mockFile += mockFns;
-    if (config.dynamicValues) mockFile += '\n\nexport const seedMocks = (seed: number) => casual.seed(seed);';
+    if (config.dynamicValues) mockFile += `\n\n${casualFunctionTokens.seedFunction}`;
     mockFile += '\n';
     return mockFile;
 };
