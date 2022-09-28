@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import casual from 'casual';
 
 interface MockValueGenerator {
@@ -43,4 +44,32 @@ export const casualFunctionTokens: FunctionTokens = {
     import: `import casual from 'casual';`,
     seed: 'casual.seed(0);',
     seedFunction: 'export const seedMocks = (seed: number) => casual.seed(seed);',
+};
+
+export class FakerMockValueGenerator implements MockValueGenerator {
+    dynamicValues: boolean;
+
+    constructor(opts: MockValueGeneratorOptions) {
+        this.dynamicValues = opts.dynamicValues;
+    }
+
+    word = () => (this.dynamicValues ? `faker.lorem.word()` : `'${faker.lorem.word()}'`);
+    uuid = () => (this.dynamicValues ? `faker.datatype.uuid()` : `'${faker.datatype.uuid()}'`);
+    boolean = () => (this.dynamicValues ? `faker.datatype.boolean()` : faker.datatype.boolean());
+    integer = () =>
+        this.dynamicValues
+            ? `faker.datatype.number({ min: 0, max: 9999 })`
+            : faker.datatype.number({ min: 0, max: 9999 });
+    float = () =>
+        this.dynamicValues
+            ? `faker.datatype.float({ min: 0, max: 10, precision: 0.1 })`
+            : faker.datatype.float({ min: 0, max: 10, precision: 0.1 });
+    date = () => (this.dynamicValues ? `faker.date.past().toISOString()` : `'${faker.date.past().toISOString()}'`);
+    seed = (seed: number) => faker.seed(seed);
+}
+
+export const fakerFunctionTokens: FunctionTokens = {
+    import: `import { faker } from '@faker-js/faker';`,
+    seed: 'faker.seed(0);',
+    seedFunction: 'export const seedMocks = (seed: number) => faker.seed(seed);',
 };
