@@ -401,7 +401,7 @@ it('should generate single list element', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id']",
+        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem']",
     );
     expect(result).toMatchSnapshot();
 });
