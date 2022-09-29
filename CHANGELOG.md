@@ -1,3 +1,15 @@
+# v2.5.2 (Thu Sep 29 2022)
+
+#### 🐛 Bug Fix
+
+- fix: faker dynamicValues data generation [#96](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/96) ([@JimmyPaolini](https://github.com/JimmyPaolini))
+
+#### Authors: 1
+
+- Jimmy Paolini ([@JimmyPaolini](https://github.com/JimmyPaolini))
+
+---
+
 # v2.5.1 (Thu Sep 29 2022)
 
 #### 🐛 Bug Fix
