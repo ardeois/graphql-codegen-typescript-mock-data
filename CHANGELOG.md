@@ -1,3 +1,16 @@
+# v2.5.0 (Thu Sep 29 2022)
+
+#### 🚀 Enhancement
+
+- feat: add generatorLibrary options and allow faker to select [#93](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/93) ([@MH4GF](https://github.com/MH4GF) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Hirotaka Miyagi ([@MH4GF](https://github.com/MH4GF))
+
+---
+
 # v2.4.1 (Thu Sep 29 2022)
 
 #### 🐛 Bug Fix
