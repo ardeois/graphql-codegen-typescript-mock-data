@@ -1156,7 +1156,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
-        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id'],
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
     };
 };
 
@@ -1313,7 +1313,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
-        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id'],
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
     };
 };
 
