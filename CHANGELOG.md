@@ -1,3 +1,15 @@
+# v2.4.1 (Thu Sep 29 2022)
+
+#### 🐛 Bug Fix
+
+- fix: listElementCount sometimes undefined [#94](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/94) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.4.0 (Mon Sep 19 2022)
 
 #### 🚀 Enhancement
