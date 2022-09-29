@@ -71,7 +71,7 @@ class FakerMockValueGenerator implements MockValueGenerator {
             : faker.datatype.float({ min: 0, max: 10, precision: 0.1 });
     date = () =>
         this.dynamicValues
-            ? `faker.date.past().toISOString(1, new Date(2022, 0))`
+            ? `faker.date.past(1, new Date(2022, 0)).toISOString()`
             : `'${faker.date.past(1, new Date(2022, 0)).toISOString()}'`;
     seed = (seed: number) => faker.seed(seed);
 }

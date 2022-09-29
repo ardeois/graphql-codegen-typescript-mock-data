@@ -959,7 +959,7 @@ export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
 export const aUser = (overrides?: Partial<User>): User => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker.datatype.uuid(),
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : faker.date.past().toISOString(1, new Date(2022, 0)),
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : faker.date.past(1, new Date(2022, 0)).toISOString(),
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : faker.lorem.word(),
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
