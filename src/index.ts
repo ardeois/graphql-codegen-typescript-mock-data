@@ -22,8 +22,8 @@ type Options<T = TypeNode> = {
     currentType: T;
     customScalars?: ScalarMap;
     transformUnderscore: boolean;
-    listElementCount?: number;
-    dynamicValues?: boolean;
+    listElementCount: number;
+    dynamicValues: boolean;
     generateLibrary: 'casual' | 'faker';
 };
 
@@ -222,7 +222,7 @@ const generateMockValue = (opts: Options): string | number | boolean => {
             const listElements = Array.from({ length: opts.listElementCount }, (_, index) =>
                 generateMockValue({
                     ...opts,
-                    fieldName: opts.fieldName + index,
+                    fieldName: opts.listElementCount === 1 ? opts.fieldName : `${opts.fieldName}${index}`,
                     currentType: (opts.currentType as ListTypeNode).type,
                 }),
             );
@@ -374,6 +374,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
     const transformUnderscore = config.transformUnderscore ?? true;
     const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
+    const dynamicValues = !!config.dynamicValues;
     const generateLibrary = config.generateLibrary || 'casual';
     // List of types that are enums
     const types: TypeItem[] = [];
@@ -418,7 +419,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         customScalars: config.scalars,
                         transformUnderscore,
                         listElementCount,
-                        dynamicValues: config.dynamicValues,
+                        dynamicValues,
                         generateLibrary,
                     });
 
@@ -448,7 +449,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       currentType: field.type,
                                       customScalars: config.scalars,
                                       transformUnderscore,
-                                      dynamicValues: config.dynamicValues,
+                                      listElementCount,
+                                      dynamicValues,
                                       generateLibrary,
                                   });
 
@@ -548,11 +550,11 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const functionTokens = setupFunctionTokens(generateLibrary);
 
     let mockFile = '';
-    if (config.dynamicValues) mockFile += `${functionTokens.import}\n`;
+    if (dynamicValues) mockFile += `${functionTokens.import}\n`;
     mockFile += typesFileImport;
-    if (config.dynamicValues) mockFile += `\n${functionTokens.seed}\n`;
+    if (dynamicValues) mockFile += `\n${functionTokens.seed}\n`;
     mockFile += mockFns;
-    if (config.dynamicValues) mockFile += `\n\n${functionTokens.seedFunction}`;
+    if (dynamicValues) mockFile += `\n\n${functionTokens.seedFunction}`;
     mockFile += '\n';
     return mockFile;
 };
