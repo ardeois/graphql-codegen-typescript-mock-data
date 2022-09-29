@@ -1,3 +1,15 @@
+# v2.5.1 (Thu Sep 29 2022)
+
+#### 🐛 Bug Fix
+
+- fix: custom generator for native scalars [#95](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/95) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.5.0 (Thu Sep 29 2022)
 
 #### 🚀 Enhancement
