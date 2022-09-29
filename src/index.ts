@@ -101,6 +101,33 @@ const getScalarDefinition = (value: ScalarDefinition | ScalarGeneratorName): Sca
     return value;
 };
 
+const getCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<NamedTypeNode>) => {
+    // If there is a mapping to a `casual` type, then use it and make sure
+    // to call it if it's a function
+    const embeddedGenerator = casual[customScalar.generator];
+    if (!embeddedGenerator && customScalar.generator) {
+        return customScalar.generator;
+    }
+
+    const generatorArgs: unknown[] = Array.isArray(customScalar.arguments)
+        ? customScalar.arguments
+        : [customScalar.arguments];
+    if (opts.dynamicValues) {
+        return `casual['${customScalar.generator}']${
+            typeof embeddedGenerator === 'function' ? `(...${JSON.stringify(generatorArgs)})` : ''
+        }`;
+    }
+    const value = typeof embeddedGenerator === 'function' ? embeddedGenerator(...generatorArgs) : embeddedGenerator;
+
+    if (typeof value === 'string') {
+        return `'${value}'`;
+    }
+    if (typeof value === 'object') {
+        return `${JSON.stringify(value)}`;
+    }
+    return value;
+};
+
 const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean => {
     if (!opts.currentType) {
         return '';
@@ -114,16 +141,26 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
-        case 'String':
-            return mockValueGenerator.word();
-        case 'Float':
-            return mockValueGenerator.float();
-        case 'ID':
-            return mockValueGenerator.uuid();
-        case 'Boolean':
-            return mockValueGenerator.boolean();
-        case 'Int':
-            return mockValueGenerator.integer();
+        case 'String': {
+            const customScalar = opts.customScalars ? getScalarDefinition(opts.customScalars['String']) : null;
+            return customScalar ? getCustomScalarValue(customScalar, opts) : mockValueGenerator.word();
+        }
+        case 'Float': {
+            const customScalar = opts.customScalars ? getScalarDefinition(opts.customScalars['Float']) : null;
+            return customScalar ? getCustomScalarValue(customScalar, opts) : mockValueGenerator.float();
+        }
+        case 'ID': {
+            const customScalar = opts.customScalars ? getScalarDefinition(opts.customScalars['ID']) : null;
+            return customScalar ? getCustomScalarValue(customScalar, opts) : mockValueGenerator.uuid();
+        }
+        case 'Boolean': {
+            const customScalar = opts.customScalars ? getScalarDefinition(opts.customScalars['Boolean']) : null;
+            return customScalar ? getCustomScalarValue(customScalar, opts) : mockValueGenerator.boolean();
+        }
+        case 'Int': {
+            const customScalar = opts.customScalars ? getScalarDefinition(opts.customScalars['Int']) : null;
+            return customScalar ? getCustomScalarValue(customScalar, opts) : mockValueGenerator.integer();
+        }
         default: {
             const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
@@ -160,34 +197,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                             return mockValueGenerator.word();
                         }
 
-                        // If there is a mapping to a `casual` type, then use it and make sure
-                        // to call it if it's a function
-                        const embeddedGenerator = casual[customScalar.generator];
-
-                        if (!embeddedGenerator && customScalar.generator) {
-                            return customScalar.generator;
-                        }
-
-                        const generatorArgs: unknown[] = Array.isArray(customScalar.arguments)
-                            ? customScalar.arguments
-                            : [customScalar.arguments];
-                        if (opts.dynamicValues) {
-                            return `casual['${customScalar.generator}']${
-                                typeof embeddedGenerator === 'function' ? `(...${JSON.stringify(generatorArgs)})` : ''
-                            }`;
-                        }
-                        const value =
-                            typeof embeddedGenerator === 'function'
-                                ? embeddedGenerator(...generatorArgs)
-                                : embeddedGenerator;
-
-                        if (typeof value === 'string') {
-                            return `'${value}'`;
-                        }
-                        if (typeof value === 'object') {
-                            return `${JSON.stringify(value)}`;
-                        }
-                        return value;
+                        return getCustomScalarValue(customScalar, opts);
                     }
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
