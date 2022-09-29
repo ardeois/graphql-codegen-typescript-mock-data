@@ -88,6 +88,23 @@ it('should generate mock data functions', async () => {
     expect(result).toMatchSnapshot();
 });
 
+it('should generate mock data functions with faker', async () => {
+    const result = await plugin(testSchema, [], { generateLibrary: 'faker' });
+
+    expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data functions with casual', async () => {
+    const result = await plugin(testSchema, [], { generateLibrary: 'casual' });
+
+    expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+
+    const defaultResult = await plugin(testSchema, [], {});
+    expect(result).toStrictEqual(defaultResult);
+});
+
 it('should generate mock data functions with scalars', async () => {
     const result = await plugin(testSchema, [], {});
 
@@ -421,6 +438,13 @@ it('should generate multiple list elements', async () => {
 
 it('should generate dynamic values in mocks', async () => {
     const result = await plugin(testSchema, [], { dynamicValues: true });
+
+    expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate dynamic values with faker', async () => {
+    const result = await plugin(testSchema, [], { dynamicValues: true, generateLibrary: 'faker' });
 
     expect(result).toBeDefined();
     expect(result).toMatchSnapshot();

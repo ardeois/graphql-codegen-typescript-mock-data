@@ -5,6 +5,7 @@ import { pascalCase } from 'pascal-case';
 import { upperCase } from 'upper-case';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
+import { setupFunctionTokens, setupMockValueGenerator } from './mockValueGenerator';
 
 type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
 
@@ -23,6 +24,7 @@ type Options<T = TypeNode> = {
     transformUnderscore: boolean;
     listElementCount: number;
     dynamicValues: boolean;
+    generateLibrary: 'casual' | 'faker';
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -104,22 +106,24 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         return '';
     }
 
-    if (!opts.dynamicValues) casual.seed(hashedString(opts.typeName + opts.fieldName));
+    const mockValueGenerator = setupMockValueGenerator({
+        generateLibrary: opts.generateLibrary,
+        dynamicValues: opts.dynamicValues,
+    });
+    if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String':
-            return opts.dynamicValues ? `casual.word` : `'${casual.word}'`;
+            return mockValueGenerator.word();
         case 'Float':
-            return opts.dynamicValues
-                ? `Math.round(casual.double(0, 10) * 100) / 100`
-                : Math.round(casual.double(0, 10) * 100) / 100;
+            return mockValueGenerator.float();
         case 'ID':
-            return opts.dynamicValues ? `casual.uuid` : `'${casual.uuid}'`;
+            return mockValueGenerator.uuid();
         case 'Boolean':
-            return opts.dynamicValues ? `casual.boolean` : casual.boolean;
+            return mockValueGenerator.boolean();
         case 'Int':
-            return opts.dynamicValues ? `casual.integer(0, 9999)` : casual.integer(0, 9999);
+            return mockValueGenerator.integer();
         default: {
             const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
             if (foundType) {
@@ -151,11 +155,9 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         // mapping for this particular scalar
                         if (!customScalar || !customScalar.generator) {
                             if (foundType.name === 'Date') {
-                                return opts.dynamicValues
-                                    ? `new Date(casual.unix_time).toISOString()`
-                                    : `'${new Date(casual.unix_time).toISOString()}'`;
+                                return mockValueGenerator.date();
                             }
-                            return opts.dynamicValues ? `casual.word` : `'${casual.word}'`;
+                            return mockValueGenerator.word();
                         }
 
                         // If there is a mapping to a `casual` type, then use it and make sure
@@ -332,6 +334,7 @@ export interface TypescriptMocksPluginConfig {
     transformUnderscore?: boolean;
     listElementCount?: number;
     dynamicValues?: boolean;
+    generateLibrary?: 'casual' | 'faker';
 }
 
 interface TypeItem {
@@ -372,6 +375,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const transformUnderscore = config.transformUnderscore ?? true;
     const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
     const dynamicValues = !!config.dynamicValues;
+    const generateLibrary = config.generateLibrary || 'casual';
     // List of types that are enums
     const types: TypeItem[] = [];
     const visitor: VisitorType = {
@@ -416,6 +420,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         transformUnderscore,
                         listElementCount,
                         dynamicValues,
+                        generateLibrary,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -446,6 +451,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       transformUnderscore,
                                       listElementCount,
                                       dynamicValues,
+                                      generateLibrary,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
@@ -541,13 +547,14 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .filter((mockFn: () => string) => !!mockFn)
         .map((mockFn: () => string) => mockFn())
         .join('\n');
+    const functionTokens = setupFunctionTokens(generateLibrary);
 
     let mockFile = '';
-    if (dynamicValues) mockFile += "import casual from 'casual';\n";
+    if (dynamicValues) mockFile += `${functionTokens.import}\n`;
     mockFile += typesFileImport;
-    if (dynamicValues) mockFile += '\ncasual.seed(0);\n';
+    if (dynamicValues) mockFile += `\n${functionTokens.seed}\n`;
     mockFile += mockFns;
-    if (dynamicValues) mockFile += '\n\nexport const seedMocks = (seed: number) => casual.seed(seed);';
+    if (dynamicValues) mockFile += `\n\n${functionTokens.seedFunction}`;
     mockFile += '\n';
     return mockFile;
 };
