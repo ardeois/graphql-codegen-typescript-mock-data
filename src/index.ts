@@ -25,6 +25,7 @@ type Options<T = TypeNode> = {
     listElementCount: number;
     dynamicValues: boolean;
     generateLibrary: 'casual' | 'faker';
+    index?: number;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -137,7 +138,8 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         generateLibrary: opts.generateLibrary,
         dynamicValues: opts.dynamicValues,
     });
-    if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
+    if (!opts.dynamicValues)
+        mockValueGenerator.seed(hashedString(`${opts.typeName}${opts.fieldName}${opts.index ? opts.index : ''}`));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
@@ -208,9 +210,9 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                     name,
                     casedName,
                     opts.prefix,
-                )}({}, relationshipsToOmit)`;
+                )}({}, relationshipsToOmit, attributesSelectionSet?.${opts.fieldName})`;
             } else {
-                return `${toMockName(name, casedName, opts.prefix)}()`;
+                return `${toMockName(name, casedName, opts.prefix)}({}, attributesSelectionSet?.${opts.fieldName})`;
             }
         }
     }
@@ -232,7 +234,8 @@ const generateMockValue = (opts: Options): string | number | boolean => {
             const listElements = Array.from({ length: opts.listElementCount }, (_, index) =>
                 generateMockValue({
                     ...opts,
-                    fieldName: opts.listElementCount === 1 ? opts.fieldName : `${opts.fieldName}${index}`,
+                    fieldName: opts.fieldName,
+                    index,
                     currentType: (opts.currentType as ListTypeNode).type,
                 }),
             );
@@ -258,31 +261,26 @@ const getMockString = (
     const casedNameWithPrefix = typenameConverter(typeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${typeName}',` : '';
     const typenameReturnType = addTypename ? `{ __typename: '${typeName}' } & ` : '';
+    const isQueryFunction = typeName.toLowerCase() === 'query';
 
-    if (terminateCircularRelationships) {
-        return `
-export const ${toMockName(
-            typeName,
-            casedName,
-            prefix,
-        )} = (overrides?: Partial<${casedNameWithPrefix}>, _relationshipsToOmit: Array<string> = []): ${typenameReturnType}${casedNameWithPrefix} => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, '${casedName}']);
-    return {${typename}
-${fields}
-    };
-};`;
-    } else {
-        return `
-export const ${toMockName(
-            typeName,
-            casedName,
-            prefix,
-        )} = (overrides?: Partial<${casedNameWithPrefix}>): ${typenameReturnType}${casedNameWithPrefix} => {
-    return {${typename}
-${fields}
-    };
-};`;
-    }
+    const params = `overrides?: Partial<${casedNameWithPrefix}>, ${
+        terminateCircularRelationships ? `_relationshipsToOmit: Array<string> = [], ` : ''
+    }${isQueryFunction ? 'queryDocument' : '_selectionSet'}?: DocumentNode`;
+
+    return `export const ${toMockName(
+        typeName,
+        casedName,
+        prefix,
+    )} = (${params}): ${typenameReturnType}${casedNameWithPrefix} => {
+        ${isQueryFunction ? 'const _selectionSet = queryDocument.definitions[0].selectionSet;' : ''}
+        const attributesSelectionSet = selectionSet ? Object.fromEntries(selectionSet.selections.map((selection) => [selection.name.value, selection.selectionSet ?? null])) : null;
+        ${
+            terminateCircularRelationships
+                ? `const relationshipsToOmit = ([..._relationshipsToOmit, '${casedName}']);`
+                : ''
+        }
+        return {${typename}${fields}};
+    };`;
 };
 
 const getImportTypes = ({
@@ -433,7 +431,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         generateLibrary,
                     });
 
-                    return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
+                    return `        ...(attributesSelectionSet && !attributesSelectionSet?.${fieldName} ? {} : { ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value} }),`;
                 },
             };
         },
