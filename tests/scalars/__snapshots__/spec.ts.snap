@@ -1,22 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should generate custom scalars for native and custom types 1`] = `
-"
-export const anA = (overrides?: Partial<A>): A => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 82,
+"import { DocumentNode, FieldNode, SelectionSetNode } from 'graphql'
+export const anA = (overrides?: Partial<A>, _selectionSet?: SelectionSetNode): A => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 82,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea corrupti qui incidunt eius consequatur blanditiis',
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Kelly_Cremin@Turcotte.biz',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : attributesSelectionSet && !attributesSelectionSet.obj ? {} as B : aB({}, attributesSelectionSet?.obj),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Kelly_Cremin@Turcotte.biz',};
     };
-};
-
-export const aB = (overrides?: Partial<B>): B => {
-    return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
+export const aB = (overrides?: Partial<B>, _selectionSet?: SelectionSetNode): B => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
         flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.509902694262564,
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,};
     };
-};
 "
 `;

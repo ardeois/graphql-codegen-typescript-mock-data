@@ -386,7 +386,7 @@ it('should use relationshipsToOmit argument to terminate circular relationships 
     expect(result).toBeDefined();
     expect(result).toMatch(/const relationshipsToOmit = \(\[..._relationshipsToOmit, 'User']\)/);
     expect(result).toMatch(
-        /relationshipsToOmit.includes\('Avatar'\) \? {} as Avatar : anAvatar\({}, relationshipsToOmit\)/,
+        /relationshipsToOmit.includes\('Avatar'\) || attributesSelectionSet && !attributesSelectionSet.avatar \? {} as Avatar : anAvatar\({}, relationshipsToOmit, attributesSelectionSet\?.avatar\)/,
     );
     expect(result).not.toMatch(/: anAvatar\(\)/);
     expect(result).toMatchSnapshot();
@@ -403,7 +403,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
         "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
     );
     expect(result).toContain(
-        'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
+        'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>, _selectionSet?: SelectionSetNode): Prefixed_Response => {',
     );
     expect(result).toContain(
         "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,",

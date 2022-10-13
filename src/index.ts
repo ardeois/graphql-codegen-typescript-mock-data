@@ -205,15 +205,16 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
-            if (opts.terminateCircularRelationships) {
-                return `relationshipsToOmit.includes('${casedName}') ? {} as ${casedName} : ${toMockName(
-                    name,
-                    casedName,
-                    opts.prefix,
-                )}({}, relationshipsToOmit, attributesSelectionSet?.${opts.fieldName})`;
-            } else {
-                return `${toMockName(name, casedName, opts.prefix)}({}, attributesSelectionSet?.${opts.fieldName})`;
-            }
+
+            return `${
+                opts.terminateCircularRelationships ? `relationshipsToOmit.includes('${casedName}') || ` : ''
+            }attributesSelectionSet && !attributesSelectionSet.${opts.fieldName} ? {} as ${casedName} : ${toMockName(
+                name,
+                casedName,
+                opts.prefix,
+            )}({}, ${opts.terminateCircularRelationships ? 'relationshipsToOmit, ' : ''}attributesSelectionSet?.${
+                opts.fieldName
+            })`;
         }
     }
 };
@@ -265,15 +266,15 @@ const getMockString = (
 
     const params = `overrides?: Partial<${casedNameWithPrefix}>, ${
         terminateCircularRelationships ? `_relationshipsToOmit: Array<string> = [], ` : ''
-    }${isQueryFunction ? 'queryDocument' : '_selectionSet'}?: DocumentNode`;
+    }${isQueryFunction ? 'queryDocument?: DocumentNode' : '_selectionSet?: SelectionSetNode'}`;
 
     return `export const ${toMockName(
         typeName,
         casedName,
         prefix,
     )} = (${params}): ${typenameReturnType}${casedNameWithPrefix} => {
-        ${isQueryFunction ? 'const _selectionSet = queryDocument.definitions[0].selectionSet;' : ''}
-        const attributesSelectionSet = selectionSet ? Object.fromEntries(selectionSet.selections.map((selection) => [selection.name.value, selection.selectionSet ?? null])) : null;
+        ${isQueryFunction ? 'const _selectionSet = queryDocument?.definitions[0].selectionSet;' : ''}
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
         ${
             terminateCircularRelationships
                 ? `const relationshipsToOmit = ([..._relationshipsToOmit, '${casedName}']);`
@@ -431,7 +432,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         generateLibrary,
                     });
 
-                    return `        ...(attributesSelectionSet && !attributesSelectionSet?.${fieldName} ? {} : { ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value} }),`;
+                    return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
                 },
             };
         },
@@ -557,7 +558,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .join('\n');
     const functionTokens = setupFunctionTokens(generateLibrary);
 
-    let mockFile = '';
+    let mockFile = "import { DocumentNode, FieldNode, SelectionSetNode } from 'graphql'\n";
     if (dynamicValues) mockFile += `${functionTokens.import}\n`;
     mockFile += typesFileImport;
     if (dynamicValues) mockFile += `\n${functionTokens.seed}\n`;
