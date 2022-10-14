@@ -2238,81 +2238,82 @@ export const aQUERY = (overrides?: Partial<QUERY>, queryDocument?: DocumentNode)
 `;
 
 exports[`should generate multiple list elements 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
-
-export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
-        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+"import { DocumentNode, FieldNode, SelectionSetNode } from 'graphql'
+import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+export const anAvatar = (overrides?: Partial<Avatar>, _selectionSet?: SelectionSetNode): Avatar => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',};
     };
-};
-
-export const aUser = (overrides?: Partial<User>): User => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+export const aUser = (overrides?: Partial<User>, _selectionSet?: SelectionSetNode): User => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
         creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : attributesSelectionSet && !attributesSelectionSet.avatar ? {} as Avatar : anAvatar({}, attributesSelectionSet?.avatar),
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
         customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
-        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
-        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
-        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : attributesSelectionSet && !attributesSelectionSet.camelCaseThing ? {} as CamelCaseThing : aCamelCaseThing({}, attributesSelectionSet?.camelCaseThing),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : attributesSelectionSet && !attributesSelectionSet.unionThing ? {} as Avatar : anAvatar({}, attributesSelectionSet?.unionThing),
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,};
     };
-};
-
-export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+export const aWithAvatar = (overrides?: Partial<WithAvatar>, _selectionSet?: SelectionSetNode): WithAvatar => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : attributesSelectionSet && !attributesSelectionSet.avatar ? {} as Avatar : anAvatar({}, attributesSelectionSet?.avatar),};
     };
-};
-
-export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, _selectionSet?: SelectionSetNode): CamelCaseThing => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',};
     };
-};
-
-export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
-    return {
-        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, _selectionSet?: SelectionSetNode): PrefixedResponse => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',};
     };
-};
-
-export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
-    return {
-        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+export const anAbcType = (overrides?: Partial<AbcType>, _selectionSet?: SelectionSetNode): AbcType => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',};
     };
-};
-
-export const aListType = (overrides?: Partial<ListType>): ListType => {
-    return {
-        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis'],
+export const aListType = (overrides?: Partial<ListType>, _selectionSet?: SelectionSetNode): ListType => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis'],};
     };
-};
-
-export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, _selectionSet?: SelectionSetNode): UpdateUserInput => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : attributesSelectionSet && !attributesSelectionSet.avatar ? {} as Avatar : anAvatar({}, attributesSelectionSet?.avatar),};
     };
-};
-
-export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
-    return {
-        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+export const aMutation = (overrides?: Partial<Mutation>, _selectionSet?: SelectionSetNode): Mutation => {
+        
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : attributesSelectionSet && !attributesSelectionSet.updateUser ? {} as User : aUser({}, attributesSelectionSet?.updateUser),};
     };
-};
-
-export const aQuery = (overrides?: Partial<Query>): Query => {
-    return {
-        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
-        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+export const aQuery = (overrides?: Partial<Query>, queryDocument?: DocumentNode): Query => {
+        const _selectionSet = queryDocument?.definitions[0].selectionSet;
+        const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
+        
+        return {        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : attributesSelectionSet && !attributesSelectionSet.user ? {} as User : aUser({}, attributesSelectionSet?.user),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : attributesSelectionSet && !attributesSelectionSet.prefixed_query ? {} as PrefixedResponse : aPrefixedResponse({}, attributesSelectionSet?.prefixed_query),};
     };
-};
 "
 `;
 

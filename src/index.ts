@@ -139,7 +139,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         dynamicValues: opts.dynamicValues,
     });
     if (!opts.dynamicValues)
-        mockValueGenerator.seed(hashedString(`${opts.typeName}${opts.fieldName}${opts.index ? opts.index : ''}`));
+        mockValueGenerator.seed(hashedString(`${opts.typeName}${opts.fieldName}${opts.index ?? ''}`));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
     switch (name) {
@@ -236,7 +236,7 @@ const generateMockValue = (opts: Options): string | number | boolean => {
                 generateMockValue({
                     ...opts,
                     fieldName: opts.fieldName,
-                    index,
+                    ...(opts.listElementCount > 1 ? { index } : {}),
                     currentType: (opts.currentType as ListTypeNode).type,
                 }),
             );
