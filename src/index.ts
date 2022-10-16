@@ -273,7 +273,7 @@ const getMockString = (
         casedName,
         prefix,
     )} = (${params}): ${typenameReturnType}${casedNameWithPrefix} => {
-        ${isQueryFunction ? 'const _selectionSet = queryDocument?.definitions[0].selectionSet;' : ''}
+        ${isQueryFunction ? 'const _selectionSet = queryDocument?.definitions[0]["selectionSet"];' : ''}
         const attributesSelectionSet = _selectionSet ? Object.fromEntries((_selectionSet.selections as FieldNode[]).map((selection) => [selection.name?.value, selection.selectionSet ?? null])) : null;
         ${
             terminateCircularRelationships

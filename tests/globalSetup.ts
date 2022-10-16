@@ -3,6 +3,7 @@ import { plugin } from '../src';
 import circularRelationshipsSchema from './terminateCircularRelationships/schema';
 import dynamicValuesSchema from './dynamicValues/schema';
 import generateLibrarySchema from './generateLibrary/schema';
+import queryDocumentsSchema from './queryDocuments/schema';
 
 export default async () => {
     const terminateCircularRelationshipsMocks = await plugin(circularRelationshipsSchema, [], {
@@ -23,4 +24,9 @@ export default async () => {
         generateLibrary: 'faker',
     });
     fs.writeFileSync('./tests/generateLibrary/faker/mocks.ts', generateWithFakerMocks.toString());
+
+    const queryDocumentsMocks = await plugin(queryDocumentsSchema, [], {
+        typesFile: './types.ts',
+    });
+    fs.writeFileSync('./tests/queryDocuments/mocks.ts', queryDocumentsMocks.toString());
 };
