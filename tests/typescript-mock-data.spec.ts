@@ -1,6 +1,6 @@
 import '@graphql-codegen/testing';
 
-import { buildSchema } from 'graphql';
+import { buildSchema, parse } from 'graphql';
 import { plugin } from '../src';
 
 const testSchema = buildSchema(/* GraphQL */ `
@@ -76,6 +76,32 @@ const testSchema = buildSchema(/* GraphQL */ `
         prefixed_query: Prefixed_Response!
     }
 `);
+
+const userQuery = {
+    document: parse(`
+    query User {
+        user {
+            id
+            login
+        }
+    }
+`),
+};
+
+const updateUserMutation = {
+    document: parse(`
+    mutation UpdateUser($input: UpdateUserInput) {
+        updateUser(input: $input) {
+            id
+            login
+        }
+    }
+`),
+};
+
+it('can be called with documents', async () => {
+    await plugin(testSchema, [userQuery, updateUserMutation], { typesFile: './types/graphql.ts' });
+});
 
 it('can be called', async () => {
     await plugin(testSchema, [], { typesFile: './types/graphql.ts' });

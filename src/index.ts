@@ -375,10 +375,12 @@ type VisitorType = { [K in keyof ASTKindToNode]?: VisitFn<ASTKindToNode[keyof AS
 
 // This plugin was generated with the help of ast explorer.
 // https://astexplorer.net
-// Paste your graphql schema in it, and you'll be able to see what the `astNode` will look like
+// Paste your graphql schema in it, and you'll be able to see what the `schemaAstNode` will look like
 export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, documents, config) => {
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
-    const astNode = parse(printedSchema); // Transforms the string into ASTNode
+    const schemaAstNode = parse(printedSchema); // Transforms the string into ASTNode
+    // console.log('🐋 ~ schemaAstNode', JSON.stringify(schemaAstNode));
+    // console.log('🐋 ~ documents', JSON.stringify(documents.map((document) => document.document)));
 
     const enumValuesConvention = config.enumValues || 'pascal-case#pascalCase';
     const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
@@ -388,7 +390,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const generateLibrary = config.generateLibrary || 'casual';
     // List of types that are enums
     const types: TypeItem[] = [];
-    const visitor: VisitorType = {
+    const schemaVisitor: VisitorType = {
         EnumTypeDefinition: (node) => {
             const name = node.name.value;
             if (!types.find((enumType: TypeItem) => enumType.name === name)) {
@@ -536,8 +538,20 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             }
         },
     };
+    const DocumentsVisitor: VisitorType = {
+        OperationDefinition: (node) => {
+            if (node.operation === 'query') {
+                const schemaQueryNode = schemaAstNode.definitions.find(
+                    (definition) => definition.kind === 'ObjectTypeDefinition' && definition.name.value === 'Query',
+                );
+                schemaQueryNode;
+                return `export const ${`${node.name.value}Query`} = ()`;
+            }
+        },
+    };
+    DocumentsVisitor;
 
-    const result = oldVisit(astNode, { leave: visitor });
+    const result = oldVisit(schemaAstNode, { leave: schemaVisitor });
     const definitions = result.definitions.filter((definition: any) => !!definition);
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
 
