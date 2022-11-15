@@ -180,7 +180,12 @@ const getCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<Name
         return getCasualCustomScalarValue(customScalar, opts);
     }
 
-    return getFakerCustomScalarValue(customScalar, opts);
+
+    if (opts.generateLibrary === 'faker') {
+        return getFakerCustomScalarValue(customScalar, opts);
+    }
+
+    throw `Unknown generator library: ${opts.generateLibrary}`;
 };
 
 const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean => {
