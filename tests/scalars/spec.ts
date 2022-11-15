@@ -1,7 +1,7 @@
 import { plugin } from '../../src';
 import testSchema from './schema';
 
-it('should generate custom scalars for native and custom types', async () => {
+it('should generate custom scalars for native and custom types using casual', async () => {
     const result = await plugin(testSchema, [], {
         scalars: {
             String: 'string',
@@ -36,6 +36,52 @@ it('should generate custom scalars for native and custom types', async () => {
 
     // ID
     expect(result).toContain("id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 82,");
+
+    // Boolean
+    expect(result).toContain("bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false");
+
+    // Int
+    expect(result).toContain("int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,");
+
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate custom scalars for native and custom types using faker', async () => {
+    const result = await plugin(testSchema, [], {
+        generateLibrary: 'faker',
+        scalars: {
+            String: 'lorem.sentence',
+            Float: {
+                generator: 'datatype.float',
+                arguments: [{ min: -100, max: 0}],
+            },
+            ID: {
+                generator: 'datatype.number',
+                arguments: [{ min: 1, max: 100}],
+            },
+            Boolean: 'false',
+            Int: {
+                generator: 'datatype.number',
+                arguments: [{ min: -100, max: 0}],
+            },
+            AnyObject: 'internet.email',
+        },
+    });
+
+    expect(result).toBeDefined();
+
+    // String
+    expect(result).toContain(
+        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Corrupti qui incidunt eius consequatur qui.',",
+    );
+
+    // Float
+    expect(result).toContain(
+        "flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.51,",
+    );
+
+    // ID
+    expect(result).toContain("id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 83,");
 
     // Boolean
     expect(result).toContain("bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false");
