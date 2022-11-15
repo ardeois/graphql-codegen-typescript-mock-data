@@ -1,4 +1,5 @@
 import { ASTKindToNode, ListTypeNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
+import { faker } from '@faker-js/faker';
 import casual from 'casual';
 import { PluginFunction, oldVisit } from '@graphql-codegen/plugin-helpers';
 import { pascalCase } from 'pascal-case';
@@ -101,7 +102,7 @@ const getScalarDefinition = (value: ScalarDefinition | ScalarGeneratorName): Sca
     return value;
 };
 
-const getCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<NamedTypeNode>) => {
+const getCasualCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<NamedTypeNode>) => {
     // If there is a mapping to a `casual` type, then use it and make sure
     // to call it if it's a function
     const embeddedGenerator = casual[customScalar.generator];
@@ -126,6 +127,60 @@ const getCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<Name
         return `${JSON.stringify(value)}`;
     }
     return value;
+};
+
+const getFakerGenerators = (generatorName: ScalarGeneratorName): [Function, string] => {
+    let embeddedGenerator: unknown = faker;
+    let dynamicGenerator = 'faker';
+
+    if (typeof generatorName === 'string') {
+        const generatorPath = generatorName.split('.');
+        for (const key of generatorPath) {
+            if (embeddedGenerator.hasOwnProperty(key)) {
+                embeddedGenerator = embeddedGenerator[key];
+                dynamicGenerator = `${dynamicGenerator}['${key}']`;
+            }
+        }
+    }
+
+    // If the faker generator is not a function, we can assume the path is wrong
+    if (typeof embeddedGenerator === 'function') {
+        return [embeddedGenerator, dynamicGenerator];
+    }
+
+    return [null, null];
+};
+
+const getFakerCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<NamedTypeNode>) => {
+    // If there is a mapping to a `faker` type, then use it
+    const [embeddedGenerator, dynamicGenerator] = getFakerGenerators(customScalar.generator);
+    if (!embeddedGenerator && customScalar.generator) {
+        return customScalar.generator;
+    }
+
+    const generatorArgs: unknown[] = Array.isArray(customScalar.arguments)
+        ? customScalar.arguments
+        : [customScalar.arguments];
+    if (opts.dynamicValues) {
+        return `${dynamicGenerator}(...${JSON.stringify(generatorArgs)})`;
+    }
+    const value = embeddedGenerator(...generatorArgs);
+
+    if (typeof value === 'string') {
+        return `'${value}'`;
+    }
+    if (typeof value === 'object') {
+        return `${JSON.stringify(value)}`;
+    }
+    return value;
+};
+
+const getCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<NamedTypeNode>) => {
+    if (opts.generateLibrary === 'casual') {
+        return getCasualCustomScalarValue(customScalar, opts);
+    }
+
+    return getFakerCustomScalarValue(customScalar, opts);
 };
 
 const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean => {
