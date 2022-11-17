@@ -129,14 +129,14 @@ const getCasualCustomScalarValue = (customScalar: ScalarDefinition, opts: Option
     return value;
 };
 
-const getFakerGenerators = (generatorName: ScalarGeneratorName): [Function, string] => {
+const getFakerGenerators = (generatorName: ScalarGeneratorName) => {
     let embeddedGenerator: unknown = faker;
     let dynamicGenerator = 'faker';
 
     if (typeof generatorName === 'string') {
         const generatorPath = generatorName.split('.');
         for (const key of generatorPath) {
-            if (embeddedGenerator.hasOwnProperty(key)) {
+            if (typeof embeddedGenerator === 'object' && key in embeddedGenerator) {
                 embeddedGenerator = embeddedGenerator[key];
                 dynamicGenerator = `${dynamicGenerator}['${key}']`;
             }
@@ -145,15 +145,15 @@ const getFakerGenerators = (generatorName: ScalarGeneratorName): [Function, stri
 
     // If the faker generator is not a function, we can assume the path is wrong
     if (typeof embeddedGenerator === 'function') {
-        return [embeddedGenerator, dynamicGenerator];
+        return { embeddedGenerator, dynamicGenerator };
     }
 
-    return [null, null];
+    return { embeddedGenerator: null, dynamicGenerator: null };
 };
 
 const getFakerCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<NamedTypeNode>) => {
     // If there is a mapping to a `faker` type, then use it
-    const [embeddedGenerator, dynamicGenerator] = getFakerGenerators(customScalar.generator);
+    const { embeddedGenerator, dynamicGenerator } = getFakerGenerators(customScalar.generator);
     if (!embeddedGenerator && customScalar.generator) {
         return customScalar.generator;
     }
