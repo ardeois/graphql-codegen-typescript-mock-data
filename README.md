@@ -44,12 +44,13 @@ Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pasc
 
 Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
 [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
-function key) with optional arguments
+function key) with optional arguments, or a or [faker](https://fakerjs.dev/api/) generator with optional arguments
 
-Examples
+Examples using **casual**
+
 **With arguments**
 
-```
+```yaml
 plugins:
   - typescript-mock-data:
       scalars:
@@ -60,7 +61,7 @@ plugins:
 
 **With multiple arguments**
 
-```
+```yaml
 plugins:
   - typescript-mock-data:
       scalars:
@@ -73,11 +74,46 @@ plugins:
 
 **Shorthand if you don't have arguments**
 
-```
+```yaml
 plugins:
   - typescript-mock-data:
       scalars:
         Date: date # gets translated to casual.date()
+```
+
+Examples using **faker**
+
+**With arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: # gets translated to faker.date.past(10)
+          generator: date.past
+          arguments: 10
+```
+
+**With multiple arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Description: # gets translated to faker.lorem.paragraphs(3, '\n')
+          generator: lorem.paragraphs
+          arguments:
+            - 3
+            - '\n'
+```
+
+**Shorthand if you don't have arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date.past # gets translated to faker.date.past()
 ```
 
 **Custom value generator**

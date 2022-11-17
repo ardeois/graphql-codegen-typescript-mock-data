@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should generate custom scalars for native and custom types 1`] = `
+exports[`should generate custom scalars for native and custom types using casual 1`] = `
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
@@ -18,5 +18,78 @@ export const aB = (overrides?: Partial<B>): B => {
         bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
     };
 };
+"
+`;
+
+exports[`should generate custom scalars for native and custom types using faker 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 83,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Corrupti qui incidunt eius consequatur qui.',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Orlando64@gmail.com',
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.51,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+"
+`;
+
+exports[`should generate dynamic custom scalars for native and custom types using casual 1`] = `
+"import casual from 'casual';
+
+casual.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual['integer'](...[1,100]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['string'],
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : casual['email'],
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : casual['integer'](...[-100,0]),
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : casual['double'](...[-100,0]),
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const seedMocks = (seed: number) => casual.seed(seed);
+"
+`;
+
+exports[`should generate dynamic custom scalars for native and custom types using faker 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](...[]),
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : faker['internet']['email'](...[]),
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['datatype']['number'](...[{\\"min\\":-100,\\"max\\":0}]),
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : faker['datatype']['float'](...[{\\"min\\":-100,\\"max\\":0}]),
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
 "
 `;
