@@ -1,3 +1,15 @@
+# v2.6.0 (Thu Nov 17 2022)
+
+#### 🚀 Enhancement
+
+- feat: Handle custom generators for faker [#101](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/101) ([@Morphyish](https://github.com/Morphyish))
+
+#### Authors: 1
+
+- Thomas Sauques ([@Morphyish](https://github.com/Morphyish))
+
+---
+
 # v2.5.2 (Thu Sep 29 2022)
 
 #### 🐛 Bug Fix
