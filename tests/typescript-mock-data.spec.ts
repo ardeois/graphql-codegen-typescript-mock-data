@@ -406,7 +406,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
     expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,",
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.Prefixed_Value,",
     );
     expect(result).toMatchSnapshot();
 });

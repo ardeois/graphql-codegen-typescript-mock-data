@@ -32,13 +32,21 @@ typescript definition from `@graphql-codegen/typescript`
 
 How many elements should be generated for lists. For example, with `listElementCount: 3` a schema field `names: [String!]!` would generate `3` names in each mock.
 
-### enumValues (`string`, defaultValue: `pascal-case#pascalCase`)
+### enumValues (`string`, defaultValue: `change-case-all#pascalCase`)
 
-Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
+Changes the case of the enums. The format of the converter must be a valid `module#method`. You can also use `keep` to
+keep all GraphQL names as-is. Available case functions in `change-case-all` are `camelCase`, `capitalCase`, `constantCase`,
+`dotCase`, `headerCase`, `noCase`, `paramCase`, `pascalCase`, `pathCase`, `sentenceCase`, `snakeCase`, `lowerCase`,
+`localeLowerCase`, `lowerCaseFirst`, `spongeCase`, `titleCase`, `upperCase`, `localeUpperCase` and `upperCaseFirst`
+[See more](https://github.com/btxtiger/change-case-all)
 
-### typenames (`string`, defaultValue: `pascal-case#pascalCase`)
+### typenames (`string`, defaultValue: `change-case-all#pascalCase`)
 
-Changes the case of the enums. Accepts `upper-case#upperCase`, `pascal-case#pascalCase` or `keep`
+Changes the case of types. The format of the converter must be a valid `module#method`. You can also use `keep` to
+keep all GraphQL names as-is. Available case functions in `change-case-all` are `camelCase`, `capitalCase`, `constantCase`,
+`dotCase`, `headerCase`, `noCase`, `paramCase`, `pascalCase`, `pathCase`, `sentenceCase`, `snakeCase`, `lowerCase`,
+`localeLowerCase`, `lowerCaseFirst`, `spongeCase`, `titleCase`, `upperCase`, `localeUpperCase` and `upperCaseFirst`
+[See more](https://github.com/btxtiger/change-case-all)
 
 ### scalars (`{ [Scalar: string]: ScalarDefinition }`, defaultValue: `undefined`)
 
