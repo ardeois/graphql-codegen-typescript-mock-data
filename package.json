@@ -37,7 +37,7 @@
     },
     "devDependencies": {
         "@auto-it/conventional-commits": "^10.33.0",
-        "@graphql-codegen/testing": "^1.17.7",
+        "@graphql-codegen/testing": "^1.18.0",
         "@types/jest": "^27.0.2",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
@@ -51,6 +51,7 @@
         "graphql": "^16.3.0",
         "husky": "^7.0.0",
         "jest": "^27.3.1",
+        "jest-diff": "^27.5.1",
         "lint-staged": "^11.2.3",
         "prettier": "^2.4.1",
         "prettier-config-landr": "^0.2.0",
