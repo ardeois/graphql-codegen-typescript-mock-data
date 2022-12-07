@@ -1,3 +1,15 @@
+# v2.7.0 (Wed Dec 07 2022)
+
+#### 🚀 Enhancement
+
+- fix(enumValues): update behaviour to match typescript plugin [#103](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/103) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v2.6.0 (Thu Nov 17 2022)
 
 #### 🚀 Enhancement
