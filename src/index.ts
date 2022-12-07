@@ -1,14 +1,12 @@
 import { ASTKindToNode, ListTypeNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
 import { faker } from '@faker-js/faker';
 import casual from 'casual';
-import { PluginFunction, oldVisit } from '@graphql-codegen/plugin-helpers';
-import { pascalCase } from 'pascal-case';
-import { upperCase } from 'upper-case';
+import { PluginFunction, oldVisit, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
 import { setupFunctionTokens, setupMockValueGenerator } from './mockValueGenerator';
 
-type NamingConvention = 'upper-case#upperCase' | 'pascal-case#pascalCase' | 'keep';
+type NamingConvention = 'change-case-all#pascalCase' | 'keep' | string;
 
 type Options<T = TypeNode> = {
     typeName: string;
@@ -42,18 +40,10 @@ const convertName = (value: string, fn: (v: string) => string, transformUndersco
 const createNameConverter =
     (convention: NamingConvention, transformUnderscore: boolean) =>
     (value: string, prefix = '') => {
-        switch (convention) {
-            case 'upper-case#upperCase': {
-                return `${prefix}${convertName(value, (s) => upperCase(s || ''), transformUnderscore)}`;
-            }
-            case 'keep':
-                return `${prefix}${value}`;
-            case 'pascal-case#pascalCase':
-            // fallthrough
-            default:
-                // default to pascal case in case of unknown values
-                return `${prefix}${convertName(value, (s) => pascalCase(s || ''), transformUnderscore)}`;
+        if (convention === 'keep') {
+            return `${prefix}${value}`;
         }
+        return `${prefix}${convertName(value, resolveExternalModuleAndFn(convention), transformUnderscore)}`;
     };
 
 const toMockName = (typedName: string, casedName: string, prefix?: string) => {
@@ -62,19 +52,6 @@ const toMockName = (typedName: string, casedName: string, prefix?: string) => {
     }
     const firstWord = sentenceCase(typedName).split(' ')[0];
     return `${a(firstWord, { articleOnly: true })}${casedName}`;
-};
-
-const updateTextCase = (str: string, enumValuesConvention: NamingConvention, transformUnderscore: boolean) => {
-    const convert = createNameConverter(enumValuesConvention, transformUnderscore);
-
-    if (str.charAt(0) === '_') {
-        return str.replace(
-            /^(_*)(.*)/,
-            (_match, underscorePrefix, typeName) => `${underscorePrefix}${convert(typeName)}`,
-        );
-    }
-
-    return convert(str);
 };
 
 const hashedString = (value: string) => {
@@ -180,7 +157,6 @@ const getCustomScalarValue = (customScalar: ScalarDefinition, opts: Options<Name
         return getCasualCustomScalarValue(customScalar, opts);
     }
 
-
     if (opts.generateLibrary === 'faker') {
         return getFakerCustomScalarValue(customScalar, opts);
     }
@@ -231,12 +207,9 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                             opts.typenamesConvention,
                             opts.transformUnderscore,
                         );
+                        const enumConverter = createNameConverter(opts.enumValuesConvention, opts.transformUnderscore);
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${updateTextCase(
-                            value,
-                            opts.enumValuesConvention,
-                            true,
-                        )}`;
+                        return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`;
                     }
                     case 'union':
                         // Return the first union type node.
@@ -440,8 +413,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
-    const enumValuesConvention = config.enumValues || 'pascal-case#pascalCase';
-    const typenamesConvention = config.typenames || 'pascal-case#pascalCase';
+    const enumValuesConvention = config.enumValues || 'change-case-all#pascalCase';
+    const typenamesConvention = config.typenames || 'change-case-all#pascalCase';
     const transformUnderscore = config.transformUnderscore ?? true;
     const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
     const dynamicValues = !!config.dynamicValues;

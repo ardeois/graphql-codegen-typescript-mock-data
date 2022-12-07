@@ -2546,7 +2546,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
         unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
-        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.Prefixed_Value,
     };
 };
 
