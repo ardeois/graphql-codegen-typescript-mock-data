@@ -191,8 +191,8 @@ it('should generate mock data with PascalCase types and enums by default', async
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with PascalCase enum values if typenames is "pascal-case#pascalCase"', async () => {
-    const result = await plugin(testSchema, [], { typenames: 'pascal-case#pascalCase' });
+it('should generate mock data with PascalCase enum values if typeNames is "pascal-case#pascalCase"', async () => {
+    const result = await plugin(testSchema, [], { typeNames: 'pascal-case#pascalCase' });
 
     expect(result).toBeDefined();
     expect(result).toMatch(/Abc(Type|Status)/);
@@ -201,8 +201,8 @@ it('should generate mock data with PascalCase enum values if typenames is "pasca
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with upperCase types and enums if typenames is "upper-case#upperCase"', async () => {
-    const result = await plugin(testSchema, [], { typenames: 'upper-case#upperCase' });
+it('should generate mock data with upperCase types and enums if typeNames is "upper-case#upperCase"', async () => {
+    const result = await plugin(testSchema, [], { typeNames: 'upper-case#upperCase' });
 
     expect(result).toBeDefined();
     expect(result).not.toMatch(/Abc(Type|Status)/);
@@ -211,8 +211,8 @@ it('should generate mock data with upperCase types and enums if typenames is "up
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase"', async () => {
-    const result = await plugin(testSchema, [], { typenames: 'upper-case#upperCase', typesFile: './types/graphql.ts' });
+it('should generate mock data with upperCase types and imports if typeNames is "upper-case#upperCase"', async () => {
+    const result = await plugin(testSchema, [], { typeNames: 'upper-case#upperCase', typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
     expect(result).not.toMatch(/Abc(Type|Status)/);
@@ -221,8 +221,8 @@ it('should generate mock data with upperCase types and imports if typenames is "
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with as-is types and enums if typenames is "keep"', async () => {
-    const result = await plugin(testSchema, [], { typenames: 'keep' });
+it('should generate mock data with as-is types and enums if typeNames is "keep"', async () => {
+    const result = await plugin(testSchema, [], { typeNames: 'keep' });
 
     expect(result).toBeDefined();
     expect(result).not.toMatch(/Abc(Type|Status)/);

@@ -1574,7 +1574,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
-exports[`should generate mock data with PascalCase enum values if typenames is "pascal-case#pascalCase" 1`] = `
+exports[`should generate mock data with PascalCase enum values if typeNames is "pascal-case#pascalCase" 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -1809,7 +1809,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
-exports[`should generate mock data with as-is types and enums if typenames is "keep" 1`] = `
+exports[`should generate mock data with as-is types and enums if typeNames is "keep" 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -2052,7 +2052,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
-exports[`should generate mock data with upperCase types and enums if typenames is "upper-case#upperCase" 1`] = `
+exports[`should generate mock data with upperCase types and enums if typeNames is "upper-case#upperCase" 1`] = `
 "
 export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
     return {
@@ -2130,7 +2130,7 @@ export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
 "
 `;
 
-exports[`should generate mock data with upperCase types and imports if typenames is "upper-case#upperCase" 1`] = `
+exports[`should generate mock data with upperCase types and imports if typeNames is "upper-case#upperCase" 1`] = `
 "import { AVATAR, USER, WITHAVATAR, CAMELCASETHING, PREFIXED_RESPONSE, ABCTYPE, LISTTYPE, UPDATEUSERINPUT, MUTATION, QUERY, ABCSTATUS, STATUS, PREFIXED_ENUM } from './types/graphql';
 
 export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
