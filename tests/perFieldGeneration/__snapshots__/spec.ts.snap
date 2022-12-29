@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`per field generation with dynamic values can accept an extra function call 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10]).toLocaleDateString(),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per field generation with dynamic values can accept an extra function call with arguments 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10]).toLocaleDateString(...[\\"en-GB\\"]),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per field generation with dynamic values can accept arguments 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10]),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per field generation with dynamic values can overwrite a scalar value 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['internet']['email'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['past'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per field generation with dynamic values uses per field generation if field name matches 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['internet']['email'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per field generation without dynamic values can accept an extra function call 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '1/1/2022',
+    };
+};
+"
+`;
+
+exports[`per field generation without dynamic values can accept an extra function call with arguments 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '01/01/2022',
+    };
+};
+"
+`;
+
+exports[`per field generation without dynamic values can accept arguments 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : \\"2022-01-01T00:00:00.000Z\\",
+    };
+};
+"
+`;
+
+exports[`per field generation without dynamic values can overwrite a scalar value 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'my@email.com',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2020-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'Word',
+    };
+};
+"
+`;
+
+exports[`per field generation without dynamic values uses per field generation if field name matches 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'my@email.com',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'Word',
+    };
+};
+"
+`;
