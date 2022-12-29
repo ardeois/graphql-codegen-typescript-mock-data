@@ -178,7 +178,7 @@ const getCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<
     throw `Unknown generator library: ${opts.generateLibrary}`;
 };
 
-const handleCustomFieldGeneration = (
+const handleValueGeneration = (
     opts: Options<NamedTypeNode>,
     customScalar: GeneratorDefinition,
     baseGenerator: () => void,
@@ -208,23 +208,23 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     switch (name) {
         case 'String': {
             const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['String']) : null;
-            return handleCustomFieldGeneration(opts, customScalar, mockValueGenerator.word);
+            return handleValueGeneration(opts, customScalar, mockValueGenerator.word);
         }
         case 'Float': {
             const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Float']) : null;
-            return handleCustomFieldGeneration(opts, customScalar, mockValueGenerator.float);
+            return handleValueGeneration(opts, customScalar, mockValueGenerator.float);
         }
         case 'ID': {
             const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['ID']) : null;
-            return handleCustomFieldGeneration(opts, customScalar, mockValueGenerator.uuid);
+            return handleValueGeneration(opts, customScalar, mockValueGenerator.uuid);
         }
         case 'Boolean': {
             const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Boolean']) : null;
-            return handleCustomFieldGeneration(opts, customScalar, mockValueGenerator.boolean);
+            return handleValueGeneration(opts, customScalar, mockValueGenerator.boolean);
         }
         case 'Int': {
             const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Int']) : null;
-            return handleCustomFieldGeneration(opts, customScalar, mockValueGenerator.integer);
+            return handleValueGeneration(opts, customScalar, mockValueGenerator.integer);
         }
         default: {
             const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
@@ -253,7 +253,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
 
                         // it's a scalar, let's use a string as a value if there is no custom
                         // mapping for this particular scalar
-                        return handleCustomFieldGeneration(
+                        return handleValueGeneration(
                             opts,
                             customScalar,
                             foundType.name === 'Date' ? mockValueGenerator.date : mockValueGenerator.word,
