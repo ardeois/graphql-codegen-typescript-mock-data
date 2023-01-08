@@ -1,7 +1,7 @@
 import { ASTKindToNode, ListTypeNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
 import { faker } from '@faker-js/faker';
 import casual from 'casual';
-import { PluginFunction, oldVisit, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
+import { oldVisit, PluginFunction, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
 import { setupFunctionTokens, setupMockValueGenerator } from './mockValueGenerator';
@@ -24,7 +24,7 @@ type Options<T = TypeNode> = {
     listElementCount: number;
     dynamicValues: boolean;
     generateLibrary: 'casual' | 'faker';
-    fieldGeneration?: FieldMap;
+    fieldGeneration?: TypeFieldMap;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -183,9 +183,17 @@ const handleValueGeneration = (
     customScalar: GeneratorDefinition,
     baseGenerator: () => void,
 ) => {
-    if (opts.fieldGeneration && opts.fieldName in opts.fieldGeneration) {
-        const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration[opts.fieldName]);
-        return getCustomValue(generatorDefinition, opts);
+    if (opts.fieldGeneration) {
+        // Check for a specific generation for the type & field
+        if (opts.typeName in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration[opts.typeName]) {
+            const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration[opts.typeName][opts.fieldName]);
+            return getCustomValue(generatorDefinition, opts);
+        }
+        // Check for a general field generation definition
+        if ('_all' in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration['_all']) {
+            const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration['_all'][opts.fieldName]);
+            return getCustomValue(generatorDefinition, opts);
+        }
     }
     if (customScalar) {
         return getCustomValue(customScalar, opts);
@@ -390,13 +398,16 @@ type GeneratorDefinition = {
         args?: unknown[];
     };
 };
+type GeneratorOptions = GeneratorName | GeneratorDefinition;
 
 type ScalarMap = {
-    [name: string]: GeneratorName | GeneratorDefinition;
+    [name: string]: GeneratorOptions;
 };
 
-type FieldMap = {
-    [name: string]: GeneratorName | GeneratorDefinition;
+type TypeFieldMap = {
+    [typeName: string]: {
+        [fieldName: string]: GeneratorOptions;
+    };
 };
 
 export interface TypescriptMocksPluginConfig {
@@ -413,7 +424,7 @@ export interface TypescriptMocksPluginConfig {
     listElementCount?: number;
     dynamicValues?: boolean;
     generateLibrary?: 'casual' | 'faker';
-    fieldGeneration?: FieldMap;
+    fieldGeneration?: TypeFieldMap;
     locale?: string;
 }
 

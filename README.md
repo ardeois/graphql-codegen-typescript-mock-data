@@ -181,6 +181,38 @@ When disabled, underscores will be retained for type names when the case is chan
 
 When enabled, values will be generated dynamically when the mock function is called rather than statically when the mock function is generated. The values are generated consistently from a [casual seed](https://github.com/boo1ean/casual#seeding) that can be manually configured using the generated `seedMocks(seed: number)` function, as shown in [this test](https://github.com/JimmyPaolini/graphql-codegen-typescript-mock-data/blob/dynamic-mode/tests/dynamicValues/spec.ts#L13).
 
+### fieldGeneration (`{ [typeName: string]: { [fieldName: string]: GeneratorOptions } }`, defaultValue: `undefined`)
+
+This setting allows you to add specific generation to a field for a given type. For example if you have a type called `User` and a field called `birthDate` you can override any generated value there as follows:
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date.future
+      fieldGeneration:
+        User:
+          birthDate: date.past
+```
+
+Note that even if `birthDate` is a scalar of `Date` type, its value will still be overridden.
+
+If you want to use a specific generator for **all** fields of a given name, you can declare it under a property called `_all`:
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date.future
+      fieldGeneration:
+        _all:
+          email: internet.email
+        AdminUser:
+          email: 'admin@email.com'
+```
+
+In the above example all resolvers with the name `email` will use the `internet.email` generator. However since we specified a specific email for `AdminUser` that will take precedence over the `_all` generated value.
+
 ### generateLibrary (`'casual' | 'faker'`, defaultValue: `'casual'`)
 
 Select a library to generate mock values. The default is [casual](https://github.com/boo1ean/casual), Other options include [faker](https://github.com/faker-js/faker).

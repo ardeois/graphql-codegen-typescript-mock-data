@@ -22,7 +22,7 @@ jest.mock('@faker-js/faker', () => ({
     },
 }));
 
-describe('per field generation', () => {
+describe('per type field generation', () => {
     const config = {
         generateLibrary: 'faker',
         scalars: {
@@ -44,13 +44,18 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    email: 'internet.email',
+                    A: { email: 'internet.email' },
                 },
             });
             expect(result).toBeDefined();
 
+            // Custom generation in type A
             expect(result).toContain(
                 "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['internet']['email']()",
+            );
+            // Original generation in type B (unchanged)
+            expect(result).toContain(
+                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),",
             );
 
             expect(result).toMatchSnapshot();
@@ -60,8 +65,7 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    email: 'internet.email',
-                    overriddenDate: 'date.past',
+                    A: { email: 'internet.email', overriddenDate: 'date.past' },
                 },
             });
             expect(result).toBeDefined();
@@ -76,13 +80,34 @@ describe('per field generation', () => {
             expect(result).toMatchSnapshot();
         });
 
+        it('can apply generator override to all fields of a specific name', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    _all: { email: 'internet.email' },
+                },
+            });
+            expect(result).toBeDefined();
+
+            // Check both `email` fields are updated
+            expect(
+                String(result).match(
+                    /email: overrides && overrides.hasOwnProperty\('email'\) \? overrides.email! : faker\['internet']\['email']\(\)/g,
+                ).length,
+            ).toEqual(2);
+            expect(result).toMatchSnapshot();
+        });
+
         it('can accept arguments', async () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    dateTime: {
-                        generator: 'date.recent',
-                        arguments: [10],
+                    A: {
+                        dateTime: {
+                            generator: 'date.recent',
+                            arguments: [10],
+                        },
                     },
                 },
             });
@@ -99,11 +124,13 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    dateTime: {
-                        generator: 'date.recent',
-                        arguments: [10],
-                        extra: {
-                            function: 'toLocaleDateString',
+                    A: {
+                        dateTime: {
+                            generator: 'date.recent',
+                            arguments: [10],
+                            extra: {
+                                function: 'toLocaleDateString',
+                            },
                         },
                     },
                 },
@@ -121,12 +148,14 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    dateTime: {
-                        generator: 'date.recent',
-                        arguments: [10],
-                        extra: {
-                            function: 'toLocaleDateString',
-                            args: ['en-GB'],
+                    A: {
+                        dateTime: {
+                            generator: 'date.recent',
+                            arguments: [10],
+                            extra: {
+                                function: 'toLocaleDateString',
+                                args: ['en-GB'],
+                            },
                         },
                     },
                 },
@@ -150,13 +179,18 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    email: 'internet.email',
+                    A: { email: 'internet.email' },
                 },
             });
             expect(result).toBeDefined();
 
+            // Custom generation in type A
             expect(result).toContain(
                 "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'my@email.com'",
+            );
+            // Original generation in type B (unchanged)
+            expect(result).toContain(
+                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence",
             );
 
             expect(result).toMatchSnapshot();
@@ -166,8 +200,7 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    email: 'internet.email',
-                    overriddenDate: 'date.past',
+                    A: { email: 'internet.email', overriddenDate: 'date.past' },
                 },
             });
             expect(result).toBeDefined();
@@ -182,13 +215,34 @@ describe('per field generation', () => {
             expect(result).toMatchSnapshot();
         });
 
+        it('can apply generator override to all fields of a specific name', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    _all: { email: 'internet.email' },
+                },
+            });
+            expect(result).toBeDefined();
+
+            // Check both `email` fields are updated
+            expect(
+                String(result).match(
+                    /email: overrides && overrides.hasOwnProperty\('email'\) \? overrides.email! : 'my@email.com'/g,
+                ).length,
+            ).toEqual(2);
+            expect(result).toMatchSnapshot();
+        });
+
         it('can accept arguments', async () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    dateTime: {
-                        generator: 'date.recent',
-                        arguments: [10],
+                    A: {
+                        dateTime: {
+                            generator: 'date.recent',
+                            arguments: [10],
+                        },
                     },
                 },
             });
@@ -205,11 +259,13 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    dateTime: {
-                        generator: 'date.recent',
-                        arguments: [10],
-                        extra: {
-                            function: 'toLocaleDateString',
+                    A: {
+                        dateTime: {
+                            generator: 'date.recent',
+                            arguments: [10],
+                            extra: {
+                                function: 'toLocaleDateString',
+                            },
                         },
                     },
                 },
@@ -217,7 +273,7 @@ describe('per field generation', () => {
             expect(result).toBeDefined();
 
             expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '1/1/2022'",
+                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '01/01/2022'",
             );
 
             expect(result).toMatchSnapshot();
@@ -227,12 +283,14 @@ describe('per field generation', () => {
             const result = await plugin(testSchema, [], {
                 ...config,
                 fieldGeneration: {
-                    dateTime: {
-                        generator: 'date.recent',
-                        arguments: [10],
-                        extra: {
-                            function: 'toLocaleDateString',
-                            args: ['en-GB'],
+                    A: {
+                        dateTime: {
+                            generator: 'date.recent',
+                            arguments: [10],
+                            extra: {
+                                function: 'toLocaleDateString',
+                                args: ['en-GB'],
+                            },
                         },
                     },
                 },

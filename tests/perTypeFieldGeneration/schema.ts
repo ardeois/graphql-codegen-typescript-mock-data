@@ -12,4 +12,13 @@ export default buildSchema(/* GraphQL */ `
         overriddenDate: Date!
         dateTime: DateTime!
     }
+
+    type B {
+        id: ID!
+        str: String!
+        email: String!
+        date: Date!
+        overriddenDate: Date!
+        dateTime: DateTime!
+    }
 `);
