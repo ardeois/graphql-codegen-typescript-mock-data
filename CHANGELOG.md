@@ -1,3 +1,15 @@
+# v2.7.1 (Mon Jan 09 2023)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump json5 from 1.0.1 to 1.0.2 [#107](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/107) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v2.7.0 (Wed Dec 07 2022)
 
 #### 🚀 Enhancement
