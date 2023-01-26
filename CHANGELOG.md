@@ -1,3 +1,15 @@
+# v3.1.1 (Thu Jan 26 2023)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump ua-parser-js from 0.7.32 to 0.7.33 [#108](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/108) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v3.1.0 (Thu Jan 26 2023)
 
 #### 🚀 Enhancement
