@@ -71,9 +71,7 @@ it('should generate dynamic custom scalars for native and custom types using cas
     expect(result).toBeDefined();
 
     // String
-    expect(result).toContain(
-        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['string'],",
-    );
+    expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['string'],");
 
     // Float
     expect(result).toContain(
@@ -81,13 +79,17 @@ it('should generate dynamic custom scalars for native and custom types using cas
     );
 
     // ID
-    expect(result).toContain("id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual['integer'](...[1,100]),");
+    expect(result).toContain(
+        "id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual['integer'](...[1,100]),",
+    );
 
     // Boolean
     expect(result).toContain("bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false");
 
     // Int
-    expect(result).toContain("int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : casual['integer'](...[-100,0]),");
+    expect(result).toContain(
+        "int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : casual['integer'](...[-100,0]),",
+    );
 
     expect(result).toMatchSnapshot();
 });
@@ -99,16 +101,16 @@ it('should generate custom scalars for native and custom types using faker', asy
             String: 'lorem.sentence',
             Float: {
                 generator: 'datatype.float',
-                arguments: [{ min: -100, max: 0}],
+                arguments: [{ min: -100, max: 0 }],
             },
             ID: {
                 generator: 'datatype.number',
-                arguments: [{ min: 1, max: 100}],
+                arguments: [{ min: 1, max: 100 }],
             },
             Boolean: 'false',
             Int: {
                 generator: 'datatype.number',
-                arguments: [{ min: -100, max: 0}],
+                arguments: [{ min: -100, max: 0 }],
             },
             AnyObject: 'internet.email',
         },
@@ -122,9 +124,7 @@ it('should generate custom scalars for native and custom types using faker', asy
     );
 
     // Float
-    expect(result).toContain(
-        "flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.51,",
-    );
+    expect(result).toContain("flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.51,");
 
     // ID
     expect(result).toContain("id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 83,");
@@ -146,16 +146,16 @@ it('should generate dynamic custom scalars for native and custom types using fak
             String: 'lorem.sentence',
             Float: {
                 generator: 'datatype.float',
-                arguments: [{ min: -100, max: 0}],
+                arguments: [{ min: -100, max: 0 }],
             },
             ID: {
                 generator: 'datatype.number',
-                arguments: [{ min: 1, max: 100}],
+                arguments: [{ min: 1, max: 100 }],
             },
             Boolean: 'false',
             Int: {
                 generator: 'datatype.number',
-                arguments: [{ min: -100, max: 0}],
+                arguments: [{ min: -100, max: 0 }],
             },
             AnyObject: 'internet.email',
         },
@@ -165,7 +165,7 @@ it('should generate dynamic custom scalars for native and custom types using fak
 
     // String
     expect(result).toContain(
-        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](...[]),",
+        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),",
     );
 
     // Float
@@ -174,13 +174,17 @@ it('should generate dynamic custom scalars for native and custom types using fak
     );
 
     // ID
-    expect(result).toContain("id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\"min\":1,\"max\":100}]),");
+    expect(result).toContain(
+        "id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\"min\":1,\"max\":100}]),",
+    );
 
     // Boolean
     expect(result).toContain("bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false");
 
     // Int
-    expect(result).toContain("int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['datatype']['number'](...[{\"min\":-100,\"max\":0}]),");
+    expect(result).toContain(
+        "int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['datatype']['number'](...[{\"min\":-100,\"max\":0}]),",
+    );
 
     expect(result).toMatchSnapshot();
 });
