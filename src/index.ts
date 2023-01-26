@@ -413,6 +413,10 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
+    if ('typenames' in config) {
+        throw new Error('Config `typenames` was renamed to `typeNames`. Please update your config');
+    }
+
     const enumValuesConvention = config.enumValues || 'change-case-all#pascalCase';
     const typeNamesConvention = config.typeNames || 'change-case-all#pascalCase';
     const transformUnderscore = config.transformUnderscore ?? true;
