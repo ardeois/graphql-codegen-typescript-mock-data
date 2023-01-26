@@ -48,13 +48,22 @@ keep all GraphQL names as-is. Available case functions in `change-case-all` are 
 `localeLowerCase`, `lowerCaseFirst`, `spongeCase`, `titleCase`, `upperCase`, `localeUpperCase` and `upperCaseFirst`
 [See more](https://github.com/btxtiger/change-case-all)
 
-### scalars (`{ [Scalar: string]: ScalarDefinition }`, defaultValue: `undefined`)
+### scalars (`{ [Scalar: string]: GeneratorOptions }`, defaultValue: `undefined`)
 
 Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
 [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
 function key) with optional arguments, or a or [faker](https://fakerjs.dev/api/) generator with optional arguments
 
+For detailed configuration options, see [GeneratorOptions](#generatoroptions-type) documentation.
+
 Examples using **casual**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date # gets translated to casual.date()
+```
 
 **With arguments**
 
@@ -67,29 +76,14 @@ plugins:
           arguments: 'YYYY-MM-DD'
 ```
 
-**With multiple arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        PaginatedAmount: # gets translated to casual.integer(-100, 100)
-          generator: integer
-          arguments:
-            - -100
-            - 100
-```
-
-**Shorthand if you don't have arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        Date: date # gets translated to casual.date()
-```
-
 Examples using **faker**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date.past # gets translated to faker.date.past()
+```
 
 **With arguments**
 
@@ -100,28 +94,6 @@ plugins:
         Date: # gets translated to faker.date.past(10)
           generator: date.past
           arguments: 10
-```
-
-**With multiple arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        Description: # gets translated to faker.lorem.paragraphs(3, '\n')
-          generator: lorem.paragraphs
-          arguments:
-            - 3
-            - '\n'
-```
-
-**Shorthand if you don't have arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        Date: date.past # gets translated to faker.date.past()
 ```
 
 **Custom value generator**
@@ -213,10 +185,122 @@ plugins:
 
 In the above example all resolvers with the name `email` will use the `internet.email` generator. However since we specified a specific email for `AdminUser` that will take precedence over the `_all` generated value.
 
+For detailed configuration options, see [GeneratorOptions](#generatoroptions-type) documentation.
+
 ### generateLibrary (`'casual' | 'faker'`, defaultValue: `'casual'`)
 
 Select a library to generate mock values. The default is [casual](https://github.com/boo1ean/casual), Other options include [faker](https://github.com/faker-js/faker).
 casual dependents on Node API and cannot be executed in a browser. faker is useful when you want to use a mock function with the dynamicValues option enabled in the browser.
+
+### `GeneratorOptions` type
+
+This type is used in `scalars` and `fieldGeneration` options.
+
+Examples using **casual**
+
+**Shorthand if you don't have arguments**
+
+```yaml
+fieldName: date # gets translated to casual.date()
+```
+
+**With arguments**
+
+```yaml
+fieldName: # gets translated to casual.date('YYYY-MM-DD')
+  generator: date
+  arguments: 'YYYY-MM-DD'
+```
+
+**With multiple arguments**
+
+```yaml
+fieldName: # gets translated to casual.integer(-100, 100)
+  generator: integer
+  arguments:
+    - -100
+    - 100
+```
+
+**With extra function call**
+
+```yaml
+fieldName: # gets translated to casual.integer.toFixed()
+  generator: integer
+  extra:
+    function: toFixed
+```
+
+**With extra function call arguments**
+
+```yaml
+fieldName: # gets translated to casual.integer.toFixed(3)
+  generator: integer
+  extra:
+    function: toFixed
+    arguments: 3
+```
+
+Examples using **faker**
+
+**With arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: # gets translated to faker.date.past(10)
+          generator: date.past
+          arguments: 10
+```
+
+**With multiple arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Description: # gets translated to faker.lorem.paragraphs(3, '\n')
+          generator: lorem.paragraphs
+          arguments:
+            - 3
+            - '\n'
+```
+
+**Shorthand if you don't have arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date.past # gets translated to faker.date.past()
+```
+
+**With extra function call**
+
+```yaml
+fieldName: # gets translated to casual.date().toLocaleDateString()
+  generator: date
+  extra:
+    function: toLocaleDateString
+```
+
+**With extra function call arguments**
+
+```yaml
+fieldName: # gets translated to casual.date().toLocaleDateString('en_GB)
+  generator: date
+  extra:
+    function: toLocaleDateString
+    arguments: 'en_GB'
+```
+
+**Custom value generator**
+
+```yaml
+# gets translated as is
+fieldName: arrayBufferGenerator()
+```
 
 ## Examples of usage
 

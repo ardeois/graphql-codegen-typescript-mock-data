@@ -91,12 +91,32 @@ const getCasualCustomValue = (generatorDefinition: GeneratorDefinition, opts: Op
     const generatorArgs: unknown[] = Array.isArray(generatorDefinition.arguments)
         ? generatorDefinition.arguments
         : [generatorDefinition.arguments];
-    if (opts.dynamicValues) {
-        return `casual['${generatorDefinition.generator}']${
-            typeof embeddedGenerator === 'function' ? `(...${JSON.stringify(generatorArgs)})` : ''
-        }`;
+
+    let extraArguments = [];
+    const hasExtra = generatorDefinition.extra;
+    if (hasExtra && generatorDefinition.extra.arguments) {
+        extraArguments = Array.isArray(generatorDefinition.extra.arguments)
+            ? generatorDefinition.extra.arguments
+            : [generatorDefinition.extra.arguments];
     }
-    const value = typeof embeddedGenerator === 'function' ? embeddedGenerator(...generatorArgs) : embeddedGenerator;
+
+    if (opts.dynamicValues) {
+        const extraCall: string = generatorDefinition.extra
+            ? extraArguments.length
+                ? `.${generatorDefinition.extra.function}(...${JSON.stringify(extraArguments)})`
+                : `.${generatorDefinition.extra.function}()`
+            : '';
+
+        let functionCall = '';
+        if (typeof embeddedGenerator === 'function') {
+            functionCall = generatorArgs.length ? `(...${JSON.stringify(generatorArgs)})` : '()';
+        }
+        return `casual['${generatorDefinition.generator}']${functionCall}${extraCall}`;
+    }
+    let value = typeof embeddedGenerator === 'function' ? embeddedGenerator(...generatorArgs) : embeddedGenerator;
+    if (hasExtra) {
+        value = value[generatorDefinition.extra.function](...(extraArguments ? extraArguments : []));
+    }
 
     if (typeof value === 'string') {
         return `'${value}'`;
@@ -140,10 +160,18 @@ const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Opt
         ? generatorDefinition.arguments
         : [generatorDefinition.arguments];
 
+    let extraArguments = [];
+    const hasExtra = generatorDefinition.extra;
+    if (hasExtra && generatorDefinition.extra.arguments) {
+        extraArguments = Array.isArray(generatorDefinition.extra.arguments)
+            ? generatorDefinition.extra.arguments
+            : [generatorDefinition.extra.arguments];
+    }
+
     if (opts.dynamicValues) {
-        const extraCall: string = generatorDefinition.extra
-            ? generatorDefinition.extra.args?.length
-                ? `.${generatorDefinition.extra.function}(...${JSON.stringify(generatorDefinition.extra.args)})`
+        const extraCall: string = hasExtra
+            ? extraArguments.length
+                ? `.${generatorDefinition.extra.function}(...${JSON.stringify(extraArguments)})`
                 : `.${generatorDefinition.extra.function}()`
             : '';
 
@@ -151,9 +179,9 @@ const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Opt
             generatorArgs.length ? `(...${JSON.stringify(generatorArgs)})${extraCall}` : `()${extraCall}`
         }`;
     }
-    const value = generatorDefinition.extra
+    const value = hasExtra
         ? embeddedGenerator(...generatorArgs)[generatorDefinition.extra.function](
-              ...(generatorDefinition.extra.args ? generatorDefinition.extra.args : []),
+              ...(extraArguments ? extraArguments : []),
           )
         : embeddedGenerator(...generatorArgs);
 
@@ -395,7 +423,7 @@ type GeneratorDefinition = {
     arguments: unknown;
     extra?: {
         function: string;
-        args?: unknown[];
+        arguments?: unknown[] | unknown;
     };
 };
 type GeneratorOptions = GeneratorName | GeneratorDefinition;
