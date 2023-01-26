@@ -1,3 +1,16 @@
+# v3.0.0 (Thu Jan 26 2023)
+
+#### 💥 Breaking Change
+
+- Rename `typenames` to `typeNames` [#105](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/105) ([@emab](https://github.com/emab) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Eddy Brown ([@emab](https://github.com/emab))
+
+---
+
 # v2.7.1 (Mon Jan 09 2023)
 
 #### 🐛 Bug Fix
