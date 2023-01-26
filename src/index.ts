@@ -300,7 +300,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                 }
             }
             if (opts.terminateCircularRelationships) {
-                return `relationshipsToOmit.includes('${casedName}') ? {} as ${casedName} : ${toMockName(
+                return `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
                     name,
                     casedName,
                     opts.prefix,
@@ -361,8 +361,9 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${casedNameWithPrefix}>, _relationshipsToOmit: Array<string> = []): ${typenameReturnType}${casedNameWithPrefix} => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, '${casedName}']);
+        )} = (overrides?: Partial<${casedNameWithPrefix}>, _relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${casedNameWithPrefix} => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('${casedName}');
     return {${typename}
 ${fields}
     };
