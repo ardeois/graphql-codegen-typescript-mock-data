@@ -40,7 +40,7 @@ keep all GraphQL names as-is. Available case functions in `change-case-all` are 
 `localeLowerCase`, `lowerCaseFirst`, `spongeCase`, `titleCase`, `upperCase`, `localeUpperCase` and `upperCaseFirst`
 [See more](https://github.com/btxtiger/change-case-all)
 
-### typenames (`string`, defaultValue: `change-case-all#pascalCase`)
+### typeNames (`string`, defaultValue: `change-case-all#pascalCase`)
 
 Changes the case of types. The format of the converter must be a valid `module#method`. You can also use `keep` to
 keep all GraphQL names as-is. Available case functions in `change-case-all` are `camelCase`, `capitalCase`, `constantCase`,

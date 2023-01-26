@@ -12,7 +12,7 @@ type Options<T = TypeNode> = {
     typeName: string;
     fieldName: string;
     types: TypeItem[];
-    typenamesConvention: NamingConvention;
+    typeNamesConvention: NamingConvention;
     enumValuesConvention: NamingConvention;
     terminateCircularRelationships: boolean;
     prefix: string | undefined;
@@ -212,7 +212,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     });
     if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
-    const casedName = createNameConverter(opts.typenamesConvention, opts.transformUnderscore)(name);
+    const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String': {
             const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['String']) : null;
@@ -241,7 +241,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                     case 'enum': {
                         // It's an enum
                         const typenameConverter = createNameConverter(
-                            opts.typenamesConvention,
+                            opts.typeNamesConvention,
                             opts.transformUnderscore,
                         );
                         const enumConverter = createNameConverter(opts.enumValuesConvention, opts.transformUnderscore);
@@ -314,16 +314,16 @@ const generateMockValue = (opts: Options): string | number | boolean => {
 const getMockString = (
     typeName: string,
     fields: string,
-    typenamesConvention: NamingConvention,
+    typeNamesConvention: NamingConvention,
     terminateCircularRelationships: boolean,
     addTypename = false,
     prefix,
     typesPrefix = '',
     transformUnderscore: boolean,
 ) => {
-    const typenameConverter = createNameConverter(typenamesConvention, transformUnderscore);
-    const casedName = typenameConverter(typeName);
-    const casedNameWithPrefix = typenameConverter(typeName, typesPrefix);
+    const typeNameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
+    const casedName = typeNameConverter(typeName);
+    const casedNameWithPrefix = typeNameConverter(typeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${typeName}',` : '';
     const typenameReturnType = addTypename ? `{ __typename: '${typeName}' } & ` : '';
 
@@ -354,7 +354,7 @@ ${fields}
 };
 
 const getImportTypes = ({
-    typenamesConvention,
+    typeNamesConvention,
     definitions,
     types,
     typesFile,
@@ -362,7 +362,7 @@ const getImportTypes = ({
     enumsPrefix,
     transformUnderscore,
 }: {
-    typenamesConvention: NamingConvention;
+    typeNamesConvention: NamingConvention;
     definitions: any;
     types: TypeItem[];
     typesFile: string;
@@ -370,7 +370,7 @@ const getImportTypes = ({
     enumsPrefix: string;
     transformUnderscore: boolean;
 }) => {
-    const typenameConverter = createNameConverter(typenamesConvention, transformUnderscore);
+    const typenameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
     const typeImports = typesPrefix?.endsWith('.')
         ? [typesPrefix.slice(0, -1)]
         : definitions
@@ -413,7 +413,7 @@ type TypeFieldMap = {
 export interface TypescriptMocksPluginConfig {
     typesFile?: string;
     enumValues?: NamingConvention;
-    typenames?: NamingConvention;
+    typeNames?: NamingConvention;
     addTypename?: boolean;
     prefix?: string;
     scalars?: ScalarMap;
@@ -461,8 +461,12 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const printedSchema = printSchema(schema); // Returns a string representation of the schema
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
+    if ('typenames' in config) {
+        throw new Error('Config `typenames` was renamed to `typeNames`. Please update your config');
+    }
+
     const enumValuesConvention = config.enumValues || 'change-case-all#pascalCase';
-    const typenamesConvention = config.typenames || 'change-case-all#pascalCase';
+    const typeNamesConvention = config.typeNames || 'change-case-all#pascalCase';
     const transformUnderscore = config.transformUnderscore ?? true;
     const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
     const dynamicValues = !!config.dynamicValues;
@@ -505,7 +509,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         typeName,
                         fieldName,
                         types,
-                        typenamesConvention,
+                        typeNamesConvention,
                         enumValuesConvention,
                         terminateCircularRelationships: !!config.terminateCircularRelationships,
                         prefix: config.prefix,
@@ -537,7 +541,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       typeName: fieldName,
                                       fieldName: field.name.value,
                                       types,
-                                      typenamesConvention,
+                                      typeNamesConvention,
                                       enumValuesConvention,
                                       terminateCircularRelationships: !!config.terminateCircularRelationships,
                                       prefix: config.prefix,
@@ -560,7 +564,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     return getMockString(
                         fieldName,
                         mockFields,
-                        typenamesConvention,
+                        typeNamesConvention,
                         !!config.terminateCircularRelationships,
                         false,
                         config.prefix,
@@ -583,7 +587,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     return getMockString(
                         typeName,
                         mockFields,
-                        typenamesConvention,
+                        typeNamesConvention,
                         !!config.terminateCircularRelationships,
                         !!config.addTypename,
                         config.prefix,
@@ -604,7 +608,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     return getMockString(
                         typeName,
                         mockFields,
-                        typenamesConvention,
+                        typeNamesConvention,
                         !!config.terminateCircularRelationships,
                         !!config.addTypename,
                         config.prefix,
@@ -630,7 +634,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
 
     const typesFileImport = getImportTypes({
-        typenamesConvention,
+        typeNamesConvention,
         definitions,
         types,
         typesFile,
