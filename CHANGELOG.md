@@ -1,3 +1,16 @@
+# v3.2.0 (Fri Jan 27 2023)
+
+#### 🚀 Enhancement
+
+- fix: Change the relationshipsToOmit data structure from Array to Set [#109](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/109) (jonghak.seo@creatrip.com [@Jonghakseo](https://github.com/Jonghakseo))
+
+#### Authors: 2
+
+- JongHak Seo ([@Jonghakseo](https://github.com/Jonghakseo))
+- Jonghak Seo (jonghak.seo@creatrip.com)
+
+---
+
 # v3.1.1 (Thu Jan 26 2023)
 
 #### 🐛 Bug Fix
