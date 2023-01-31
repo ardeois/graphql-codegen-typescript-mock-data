@@ -4,6 +4,11 @@ export default buildSchema(/* GraphQL */ `
     scalar Date
     scalar DateTime
 
+    enum EnumExample {
+        LOREM
+        IPSUM
+    }
+
     type A {
         id: ID!
         str: String!
@@ -20,5 +25,11 @@ export default buildSchema(/* GraphQL */ `
         date: Date!
         overriddenDate: Date!
         dateTime: DateTime!
+    }
+
+    type C {
+        id: ID!
+        str: String!
+        enum: EnumExample!
     }
 `);
