@@ -279,7 +279,6 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                             undefined,
                             () => `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`,
                         );
-                        // return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`;
                     }
                     case 'union':
                         // Return the first union type node.
