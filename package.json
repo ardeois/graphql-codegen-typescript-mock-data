@@ -1,6 +1,6 @@
 {
     "name": "graphql-codegen-typescript-mock-data",
-    "version": "3.2.0",
+    "version": "3.2.1",
     "description": "GraphQL Codegen plugin for building mock data",
     "main": "dist/commonjs/index.js",
     "module": "dist/esnext/index.js",
