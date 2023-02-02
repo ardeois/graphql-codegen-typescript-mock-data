@@ -274,7 +274,11 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         );
                         const enumConverter = createNameConverter(opts.enumValuesConvention, opts.transformUnderscore);
                         const value = foundType.values ? foundType.values[0] : '';
-                        return `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`;
+                        return handleValueGeneration(
+                            opts,
+                            undefined,
+                            () => `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`,
+                        );
                     }
                     case 'union':
                         // Return the first union type node.
