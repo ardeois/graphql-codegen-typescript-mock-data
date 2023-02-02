@@ -147,7 +147,7 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 ### transformUnderscore (`boolean`, defaultValue: `true`)
 
-When disabled, underscores will be retained for type names when the case is changed. It has no effect if `typenames` is set to `keep`.
+When disabled, underscores will be retained for type names when the case is changed. It has no effect if `typeNames` is set to `keep`.
 
 ### dynamicValues (`boolean`, defaultValue: `false`)
 
@@ -318,7 +318,7 @@ generates:
       - typescript-mock-data:
           typesFile: '../generated-types.ts'
           enumValues: upper-case#upperCase
-          typenames: keep
+          typeNames: keep
           scalars:
             AWSTimestamp: unix_time # gets translated to casual.unix_time
 ```
@@ -341,7 +341,7 @@ generates:
       - typescript-mock-data:
           typesFile: '../generated-types.ts'
           enumValues: upper-case#upperCase
-          typenames: keep
+          typeNames: keep
           scalars:
             AWSTimestamp: unix_time # gets translated to casual.unix_time
 ```

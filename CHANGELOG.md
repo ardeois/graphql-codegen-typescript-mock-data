@@ -1,3 +1,15 @@
+# v3.2.1 (Wed Feb 01 2023)
+
+#### 🐛 Bug Fix
+
+- Updated readme to reflect the renaming of typenames to typeNames [#112](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/112) ([@lkloeppel](https://github.com/lkloeppel))
+
+#### Authors: 1
+
+- Lukas Kloeppel ([@lkloeppel](https://github.com/lkloeppel))
+
+---
+
 # v3.2.0 (Fri Jan 27 2023)
 
 #### 🚀 Enhancement
