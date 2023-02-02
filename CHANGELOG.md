@@ -1,3 +1,16 @@
+# v3.2.2 (Thu Feb 02 2023)
+
+#### 🐛 Bug Fix
+
+- Allow custom field generation for Enum types [#111](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/111) ([@emab](https://github.com/emab) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Eddy Brown ([@emab](https://github.com/emab))
+
+---
+
 # v3.2.1 (Wed Feb 01 2023)
 
 #### 🐛 Bug Fix
