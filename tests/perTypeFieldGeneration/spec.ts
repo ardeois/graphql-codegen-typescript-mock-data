@@ -99,6 +99,23 @@ describe('per type field generation with faker', () => {
             expect(result).toMatchSnapshot();
         });
 
+        it('can overwrite an enum value when enumsAsTypes is true', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    C: { enum: { generator: 'helpers.arrayElement', arguments: [['active', 'disabled']] } },
+                },
+                enumsAsTypes: true,
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain(
+                `enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : faker['helpers']['arrayElement'](...[["active","disabled"]]),`,
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+
         it('can apply generator override to all fields of a specific name', async () => {
             const result = await plugin(testSchema, [], {
                 ...config,
@@ -275,6 +292,23 @@ describe('per type field generation with faker', () => {
             expect(result).toMatchSnapshot();
         });
 
+        it('can overwrite an enum value when enumsAsTypes is true', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    C: { enum: 'internet.email' },
+                },
+                enumsAsTypes: true,
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain(
+                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'my@email.com'",
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+
         it('can apply generator override to all fields of a specific name', async () => {
             const result = await plugin(testSchema, [], {
                 ...config,
@@ -430,6 +464,23 @@ describe('per type field generation with casual', () => {
                 fieldGeneration: {
                     C: { enum: 'email' },
                 },
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain(
+                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : casual['email'],",
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+
+        it('can overwrite an enum value when enumsAsTypes is true', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    C: { enum: 'email' },
+                },
+                enumsAsTypes: true,
             });
             expect(result).toBeDefined();
 
@@ -606,6 +657,23 @@ describe('per type field generation with casual', () => {
                 fieldGeneration: {
                     C: { enum: 'email' },
                 },
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain(
+                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'Roosevelt.Oberbrunner@gmail.com'",
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+
+        it('can overwrite an enum value when enumsAsTypes is true', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    C: { enum: 'email' },
+                },
+                enumsAsTypes: true,
             });
             expect(result).toBeDefined();
 

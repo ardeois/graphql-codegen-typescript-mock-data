@@ -31,6 +31,22 @@ describe('enumValues config', () => {
             expect(result).toContain('ScreamingSnakeCaseEnum.SCREAMING_SNAKE_CASE');
             expect(result).toMatchSnapshot();
         });
+
+        it(`should have no effect if 'transformUnderscore' is false and 'enumsAsTypes' is true`, async () => {
+            const result = await plugin(enumSchema, [], {
+                enumValues: 'keep',
+                transformUnderscore: false,
+                enumsAsTypes: true,
+            });
+
+            expect(result).toBeDefined();
+            expect(result).toContain('_id');
+            expect(result).toContain('PascalCase');
+            expect(result).toContain('camelCase');
+            expect(result).toContain('snake_case');
+            expect(result).toContain('SCREAMING_SNAKE_CASE');
+            expect(result).toMatchSnapshot();
+        });
     });
 
     describe(`having default value`, () => {
@@ -57,6 +73,21 @@ describe('enumValues config', () => {
             expect(result).toContain('CamelCaseEnum.CamelCase');
             expect(result).toContain('SnakeCaseEnum.Snake_Case');
             expect(result).toContain('ScreamingSnakeCaseEnum.Screaming_Snake_Case');
+            expect(result).toMatchSnapshot();
+        });
+
+        it(`should keep underscores if 'transformUnderscore' is false and 'enumsAsTypes' is true`, async () => {
+            const result = await plugin(enumSchema, [], {
+                transformUnderscore: false,
+                enumsAsTypes: true,
+            });
+
+            expect(result).toBeDefined();
+            expect(result).toContain('_Id');
+            expect(result).toContain('PascalCase');
+            expect(result).toContain('CamelCase');
+            expect(result).toContain('Snake_Case');
+            expect(result).toContain('Screaming_Snake_Case');
             expect(result).toMatchSnapshot();
         });
     });
@@ -90,6 +121,22 @@ describe('enumValues config', () => {
             expect(result).toContain('ScreamingSnakeCaseEnum.Screaming_Snake_Case');
             expect(result).toMatchSnapshot();
         });
+
+        it(`should keep underscores if 'transformUnderscore' is false and 'enumsAsTypes' is true`, async () => {
+            const result = await plugin(enumSchema, [], {
+                enumValues: 'change-case-all#pascalCase',
+                transformUnderscore: false,
+                enumsAsTypes: true,
+            });
+
+            expect(result).toBeDefined();
+            expect(result).toContain('_Id');
+            expect(result).toContain('PascalCase');
+            expect(result).toContain('CamelCase');
+            expect(result).toContain('Snake_Case');
+            expect(result).toContain('Screaming_Snake_Case');
+            expect(result).toMatchSnapshot();
+        });
     });
 
     describe(`having 'change-case-all#upperCase' value`, () => {
@@ -120,6 +167,23 @@ describe('enumValues config', () => {
             expect(result).toContain('CamelCaseEnum.CAMELCASE');
             expect(result).toContain('SnakeCaseEnum.SNAKE_CASE');
             expect(result).toContain('ScreamingSnakeCaseEnum.SCREAMING_SNAKE_CASE');
+            expect(result).toMatchSnapshot();
+        });
+
+        it(`should keep underscores if 'transformUnderscore' is false and 'enumsAsTypes' is true`, async () => {
+            const result = await plugin(enumSchema, [], {
+                enumValues: 'change-case-all#upperCase',
+                transformUnderscore: false,
+                enumsAsTypes: true,
+            });
+
+            expect(result).toBeDefined();
+            expect(result).toBeDefined();
+            expect(result).toContain('_ID');
+            expect(result).toContain('PASCALCASE');
+            expect(result).toContain('CAMELCASE');
+            expect(result).toContain('SNAKE_CASE');
+            expect(result).toContain('SCREAMING_SNAKE_CASE');
             expect(result).toMatchSnapshot();
         });
     });

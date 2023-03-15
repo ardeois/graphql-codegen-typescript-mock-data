@@ -25,6 +25,7 @@ type Options<T = TypeNode> = {
     dynamicValues: boolean;
     generateLibrary: 'casual' | 'faker';
     fieldGeneration?: TypeFieldMap;
+    enumsAsTypes?: boolean;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -274,10 +275,10 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         );
                         const enumConverter = createNameConverter(opts.enumValuesConvention, opts.transformUnderscore);
                         const value = foundType.values ? foundType.values[0] : '';
-                        return handleValueGeneration(
-                            opts,
-                            undefined,
-                            () => `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`,
+                        return handleValueGeneration(opts, undefined, () =>
+                            opts.enumsAsTypes
+                                ? `'${enumConverter(value)}'`
+                                : `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`,
                         );
                     }
                     case 'union':
@@ -394,6 +395,7 @@ const getImportTypes = ({
     typesPrefix,
     enumsPrefix,
     transformUnderscore,
+    enumsAsTypes,
 }: {
     typeNamesConvention: NamingConvention;
     definitions: any;
@@ -402,6 +404,7 @@ const getImportTypes = ({
     typesPrefix: string;
     enumsPrefix: string;
     transformUnderscore: boolean;
+    enumsAsTypes: boolean;
 }) => {
     const typenameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
     const typeImports = typesPrefix?.endsWith('.')
@@ -413,7 +416,9 @@ const getImportTypes = ({
         ? [enumsPrefix.slice(0, -1)]
         : types.filter(({ type }) => type === 'enum').map(({ name }) => typenameConverter(name, enumsPrefix));
 
-    typeImports.push(...enumTypes);
+    if (!enumsAsTypes) {
+        typeImports.push(...enumTypes);
+    }
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -459,6 +464,7 @@ export interface TypescriptMocksPluginConfig {
     generateLibrary?: 'casual' | 'faker';
     fieldGeneration?: TypeFieldMap;
     locale?: string;
+    enumsAsTypes?: boolean;
 }
 
 interface TypeItem {
@@ -504,6 +510,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const listElementCount = config.listElementCount > 0 ? config.listElementCount : 1;
     const dynamicValues = !!config.dynamicValues;
     const generateLibrary = config.generateLibrary || 'casual';
+    const enumsAsTypes = config.enumsAsTypes ?? false;
 
     if (generateLibrary === 'faker' && config.locale) {
         faker.setLocale(config.locale);
@@ -555,6 +562,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         dynamicValues,
                         generateLibrary,
                         fieldGeneration: config.fieldGeneration,
+                        enumsAsTypes,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -587,6 +595,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       dynamicValues,
                                       generateLibrary,
                                       fieldGeneration: config.fieldGeneration,
+                                      enumsAsTypes,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
@@ -674,6 +683,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         typesPrefix: config.typesPrefix,
         enumsPrefix: config.enumsPrefix,
         transformUnderscore: transformUnderscore,
+        enumsAsTypes,
     });
     // Function that will generate the mocks.
     // We generate it after having visited because we need to distinct types from enums
