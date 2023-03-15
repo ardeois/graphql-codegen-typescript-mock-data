@@ -18,6 +18,10 @@ Defines the file path containing all GraphQL types. This file can also be genera
 
 Adds `__typename` property to mock data
 
+### enumsAsTypes (`boolean`, defaultValue: `false`)
+
+Changes enums to TypeScript string union types
+
 ### terminateCircularRelationships (`boolean`, defaultValue: `false`)
 
 When enabled, prevents circular relationships from triggering infinite recursion. After the first resolution of a

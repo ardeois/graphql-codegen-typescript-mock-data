@@ -181,6 +181,32 @@ it('should generate mock data with as-is enum values if enumValues is "keep"', a
     expect(result).toMatchSnapshot();
 });
 
+it('should generate mock data with enum values as string union type if enumsAsTypes is true', async () => {
+    const result = await plugin(testSchema, [], { enumsAsTypes: true });
+
+    expect(result).toBeDefined();
+    expect(result).not.toContain('Status.Online');
+    expect(result).toContain('Online');
+    expect(result).not.toContain('ABCStatus.hasXYZStatus');
+    expect(result).toContain('HasXyzStatus');
+    expect(result).not.toContain('Prefixed_Enum.PREFIXED_VALUE');
+    expect(result).toContain('PrefixedValue');
+    expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data with as-is enum values as string union type if enumsAsTypes is true and enumValues is "keep"', async () => {
+    const result = await plugin(testSchema, [], { enumsAsTypes: true, enumValues: 'keep' });
+
+    expect(result).toBeDefined();
+    expect(result).not.toContain('Status.Online');
+    expect(result).toContain('ONLINE');
+    expect(result).not.toContain('ABCStatus.hasXYZStatus');
+    expect(result).toContain('hasXYZStatus');
+    expect(result).not.toContain('Prefixed_Enum.PREFIXED_VALUE');
+    expect(result).toContain('PREFIXED_VALUE');
+    expect(result).toMatchSnapshot();
+});
+
 it('should generate mock data with PascalCase types and enums by default', async () => {
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
@@ -406,6 +432,26 @@ it('should preserve underscores if transformUnderscore is false', async () => {
     );
     expect(result).toContain(
         "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.Prefixed_Value,",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should preserve underscores if transformUnderscore is false and enumsAsTypes is true', async () => {
+    const result = await plugin(testSchema, [], {
+        transformUnderscore: false,
+        typesFile: './types/graphql.ts',
+        enumsAsTypes: true,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query } from './types/graphql';",
+    );
+    expect(result).toContain(
+        'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
+    );
+    expect(result).toContain(
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'Prefixed_Value',",
     );
     expect(result).toMatchSnapshot();
 });
