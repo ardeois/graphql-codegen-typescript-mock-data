@@ -1,3 +1,15 @@
+# v3.3.0 (Thu Mar 16 2023)
+
+#### 🚀 Enhancement
+
+- fix: enum values update [#120](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/120) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v3.2.2 (Thu Feb 02 2023)
 
 #### 🐛 Bug Fix
