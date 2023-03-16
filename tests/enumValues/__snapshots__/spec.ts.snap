@@ -1,14 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`enumValues config having 'change-case-all#pascalCase' value should keep underscores if 'transformUnderscore' is false 1`] = `
+exports[`enumValues config having 'change-case-all#pascalCase' value should keep underscores for type name only if 'transformUnderscore' is false 1`] = `
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {
     return {
-        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : UnderscoreEnum._Id,
+        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : UnderscoreEnum.Id,
         pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : PascalCaseEnum.PascalCase,
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.CamelCase,
-        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.Snake_Case,
-        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.Screaming_Snake_Case,
+        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.SnakeCase,
+        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.ScreamingSnakeCase,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCase_WithUnderscore.OtherSnakeCase,
     };
 };
 "
@@ -18,11 +19,12 @@ exports[`enumValues config having 'change-case-all#pascalCase' value should keep
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {
     return {
-        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : '_Id',
+        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : '_id',
         pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : 'PascalCase',
-        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'CamelCase',
-        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'Snake_Case',
-        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : 'Screaming_Snake_Case',
+        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'camelCase',
+        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'snake_case',
+        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : 'SCREAMING_SNAKE_CASE',
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : 'other_snake_case',
     };
 };
 "
@@ -37,6 +39,7 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.CamelCase,
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.SnakeCase,
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.ScreamingSnakeCase,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCaseWithUnderscore.OtherSnakeCase,
     };
 };
 "
@@ -51,6 +54,7 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.CAMELCASE,
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.SNAKE_CASE,
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.SCREAMING_SNAKE_CASE,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCase_WithUnderscore.OTHER_SNAKE_CASE,
     };
 };
 "
@@ -60,11 +64,12 @@ exports[`enumValues config having 'change-case-all#upperCase' value should keep 
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {
     return {
-        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : '_ID',
-        pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : 'PASCALCASE',
-        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'CAMELCASE',
-        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'SNAKE_CASE',
+        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : '_id',
+        pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : 'PascalCase',
+        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'camelCase',
+        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'snake_case',
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : 'SCREAMING_SNAKE_CASE',
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : 'other_snake_case',
     };
 };
 "
@@ -79,12 +84,13 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.CAMELCASE,
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.SNAKE_CASE,
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.SCREAMING_SNAKE_CASE,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCaseWithUnderscore.OTHER_SNAKE_CASE,
     };
 };
 "
 `;
 
-exports[`enumValues config having 'keep' value should have no effect if 'transformUnderscore' is false 1`] = `
+exports[`enumValues config having 'keep' value should have effect on enum type only if 'transformUnderscore' is false 1`] = `
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {
     return {
@@ -93,6 +99,7 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.camelCase,
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.snake_case,
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.SCREAMING_SNAKE_CASE,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCase_WithUnderscore.other_snake_case,
     };
 };
 "
@@ -107,6 +114,7 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'camelCase',
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'snake_case',
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : 'SCREAMING_SNAKE_CASE',
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : 'other_snake_case',
     };
 };
 "
@@ -121,20 +129,22 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.camelCase,
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.snake_case,
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.SCREAMING_SNAKE_CASE,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCaseWithUnderscore.other_snake_case,
     };
 };
 "
 `;
 
-exports[`enumValues config having default value should keep underscores if 'transformUnderscore' is false 1`] = `
+exports[`enumValues config having default value should keep underscores for enum type only if 'transformUnderscore' is false 1`] = `
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {
     return {
-        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : UnderscoreEnum._Id,
+        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : UnderscoreEnum.Id,
         pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : PascalCaseEnum.PascalCase,
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.CamelCase,
-        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.Snake_Case,
-        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.Screaming_Snake_Case,
+        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.SnakeCase,
+        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.ScreamingSnakeCase,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCase_WithUnderscore.OtherSnakeCase,
     };
 };
 "
@@ -144,11 +154,12 @@ exports[`enumValues config having default value should keep underscores if 'tran
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {
     return {
-        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : '_Id',
+        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : '_id',
         pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : 'PascalCase',
-        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'CamelCase',
-        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'Snake_Case',
-        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : 'Screaming_Snake_Case',
+        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : 'camelCase',
+        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : 'snake_case',
+        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : 'SCREAMING_SNAKE_CASE',
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : 'other_snake_case',
     };
 };
 "
@@ -163,6 +174,7 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
         camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : CamelCaseEnum.CamelCase,
         snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : SnakeCaseEnum.SnakeCase,
         screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ScreamingSnakeCaseEnum.ScreamingSnakeCase,
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : PascalCaseWithUnderscore.OtherSnakeCase,
     };
 };
 "

@@ -273,11 +273,11 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                             opts.typeNamesConvention,
                             opts.transformUnderscore,
                         );
-                        const enumConverter = createNameConverter(opts.enumValuesConvention, opts.transformUnderscore);
+                        const enumConverter = createNameConverter(opts.enumValuesConvention, !opts.enumsAsTypes);
                         const value = foundType.values ? foundType.values[0] : '';
                         return handleValueGeneration(opts, undefined, () =>
                             opts.enumsAsTypes
-                                ? `'${enumConverter(value)}'`
+                                ? `'${value}'`
                                 : `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`,
                         );
                     }

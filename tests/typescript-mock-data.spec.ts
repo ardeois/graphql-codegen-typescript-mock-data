@@ -186,11 +186,11 @@ it('should generate mock data with enum values as string union type if enumsAsTy
 
     expect(result).toBeDefined();
     expect(result).not.toContain('Status.Online');
-    expect(result).toContain('Online');
+    expect(result).toContain('ONLINE');
     expect(result).not.toContain('ABCStatus.hasXYZStatus');
-    expect(result).toContain('HasXyzStatus');
+    expect(result).toContain('hasXYZStatus');
     expect(result).not.toContain('Prefixed_Enum.PREFIXED_VALUE');
-    expect(result).toContain('PrefixedValue');
+    expect(result).toContain('PREFIXED_VALUE');
     expect(result).toMatchSnapshot();
 });
 
@@ -431,7 +431,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
     expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.Prefixed_Value,",
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,",
     );
     expect(result).toMatchSnapshot();
 });
@@ -451,7 +451,7 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
     expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'Prefixed_Value',",
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',",
     );
     expect(result).toMatchSnapshot();
 });
