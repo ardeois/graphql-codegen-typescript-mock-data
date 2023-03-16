@@ -1980,12 +1980,12 @@ export const aUser = (overrides?: Partial<User>): User => {
         creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'Online',
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'HasXyzStatus',
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'ONLINE',
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'hasXYZStatus',
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
         unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
-        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PrefixedValue',
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',
     };
 };
 
@@ -2702,7 +2702,7 @@ export const aUser = (overrides?: Partial<User>): User => {
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
         unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
-        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.Prefixed_Value,
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,
     };
 };
 
@@ -2776,12 +2776,12 @@ export const aUser = (overrides?: Partial<User>): User => {
         creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'Online',
-        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'HasXyzStatus',
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'ONLINE',
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'hasXYZStatus',
         scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
         unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
-        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'Prefixed_Value',
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',
     };
 };
 

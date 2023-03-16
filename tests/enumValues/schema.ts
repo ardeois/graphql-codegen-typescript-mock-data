@@ -21,11 +21,16 @@ export default buildSchema(/* GraphQL */ `
         SCREAMING_SNAKE_CASE
     }
 
+    enum PascalCase_WithUnderscore {
+        other_snake_case
+    }
+
     type MyType {
         underscoreEnum: UnderscoreEnum!
         pascalCaseEnum: PascalCaseEnum!
         camelCaseEnum: CamelCaseEnum!
         snakeCaseEnum: SnakeCaseEnum!
         screamingSnakeCaseEnum: ScreamingSnakeCaseEnum!
+        pascalCase_withUnderscore: PascalCase_WithUnderscore!
     }
 `);
