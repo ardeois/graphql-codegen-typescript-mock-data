@@ -35,6 +35,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
@@ -71,6 +77,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -113,6 +125,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
@@ -149,6 +167,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -191,6 +215,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
@@ -227,6 +257,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -269,6 +305,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
@@ -305,6 +347,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : casual['email'],
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -347,6 +395,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
@@ -380,6 +434,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -416,6 +476,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -448,6 +514,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -484,6 +556,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -516,6 +594,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -552,6 +636,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -584,6 +674,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'Roosevelt.Oberbrunner@gmail.com',
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -620,6 +716,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'Roosevelt.Oberbrunner@gmail.com',
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -652,6 +754,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -689,6 +797,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -731,6 +845,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => faker.seed(seed);
 "
 `;
@@ -767,6 +887,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -809,6 +935,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => faker.seed(seed);
 "
 `;
@@ -845,6 +977,110 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per type field generation with faker with dynamic values can overwrite a nested value with null 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null,
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per type field generation with faker with dynamic values can overwrite a nested value with null when terminateCircularRelationships is true 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>, _relationshipsToOmit: Set<string> = new Set()): A => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('A');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const aB = (overrides?: Partial<B>, _relationshipsToOmit: Set<string> = new Set()): B => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('B');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const aC = (overrides?: Partial<C>, _relationshipsToOmit: Set<string> = new Set()): C => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('C');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>, _relationshipsToOmit: Set<string> = new Set()): D => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('D');
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null,
     };
 };
 
@@ -887,6 +1123,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => faker.seed(seed);
 "
 `;
@@ -923,6 +1165,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : faker['helpers']['arrayElement'](...[[\\"active\\",\\"disabled\\"]]),
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 
@@ -965,6 +1213,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => faker.seed(seed);
 "
 `;
@@ -1004,6 +1258,12 @@ export const aC = (overrides?: Partial<C>): C => {
     };
 };
 
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
 export const seedMocks = (seed: number) => faker.seed(seed);
 "
 `;
@@ -1037,6 +1297,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -1073,6 +1339,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -1105,6 +1377,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -1141,6 +1419,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -1173,6 +1457,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
@@ -1209,6 +1499,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'my@email.com',
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -1243,6 +1539,12 @@ export const aC = (overrides?: Partial<C>): C => {
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'my@email.com',
     };
 };
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
 "
 `;
 
@@ -1275,6 +1577,12 @@ export const aC = (overrides?: Partial<C>): C => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
         enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
     };
 };
 "
