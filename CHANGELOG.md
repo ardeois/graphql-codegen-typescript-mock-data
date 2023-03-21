@@ -1,3 +1,15 @@
+# v3.3.1 (Tue Mar 21 2023)
+
+#### 🐛 Bug Fix
+
+- fix: relationships overrides via fieldGeneration config [#123](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/123) ([@gurschitz](https://github.com/gurschitz))
+
+#### Authors: 1
+
+- Gerald Urschitz ([@gurschitz](https://github.com/gurschitz))
+
+---
+
 # v3.3.0 (Thu Mar 16 2023)
 
 #### 🚀 Enhancement
