@@ -83,6 +83,35 @@ describe('per type field generation with faker', () => {
             expect(result).toMatchSnapshot();
         });
 
+        it('can overwrite a nested value with null', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                fieldGeneration: {
+                    D: { nested: 'null' },
+                },
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain("overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null");
+
+            expect(result).toMatchSnapshot();
+        });
+
+        it('can overwrite a nested value with null when terminateCircularRelationships is true', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                terminateCircularRelationships: true,
+                fieldGeneration: {
+                    D: { nested: 'null' },
+                },
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain("overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null");
+
+            expect(result).toMatchSnapshot();
+        });
+
         it('can overwrite an enum value', async () => {
             const result = await plugin(testSchema, [], {
                 ...config,

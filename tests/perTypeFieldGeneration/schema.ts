@@ -32,4 +32,8 @@ export default buildSchema(/* GraphQL */ `
         str: String!
         enum: EnumExample!
     }
+
+    type D {
+        nested: C!
+    }
 `);

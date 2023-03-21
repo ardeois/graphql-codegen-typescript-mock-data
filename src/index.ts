@@ -305,13 +305,18 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                 }
             }
             if (opts.terminateCircularRelationships) {
-                return `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
-                    name,
-                    casedName,
-                    opts.prefix,
-                )}({}, relationshipsToOmit)`;
+                return handleValueGeneration(
+                    opts,
+                    null,
+                    () =>
+                        `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
+                            name,
+                            casedName,
+                            opts.prefix,
+                        )}({}, relationshipsToOmit)`,
+                );
             } else {
-                return `${toMockName(name, casedName, opts.prefix)}()`;
+                return handleValueGeneration(opts, null, () => `${toMockName(name, casedName, opts.prefix)}()`);
             }
         }
     }
