@@ -24,3 +24,20 @@ it(`shouldn't support useImplementingTypes`, async () => {
 
     expect(result).toMatchSnapshot();
 });
+
+it(`shouldn't support useImplementingTypes with fieldGeneration prop`, async () => {
+    const result = await plugin(testSchema, [], {
+        prefix: 'mock',
+        useImplementingTypes: true,
+        fieldGeneration: {
+            A: { config: 'email' },
+        },
+    });
+    expect(result).toBeDefined();
+    // Boolean
+    expect(result).toContain(
+        "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Karelle_Kassulke@Carolyne.io'",
+    );
+
+    expect(result).toMatchSnapshot();
+});

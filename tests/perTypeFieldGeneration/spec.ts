@@ -421,7 +421,7 @@ describe('per type field generation with faker', () => {
             expect(result).toBeDefined();
 
             expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '1/1/2022'",
+                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '01/01/2022'",
             );
 
             expect(result).toMatchSnapshot();
