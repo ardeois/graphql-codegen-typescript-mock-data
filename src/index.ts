@@ -284,10 +284,10 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
             return handleValueGeneration(opts, customScalar, mockValueGenerator.integer);
         }
         default: {
-            const foundTypes = opts.types.filter((enumType: TypeItem) => {
-                if (enumType.types && 'interfaces' in enumType.types)
-                    return enumType.types.interfaces.every((item) => item.name.value === name);
-                return enumType.name === name;
+            const foundTypes = opts.types.filter((foundType: TypeItem) => {
+                if (foundType.types && 'interfaces' in foundType.types)
+                    return foundType.types.interfaces.every((item) => item.name.value === name);
+                return foundType.name === name;
             });
 
             if (foundTypes.length) {
