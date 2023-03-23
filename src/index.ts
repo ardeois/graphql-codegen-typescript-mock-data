@@ -246,6 +246,7 @@ const getNamedImplementType = (opts: Options<TypeItem['types']>): string => {
 
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
+
     return `${toMockName(name, casedName, opts.prefix)}()`;
 };
 
@@ -339,13 +340,18 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                 }
             }
             if (opts.terminateCircularRelationships) {
-                return `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
-                    name,
-                    casedName,
-                    opts.prefix,
-                )}({}, relationshipsToOmit)`;
+                return handleValueGeneration(
+                    opts,
+                    null,
+                    () =>
+                        `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
+                            name,
+                            casedName,
+                            opts.prefix,
+                        )}({}, relationshipsToOmit)`,
+                );
             } else {
-                return `${toMockName(name, casedName, opts.prefix)}()`;
+                return handleValueGeneration(opts, null, () => `${toMockName(name, casedName, opts.prefix)}()`);
             }
         }
     }
@@ -579,8 +585,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             // This function triggered per each type
             const typeName = node.name.value;
 
-            if (config.useImplementingTypes) {
-                if (!types.find((enumType) => enumType.name === typeName)) {
+            if (config.useImplementingTypes && config.fieldGeneration) {
+                if (!types.find((objectType) => objectType.name === typeName)) {
                     node.interfaces.length &&
                         types.push({
                             name: typeName,
@@ -592,7 +598,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         },
         ScalarTypeDefinition: (node) => {
             const name = node.name.value;
-            if (!types.find((enumType) => enumType.name === name)) {
+            if (!types.find((scalarType) => scalarType.name === name)) {
                 types.push({
                     name,
                     type: 'scalar',
