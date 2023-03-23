@@ -1,4 +1,12 @@
-import { ASTKindToNode, ListTypeNode, NamedTypeNode, parse, printSchema, TypeNode } from 'graphql';
+import {
+    parse,
+    printSchema,
+    TypeNode,
+    ASTKindToNode,
+    ListTypeNode,
+    NamedTypeNode,
+    ObjectTypeDefinitionNode,
+} from 'graphql';
 import { faker } from '@faker-js/faker';
 import casual from 'casual';
 import { oldVisit, PluginFunction, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
@@ -26,6 +34,7 @@ type Options<T = TypeNode> = {
     generateLibrary: 'casual' | 'faker';
     fieldGeneration?: TypeFieldMap;
     enumsAsTypes?: boolean;
+    useImplementingTypes: boolean;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -230,6 +239,16 @@ const handleValueGeneration = (
     return baseGenerator();
 };
 
+const getNamedImplementType = (opts: Options<TypeItem['types']>): string => {
+    if (!opts.currentType || !('name' in opts.currentType)) {
+        return '';
+    }
+
+    const name = opts.currentType.name.value;
+    const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
+    return `${toMockName(name, casedName, opts.prefix)}()`;
+};
+
 const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean => {
     if (!opts.currentType) {
         return '';
@@ -264,8 +283,14 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
             return handleValueGeneration(opts, customScalar, mockValueGenerator.integer);
         }
         default: {
-            const foundType = opts.types.find((enumType: TypeItem) => enumType.name === name);
-            if (foundType) {
+            const foundTypes = opts.types.filter((enumType: TypeItem) => {
+                if (enumType.types && 'interfaces' in enumType.types)
+                    return enumType.types.interfaces.every((item) => item.name.value === name);
+                return enumType.name === name;
+            });
+
+            if (foundTypes.length) {
+                const foundType = foundTypes[0];
                 switch (foundType.type) {
                     case 'enum': {
                         // It's an enum
@@ -300,23 +325,27 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                             foundType.name === 'Date' ? mockValueGenerator.date : mockValueGenerator.word,
                         );
                     }
+                    case 'implement':
+                        return foundTypes
+                            .map((implementType: TypeItem) =>
+                                getNamedImplementType({
+                                    ...opts,
+                                    currentType: implementType.types,
+                                }),
+                            )
+                            .join(' || ');
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
             if (opts.terminateCircularRelationships) {
-                return handleValueGeneration(
-                    opts,
-                    null,
-                    () =>
-                        `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
-                            name,
-                            casedName,
-                            opts.prefix,
-                        )}({}, relationshipsToOmit)`,
-                );
+                return `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
+                    name,
+                    casedName,
+                    opts.prefix,
+                )}({}, relationshipsToOmit)`;
             } else {
-                return handleValueGeneration(opts, null, () => `${toMockName(name, casedName, opts.prefix)}()`);
+                return `${toMockName(name, casedName, opts.prefix)}()`;
             }
         }
     }
@@ -470,13 +499,14 @@ export interface TypescriptMocksPluginConfig {
     fieldGeneration?: TypeFieldMap;
     locale?: string;
     enumsAsTypes?: boolean;
+    useImplementingTypes?: boolean;
 }
 
 interface TypeItem {
     name: string;
-    type: 'enum' | 'scalar' | 'union';
+    type: 'enum' | 'scalar' | 'union' | 'implement';
     values?: string[];
-    types?: readonly NamedTypeNode[];
+    types?: readonly NamedTypeNode[] | ObjectTypeDefinitionNode;
 }
 
 type VisitFn<TAnyNode, TVisitedNode = TAnyNode> = (
@@ -516,6 +546,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const dynamicValues = !!config.dynamicValues;
     const generateLibrary = config.generateLibrary || 'casual';
     const enumsAsTypes = config.enumsAsTypes ?? false;
+    const useImplementingTypes = config.useImplementingTypes ?? false;
 
     if (generateLibrary === 'faker' && config.locale) {
         faker.setLocale(config.locale);
@@ -523,7 +554,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
 
     // List of types that are enums
     const types: TypeItem[] = [];
-    const visitor: VisitorType = {
+    const typeVisitor: VisitorType = {
         EnumTypeDefinition: (node) => {
             const name = node.name.value;
             if (!types.find((enumType: TypeItem) => enumType.name === name)) {
@@ -544,6 +575,32 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 });
             }
         },
+        ObjectTypeDefinition: (node) => {
+            // This function triggered per each type
+            const typeName = node.name.value;
+
+            if (config.useImplementingTypes) {
+                if (!types.find((enumType) => enumType.name === typeName)) {
+                    node.interfaces.length &&
+                        types.push({
+                            name: typeName,
+                            type: 'implement',
+                            types: node,
+                        });
+                }
+            }
+        },
+        ScalarTypeDefinition: (node) => {
+            const name = node.name.value;
+            if (!types.find((enumType) => enumType.name === name)) {
+                types.push({
+                    name,
+                    type: 'scalar',
+                });
+            }
+        },
+    };
+    const visitor: VisitorType = {
         FieldDefinition: (node) => {
             const fieldName = node.name.value;
 
@@ -568,6 +625,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         generateLibrary,
                         fieldGeneration: config.fieldGeneration,
                         enumsAsTypes,
+                        useImplementingTypes,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -601,6 +659,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       generateLibrary,
                                       fieldGeneration: config.fieldGeneration,
                                       enumsAsTypes,
+                                      useImplementingTypes,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
@@ -665,17 +724,10 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                 },
             };
         },
-        ScalarTypeDefinition: (node) => {
-            const name = node.name.value;
-            if (!types.find((enumType) => enumType.name === name)) {
-                types.push({
-                    name,
-                    type: 'scalar',
-                });
-            }
-        },
     };
 
+    // run on the types first
+    oldVisit(astNode, { leave: typeVisitor });
     const result = oldVisit(astNode, { leave: visitor });
     const definitions = result.definitions.filter((definition: any) => !!definition);
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;

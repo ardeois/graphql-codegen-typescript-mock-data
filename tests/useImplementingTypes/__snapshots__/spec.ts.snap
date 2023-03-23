@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should support useImplementingTypes 1`] = `
+"
+export const mockAConfig = (overrides?: Partial<AConfig>): AConfig => {
+    return {
+        configTypes: overrides && overrides.hasOwnProperty('configTypes') ? overrides.configTypes! : [ConfigTypes.Test],
+    };
+};
+
+export const mockA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
+        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),
+    };
+};
+
+export const mockB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const mockTestAConfig = (overrides?: Partial<TestAConfig>): TestAConfig => {
+    return {
+        detectionTypes: overrides && overrides.hasOwnProperty('detectionTypes') ? overrides.detectionTypes! : [ConfigTypes.Test],
+        active: overrides && overrides.hasOwnProperty('active') ? overrides.active! : true,
+    };
+};
+
+export const mockTestTwoAConfig = (overrides?: Partial<TestTwoAConfig>): TestTwoAConfig => {
+    return {
+        detectionTypes: overrides && overrides.hasOwnProperty('detectionTypes') ? overrides.detectionTypes! : [ConfigTypes.Test],
+        username: overrides && overrides.hasOwnProperty('username') ? overrides.username! : 'et',
+    };
+};
+"
+`;
+
+exports[`shouldn't support useImplementingTypes 1`] = `
+"
+export const mockAConfig = (overrides?: Partial<AConfig>): AConfig => {
+    return {
+        configTypes: overrides && overrides.hasOwnProperty('configTypes') ? overrides.configTypes! : [ConfigTypes.Test],
+    };
+};
+
+export const mockA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
+        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockAConfig(),
+    };
+};
+
+export const mockB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const mockTestAConfig = (overrides?: Partial<TestAConfig>): TestAConfig => {
+    return {
+        detectionTypes: overrides && overrides.hasOwnProperty('detectionTypes') ? overrides.detectionTypes! : [ConfigTypes.Test],
+        active: overrides && overrides.hasOwnProperty('active') ? overrides.active! : true,
+    };
+};
+
+export const mockTestTwoAConfig = (overrides?: Partial<TestTwoAConfig>): TestTwoAConfig => {
+    return {
+        detectionTypes: overrides && overrides.hasOwnProperty('detectionTypes') ? overrides.detectionTypes! : [ConfigTypes.Test],
+        username: overrides && overrides.hasOwnProperty('username') ? overrides.username! : 'et',
+    };
+};
+"
+`;
