@@ -5,7 +5,7 @@ it('should support useImplementingTypes', async () => {
     const result = await plugin(testSchema, [], { prefix: 'mock', useImplementingTypes: true });
 
     expect(result).toBeDefined();
-    // Boolean
+
     expect(result).toContain(
         "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),",
     );
@@ -17,7 +17,7 @@ it(`shouldn't support useImplementingTypes`, async () => {
     const result = await plugin(testSchema, [], { prefix: 'mock' });
 
     expect(result).toBeDefined();
-    // Boolean
+
     expect(result).toContain(
         "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockAConfig(),",
     );
@@ -25,8 +25,25 @@ it(`shouldn't support useImplementingTypes`, async () => {
     expect(result).toMatchSnapshot();
 });
 
-it(`shouldn't support useImplementingTypes with fieldGeneration prop`, async () => {
-    const result = await plugin(testSchema, [], {
+it(`support useImplementingTypes with fieldGeneration prop`, async () => {
+    let result = await plugin(testSchema, [], {
+        prefix: 'mock',
+        useImplementingTypes: true,
+        fieldGeneration: {
+            A: { str: 'email' },
+        },
+    });
+    expect(result).toBeDefined();
+
+    expect(result).toContain(
+        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Krystel.Farrell@Frederique.biz'",
+    );
+
+    expect(result).toContain(
+        "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),",
+    );
+
+    result = await plugin(testSchema, [], {
         prefix: 'mock',
         useImplementingTypes: true,
         fieldGeneration: {
@@ -34,9 +51,11 @@ it(`shouldn't support useImplementingTypes with fieldGeneration prop`, async () 
         },
     });
     expect(result).toBeDefined();
-    // Boolean
+
+    expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea'");
+
     expect(result).toContain(
-        "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Karelle_Kassulke@Carolyne.io'",
+        "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Karelle_Kassulke@Carolyne.io',",
     );
 
     expect(result).toMatchSnapshot();

@@ -24,12 +24,12 @@ export default buildSchema(/* GraphQL */ `
     }
 
     type TestAConfig implements AConfig {
-        detectionTypes: [configTypes!]!
+        configTypes: [configTypes!]!
         active: Boolean!
     }
 
     type TestTwoAConfig implements AConfig {
-        detectionTypes: [configTypes!]!
+        configTypes: [configTypes!]!
         username: String!
     }
 `);
