@@ -327,6 +327,13 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         );
                     }
                     case 'implement':
+                        if (
+                            opts.fieldGeneration &&
+                            opts.fieldGeneration[opts.typeName] &&
+                            opts.fieldGeneration[opts.typeName][opts.fieldName]
+                        )
+                            break;
+
                         return foundTypes
                             .map((implementType: TypeItem) =>
                                 getNamedImplementType({
@@ -585,7 +592,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             // This function triggered per each type
             const typeName = node.name.value;
 
-            if (config.useImplementingTypes && !config.fieldGeneration) {
+            if (config.useImplementingTypes) {
                 if (!types.find((objectType) => objectType.name === typeName)) {
                     node.interfaces.length &&
                         types.push({
