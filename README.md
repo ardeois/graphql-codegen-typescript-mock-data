@@ -157,7 +157,7 @@ When disabled, underscores will be retained for type names when the case is chan
 
 When enabled, values will be generated dynamically when the mock function is called rather than statically when the mock function is generated. The values are generated consistently from a [casual seed](https://github.com/boo1ean/casual#seeding) that can be manually configured using the generated `seedMocks(seed: number)` function, as shown in [this test](https://github.com/JimmyPaolini/graphql-codegen-typescript-mock-data/blob/dynamic-mode/tests/dynamicValues/spec.ts#L13).
 
-###useImplementingTypes (`boolean`, defaultValue: `false`)
+### useImplementingTypes (`boolean`, defaultValue: `false`)
 
 When enabled, it will support the useImplementingTypes GraphQL codegen configuration.
 - When a GraphQL interface is used for a field, this flag will use the implementing types, instead of the interface itself.
