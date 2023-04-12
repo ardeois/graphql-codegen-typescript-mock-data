@@ -286,7 +286,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
         default: {
             const foundTypes = opts.types.filter((foundType: TypeItem) => {
                 if (foundType.types && 'interfaces' in foundType.types)
-                    return foundType.types.interfaces.every((item) => item.name.value === name);
+                    return foundType.types.interfaces.some((item) => item.name.value === name);
                 return foundType.name === name;
             });
 

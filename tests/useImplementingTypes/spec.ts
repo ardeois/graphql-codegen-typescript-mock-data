@@ -10,6 +10,17 @@ it('should support useImplementingTypes', async () => {
         "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),",
     );
 
+    expect(result).toContain(
+        "configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockTestAConfig() || mockTestTwoAConfig()],",
+    );
+
+    expect(result).toContain(
+        "field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockTestTwoAConfig(),",
+    );
+
+    expect(result).toContain(
+        "action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockTestAction(),",
+    );
     expect(result).toMatchSnapshot();
 });
 
