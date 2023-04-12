@@ -1,3 +1,15 @@
+# v3.4.0 (Tue Apr 11 2023)
+
+#### 🚀 Enhancement
+
+- add support for useImplementingTypes [#125](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/125) ([@maordaniel](https://github.com/maordaniel))
+
+#### Authors: 1
+
+- Maor Daniel ([@maordaniel](https://github.com/maordaniel))
+
+---
+
 # v3.3.1 (Tue Mar 21 2023)
 
 #### 🐛 Bug Fix
