@@ -1,3 +1,15 @@
+# v3.4.1 (Thu Apr 13 2023)
+
+#### 🐛 Bug Fix
+
+- hotfix/maord support use implementing types [#127](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/127) ([@maordaniel](https://github.com/maordaniel))
+
+#### Authors: 1
+
+- Maor Daniel ([@maordaniel](https://github.com/maordaniel))
+
+---
+
 # v3.4.0 (Tue Apr 11 2023)
 
 #### 🚀 Enhancement
