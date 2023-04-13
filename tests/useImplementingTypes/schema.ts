@@ -2,10 +2,18 @@ import { buildSchema } from 'graphql';
 
 export default buildSchema(/* GraphQL */ `
     interface AConfig {
-        configTypes: [configTypes!]!
+        testTypes: [testObj!]!
     }
 
-    enum configTypes {
+    interface Field {
+        testTypes: [testObj!]!
+    }
+
+    interface Action {
+        action: [testObj!]!
+    }
+
+    enum testObj {
         TEST
         TEST2
     }
@@ -15,6 +23,9 @@ export default buildSchema(/* GraphQL */ `
         str: String!
         obj: B!
         config: AConfig!
+        configArray: [AConfig!]!
+        field: Field!
+        action: Action!
     }
 
     type B {
@@ -24,12 +35,17 @@ export default buildSchema(/* GraphQL */ `
     }
 
     type TestAConfig implements AConfig {
-        configTypes: [configTypes!]!
+        testTypes: [testObj!]!
         active: Boolean!
     }
 
-    type TestTwoAConfig implements AConfig {
-        configTypes: [configTypes!]!
+    type TestTwoAConfig implements AConfig & Field {
+        testTypes: [testObj!]!
         username: String!
+    }
+
+    type TestAction implements Action {
+        action: [testObj!]!
+        createdAt: String!
     }
 `);
