@@ -160,7 +160,12 @@ When enabled, values will be generated dynamically when the mock function is cal
 ### useImplementingTypes (`boolean`, defaultValue: `false`)
 
 When enabled, it will support the useImplementingTypes GraphQL codegen configuration.
+
 - When a GraphQL interface is used for a field, this flag will use the implementing types, instead of the interface itself.
+
+### defaultNullableToNull (`boolean`, defaultValue: `false`)
+
+When enabled, it will set all nullable fields to null per default instead of generating a value.
 
 ### fieldGeneration (`{ [typeName: string]: { [fieldName: string]: GeneratorOptions } }`, defaultValue: `undefined`)
 

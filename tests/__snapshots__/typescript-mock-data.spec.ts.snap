@@ -1,5 +1,163 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`defaults all nullable fields to null when defaultNullableToNull is set 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null,
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : null,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : null,
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : null,
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : null,
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null,
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const aListType = (overrides?: Partial<ListType>): ListType => {
+    return {
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : null,
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : null,
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null,
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : null,
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`overriding works as expected when defaultNullableToNull is true 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : someAvatar,
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'abc',
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : null,
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : null,
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : null,
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null,
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const aListType = (overrides?: Partial<ListType>): ListType => {
+    return {
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['abc'],
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : null,
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null,
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : null,
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
 exports[`should add custom prefix if the \`prefix\` config option is specified 1`] = `
 "
 export const mockAvatar = (overrides?: Partial<Avatar>): Avatar => {
@@ -52,6 +210,7 @@ export const mockAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const mockListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -130,6 +289,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -209,6 +369,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -288,6 +449,7 @@ export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
 export const aListType = (overrides?: Partial<Api.ListType>): Api.ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -366,6 +528,7 @@ export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
 export const aListType = (overrides?: Partial<Api.ListType>): Api.ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -445,6 +608,7 @@ export const anAbcType = (overrides?: Partial<Api.AbcType>): Api.AbcType => {
 export const aListType = (overrides?: Partial<Api.ListType>): Api.ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -523,6 +687,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -601,6 +766,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -679,6 +845,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -757,6 +924,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -835,6 +1003,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -916,6 +1085,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : [casual.word],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : [casual.word],
     };
 };
 
@@ -999,6 +1169,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : [faker.lorem.word()],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : [faker.lorem.word()],
     };
 };
 
@@ -1079,6 +1250,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1157,6 +1329,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1236,6 +1409,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1314,6 +1488,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1392,6 +1567,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1470,6 +1646,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1548,6 +1725,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1626,6 +1804,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1705,6 +1884,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1783,6 +1963,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1861,6 +2042,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -1939,6 +2121,7 @@ export const anABCType = (overrides?: Partial<ABCType>): ABCType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2017,6 +2200,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2102,6 +2286,7 @@ export const aListType = (overrides?: Partial<ListType>): { __typename: 'ListTyp
     return {
         __typename: 'ListType',
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2182,6 +2367,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2260,6 +2446,7 @@ export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
 export const aLISTTYPE = (overrides?: Partial<LISTTYPE>): LISTTYPE => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2339,6 +2526,7 @@ export const anABCTYPE = (overrides?: Partial<ABCTYPE>): ABCTYPE => {
 export const aLISTTYPE = (overrides?: Partial<LISTTYPE>): LISTTYPE => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2418,6 +2606,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['soluta', 'deserunt', 'ut'],
     };
 };
 
@@ -2497,6 +2686,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : [],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : [],
     };
 };
 
@@ -2576,6 +2766,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2655,6 +2846,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2734,6 +2926,7 @@ export const anAbcType = (overrides?: Partial<ApiAbcType>): ApiAbcType => {
 export const aListType = (overrides?: Partial<ApiListType>): ApiListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2813,6 +3006,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2892,6 +3086,7 @@ export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
 export const aListType = (overrides?: Partial<ListType>): ListType => {
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
@@ -2984,6 +3179,7 @@ export const aListType = (overrides?: Partial<ListType>, _relationshipsToOmit: S
     relationshipsToOmit.add('ListType');
     return {
         stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
     };
 };
 
