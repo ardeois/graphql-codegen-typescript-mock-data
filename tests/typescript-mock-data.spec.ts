@@ -481,6 +481,19 @@ it('should generate multiple list elements', async () => {
     expect(result).toMatchSnapshot();
 });
 
+it('should generate no list elements when listElementCount is 0', async () => {
+    const result = await plugin(testSchema, [], {
+        typesFile: './types/graphql.ts',
+        listElementCount: 0,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : []",
+    );
+    expect(result).toMatchSnapshot();
+});
+
 it('should generate dynamic values in mocks', async () => {
     const result = await plugin(testSchema, [], { dynamicValues: true });
 
