@@ -44,6 +44,7 @@ const testSchema = buildSchema(/* GraphQL */ `
 
     type ListType {
         stringList: [String!]!
+        nullableStringList: [String!]
     }
 
     input UpdateUserInput {
@@ -505,5 +506,58 @@ it('should generate dynamic values with faker', async () => {
     const result = await plugin(testSchema, [], { dynamicValues: true, generateLibrary: 'faker' });
 
     expect(result).toBeDefined();
+    expect(result).toMatchSnapshot();
+});
+
+it('defaults all nullable fields to null when defaultNullableToNull is set', async () => {
+    const result = await plugin(testSchema, [], { defaultNullableToNull: true });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : null",
+    );
+    expect(result).toContain(
+        "camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : null",
+    );
+    expect(result).toContain(
+        "unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : null",
+    );
+    expect(result).toContain(
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : null",
+    );
+    expect(result).toContain("avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null");
+    expect(result).toContain("login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : null");
+    expect(result).toContain(
+        "nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : null",
+    );
+
+    expect(result).toMatchSnapshot();
+});
+
+it('overriding works as expected when defaultNullableToNull is true', async () => {
+    const result = await plugin(testSchema, [], {
+        defaultNullableToNull: true,
+        fieldGeneration: {
+            User: {
+                customStatus: "'abc'",
+                avatar: 'someAvatar',
+            },
+            ListType: {
+                nullableStringList: "'abc'",
+            },
+        },
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'abc'",
+    );
+    expect(result).toContain(
+        "avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : someAvatar",
+    );
+    expect(result).toContain(
+        "nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['abc']",
+    );
+
     expect(result).toMatchSnapshot();
 });

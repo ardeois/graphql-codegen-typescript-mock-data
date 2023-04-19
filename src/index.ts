@@ -35,6 +35,8 @@ type Options<T = TypeNode> = {
     fieldGeneration?: TypeFieldMap;
     enumsAsTypes?: boolean;
     useImplementingTypes: boolean;
+    defaultNullableToNull: boolean;
+    nonNull: boolean;
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -236,6 +238,9 @@ const handleValueGeneration = (
     if (customScalar) {
         return getCustomValue(customScalar, opts);
     }
+    if (opts.defaultNullableToNull && !opts.nonNull) {
+        return null;
+    }
     return baseGenerator();
 };
 
@@ -375,8 +380,14 @@ const generateMockValue = (opts: Options): string | number | boolean => {
             return generateMockValue({
                 ...opts,
                 currentType: opts.currentType.type,
+                nonNull: true,
             });
         case 'ListType': {
+            const hasOverride = opts.fieldGeneration?.[opts.typeName]?.[opts.fieldName];
+            if (!hasOverride && opts.defaultNullableToNull && !opts.nonNull) {
+                return null;
+            }
+
             const listElements = Array.from({ length: opts.listElementCount }, (_, index) =>
                 generateMockValue({
                     ...opts,
@@ -513,6 +524,7 @@ export interface TypescriptMocksPluginConfig {
     locale?: string;
     enumsAsTypes?: boolean;
     useImplementingTypes?: boolean;
+    defaultNullableToNull?: boolean;
 }
 
 interface TypeItem {
@@ -560,6 +572,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const generateLibrary = config.generateLibrary || 'casual';
     const enumsAsTypes = config.enumsAsTypes ?? false;
     const useImplementingTypes = config.useImplementingTypes ?? false;
+    const defaultNullableToNull = config.defaultNullableToNull ?? false;
 
     if (generateLibrary === 'faker' && config.locale) {
         faker.setLocale(config.locale);
@@ -639,6 +652,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         fieldGeneration: config.fieldGeneration,
                         enumsAsTypes,
                         useImplementingTypes,
+                        defaultNullableToNull,
+                        nonNull: false,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -673,6 +688,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       fieldGeneration: config.fieldGeneration,
                                       enumsAsTypes,
                                       useImplementingTypes,
+                                      defaultNullableToNull,
+                                      nonNull: false,
                                   });
 
                                   return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
