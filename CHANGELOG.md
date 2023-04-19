@@ -1,3 +1,15 @@
+# v3.5.0 (Wed Apr 19 2023)
+
+#### 🚀 Enhancement
+
+- implement defaultNullableToNull config option (#128) [#130](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/130) ([@gurschitz](https://github.com/gurschitz))
+
+#### Authors: 1
+
+- Gerald Urschitz ([@gurschitz](https://github.com/gurschitz))
+
+---
+
 # v3.4.2 (Wed Apr 19 2023)
 
 #### 🐛 Bug Fix
