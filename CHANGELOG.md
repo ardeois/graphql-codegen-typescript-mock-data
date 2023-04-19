@@ -1,3 +1,15 @@
+# v3.4.2 (Wed Apr 19 2023)
+
+#### 🐛 Bug Fix
+
+- allow `listElementCount` to be 0 in config [#129](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/129) ([@gurschitz](https://github.com/gurschitz))
+
+#### Authors: 1
+
+- Gerald Urschitz ([@gurschitz](https://github.com/gurschitz))
+
+---
+
 # v3.4.1 (Thu Apr 13 2023)
 
 #### 🐛 Bug Fix
