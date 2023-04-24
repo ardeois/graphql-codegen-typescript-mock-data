@@ -110,9 +110,7 @@ it('should generate mock data functions with scalars', async () => {
     const result = await plugin(testSchema, [], {});
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',",
-    );
+    expect(result).toContain("scalarValue: 'neque',");
     expect(result).toMatchSnapshot();
 });
 
@@ -431,8 +429,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
-    expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : Prefixed_Enum.PrefixedValue,",
+    expect(result).toContain('prefixedEnum: Prefixed_Enum.PrefixedValue,",
     );
     expect(result).toMatchSnapshot();
 });
@@ -452,8 +449,7 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
     expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',",
-    );
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',');
     expect(result).toMatchSnapshot();
 });
 
@@ -463,9 +459,7 @@ it('should generate single list element', async () => {
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem']",
-    );
+    expect(result).toContain("stringList: ['voluptatem']");
     expect(result).toMatchSnapshot();
 });
 
@@ -476,9 +470,7 @@ it('should generate multiple list elements', async () => {
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis']",
-    );
+    expect(result).toContain("stringList: ['id', 'soluta', 'quis']");
     expect(result).toMatchSnapshot();
 });
 

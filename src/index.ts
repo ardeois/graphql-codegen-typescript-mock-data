@@ -429,6 +429,7 @@ export const ${toMockName(
     relationshipsToOmit.add('${casedName}');
     return {${typename}
 ${fields}
+        ...overrides,
     };
 };`;
     } else {
@@ -440,6 +441,7 @@ export const ${toMockName(
         )} = (overrides?: Partial<${casedNameWithPrefix}>): ${typenameReturnType}${casedNameWithPrefix} => {
     return {${typename}
 ${fields}
+        ...overrides,
     };
 };`;
     }
@@ -656,7 +658,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         nonNull: false,
                     });
 
-                    return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
+                    return `        ${fieldName}: ${value},`;
                 },
             };
         },
@@ -692,7 +694,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       nonNull: false,
                                   });
 
-                                  return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
+                                  return `        ${field.name.value}: ${value},`;
                               })
                               .join('\n')
                         : '';

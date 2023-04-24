@@ -53,13 +53,9 @@ describe('per type field generation with faker', () => {
             expect(result).toBeDefined();
 
             // Custom generation in type A
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['internet']['email']()",
-            );
+            expect(result).toContain("email: faker['internet']['email']()");
             // Original generation in type B (unchanged)
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),",
-            );
+            expect(result).toContain("email: faker['lorem']['sentence'](),");
 
             expect(result).toMatchSnapshot();
         });
@@ -73,12 +69,8 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future']()",
-            );
-            expect(result).toContain(
-                "overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['past']()",
-            );
+            expect(result).toContain("date: faker['date']['future']()");
+            expect(result).toContain("overriddenDate: faker['date']['past']()");
 
             expect(result).toMatchSnapshot();
         });
@@ -121,9 +113,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                `enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : faker['helpers']['arrayElement'](...[["active","disabled"]]),`,
-            );
+            expect(result).toContain(`enum: faker['helpers']['arrayElement'](...[["active","disabled"]]),`);
 
             expect(result).toMatchSnapshot();
         });
@@ -156,11 +146,7 @@ describe('per type field generation with faker', () => {
             expect(result).toBeDefined();
 
             // Check both `email` fields are updated
-            expect(
-                String(result).match(
-                    /email: overrides && overrides.hasOwnProperty\('email'\) \? overrides.email! : faker\['internet']\['email']\(\)/g,
-                ).length,
-            ).toEqual(2);
+            expect(String(result).match(/email: faker\['internet']\['email']\(\)/g).length).toEqual(2);
             expect(result).toMatchSnapshot();
         });
 
@@ -178,9 +164,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10])",
-            );
+            expect(result).toContain("dateTime: faker['date']['recent'](...[10])");
 
             expect(result).toMatchSnapshot();
         });
@@ -202,9 +186,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10]).toLocaleDateString()",
-            );
+            expect(result).toContain("dateTime: faker['date']['recent'](...[10]).toLocaleDateString()");
 
             expect(result).toMatchSnapshot();
         });
@@ -227,9 +209,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10]).toLocaleDateString(...[\"en-GB\"])",
-            );
+            expect(result).toContain("dateTime: faker['date']['recent'](...[10]).toLocaleDateString(...[\"en-GB\"])");
 
             expect(result).toMatchSnapshot();
         });
@@ -252,9 +232,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker['date']['recent'](...[10]).toLocaleDateString(...[\"en-GB\"])",
-            );
+            expect(result).toContain("dateTime: faker['date']['recent'](...[10]).toLocaleDateString(...[\"en-GB\"])");
 
             expect(result).toMatchSnapshot();
         });
@@ -275,13 +253,9 @@ describe('per type field generation with faker', () => {
             expect(result).toBeDefined();
 
             // Custom generation in type A
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'my@email.com'",
-            );
+            expect(result).toContain("email: 'my@email.com'");
             // Original generation in type B (unchanged)
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence",
-            );
+            expect(result).toContain("email: 'A sentence");
 
             expect(result).toMatchSnapshot();
         });
@@ -295,12 +269,8 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                'date: overrides && overrides.hasOwnProperty(\'date\') ? overrides.date! : "2050-01-01T00:00:00.000Z"',
-            );
-            expect(result).toContain(
-                'overriddenDate: overrides && overrides.hasOwnProperty(\'overriddenDate\') ? overrides.overriddenDate! : "2020-01-01T00:00:00.000Z"',
-            );
+            expect(result).toContain('date: "2050-01-01T00:00:00.000Z"');
+            expect(result).toContain('overriddenDate: "2020-01-01T00:00:00.000Z"');
 
             expect(result).toMatchSnapshot();
         });
@@ -314,9 +284,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'my@email.com'",
-            );
+            expect(result).toContain("enum: 'my@email.com'");
 
             expect(result).toMatchSnapshot();
         });
@@ -349,11 +317,7 @@ describe('per type field generation with faker', () => {
             expect(result).toBeDefined();
 
             // Check both `email` fields are updated
-            expect(
-                String(result).match(
-                    /email: overrides && overrides.hasOwnProperty\('email'\) \? overrides.email! : 'my@email.com'/g,
-                ).length,
-            ).toEqual(2);
+            expect(String(result).match(/email: 'my@email.com'/g).length).toEqual(2);
             expect(result).toMatchSnapshot();
         });
 
@@ -371,9 +335,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                'dateTime: overrides && overrides.hasOwnProperty(\'dateTime\') ? overrides.dateTime! : "2022-01-01T00:00:00.000Z"',
-            );
+            expect(result).toContain('dateTime: "2022-01-01T00:00:00.000Z"');
 
             expect(result).toMatchSnapshot();
         });
@@ -395,9 +357,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '1/1/2022'",
-            );
+            expect(result).toContain("dateTime: '1/1/2022'");
 
             expect(result).toMatchSnapshot();
         });
@@ -420,9 +380,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '01/01/2022'",
-            );
+            expect(result).toContain("dateTime: '01/01/2022'");
 
             expect(result).toMatchSnapshot();
         });
@@ -457,13 +415,9 @@ describe('per type field generation with casual', () => {
             expect(result).toBeDefined();
 
             // Custom generation in type A
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : casual['email']",
-            );
+            expect(result).toContain("email: casual['email']");
             // Original generation in type B (unchanged)
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : casual['word'],",
-            );
+            expect(result).toContain("email: casual['word'],");
 
             expect(result).toMatchSnapshot();
         });
@@ -477,12 +431,8 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : casual['date']",
-            );
-            expect(result).toContain(
-                "overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : casual['date']()",
-            );
+            expect(result).toContain("date: casual['date']");
+            expect(result).toContain("overriddenDate: casual['date']()");
 
             expect(result).toMatchSnapshot();
         });
@@ -496,9 +446,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : casual['email'],",
-            );
+            expect(result).toContain("enum: casual['email'],");
 
             expect(result).toMatchSnapshot();
         });
@@ -531,11 +479,7 @@ describe('per type field generation with casual', () => {
             expect(result).toBeDefined();
 
             // Check both `email` fields are updated
-            expect(
-                String(result).match(
-                    /email: overrides && overrides.hasOwnProperty\('email'\) \? overrides.email! : casual\['email']/g,
-                ).length,
-            ).toEqual(2);
+            expect(String(result).match(/email: casual\['email']/g).length).toEqual(2);
             expect(result).toMatchSnapshot();
         });
 
@@ -553,9 +497,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual['integer'](...[1,100])",
-            );
+            expect(result).toContain("dateTime: casual['integer'](...[1,100])");
 
             expect(result).toMatchSnapshot();
         });
@@ -577,9 +519,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual['integer'](...[1,100]).toFixed()",
-            );
+            expect(result).toContain("dateTime: casual['integer'](...[1,100]).toFixed()");
 
             expect(result).toMatchSnapshot();
         });
@@ -602,9 +542,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual['integer'](...[1,100]).toFixed(...[3])",
-            );
+            expect(result).toContain("dateTime: casual['integer'](...[1,100]).toFixed(...[3])");
 
             expect(result).toMatchSnapshot();
         });
@@ -627,9 +565,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual['integer'](...[1,100]).toFixed(...[3])",
-            );
+            expect(result).toContain("dateTime: casual['integer'](...[1,100]).toFixed(...[3])");
 
             expect(result).toMatchSnapshot();
         });
@@ -650,13 +586,9 @@ describe('per type field generation with casual', () => {
             expect(result).toBeDefined();
 
             // Custom generation in type A
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'Schuppe.Demario@yahoo.com'",
-            );
+            expect(result).toContain("email: 'Schuppe.Demario@yahoo.com'");
             // Original generation in type B (unchanged)
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'quibusdam'",
-            );
+            expect(result).toContain("email: 'quibusdam'");
 
             expect(result).toMatchSnapshot();
         });
@@ -670,12 +602,8 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '2004-01-01'",
-            );
-            expect(result).toContain(
-                "overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : '1995-09-05'",
-            );
+            expect(result).toContain("date: '2004-01-01'");
+            expect(result).toContain("overriddenDate: '1995-09-05'");
 
             expect(result).toMatchSnapshot();
         });
@@ -689,9 +617,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'Roosevelt.Oberbrunner@gmail.com'",
-            );
+            expect(result).toContain("enum: 'Roosevelt.Oberbrunner@gmail.com'");
 
             expect(result).toMatchSnapshot();
         });
@@ -724,12 +650,8 @@ describe('per type field generation with casual', () => {
             expect(result).toBeDefined();
 
             // Check both `email` fields are updated
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'Schuppe.Demario@yahoo.com'",
-            );
-            expect(result).toContain(
-                "email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'Molly.Wuckert@gmail.com'",
-            );
+            expect(result).toContain("email: 'Schuppe.Demario@yahoo.com'");
+            expect(result).toContain("email: 'Molly.Wuckert@gmail.com'");
             expect(result).toMatchSnapshot();
         });
 
@@ -747,9 +669,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 39",
-            );
+            expect(result).toContain('dateTime: 39');
 
             expect(result).toMatchSnapshot();
         });
@@ -771,9 +691,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '39'",
-            );
+            expect(result).toContain("dateTime: '39'");
 
             expect(result).toMatchSnapshot();
         });
@@ -796,9 +714,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '39.000'",
-            );
+            expect(result).toContain("dateTime: '39.000'");
 
             expect(result).toMatchSnapshot();
         });
@@ -821,9 +737,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '39.000'",
-            );
+            expect(result).toContain("dateTime: '39.000'");
 
             expect(result).toMatchSnapshot();
         });

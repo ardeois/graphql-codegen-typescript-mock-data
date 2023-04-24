@@ -4,18 +4,20 @@ exports[`should generate custom scalars for native and custom types using casual
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 82,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea corrupti qui incidunt eius consequatur blanditiis',
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Kelly_Cremin@Turcotte.biz',
+        id: 82,
+        str: 'ea corrupti qui incidunt eius consequatur blanditiis',
+        obj: aB(),
+        anyObject: 'Kelly_Cremin@Turcotte.biz',
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.509902694262564,
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: -93,
+        flt: -24.509902694262564,
+        bool: false,
+        ...overrides,
     };
 };
 "
@@ -25,18 +27,20 @@ exports[`should generate custom scalars for native and custom types using faker 
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 83,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Corrupti qui incidunt eius consequatur qui.',
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Orlando64@gmail.com',
+        id: 83,
+        str: 'Corrupti qui incidunt eius consequatur qui.',
+        obj: aB(),
+        anyObject: 'Orlando64@gmail.com',
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.51,
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: -93,
+        flt: -24.51,
+        bool: false,
+        ...overrides,
     };
 };
 "
@@ -49,18 +53,20 @@ casual.seed(0);
 
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual['integer'](...[1,100]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['string'],
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : casual['email'],
+        id: casual['integer'](...[1,100]),
+        str: casual['string'],
+        obj: aB(),
+        anyObject: casual['email'],
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : casual['integer'](...[-100,0]),
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : casual['double'](...[-100,0]),
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: casual['integer'](...[-100,0]),
+        flt: casual['double'](...[-100,0]),
+        bool: false,
+        ...overrides,
     };
 };
 
@@ -75,18 +81,20 @@ faker.seed(0);
 
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : faker['internet']['email'](),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        obj: aB(),
+        anyObject: faker['internet']['email'](),
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['datatype']['number'](...[{\\"min\\":-100,\\"max\\":0}]),
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : faker['datatype']['float'](...[{\\"min\\":-100,\\"max\\":0}]),
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: faker['datatype']['number'](...[{\\"min\\":-100,\\"max\\":0}]),
+        flt: faker['datatype']['float'](...[{\\"min\\":-100,\\"max\\":0}]),
+        bool: false,
+        ...overrides,
     };
 };
 
