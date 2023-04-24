@@ -429,8 +429,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
-    expect(result).toContain('prefixedEnum: Prefixed_Enum.PrefixedValue,",
-    );
+    expect(result).toContain('prefixedEnum: Prefixed_Enum.PrefixedValue,');
     expect(result).toMatchSnapshot();
 });
 
@@ -448,8 +447,7 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
     );
-    expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',');
+    expect(result).toContain("prefixedEnum: 'PREFIXED_VALUE',");
     expect(result).toMatchSnapshot();
 });
 
@@ -481,9 +479,7 @@ it('should generate no list elements when listElementCount is 0', async () => {
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : []",
-    );
+    expect(result).toContain('stringList: []');
     expect(result).toMatchSnapshot();
 });
 
@@ -505,23 +501,13 @@ it('defaults all nullable fields to null when defaultNullableToNull is set', asy
     const result = await plugin(testSchema, [], { defaultNullableToNull: true });
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : null",
-    );
-    expect(result).toContain(
-        "camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : null",
-    );
-    expect(result).toContain(
-        "unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : null",
-    );
-    expect(result).toContain(
-        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : null",
-    );
-    expect(result).toContain("avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null");
-    expect(result).toContain("login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : null");
-    expect(result).toContain(
-        "nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : null",
-    );
+    expect(result).toContain('customStatus: null');
+    expect(result).toContain('camelCaseThing: null');
+    expect(result).toContain('unionThing: null');
+    expect(result).toContain('prefixedEnum: null');
+    expect(result).toContain('avatar: null');
+    expect(result).toContain('login: null');
+    expect(result).toContain('nullableStringList: null');
 
     expect(result).toMatchSnapshot();
 });
@@ -541,15 +527,9 @@ it('overriding works as expected when defaultNullableToNull is true', async () =
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain(
-        "customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : 'abc'",
-    );
-    expect(result).toContain(
-        "avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : someAvatar",
-    );
-    expect(result).toContain(
-        "nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['abc']",
-    );
+    expect(result).toContain("customStatus: 'abc'");
+    expect(result).toContain('avatar: someAvatar');
+    expect(result).toContain("nullableStringList: ['abc']");
 
     expect(result).toMatchSnapshot();
 });

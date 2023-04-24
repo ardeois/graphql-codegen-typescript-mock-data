@@ -84,7 +84,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain("overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null");
+            expect(result).toContain('nested: null');
 
             expect(result).toMatchSnapshot();
         });
@@ -99,7 +99,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain("overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null");
+            expect(result).toContain('nested: null');
 
             expect(result).toMatchSnapshot();
         });
@@ -128,9 +128,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                `enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : faker['helpers']['arrayElement'](...[["active","disabled"]]),`,
-            );
+            expect(result).toContain(`enum: faker['helpers']['arrayElement'](...[["active","disabled"]]),`);
 
             expect(result).toMatchSnapshot();
         });
@@ -299,9 +297,7 @@ describe('per type field generation with faker', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'my@email.com'",
-            );
+            expect(result).toContain("enum: 'my@email.com'");
 
             expect(result).toMatchSnapshot();
         });
@@ -461,9 +457,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : casual['email'],",
-            );
+            expect(result).toContain("enum: casual['email'],");
 
             expect(result).toMatchSnapshot();
         });
@@ -632,9 +626,7 @@ describe('per type field generation with casual', () => {
             });
             expect(result).toBeDefined();
 
-            expect(result).toContain(
-                "enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'Roosevelt.Oberbrunner@gmail.com'",
-            );
+            expect(result).toContain("enum: 'Roosevelt.Oberbrunner@gmail.com'");
 
             expect(result).toMatchSnapshot();
         });

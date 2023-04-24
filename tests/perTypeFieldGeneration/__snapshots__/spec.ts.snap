@@ -40,7 +40,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -88,7 +89,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -136,7 +138,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -184,7 +187,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -232,7 +236,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -280,7 +285,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -328,7 +334,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -343,37 +350,41 @@ casual.seed(0);
 
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : casual['word'],
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : casual['date'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : casual['date'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual.word,
+        id: datatype.integer,
+        str: casual['word'],
+        email: casual['word'],
+        date: casual['date'](),
+        overriddenDate: casual['date'](),
+        dateTime: casual.word,
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : casual['word'],
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : casual['date'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : casual['date'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual.word,
+        id: datatype.integer,
+        str: casual['word'],
+        email: casual['word'],
+        date: casual['date'](),
+        overriddenDate: casual['date'](),
+        dateTime: casual.word,
+        ...overrides,
     };
 };
 
 export const aC = (overrides?: Partial<C>): C => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['word'],
-        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : casual['email'],
+        id: datatype.integer,
+        str: casual['word'],
+        enum: casual['email'],
+        ...overrides,
     };
 };
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -421,7 +432,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -466,7 +478,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -509,7 +522,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -552,7 +566,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -595,7 +610,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -638,7 +654,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -681,7 +698,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -724,7 +742,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -734,37 +753,41 @@ exports[`per type field generation with casual without dynamic values can overwr
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'vero',
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '2004-01-01',
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : '1995-09-05',
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'vel',
+        id: datatype.integer,
+        str: 'ea',
+        email: 'vero',
+        date: '2004-01-01',
+        overriddenDate: '1995-09-05',
+        dateTime: 'vel',
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'consectetur',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'quibusdam',
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1980-12-10',
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : '2014-12-19',
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'ut',
+        id: datatype.integer,
+        str: 'consectetur',
+        email: 'quibusdam',
+        date: '1980-12-10',
+        overriddenDate: '2014-12-19',
+        dateTime: 'ut',
+        ...overrides,
     };
 };
 
 export const aC = (overrides?: Partial<C>): C => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : datatype.integer,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
-        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'Roosevelt.Oberbrunner@gmail.com',
+        id: datatype.integer,
+        str: 'voluptas',
+        enum: 'Roosevelt.Oberbrunner@gmail.com',
+        ...overrides,
     };
 };
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -807,7 +830,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -853,7 +877,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -901,7 +926,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -949,7 +975,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -997,7 +1024,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -1045,7 +1073,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -1060,37 +1089,41 @@ faker.seed(0);
 
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        email: faker['lorem']['sentence'](),
+        date: faker['date']['future'](),
+        overriddenDate: faker['date']['future'](),
+        dateTime: faker.lorem.word(),
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        email: faker['lorem']['sentence'](),
+        date: faker['date']['future'](),
+        overriddenDate: faker['date']['future'](),
+        dateTime: faker.lorem.word(),
+        ...overrides,
     };
 };
 
 export const aC = (overrides?: Partial<C>): C => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        enum: EnumExample.Lorem,
+        ...overrides,
     };
 };
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null,
+        nested: null,
+        ...overrides,
     };
 };
 
@@ -1107,12 +1140,13 @@ export const anA = (overrides?: Partial<A>, _relationshipsToOmit: Set<string> = 
     const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
     relationshipsToOmit.add('A');
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        email: faker['lorem']['sentence'](),
+        date: faker['date']['future'](),
+        overriddenDate: faker['date']['future'](),
+        dateTime: faker.lorem.word(),
+        ...overrides,
     };
 };
 
@@ -1120,12 +1154,13 @@ export const aB = (overrides?: Partial<B>, _relationshipsToOmit: Set<string> = n
     const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
     relationshipsToOmit.add('B');
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        email: faker['lorem']['sentence'](),
+        date: faker['date']['future'](),
+        overriddenDate: faker['date']['future'](),
+        dateTime: faker.lorem.word(),
+        ...overrides,
     };
 };
 
@@ -1133,9 +1168,10 @@ export const aC = (overrides?: Partial<C>, _relationshipsToOmit: Set<string> = n
     const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
     relationshipsToOmit.add('C');
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        enum: EnumExample.Lorem,
+        ...overrides,
     };
 };
 
@@ -1143,7 +1179,8 @@ export const aD = (overrides?: Partial<D>, _relationshipsToOmit: Set<string> = n
     const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
     relationshipsToOmit.add('D');
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : null,
+        nested: null,
+        ...overrides,
     };
 };
 
@@ -1191,7 +1228,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -1239,7 +1277,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -1254,37 +1293,41 @@ faker.seed(0);
 
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        email: faker['lorem']['sentence'](),
+        date: faker['date']['future'](),
+        overriddenDate: faker['date']['future'](),
+        dateTime: faker.lorem.word(),
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        email: faker['lorem']['sentence'](),
+        date: faker['date']['future'](),
+        overriddenDate: faker['date']['future'](),
+        dateTime: faker.lorem.word(),
+        ...overrides,
     };
 };
 
 export const aC = (overrides?: Partial<C>): C => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
-        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : faker['helpers']['arrayElement'](...[[\\"active\\",\\"disabled\\"]]),
+        id: faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: faker['lorem']['sentence'](),
+        enum: faker['helpers']['arrayElement'](...[[\\"active\\",\\"disabled\\"]]),
+        ...overrides,
     };
 };
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -1332,7 +1375,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 
@@ -1377,7 +1421,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1420,7 +1465,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1463,7 +1509,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1506,7 +1553,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1549,7 +1597,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1592,7 +1641,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1602,37 +1652,41 @@ exports[`per type field generation with faker without dynamic values can overwri
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'Word',
+        id: 1,
+        str: 'A sentence',
+        email: 'A sentence',
+        date: \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: 'Word',
+        ...overrides,
     };
 };
 
 export const aB = (overrides?: Partial<B>): B => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
-        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
-        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'Word',
+        id: 1,
+        str: 'A sentence',
+        email: 'A sentence',
+        date: \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: 'Word',
+        ...overrides,
     };
 };
 
 export const aC = (overrides?: Partial<C>): C => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
-        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : 'my@email.com',
+        id: 1,
+        str: 'A sentence',
+        enum: 'my@email.com',
+        ...overrides,
     };
 };
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "
@@ -1675,7 +1729,8 @@ export const aC = (overrides?: Partial<C>): C => {
 
 export const aD = (overrides?: Partial<D>): D => {
     return {
-        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+        nested: aC(),
+        ...overrides,
     };
 };
 "

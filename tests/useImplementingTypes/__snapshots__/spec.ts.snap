@@ -4,60 +4,68 @@ exports[`should support useImplementingTypes 1`] = `
 "
 export const mockAConfig = (overrides?: Partial<AConfig>): AConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
+        testTypes: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockField = (overrides?: Partial<Field>): Field => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
+        testTypes: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockAction = (overrides?: Partial<Action>): Action => {
     return {
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : [TestObj.Test],
+        action: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
-        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),
-        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockTestAConfig() || mockTestTwoAConfig()],
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockTestTwoAConfig(),
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockTestAction(),
+        id: 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: 'ea',
+        obj: mockB(),
+        config: mockTestAConfig() || mockTestTwoAConfig(),
+        configArray: [mockTestAConfig() || mockTestTwoAConfig()],
+        field: mockTestTwoAConfig(),
+        action: mockTestAction(),
+        ...overrides,
     };
 };
 
 export const mockB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: 696,
+        flt: 7.55,
+        bool: false,
+        ...overrides,
     };
 };
 
 export const mockTestAConfig = (overrides?: Partial<TestAConfig>): TestAConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
-        active: overrides && overrides.hasOwnProperty('active') ? overrides.active! : true,
+        testTypes: [TestObj.Test],
+        active: true,
+        ...overrides,
     };
 };
 
 export const mockTestTwoAConfig = (overrides?: Partial<TestTwoAConfig>): TestTwoAConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
-        username: overrides && overrides.hasOwnProperty('username') ? overrides.username! : 'et',
+        testTypes: [TestObj.Test],
+        username: 'et',
+        ...overrides,
     };
 };
 
 export const mockTestAction = (overrides?: Partial<TestAction>): TestAction => {
     return {
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : [TestObj.Test],
-        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'voluptate',
+        action: [TestObj.Test],
+        createdAt: 'voluptate',
+        ...overrides,
     };
 };
 "
@@ -67,60 +75,68 @@ exports[`shouldn't support useImplementingTypes 1`] = `
 "
 export const mockAConfig = (overrides?: Partial<AConfig>): AConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
+        testTypes: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockField = (overrides?: Partial<Field>): Field => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
+        testTypes: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockAction = (overrides?: Partial<Action>): Action => {
     return {
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : [TestObj.Test],
+        action: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
-        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockAConfig(),
-        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockAConfig()],
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockField(),
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockAction(),
+        id: 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: 'ea',
+        obj: mockB(),
+        config: mockAConfig(),
+        configArray: [mockAConfig()],
+        field: mockField(),
+        action: mockAction(),
+        ...overrides,
     };
 };
 
 export const mockB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: 696,
+        flt: 7.55,
+        bool: false,
+        ...overrides,
     };
 };
 
 export const mockTestAConfig = (overrides?: Partial<TestAConfig>): TestAConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
-        active: overrides && overrides.hasOwnProperty('active') ? overrides.active! : true,
+        testTypes: [TestObj.Test],
+        active: true,
+        ...overrides,
     };
 };
 
 export const mockTestTwoAConfig = (overrides?: Partial<TestTwoAConfig>): TestTwoAConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
-        username: overrides && overrides.hasOwnProperty('username') ? overrides.username! : 'et',
+        testTypes: [TestObj.Test],
+        username: 'et',
+        ...overrides,
     };
 };
 
 export const mockTestAction = (overrides?: Partial<TestAction>): TestAction => {
     return {
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : [TestObj.Test],
-        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'voluptate',
+        action: [TestObj.Test],
+        createdAt: 'voluptate',
+        ...overrides,
     };
 };
 "
@@ -130,60 +146,68 @@ exports[`support useImplementingTypes with fieldGeneration prop 1`] = `
 "
 export const mockAConfig = (overrides?: Partial<AConfig>): AConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
+        testTypes: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockField = (overrides?: Partial<Field>): Field => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
+        testTypes: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockAction = (overrides?: Partial<Action>): Action => {
     return {
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : [TestObj.Test],
+        action: [TestObj.Test],
+        ...overrides,
     };
 };
 
 export const mockA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
-        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
-        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Karelle_Kassulke@Carolyne.io',
-        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockTestAConfig() || mockTestTwoAConfig()],
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockTestTwoAConfig(),
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockTestAction(),
+        id: 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: 'ea',
+        obj: mockB(),
+        config: 'Karelle_Kassulke@Carolyne.io',
+        configArray: [mockTestAConfig() || mockTestTwoAConfig()],
+        field: mockTestTwoAConfig(),
+        action: mockTestAction(),
+        ...overrides,
     };
 };
 
 export const mockB = (overrides?: Partial<B>): B => {
     return {
-        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
-        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+        int: 696,
+        flt: 7.55,
+        bool: false,
+        ...overrides,
     };
 };
 
 export const mockTestAConfig = (overrides?: Partial<TestAConfig>): TestAConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
-        active: overrides && overrides.hasOwnProperty('active') ? overrides.active! : true,
+        testTypes: [TestObj.Test],
+        active: true,
+        ...overrides,
     };
 };
 
 export const mockTestTwoAConfig = (overrides?: Partial<TestTwoAConfig>): TestTwoAConfig => {
     return {
-        testTypes: overrides && overrides.hasOwnProperty('testTypes') ? overrides.testTypes! : [TestObj.Test],
-        username: overrides && overrides.hasOwnProperty('username') ? overrides.username! : 'et',
+        testTypes: [TestObj.Test],
+        username: 'et',
+        ...overrides,
     };
 };
 
 export const mockTestAction = (overrides?: Partial<TestAction>): TestAction => {
     return {
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : [TestObj.Test],
-        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'voluptate',
+        action: [TestObj.Test],
+        createdAt: 'voluptate',
+        ...overrides,
     };
 };
 "
