@@ -338,6 +338,15 @@ it('should add typesPrefix to all types when option is specified', async () => {
     expect(result).toMatchSnapshot();
 });
 
+it('should add typesPrefix to terminating circular relationships', async () => {
+    const result = await plugin(testSchema, [], { typesPrefix: 'Api.', terminateCircularRelationships: true });
+
+    expect(result).toBeDefined();
+    expect(result).toMatch(/as Api.User/);
+    expect(result).not.toMatch(/as User/);
+    expect(result).toMatchSnapshot();
+});
+
 it('should add typesPrefix to imports', async () => {
     const result = await plugin(testSchema, [], { typesPrefix: 'Api.', typesFile: './types/graphql.ts' });
 

@@ -635,6 +635,105 @@ export const aQuery = (overrides?: Partial<Api.Query>): Api.Query => {
 "
 `;
 
+exports[`should add typesPrefix to terminating circular relationships 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Api.Avatar>, _relationshipsToOmit: Set<string> = new Set()): Api.Avatar => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Avatar');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0550ff93-dd31-49b4-8c38-ff1cb68bdc38',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'aliquid',
+    };
+};
+
+export const aUser = (overrides?: Partial<Api.User>, _relationshipsToOmit: Set<string> = new Set()): Api.User => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('User');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a5756f00-41a6-422a-8a7d-d13ee6a63750',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '1970-01-09T16:33:21.532Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'libero',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Api.Avatar : anAvatar({}, relationshipsToOmit),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('CamelCaseThing') ? {} as Api.CamelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : relationshipsToOmit.has('Avatar') ? {} as Api.Avatar : anAvatar({}, relationshipsToOmit),
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<Api.WithAvatar>, _relationshipsToOmit: Set<string> = new Set()): Api.WithAvatar => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('WithAvatar');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '89f515e7-31e0-461d-a230-c4c7f4dafc5c',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Api.Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<Api.CamelCaseThing>, _relationshipsToOmit: Set<string> = new Set()): Api.CamelCaseThing => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('CamelCaseThing');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '345b9cf9-00fa-4974-800f-aeee5ee7fd42',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<Api.PrefixedResponse>, _relationshipsToOmit: Set<string> = new Set()): Api.PrefixedResponse => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('PrefixedResponse');
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'sunt',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<Api.AbcType>, _relationshipsToOmit: Set<string> = new Set()): Api.AbcType => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('AbcType');
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'sit',
+    };
+};
+
+export const aListType = (overrides?: Partial<Api.ListType>, _relationshipsToOmit: Set<string> = new Set()): Api.ListType => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('ListType');
+    return {
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['eum'],
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>, _relationshipsToOmit: Set<string> = new Set()): Api.UpdateUserInput => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('UpdateUserInput');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1d6a9360-c92b-4660-8e5f-04155047bddc',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'qui',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Api.Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Api.Mutation>, _relationshipsToOmit: Set<string> = new Set()): Api.Mutation => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Mutation');
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.has('User') ? {} as Api.User : aUser({}, relationshipsToOmit),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Api.Query>, _relationshipsToOmit: Set<string> = new Set()): Api.Query => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Query');
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as Api.User : aUser({}, relationshipsToOmit),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('PrefixedResponse') ? {} as Api.PrefixedResponse : aPrefixedResponse({}, relationshipsToOmit),
+    };
+};
+"
+`;
+
 exports[`should correctly generate the \`casual\` data for a function with arguments scalar mapping 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {

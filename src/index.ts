@@ -356,11 +356,9 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                     opts,
                     null,
                     () =>
-                        `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
-                            name,
-                            casedName,
-                            opts.prefix,
-                        )}({}, relationshipsToOmit)`,
+                        `relationshipsToOmit.has('${casedName}') ? {} as ${
+                            opts.typesPrefix ?? ''
+                        }${casedName} : ${toMockName(name, casedName, opts.prefix)}({}, relationshipsToOmit)`,
                 );
             } else {
                 return handleValueGeneration(opts, null, () => `${toMockName(name, casedName, opts.prefix)}()`);
