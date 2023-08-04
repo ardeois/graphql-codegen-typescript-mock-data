@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should support useImplementingTypes and terminateCircularRelationships at the same time 1`] = `
+"
+export const mockQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Set<string> = new Set()): Query => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Query');
+    return {
+        getUser: overrides && overrides.hasOwnProperty('getUser') ? overrides.getUser! : relationshipsToOmit.has('User') ? {} as User : mockUser({}, relationshipsToOmit),
+    };
+};
+
+export const mockUser = (overrides?: Partial<User>, _relationshipsToOmit: Set<string> = new Set()): User => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('User');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'est',
+        events: overrides && overrides.hasOwnProperty('events') ? overrides.events! : [relationshipsToOmit.has('MeetingEvent') ? {} as MeetingEvent : mockMeetingEvent({}, relationshipsToOmit) || relationshipsToOmit.has('OtherEvent') ? {} as OtherEvent : mockOtherEvent({}, relationshipsToOmit)],
+    };
+};
+
+export const mockEvent = (overrides?: Partial<Event>, _relationshipsToOmit: Set<string> = new Set()): Event => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Event');
+    return {
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'sunt',
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'harum',
+        timeZone: overrides && overrides.hasOwnProperty('timeZone') ? overrides.timeZone! : 'voluptatem',
+    };
+};
+
+export const mockMeetingEvent = (overrides?: Partial<MeetingEvent>, _relationshipsToOmit: Set<string> = new Set()): MeetingEvent => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('MeetingEvent');
+    return {
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'quae',
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'aspernatur',
+        timeZone: overrides && overrides.hasOwnProperty('timeZone') ? overrides.timeZone! : 'quos',
+        event: overrides && overrides.hasOwnProperty('event') ? overrides.event! : relationshipsToOmit.has('MeetingEvent') ? {} as MeetingEvent : mockMeetingEvent({}, relationshipsToOmit) || relationshipsToOmit.has('OtherEvent') ? {} as OtherEvent : mockOtherEvent({}, relationshipsToOmit),
+    };
+};
+
+export const mockOtherEvent = (overrides?: Partial<OtherEvent>, _relationshipsToOmit: Set<string> = new Set()): OtherEvent => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('OtherEvent');
+    return {
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'ut',
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'neque',
+        timeZone: overrides && overrides.hasOwnProperty('timeZone') ? overrides.timeZone! : 'aut',
+        somethingElse: overrides && overrides.hasOwnProperty('somethingElse') ? overrides.somethingElse! : 'ut',
+    };
+};
+"
+`;
