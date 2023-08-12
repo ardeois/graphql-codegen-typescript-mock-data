@@ -82,7 +82,7 @@ const hashedString = (value: string) => {
     return hash;
 };
 
-const getGeneratorDefinitions = (value: GeneratorOptions): GeneratorDefinition[] | undefined => {
+const getGeneratorDefinition = (value: GeneratorOptions): GeneratorDefinition[] | undefined => {
     if (value === undefined) {
         return undefined;
     }
@@ -283,12 +283,12 @@ const handleValueGeneration = (
     if (opts.fieldGeneration) {
         // Check for a specific generation for the type & field
         if (opts.typeName in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration[opts.typeName]) {
-            const generatorDefinitions = getGeneratorDefinitions(opts.fieldGeneration[opts.typeName][opts.fieldName]);
+            const generatorDefinitions = getGeneratorDefinition(opts.fieldGeneration[opts.typeName][opts.fieldName]);
             return getCustomValue(generatorDefinitions, opts);
         }
         // Check for a general field generation definition
         if ('_all' in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration['_all']) {
-            const generatorDefinitions = getGeneratorDefinitions(opts.fieldGeneration['_all'][opts.fieldName]);
+            const generatorDefinitions = getGeneratorDefinition(opts.fieldGeneration['_all'][opts.fieldName]);
             return getCustomValue(generatorDefinitions, opts);
         }
     }
@@ -326,23 +326,23 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String': {
-            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['String']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['String']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.word);
         }
         case 'Float': {
-            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['Float']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Float']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.float);
         }
         case 'ID': {
-            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['ID']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['ID']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.uuid);
         }
         case 'Boolean': {
-            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['Boolean']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Boolean']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.boolean);
         }
         case 'Int': {
-            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['Int']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Int']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.integer);
         }
         default: {
@@ -377,7 +377,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         });
                     case 'scalar': {
                         const customScalar = opts.customScalars
-                            ? getGeneratorDefinitions(opts.customScalars[foundType.name])
+                            ? getGeneratorDefinition(opts.customScalars[foundType.name])
                             : null;
 
                         // it's a scalar, let's use a string as a value if there is no custom
