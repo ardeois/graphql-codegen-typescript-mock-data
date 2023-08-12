@@ -82,17 +82,24 @@ const hashedString = (value: string) => {
     return hash;
 };
 
-const getGeneratorDefinition = (value: GeneratorDefinition | GeneratorName): GeneratorDefinition => {
-    if (typeof value === 'string') {
-        return {
-            generator: value,
-            arguments: [],
-        };
+const getGeneratorDefinitions = (value: GeneratorOptions): GeneratorDefinition[] | undefined => {
+    if (value === undefined) {
+        return undefined;
     }
-    return value;
+    return (Array.isArray(value) ? value : [value]).map((v) => {
+        if (typeof v === 'string') {
+            return {
+                generator: v,
+                arguments: [],
+            };
+        }
+        return v;
+    });
 };
 
-const getCasualCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
+const getCasualCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
+    // TODO
+    const generatorDefinition = generatorDefinitions[0];
     // If there is a mapping to a `casual` type, then use it and make sure
     // to call it if it's a function
     const embeddedGenerator = casual[generatorDefinition.generator];
@@ -161,7 +168,9 @@ const getFakerGenerators = (generatorName: GeneratorName) => {
     return { embeddedGenerator: null, dynamicGenerator: null };
 };
 
-const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
+const getFakerCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
+    // TODO
+    const generatorDefinition = generatorDefinitions[0];
     // If there is a mapping to a `faker` type, then use it
     const { embeddedGenerator, dynamicGenerator } = getFakerGenerators(generatorDefinition.generator);
     if (!embeddedGenerator && generatorDefinition.generator) {
@@ -206,13 +215,13 @@ const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Opt
     return value;
 };
 
-const getCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
+const getCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
     if (opts.generateLibrary === 'casual') {
-        return getCasualCustomValue(generatorDefinition, opts);
+        return getCasualCustomValue(generatorDefinitions, opts);
     }
 
     if (opts.generateLibrary === 'faker') {
-        return getFakerCustomValue(generatorDefinition, opts);
+        return getFakerCustomValue(generatorDefinitions, opts);
     }
 
     throw `Unknown generator library: ${opts.generateLibrary}`;
@@ -220,19 +229,19 @@ const getCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<
 
 const handleValueGeneration = (
     opts: Options<NamedTypeNode>,
-    customScalar: GeneratorDefinition,
+    customScalar: GeneratorDefinition[],
     baseGenerator: () => void,
 ) => {
     if (opts.fieldGeneration) {
         // Check for a specific generation for the type & field
         if (opts.typeName in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration[opts.typeName]) {
-            const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration[opts.typeName][opts.fieldName]);
-            return getCustomValue(generatorDefinition, opts);
+            const generatorDefinitions = getGeneratorDefinitions(opts.fieldGeneration[opts.typeName][opts.fieldName]);
+            return getCustomValue(generatorDefinitions, opts);
         }
         // Check for a general field generation definition
         if ('_all' in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration['_all']) {
-            const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration['_all'][opts.fieldName]);
-            return getCustomValue(generatorDefinition, opts);
+            const generatorDefinitions = getGeneratorDefinitions(opts.fieldGeneration['_all'][opts.fieldName]);
+            return getCustomValue(generatorDefinitions, opts);
         }
     }
     if (customScalar) {
@@ -269,23 +278,23 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
     const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
     switch (name) {
         case 'String': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['String']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['String']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.word);
         }
         case 'Float': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Float']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['Float']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.float);
         }
         case 'ID': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['ID']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['ID']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.uuid);
         }
         case 'Boolean': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Boolean']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['Boolean']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.boolean);
         }
         case 'Int': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Int']) : null;
+            const customScalar = opts.customScalars ? getGeneratorDefinitions(opts.customScalars['Int']) : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.integer);
         }
         default: {
@@ -320,7 +329,7 @@ const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean =
                         });
                     case 'scalar': {
                         const customScalar = opts.customScalars
-                            ? getGeneratorDefinition(opts.customScalars[foundType.name])
+                            ? getGeneratorDefinitions(opts.customScalars[foundType.name])
                             : null;
 
                         // it's a scalar, let's use a string as a value if there is no custom
@@ -494,7 +503,7 @@ type GeneratorDefinition = {
         arguments?: unknown[] | unknown;
     };
 };
-type GeneratorOptions = GeneratorName | GeneratorDefinition;
+type GeneratorOptions = GeneratorName | GeneratorDefinition | GeneratorName[] | GeneratorDefinition[];
 
 type ScalarMap = {
     [name: string]: GeneratorOptions;
