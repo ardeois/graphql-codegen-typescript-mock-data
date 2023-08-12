@@ -1,4 +1,5 @@
-import { plugin } from '../../src';
+import { faker } from '@faker-js/faker';
+import { TypescriptMocksPluginConfig, plugin } from '../../src';
 import testSchema from './schema';
 
 it('should generate custom scalars for native and custom types using casual', async () => {
@@ -136,6 +137,36 @@ it('should generate custom scalars for native and custom types using faker', asy
     expect(result).toContain("int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,");
 
     expect(result).toMatchSnapshot();
+});
+
+describe('choosing random generator using faker', () => {
+    const config = {
+        generateLibrary: 'faker',
+        scalars: {
+            String: ['lorem.sentence', 'lorem.words'],
+        },
+    } as TypescriptMocksPluginConfig;
+
+    beforeEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockReturnValue(0.51);
+    });
+
+    afterEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockRestore();
+    });
+
+    it('should generate random scalars using faker', async () => {
+        const result = await plugin(testSchema, [], config);
+
+        expect(result).toBeDefined();
+
+        // String
+        expect(result).toContain(
+            "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas accusamus eos',",
+        );
+
+        expect(result).toMatchSnapshot();
+    });
 });
 
 it('should generate dynamic custom scalars for native and custom types using faker', async () => {

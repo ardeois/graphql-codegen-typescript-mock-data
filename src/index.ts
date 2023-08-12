@@ -97,9 +97,7 @@ const getGeneratorDefinitions = (value: GeneratorOptions): GeneratorDefinition[]
     });
 };
 
-const getCasualCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
-    // TODO
-    const generatorDefinition = generatorDefinitions[0];
+const getCasualCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
     // If there is a mapping to a `casual` type, then use it and make sure
     // to call it if it's a function
     const embeddedGenerator = casual[generatorDefinition.generator];
@@ -168,9 +166,7 @@ const getFakerGenerators = (generatorName: GeneratorName) => {
     return { embeddedGenerator: null, dynamicGenerator: null };
 };
 
-const getFakerCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
-    // TODO
-    const generatorDefinition = generatorDefinitions[0];
+const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
     // If there is a mapping to a `faker` type, then use it
     const { embeddedGenerator, dynamicGenerator } = getFakerGenerators(generatorDefinition.generator);
     if (!embeddedGenerator && generatorDefinition.generator) {
@@ -215,16 +211,50 @@ const getFakerCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: 
     return value;
 };
 
+const weightedChoice = (weights: number[], random: () => number) => {
+    const totalWeight = weights.reduce((acc, weight) => acc + weight, 0);
+    let randomNum = random() * totalWeight;
+
+    for (let i = 0; i < weights.length; i++) {
+        if (randomNum < weights[i]) {
+            return i;
+        }
+        randomNum -= weights[i];
+    }
+
+    throw new Error('Something went wrong in weightedChoice.');
+};
+
+const getRandomFunction = (opts: Options<NamedTypeNode>) => {
+    switch (opts.generateLibrary) {
+        case 'casual':
+            throw `Not implemented: ${opts.generateLibrary}`;
+        case 'faker':
+            return faker.datatype.float;
+        default:
+            throw `Unknown generator library: ${opts.generateLibrary}`;
+    }
+};
 const getCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
-    if (opts.generateLibrary === 'casual') {
-        return getCasualCustomValue(generatorDefinitions, opts);
-    }
+    const values = generatorDefinitions.map((generatorDefinition) => {
+        if (opts.generateLibrary === 'casual') {
+            return getCasualCustomValue(generatorDefinition, opts);
+        }
 
-    if (opts.generateLibrary === 'faker') {
-        return getFakerCustomValue(generatorDefinitions, opts);
-    }
+        if (opts.generateLibrary === 'faker') {
+            return getFakerCustomValue(generatorDefinition, opts);
+        }
 
-    throw `Unknown generator library: ${opts.generateLibrary}`;
+        throw `Unknown generator library: ${opts.generateLibrary}`;
+    });
+
+    if (values.length === 1) {
+        return values[0];
+    }
+    const randomFunction = getRandomFunction(opts);
+    const weights = generatorDefinitions.map((generatorDefinition) => generatorDefinition.weight ?? 1);
+    const choice = weightedChoice(weights, randomFunction);
+    return values[choice];
 };
 
 const handleValueGeneration = (
@@ -502,6 +532,7 @@ type GeneratorDefinition = {
         function: string;
         arguments?: unknown[] | unknown;
     };
+    weight?: number;
 };
 type GeneratorOptions = GeneratorName | GeneratorDefinition | GeneratorName[] | GeneratorDefinition[];
 

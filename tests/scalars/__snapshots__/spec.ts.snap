@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`choosing random generator using faker should generate random scalars using faker 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'dae147b0-0c04-459e-92db-724dd87433b4',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas accusamus eos',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'dicta',
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 695,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 0.51,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : true,
+    };
+};
+"
+`;
+
 exports[`should generate custom scalars for native and custom types using casual 1`] = `
 "
 export const anA = (overrides?: Partial<A>): A => {
