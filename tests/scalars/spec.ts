@@ -219,3 +219,45 @@ it('should generate dynamic custom scalars for native and custom types using fak
 
     expect(result).toMatchSnapshot();
 });
+
+describe('choosing random dynamic generator using faker', () => {
+    const config = {
+        generateLibrary: 'faker',
+        defineWeightedChoice: true,
+        dynamicValues: true,
+        scalars: {
+            String: [
+                {
+                    generator: 'lorem.sentence',
+                    arguments: [3],
+                },
+                {
+                    generator: 'lorem.words',
+                    arguments: [3],
+                    weight: 99,
+                },
+            ],
+        },
+    } as TypescriptMocksPluginConfig;
+
+    beforeEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockReturnValue(0.02);
+    });
+
+    afterEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockRestore();
+    });
+
+    it('should generate random scalars using faker', async () => {
+        const result = await plugin(testSchema, [], config);
+
+        expect(result).toBeDefined();
+
+        // String
+        expect(result).toContain(
+            "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => faker['lorem']['sentence'](...[3]), () => faker['lorem']['words'](...[3])][weightedChoice([1,99], () => faker.datatype.float({ max: 1.0 }))]()",
+        );
+
+        expect(result).toMatchSnapshot();
+    });
+});

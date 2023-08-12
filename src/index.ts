@@ -216,7 +216,7 @@ const weightedChoice = (weights: number[], random: () => number) => {
     let randomNum = random() * totalWeight;
 
     for (let i = 0; i < weights.length; i++) {
-        if (randomNum < weights[i]) {
+        if (randomNum <= weights[i]) {
             return i;
         }
         randomNum -= weights[i];
@@ -225,16 +225,28 @@ const weightedChoice = (weights: number[], random: () => number) => {
     throw new Error('Something went wrong in weightedChoice.');
 };
 
+const getRandomFunctionDynamic = (opts: Options<NamedTypeNode>) => {
+    switch (opts.generateLibrary) {
+        case 'casual':
+            throw `Not implemented: ${opts.generateLibrary}`;
+        case 'faker':
+            return 'faker.datatype.float({ max: 1.0 })';
+        default:
+            throw `Unknown generator library: ${opts.generateLibrary}`;
+    }
+};
+
 const getRandomFunction = (opts: Options<NamedTypeNode>) => {
     switch (opts.generateLibrary) {
         case 'casual':
             throw `Not implemented: ${opts.generateLibrary}`;
         case 'faker':
-            return faker.datatype.float;
+            return () => faker.datatype.float({ max: 1.0 });
         default:
             throw `Unknown generator library: ${opts.generateLibrary}`;
     }
 };
+
 const getCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
     const values = generatorDefinitions.map((generatorDefinition) => {
         if (opts.generateLibrary === 'casual') {
@@ -251,10 +263,16 @@ const getCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Optio
     if (values.length === 1) {
         return values[0];
     }
-    const randomFunction = getRandomFunction(opts);
+
     const weights = generatorDefinitions.map((generatorDefinition) => generatorDefinition.weight ?? 1);
-    const choice = weightedChoice(weights, randomFunction);
-    return values[choice];
+    if (opts.dynamicValues) {
+        const choices = values.map((value) => `() => ${value}`);
+        const randomCall = `() => ${getRandomFunctionDynamic(opts)}`;
+        const weightedChoice = `weightedChoice(${JSON.stringify(weights)}, ${randomCall})`;
+        return `[${choices.join(', ')}][${weightedChoice}]()`;
+    }
+
+    return values[weightedChoice(weights, getRandomFunction(opts))];
 };
 
 const handleValueGeneration = (
@@ -565,6 +583,7 @@ export interface TypescriptMocksPluginConfig {
     enumsAsTypes?: boolean;
     useImplementingTypes?: boolean;
     defaultNullableToNull?: boolean;
+    defineWeightedChoice?: boolean;
 }
 
 interface TypeItem {
@@ -825,6 +844,9 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     if (dynamicValues) mockFile += `${functionTokens.import}\n`;
     mockFile += typesFileImport;
     if (dynamicValues) mockFile += `\n${functionTokens.seed}\n`;
+    if (dynamicValues && config.defineWeightedChoice) {
+        mockFile += `\nconst weightedChoice = ${weightedChoice.toString()}\n`;
+    }
     mockFile += mockFns;
     if (dynamicValues) mockFile += `\n\n${functionTokens.seedFunction}`;
     mockFile += '\n';

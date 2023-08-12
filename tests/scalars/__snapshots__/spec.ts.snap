@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`choosing random dynamic generator using faker should generate random scalars using faker 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+const weightedChoice = (weights, random) => {
+    const totalWeight = weights.reduce((acc, weight) => acc + weight, 0);
+    let randomNum = random() * totalWeight;
+    for (let i = 0; i < weights.length; i++) {
+        if (randomNum < weights[i]) {
+            return i;
+        }
+        randomNum -= weights[i];
+    }
+    throw new Error('Something went wrong in weightedChoice.');
+}
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker.datatype.uuid(),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => faker['lorem']['sentence'](...[3]), () => faker['lorem']['words'](...[3])][weightedChoice([1,99], () => faker.datatype.float({ max: 1.0 }))](),
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : faker.lorem.word(),
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker.datatype.number({ min: 0, max: 9999 }),
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : faker.datatype.float({ min: 0, max: 10, precision: 0.1 }),
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : faker.datatype.boolean(),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
 exports[`choosing random generator using faker should generate random scalars using faker 1`] = `
 "
 export const anA = (overrides?: Partial<A>): A => {
