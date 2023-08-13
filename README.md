@@ -206,9 +206,21 @@ For detailed configuration options, see [GeneratorOptions](#generatoroptions-typ
 Select a library to generate mock values. The default is [casual](https://github.com/boo1ean/casual), Other options include [faker](https://github.com/faker-js/faker).
 casual dependents on Node API and cannot be executed in a browser. faker is useful when you want to use a mock function with the dynamicValues option enabled in the browser.
 
+### weight (`number`, defaultValue: `1`)
+
+If multiple generator options are provided for a scalar or field, specifies the relative chances of a generator being chosen at random.
+If all choices the same weight, they are equally likely to be chosen; the default is 1.
+Providing three generator options with weights of 2, 1, and 1, for instance, means the first will be chosen half the time and the others one-quarter of the time each.
+The `weight` is ignored if only a single generator option is provided.
+
 ### `GeneratorOptions` type
 
 This type is used in `scalars` and `fieldGeneration` options.
+
+You can specify an array of generator options, and one will be chosen at random.
+By default, the choices are equally likely.
+You can specify a `weight` option to change how likely a given generator is to be chosen; if not specified, a weight of 1 is assumed.
+Both the shortcut string-only and full `GeneratorOptions` object are supported if multiple generators are supplied.
 
 Examples using **casual**
 
@@ -314,6 +326,25 @@ fieldName: # gets translated to casual.date().toLocaleDateString('en_GB)
 ```yaml
 # gets translated as is
 fieldName: arrayBufferGenerator()
+```
+
+**Multiple generators**
+
+```yaml
+fieldName: # will be null 3/4 of the time, contain the output of lorem.paragraphs() the other 1/4
+  - generator: 'null'
+    weight: 3
+  - lorem.paragraphs
+```
+
+which could also be written as:
+
+```yaml
+fieldName: # will be null 3/4 of the time, contain the output of lorem.paragraphs() the other 1/4
+  - 'null'
+  - 'null'
+  - 'null'
+  - lorem.paragraphs
 ```
 
 ## Examples of usage
