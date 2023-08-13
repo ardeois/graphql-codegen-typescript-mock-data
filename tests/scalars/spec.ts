@@ -47,6 +47,34 @@ it('should generate custom scalars for native and custom types using casual', as
     expect(result).toMatchSnapshot();
 });
 
+describe('choosing random generator using casual', () => {
+    const config = {
+        generateLibrary: 'casual',
+        scalars: {
+            String: ['string', 'word'],
+        },
+    } as TypescriptMocksPluginConfig;
+
+    beforeEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockReturnValue(0.51);
+    });
+
+    afterEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockRestore();
+    });
+
+    it('should generate random scalars using casual', async () => {
+        const result = await plugin(testSchema, [], config);
+
+        expect(result).toBeDefined();
+
+        // String
+        expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas',");
+
+        expect(result).toMatchSnapshot();
+    });
+});
+
 it('should generate dynamic custom scalars for native and custom types using casual', async () => {
     const result = await plugin(testSchema, [], {
         dynamicValues: true,
@@ -93,6 +121,48 @@ it('should generate dynamic custom scalars for native and custom types using cas
     );
 
     expect(result).toMatchSnapshot();
+});
+
+describe('choosing random dynamic generator using casual', () => {
+    const config = {
+        generateLibrary: 'casual',
+        defineWeightedChoice: true,
+        dynamicValues: true,
+        scalars: {
+            ID: [
+                {
+                    generator: 'integer',
+                    arguments: [101, 1000],
+                },
+                {
+                    generator: 'integer',
+                    arguments: [1, 100],
+                    weight: 99,
+                },
+            ],
+        },
+    } as TypescriptMocksPluginConfig;
+
+    beforeEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockReturnValue(0.02);
+    });
+
+    afterEach(() => {
+        jest.spyOn(faker.datatype, 'float').mockRestore();
+    });
+
+    it('should generate random scalars using casual', async () => {
+        const result = await plugin(testSchema, [], config);
+
+        expect(result).toBeDefined();
+
+        // String
+        expect(result).toContain(
+            "id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : [() => casual['integer'](...[101,1000]), () => casual['integer'](...[1,100])][weightedChoice([1,99], () => casual.double(0, 1.0))]()",
+        );
+
+        expect(result).toMatchSnapshot();
+    });
 });
 
 it('should generate custom scalars for native and custom types using faker', async () => {

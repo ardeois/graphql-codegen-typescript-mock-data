@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`choosing random dynamic generator using casual should generate random scalars using casual 1`] = `
+"import casual from 'casual';
+
+casual.seed(0);
+
+const weightedChoice = (weights, random) => {
+    const totalWeight = weights.reduce((acc, weight) => acc + weight, 0);
+    let randomNum = random() * totalWeight;
+    for (let i = 0; i < weights.length; i++) {
+        if (randomNum <= weights[i]) {
+            return i;
+        }
+        randomNum -= weights[i];
+    }
+    throw new Error('Something went wrong in weightedChoice.');
+}
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : [() => casual['integer'](...[101,1000]), () => casual['integer'](...[1,100])][weightedChoice([1,99], () => casual.double(0, 1.0))](),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual.word,
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : casual.word,
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : casual.integer(0, 9999),
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : Math.round(casual.double(0, 10) * 100) / 100,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : casual.boolean,
+    };
+};
+
+export const seedMocks = (seed: number) => casual.seed(seed);
+"
+`;
+
 exports[`choosing random dynamic generator using faker should generate random scalars using faker 1`] = `
 "import { faker } from '@faker-js/faker';
 
@@ -9,7 +47,7 @@ const weightedChoice = (weights, random) => {
     const totalWeight = weights.reduce((acc, weight) => acc + weight, 0);
     let randomNum = random() * totalWeight;
     for (let i = 0; i < weights.length; i++) {
-        if (randomNum < weights[i]) {
+        if (randomNum <= weights[i]) {
             return i;
         }
         randomNum -= weights[i];
@@ -35,6 +73,27 @@ export const aB = (overrides?: Partial<B>): B => {
 };
 
 export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`choosing random generator using casual should generate random scalars using casual 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'dicta',
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
 "
 `;
 

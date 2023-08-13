@@ -228,7 +228,7 @@ const weightedChoice = (weights: number[], random: () => number) => {
 const getRandomFunctionDynamic = (opts: Options<NamedTypeNode>) => {
     switch (opts.generateLibrary) {
         case 'casual':
-            throw `Not implemented: ${opts.generateLibrary}`;
+            return 'casual.double(0, 1.0)';
         case 'faker':
             return 'faker.datatype.float({ max: 1.0 })';
         default:
@@ -239,7 +239,7 @@ const getRandomFunctionDynamic = (opts: Options<NamedTypeNode>) => {
 const getRandomFunction = (opts: Options<NamedTypeNode>) => {
     switch (opts.generateLibrary) {
         case 'casual':
-            throw `Not implemented: ${opts.generateLibrary}`;
+            return () => casual.double(0, 1.0);
         case 'faker':
             return () => faker.datatype.float({ max: 1.0 });
         default:
