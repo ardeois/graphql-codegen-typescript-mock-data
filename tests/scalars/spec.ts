@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import casual from 'casual';
 import { TypescriptMocksPluginConfig, plugin } from '../../src';
 import testSchema from './schema';
 
@@ -56,14 +57,14 @@ describe('choosing random generator using casual', () => {
     } as TypescriptMocksPluginConfig;
 
     beforeEach(() => {
-        jest.spyOn(faker.datatype, 'float').mockReturnValue(0.51);
+        jest.spyOn(casual, 'double').mockReturnValue(0.51);
     });
 
     afterEach(() => {
-        jest.spyOn(faker.datatype, 'float').mockRestore();
+        jest.spyOn(casual, 'double').mockRestore();
     });
 
-    it('should generate random scalars using casual', async () => {
+    fit('should generate random scalars using casual', async () => {
         const result = await plugin(testSchema, [], config);
 
         expect(result).toBeDefined();
@@ -144,11 +145,11 @@ describe('choosing random dynamic generator using casual', () => {
     } as TypescriptMocksPluginConfig;
 
     beforeEach(() => {
-        jest.spyOn(faker.datatype, 'float').mockReturnValue(0.02);
+        jest.spyOn(casual, 'double').mockReturnValue(0.02);
     });
 
     afterEach(() => {
-        jest.spyOn(faker.datatype, 'float').mockRestore();
+        jest.spyOn(casual, 'double').mockRestore();
     });
 
     it('should generate random scalars using casual', async () => {

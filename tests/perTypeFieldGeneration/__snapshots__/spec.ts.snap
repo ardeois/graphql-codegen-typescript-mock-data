@@ -1587,3 +1587,173 @@ export const aD = (overrides?: Partial<D>): D => {
 };
 "
 `;
+
+exports[`per-type random generator using casual with dynamic values should generate random fields using casual 1`] = `
+"import casual from 'casual';
+
+casual.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => casual['string'], () => casual['word']][weightedChoice([1,1], () => casual.double(0, 1.0))](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : casual.word,
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : new Date(casual.unix_time).toISOString(),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : new Date(casual.unix_time).toISOString(),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual.word,
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual.word,
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : casual.word,
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : new Date(casual.unix_time).toISOString(),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : new Date(casual.unix_time).toISOString(),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : casual.word,
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual.uuid,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual.word,
+        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
+export const seedMocks = (seed: number) => casual.seed(seed);
+"
+`;
+
+exports[`per-type random generator using casual without dynamic values should generate random fields using casual 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'vero',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-13T10:02:01.054Z',
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : '1970-01-10T09:04:53.325Z',
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'vel',
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2adf6f2a-dfd8-451a-bc13-cdc42cd4d792',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'consectetur',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'quibusdam',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-04T23:55:36.062Z',
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : '1970-01-17T10:09:47.625Z',
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'ut',
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd51e6316-92d8-4082-99dd-f8c5b2f9fb2a',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'voluptas',
+        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+"
+`;
+
+exports[`per-type random generator using faker with dynamic values should generate random fields using faker 1`] = `
+"import { faker } from '@faker-js/faker';
+
+faker.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => faker['lorem']['sentence'](), () => faker['lorem']['word']()][weightedChoice([1,1], () => faker.datatype.float({ max: 1.0 }))](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => faker['lorem']['word'](...[3]), () => faker['lorem']['sentence'](...[3])][weightedChoice([1,99], () => faker.datatype.float({ max: 1.0 }))](),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : faker['lorem']['sentence'](),
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : faker['date']['future'](),
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : faker['date']['future'](),
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : faker.lorem.word(),
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\\"min\\":1,\\"max\\":100}]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : faker['lorem']['sentence'](),
+        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+
+export const seedMocks = (seed: number) => faker.seed(seed);
+"
+`;
+
+exports[`per-type random generator using faker without dynamic values should generate random fields using faker 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Word',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'Word',
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'A sentence',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : \\"2050-01-01T00:00:00.000Z\\",
+        overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : \\"2050-01-01T00:00:00.000Z\\",
+        dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : 'Word',
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 1,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence',
+        enum: overrides && overrides.hasOwnProperty('enum') ? overrides.enum! : EnumExample.Lorem,
+    };
+};
+
+export const aD = (overrides?: Partial<D>): D => {
+    return {
+        nested: overrides && overrides.hasOwnProperty('nested') ? overrides.nested! : aC(),
+    };
+};
+"
+`;

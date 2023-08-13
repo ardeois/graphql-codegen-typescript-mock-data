@@ -1,3 +1,4 @@
+import casual from 'casual';
 import { plugin, TypescriptMocksPluginConfig } from '../../src';
 import testSchema from './schema';
 
@@ -14,6 +15,7 @@ jest.mock('@faker-js/faker', () => ({
         },
         datatype: {
             number: () => 1,
+            float: () => 0.51,
         },
         internet: {
             email: () => 'my@email.com',
@@ -429,6 +431,82 @@ describe('per type field generation with faker', () => {
     });
 });
 
+describe('per-type random generator using faker', () => {
+    const config = {
+        generateLibrary: 'faker',
+        scalars: {
+            String: 'lorem.sentence',
+            Date: 'date.future',
+            ID: {
+                generator: 'datatype.number',
+                arguments: [{ min: 1, max: 100 }],
+            },
+        },
+        fieldGeneration: {
+            A: { str: ['lorem.sentence', 'lorem.word'] },
+            B: {
+                str: [
+                    {
+                        generator: 'lorem.word',
+                        arguments: [3],
+                    },
+                    {
+                        generator: 'lorem.sentence',
+                        arguments: [3],
+                        weight: 99,
+                    },
+                ],
+            },
+        },
+    } as TypescriptMocksPluginConfig;
+
+    describe('with dynamic values', () => {
+        beforeAll(() => {
+            config.dynamicValues = true;
+        });
+
+        it('should generate random fields using faker', async () => {
+            const result = await plugin(testSchema, [], config);
+
+            expect(result).toBeDefined();
+
+            // A
+            expect(result).toContain(
+                "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => faker['lorem']['sentence'](), () => faker['lorem']['word']()][weightedChoice([1,1], () => faker.datatype.float({ max: 1.0 }))]()",
+            );
+
+            // B
+            expect(result).toContain(
+                "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => faker['lorem']['word'](...[3]), () => faker['lorem']['sentence'](...[3])][weightedChoice([1,99], () => faker.datatype.float({ max: 1.0 }))]()",
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+    });
+
+    describe('without dynamic values', () => {
+        beforeAll(() => {
+            config.dynamicValues = false;
+        });
+
+        it('should generate random fields using faker', async () => {
+            const result = await plugin(testSchema, [], config);
+
+            expect(result).toBeDefined();
+
+            // A
+            expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Word'");
+
+            // B
+            expect(result).toContain(
+                "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'A sentence'",
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+    });
+});
+
 describe('per type field generation with casual', () => {
     const config = {
         generateLibrary: 'casual',
@@ -824,6 +902,59 @@ describe('per type field generation with casual', () => {
             expect(result).toContain(
                 "dateTime: overrides && overrides.hasOwnProperty('dateTime') ? overrides.dateTime! : '39.000'",
             );
+
+            expect(result).toMatchSnapshot();
+        });
+    });
+});
+
+describe('per-type random generator using casual', () => {
+    const config = {
+        generateLibrary: 'casual',
+        fieldGeneration: {
+            A: { str: ['string', 'word'] },
+        },
+    } as TypescriptMocksPluginConfig;
+
+    beforeEach(() => {
+        jest.spyOn(casual, 'double').mockReturnValue(0.51);
+    });
+
+    afterEach(() => {
+        jest.spyOn(casual, 'double').mockRestore();
+    });
+
+    describe('with dynamic values', () => {
+        beforeAll(() => {
+            config.dynamicValues = true;
+        });
+
+        it('should generate random fields using casual', async () => {
+            const result = await plugin(testSchema, [], config);
+
+            expect(result).toBeDefined();
+
+            // String
+            expect(result).toContain(
+                "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : [() => casual['string'], () => casual['word']][weightedChoice([1,1], () => casual.double(0, 1.0))]()",
+            );
+
+            expect(result).toMatchSnapshot();
+        });
+    });
+
+    describe('without dynamic values', () => {
+        beforeAll(() => {
+            config.dynamicValues = false;
+        });
+
+        it('should generate random fields using casual', async () => {
+            const result = await plugin(testSchema, [], config);
+
+            expect(result).toBeDefined();
+
+            // String
+            expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas'");
 
             expect(result).toMatchSnapshot();
         });

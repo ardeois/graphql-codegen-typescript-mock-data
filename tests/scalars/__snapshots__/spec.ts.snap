@@ -90,7 +90,7 @@ export const anA = (overrides?: Partial<A>): A => {
 export const aB = (overrides?: Partial<B>): B => {
     return {
         int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : 696,
-        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 7.55,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : 0.51,
         bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
     };
 };
