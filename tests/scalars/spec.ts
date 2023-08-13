@@ -70,7 +70,7 @@ describe('choosing random generator using casual', () => {
         expect(result).toBeDefined();
 
         // String
-        expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas',");
+        expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea'");
 
         expect(result).toMatchSnapshot();
     });

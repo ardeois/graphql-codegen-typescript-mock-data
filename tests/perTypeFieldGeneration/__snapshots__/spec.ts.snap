@@ -1638,7 +1638,7 @@ exports[`per-type random generator using casual without dynamic values should ge
 export const anA = (overrides?: Partial<A>): A => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'vero',
         date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-13T10:02:01.054Z',
         overriddenDate: overrides && overrides.hasOwnProperty('overriddenDate') ? overrides.overriddenDate! : '1970-01-10T09:04:53.325Z',

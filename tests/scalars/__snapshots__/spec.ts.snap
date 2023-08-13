@@ -81,7 +81,7 @@ exports[`choosing random generator using casual should generate random scalars u
 export const anA = (overrides?: Partial<A>): A => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cae147b0-1c04-459e-82db-624dd87433b4',
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'quas',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
         anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'dicta',
     };

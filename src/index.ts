@@ -248,7 +248,9 @@ const getRandomFunction = (opts: Options<NamedTypeNode>) => {
 };
 
 const getCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Options<NamedTypeNode>) => {
-    const values = generatorDefinitions.map((generatorDefinition) => {
+    const weights = generatorDefinitions.map((generatorDefinition) => generatorDefinition.weight ?? 1);
+    const count = generatorDefinitions.length;
+    const getLibraryCustomValue = (generatorDefinition) => {
         if (opts.generateLibrary === 'casual') {
             return getCasualCustomValue(generatorDefinition, opts);
         }
@@ -258,21 +260,26 @@ const getCustomValue = (generatorDefinitions: GeneratorDefinition[], opts: Optio
         }
 
         throw `Unknown generator library: ${opts.generateLibrary}`;
-    });
+    };
 
-    if (values.length === 1) {
+    if (!opts.dynamicValues) {
+        // Not dynamic, so just pick one generator and call it.
+        const index = count === 1 ? 0 : weightedChoice(weights, getRandomFunction(opts));
+        const generatorDefinition = generatorDefinitions[index];
+        return getLibraryCustomValue(generatorDefinition);
+    }
+
+    const values = generatorDefinitions.map(getLibraryCustomValue);
+    if (count === 1) {
+        // The default (single generator) case.
         return values[0];
     }
 
-    const weights = generatorDefinitions.map((generatorDefinition) => generatorDefinition.weight ?? 1);
-    if (opts.dynamicValues) {
-        const choices = values.map((value) => `() => ${value}`);
-        const randomCall = `() => ${getRandomFunctionDynamic(opts)}`;
-        const weightedChoice = `weightedChoice(${JSON.stringify(weights)}, ${randomCall})`;
-        return `[${choices.join(', ')}][${weightedChoice}]()`;
-    }
-
-    return values[weightedChoice(weights, getRandomFunction(opts))];
+    // Generate call strings for each generator and choose one at runtime.
+    const choices = values.map((value) => `() => ${value}`);
+    const randomCall = `() => ${getRandomFunctionDynamic(opts)}`;
+    const weightedChoiceCall = `weightedChoice(${JSON.stringify(weights)}, ${randomCall})`;
+    return `[${choices.join(', ')}][${weightedChoiceCall}]()`;
 };
 
 const handleValueGeneration = (
