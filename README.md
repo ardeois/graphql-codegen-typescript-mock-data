@@ -213,6 +213,12 @@ If all choices the same weight, they are equally likely to be chosen; the defaul
 Providing three generator options with weights of 2, 1, and 1, for instance, means the first will be chosen half the time and the others one-quarter of the time each.
 The `weight` is ignored if only a single generator option is provided.
 
+### defineWeightedChoice (`boolean`, defaultValue: `false`)
+
+Provides a default implementation of the `weightedChoice` function, used when choosing a random generator if multiple options are provided for a field.
+This function is not used in the default scenario where only a single generator is provided for any given field.
+Instead of using the default, you may provide your own implementation with the signature `(weights: number[], random: () => number)`.
+
 ### `GeneratorOptions` type
 
 This type is used in `scalars` and `fieldGeneration` options.
@@ -221,6 +227,7 @@ You can specify an array of generator options, and one will be chosen at random.
 By default, the choices are equally likely.
 You can specify a `weight` option to change how likely a given generator is to be chosen; if not specified, a weight of 1 is assumed.
 Both the shortcut string-only and full `GeneratorOptions` object are supported if multiple generators are supplied.
+When providing multiple options, you must either specify `defineWeightedChoice: true` in your config or provide your own implementation of the `weightedhChoice` function.
 
 Examples using **casual**
 
