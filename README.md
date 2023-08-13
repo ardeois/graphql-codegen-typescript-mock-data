@@ -338,7 +338,7 @@ fieldName: arrayBufferGenerator()
 **Multiple generators**
 
 ```yaml
-fieldName: # will be null 3/4 of the time, contain the output of lorem.paragraphs() the other 1/4
+fieldName: # will be null 3/4 of the time, contain the output of faker.lorem.paragraphs() the other 1/4
   - generator: 'null'
     weight: 3
   - lorem.paragraphs
@@ -347,7 +347,7 @@ fieldName: # will be null 3/4 of the time, contain the output of lorem.paragraph
 which could also be written as:
 
 ```yaml
-fieldName: # will be null 3/4 of the time, contain the output of lorem.paragraphs() the other 1/4
+fieldName: # will be null 3/4 of the time, contain the output of faker.lorem.paragraphs() the other 1/4
   - 'null'
   - 'null'
   - 'null'
