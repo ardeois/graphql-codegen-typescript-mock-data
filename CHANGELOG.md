@@ -1,3 +1,15 @@
+# v3.5.1 (Thu Oct 12 2023)
+
+#### 🐛 Bug Fix
+
+- fix: update stale bot [#145](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/145) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v3.5.0 (Wed Apr 19 2023)
 
 #### 🚀 Enhancement
