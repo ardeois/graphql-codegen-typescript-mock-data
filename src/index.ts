@@ -92,7 +92,10 @@ const getGeneratorDefinition = (value: GeneratorDefinition | GeneratorName): Gen
     return value;
 };
 
-const getCasualCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
+const getCasualCustomValue = (
+    generatorDefinition: GeneratorDefinition,
+    opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>,
+) => {
     // If there is a mapping to a `casual` type, then use it and make sure
     // to call it if it's a function
     const embeddedGenerator = casual[generatorDefinition.generator];
@@ -161,7 +164,10 @@ const getFakerGenerators = (generatorName: GeneratorName) => {
     return { embeddedGenerator: null, dynamicGenerator: null };
 };
 
-const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
+const getFakerCustomValue = (
+    generatorDefinition: GeneratorDefinition,
+    opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>,
+) => {
     // If there is a mapping to a `faker` type, then use it
     const { embeddedGenerator, dynamicGenerator } = getFakerGenerators(generatorDefinition.generator);
     if (!embeddedGenerator && generatorDefinition.generator) {
@@ -206,7 +212,10 @@ const getFakerCustomValue = (generatorDefinition: GeneratorDefinition, opts: Opt
     return value;
 };
 
-const getCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<NamedTypeNode>) => {
+const getCustomValue = (
+    generatorDefinition: GeneratorDefinition,
+    opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>,
+) => {
     if (opts.generateLibrary === 'casual') {
         return getCasualCustomValue(generatorDefinition, opts);
     }
@@ -219,7 +228,7 @@ const getCustomValue = (generatorDefinition: GeneratorDefinition, opts: Options<
 };
 
 const handleValueGeneration = (
-    opts: Options<NamedTypeNode>,
+    opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>,
     customScalar: GeneratorDefinition,
     baseGenerator: () => void,
 ) => {
@@ -244,18 +253,20 @@ const handleValueGeneration = (
     return baseGenerator();
 };
 
-const getNamedImplementType = (opts: Options<TypeItem['types']>): string => {
-    if (!opts.currentType || !('name' in opts.currentType)) {
+const getNamedImplementType = (opts: Options<TypeItem['types']>): string | number | boolean => {
+    const { currentType } = opts;
+
+    if (!currentType || !('name' in currentType)) {
         return '';
     }
 
-    const name = opts.currentType.name.value;
-    const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
-
-    return `${toMockName(name, casedName, opts.prefix)}()`;
+    return getNamedType({
+        ...opts,
+        currentType,
+    });
 };
 
-const getNamedType = (opts: Options<NamedTypeNode>): string | number | boolean => {
+const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): string | number | boolean => {
     if (!opts.currentType) {
         return '';
     }
