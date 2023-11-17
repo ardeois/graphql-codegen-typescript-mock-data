@@ -14,6 +14,10 @@
 
 Defines the file path containing all GraphQL types. This file can also be generated through graphql-codgen
 
+### useTypeImports(boolean, defaultValue: false)
+
+Will use import type {} rather than import {} when importing only types. This gives compatibility with TypeScript's "importsNotUsedAsValues": "error" option
+
 ### addTypename (`boolean`, defaultValue: `false`)
 
 Adds `__typename` property to mock data
