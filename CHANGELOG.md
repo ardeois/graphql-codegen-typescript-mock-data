@@ -1,3 +1,16 @@
+# v3.6.0 (Fri Nov 17 2023)
+
+#### 🚀 Enhancement
+
+- feat(config): add import type support [#148](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/148) (shaun@integrate.co [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Shaun Sweet ([@shaun-sweet](https://github.com/shaun-sweet))
+
+---
+
 # v3.5.4 (Fri Nov 17 2023)
 
 #### 🐛 Bug Fix
