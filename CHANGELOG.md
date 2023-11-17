@@ -1,3 +1,28 @@
+# v3.5.3 (Fri Nov 17 2023)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump @babel/traverse from 7.17.3 to 7.23.2 [#146](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/146) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
+# v3.5.2 (Fri Nov 17 2023)
+
+#### 🐛 Bug Fix
+
+- build(deps-dev): bump graphql from 16.3.0 to 16.8.1 [#144](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/144) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v3.5.1 (Thu Oct 12 2023)
 
 #### 🐛 Bug Fix
