@@ -1,3 +1,15 @@
+# v3.5.2 (Fri Nov 17 2023)
+
+#### 🐛 Bug Fix
+
+- build(deps-dev): bump graphql from 16.3.0 to 16.8.1 [#144](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/144) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v3.5.1 (Thu Oct 12 2023)
 
 #### 🐛 Bug Fix
