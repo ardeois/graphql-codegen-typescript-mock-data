@@ -1,3 +1,16 @@
+# v3.5.4 (Fri Nov 17 2023)
+
+#### 🐛 Bug Fix
+
+- fix: Error when using useImplementingTypes and terminateCircularRelationships at the same time [#141](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/141) ([@Swanoo](https://github.com/Swanoo) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- François DANGUY ([@Swanoo](https://github.com/Swanoo))
+
+---
+
 # v3.5.3 (Fri Nov 17 2023)
 
 #### 🐛 Bug Fix
