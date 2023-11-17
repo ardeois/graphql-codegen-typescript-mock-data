@@ -1,7 +1,7 @@
 import { plugin } from '../../src';
 import testSchema from './schema';
 
-it.only('should support useTypeImports', async () => {
+it('should support useTypeImports', async () => {
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts', useTypeImports: true });
 
     expect(result).toBeDefined();
