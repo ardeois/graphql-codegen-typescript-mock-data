@@ -1,3 +1,15 @@
+# v3.7.0 (Mon Nov 27 2023)
+
+#### 🚀 Enhancement
+
+- feat: support casting enum values as types [#150](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/150) ([@rickdunkin](https://github.com/rickdunkin))
+
+#### Authors: 1
+
+- Rick Dunkin ([@rickdunkin](https://github.com/rickdunkin))
+
+---
+
 # v3.6.0 (Fri Nov 17 2023)
 
 #### 🚀 Enhancement
