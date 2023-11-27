@@ -195,6 +195,19 @@ it('should generate mock data with enum values as string union type if enumsAsTy
     expect(result).toMatchSnapshot();
 });
 
+it('should generate mock data with enum values as string union type if enumsAsTypes is true and cast the type if castEnumsAsTypes', async () => {
+    const result = await plugin(testSchema, [], { enumsAsTypes: true, castEnumsAsTypes: true });
+
+    expect(result).toBeDefined();
+    expect(result).not.toContain('Status.Online');
+    expect(result).toContain(`('ONLINE' as Status)`);
+    expect(result).not.toContain('ABCStatus.hasXYZStatus');
+    expect(result).toContain(`('hasXYZStatus' as AbcStatus)`);
+    expect(result).not.toContain('Prefixed_Enum.PREFIXED_VALUE');
+    expect(result).toContain(`('PREFIXED_VALUE' as PrefixedEnum)`);
+    expect(result).toMatchSnapshot();
+});
+
 it('should generate mock data with as-is enum values as string union type if enumsAsTypes is true and enumValues is "keep"', async () => {
     const result = await plugin(testSchema, [], { enumsAsTypes: true, enumValues: 'keep' });
 
@@ -453,6 +466,27 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
     );
     expect(result).toContain(
         "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : 'PREFIXED_VALUE',",
+    );
+    expect(result).toMatchSnapshot();
+});
+
+it('should preserve underscores if transformUnderscore is false and enumsAsTypes is true as cast the enum type if castEnumsAsTypes is true', async () => {
+    const result = await plugin(testSchema, [], {
+        transformUnderscore: false,
+        typesFile: './types/graphql.ts',
+        enumsAsTypes: true,
+        castEnumsAsTypes: true,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
+    );
+    expect(result).toContain(
+        'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
+    );
+    expect(result).toContain(
+        "prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : ('PREFIXED_VALUE' as Prefixed_Enum),",
     );
     expect(result).toMatchSnapshot();
 });
