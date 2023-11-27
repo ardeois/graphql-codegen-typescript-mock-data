@@ -195,8 +195,8 @@ it('should generate mock data with enum values as string union type if enumsAsTy
     expect(result).toMatchSnapshot();
 });
 
-it('should generate mock data with enum values as string union type if enumsAsTypes is true and cast the type if castEnumsAsTypes', async () => {
-    const result = await plugin(testSchema, [], { enumsAsTypes: true, castEnumsAsTypes: true });
+it('should generate mock data with enum values as string union type if enumsAsTypes is true and cast the type if useTypeImports', async () => {
+    const result = await plugin(testSchema, [], { enumsAsTypes: true, useTypeImports: true });
 
     expect(result).toBeDefined();
     expect(result).not.toContain('Status.Online');
@@ -470,17 +470,17 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
     expect(result).toMatchSnapshot();
 });
 
-it('should preserve underscores if transformUnderscore is false and enumsAsTypes is true as cast the enum type if castEnumsAsTypes is true', async () => {
+it('should preserve underscores if transformUnderscore is false and enumsAsTypes is true as cast the enum type if useTypeImports is true', async () => {
     const result = await plugin(testSchema, [], {
         transformUnderscore: false,
         typesFile: './types/graphql.ts',
         enumsAsTypes: true,
-        castEnumsAsTypes: true,
+        useTypeImports: true,
     });
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
+        "import type { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
     );
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',

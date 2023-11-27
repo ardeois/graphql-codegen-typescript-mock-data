@@ -135,6 +135,21 @@ export const aMyType = (overrides?: Partial<MyType>): MyType => {
 "
 `;
 
+exports[`enumValues config having 'keep' value should have no effect if 'transformUnderscore' is false and 'useTypeImports' is true 1`] = `
+"
+export const aMyType = (overrides?: Partial<MyType>): MyType => {
+    return {
+        underscoreEnum: overrides && overrides.hasOwnProperty('underscoreEnum') ? overrides.underscoreEnum! : ('_id' as UnderscoreEnum),
+        pascalCaseEnum: overrides && overrides.hasOwnProperty('pascalCaseEnum') ? overrides.pascalCaseEnum! : ('PascalCase' as PascalCaseEnum),
+        camelCaseEnum: overrides && overrides.hasOwnProperty('camelCaseEnum') ? overrides.camelCaseEnum! : ('camelCase' as CamelCaseEnum),
+        snakeCaseEnum: overrides && overrides.hasOwnProperty('snakeCaseEnum') ? overrides.snakeCaseEnum! : ('snake_case' as SnakeCaseEnum),
+        screamingSnakeCaseEnum: overrides && overrides.hasOwnProperty('screamingSnakeCaseEnum') ? overrides.screamingSnakeCaseEnum! : ('SCREAMING_SNAKE_CASE' as ScreamingSnakeCaseEnum),
+        pascalCase_withUnderscore: overrides && overrides.hasOwnProperty('pascalCase_withUnderscore') ? overrides.pascalCase_withUnderscore! : ('other_snake_case' as PascalCase_WithUnderscore),
+    };
+};
+"
+`;
+
 exports[`enumValues config having 'keep' value should keep case 1`] = `
 "
 export const aMyType = (overrides?: Partial<MyType>): MyType => {

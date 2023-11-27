@@ -51,12 +51,12 @@ describe('enumValues config', () => {
             expect(result).toMatchSnapshot();
         });
 
-        it(`should have no effect if 'transformUnderscore' is false and 'castEnumsAsTypes' is true`, async () => {
+        it(`should have no effect if 'transformUnderscore' is false and 'useTypeImports' is true`, async () => {
             const result = await plugin(enumSchema, [], {
                 enumValues: 'keep',
                 transformUnderscore: false,
                 enumsAsTypes: true,
-                castEnumsAsTypes: true,
+                useTypeImports: true,
             });
 
             expect(result).toBeDefined();
