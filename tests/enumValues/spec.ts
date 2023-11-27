@@ -50,6 +50,24 @@ describe('enumValues config', () => {
             expect(result).toContain('other_snake_case');
             expect(result).toMatchSnapshot();
         });
+
+        it(`should have no effect if 'transformUnderscore' is false and 'useTypeImports' is true`, async () => {
+            const result = await plugin(enumSchema, [], {
+                enumValues: 'keep',
+                transformUnderscore: false,
+                enumsAsTypes: true,
+                useTypeImports: true,
+            });
+
+            expect(result).toBeDefined();
+            expect(result).toContain('_id');
+            expect(result).toContain(`('PascalCase' as PascalCaseEnum)`);
+            expect(result).toContain(`('camelCase' as CamelCaseEnum)`);
+            expect(result).toContain(`('snake_case' as SnakeCaseEnum)`);
+            expect(result).toContain(`('SCREAMING_SNAKE_CASE' as ScreamingSnakeCaseEnum)`);
+            expect(result).toContain(`('other_snake_case' as PascalCase_WithUnderscore)`);
+            expect(result).toMatchSnapshot();
+        });
     });
 
     describe(`having default value`, () => {

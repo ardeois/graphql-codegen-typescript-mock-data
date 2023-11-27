@@ -34,6 +34,7 @@ type Options<T = TypeNode> = {
     generateLibrary: 'casual' | 'faker';
     fieldGeneration?: TypeFieldMap;
     enumsAsTypes?: boolean;
+    useTypeImports?: boolean;
     useImplementingTypes: boolean;
     defaultNullableToNull: boolean;
     nonNull: boolean;
@@ -319,7 +320,9 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
                         const value = foundType.values ? foundType.values[0] : '';
                         return handleValueGeneration(opts, undefined, () =>
                             opts.enumsAsTypes
-                                ? `'${value}'`
+                                ? opts.useTypeImports
+                                    ? `('${value}' as ${typenameConverter(foundType.name, opts.enumsPrefix)})`
+                                    : `'${value}'`
                                 : `${typenameConverter(foundType.name, opts.enumsPrefix)}.${enumConverter(value)}`,
                         );
                     }
@@ -487,7 +490,7 @@ const getImportTypes = ({
         ? [enumsPrefix.slice(0, -1)]
         : types.filter(({ type }) => type === 'enum').map(({ name }) => typenameConverter(name, enumsPrefix));
 
-    if (!enumsAsTypes) {
+    if (!enumsAsTypes || useTypeImports) {
         typeImports.push(...enumTypes);
     }
 
@@ -587,6 +590,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const dynamicValues = !!config.dynamicValues;
     const generateLibrary = config.generateLibrary || 'casual';
     const enumsAsTypes = config.enumsAsTypes ?? false;
+    const useTypeImports = config.useTypeImports ?? false;
     const useImplementingTypes = config.useImplementingTypes ?? false;
     const defaultNullableToNull = config.defaultNullableToNull ?? false;
 
@@ -667,6 +671,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         generateLibrary,
                         fieldGeneration: config.fieldGeneration,
                         enumsAsTypes,
+                        useTypeImports,
                         useImplementingTypes,
                         defaultNullableToNull,
                         nonNull: false,
@@ -703,6 +708,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       generateLibrary,
                                       fieldGeneration: config.fieldGeneration,
                                       enumsAsTypes,
+                                      useTypeImports,
                                       useImplementingTypes,
                                       defaultNullableToNull,
                                       nonNull: false,
