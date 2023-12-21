@@ -366,16 +366,26 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
                 }
             }
             if (opts.terminateCircularRelationships) {
-                return handleValueGeneration(
-                    opts,
-                    null,
-                    () =>
-                        `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
+                return handleValueGeneration(opts, null, () => {
+                    if (opts.typesPrefix) {
+                        const typeNameConverter = createNameConverter(
+                            opts.typeNamesConvention,
+                            opts.transformUnderscore,
+                        );
+                        const casedNameWithPrefix = typeNameConverter(name, opts.typesPrefix);
+                        return `relationshipsToOmit.has('${casedName}') ? {} as ${casedNameWithPrefix} : ${toMockName(
                             name,
                             casedName,
                             opts.prefix,
-                        )}({}, relationshipsToOmit)`,
-                );
+                        )}({}, relationshipsToOmit)`;
+                    } else {
+                        return `relationshipsToOmit.has('${casedName}') ? {} as ${casedName} : ${toMockName(
+                            name,
+                            casedName,
+                            opts.prefix,
+                        )}({}, relationshipsToOmit)`;
+                    }
+                });
             } else {
                 return handleValueGeneration(opts, null, () => `${toMockName(name, casedName, opts.prefix)}()`);
             }

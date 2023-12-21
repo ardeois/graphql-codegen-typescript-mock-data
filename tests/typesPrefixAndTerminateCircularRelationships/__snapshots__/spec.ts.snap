@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should support typesPrefix and terminateCircularRelationships at the same time 1`] = `
+"
+export const mockA = (overrides?: Partial<MockA>, _relationshipsToOmit: Set<string> = new Set()): MockA => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('A');
+    return {
+        b: overrides && overrides.hasOwnProperty('b') ? overrides.b! : relationshipsToOmit.has('B') ? {} as MockB : mockB({}, relationshipsToOmit),
+    };
+};
+
+export const mockB = (overrides?: Partial<MockB>, _relationshipsToOmit: Set<string> = new Set()): MockB => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('B');
+    return {
+        a: overrides && overrides.hasOwnProperty('a') ? overrides.a! : relationshipsToOmit.has('A') ? {} as MockA : mockA({}, relationshipsToOmit),
+    };
+};
+"
+`;
