@@ -1,3 +1,15 @@
+# v3.7.1 (Thu Dec 21 2023)
+
+#### 🐛 Bug Fix
+
+- fix: type error when using typesPrefix and terminateCircularRelationships [#151](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/151) ([@Miyaboom](https://github.com/Miyaboom))
+
+#### Authors: 1
+
+- [@Miyaboom](https://github.com/Miyaboom)
+
+---
+
 # v3.7.0 (Mon Nov 27 2023)
 
 #### 🚀 Enhancement
