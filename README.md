@@ -12,7 +12,7 @@
 
 ### typesFile (`string`, defaultValue: `null`)
 
-Defines the file path containing all GraphQL types. This file can also be generated through graphql-codgen
+Defines the file path containing all GraphQL types. This file can also be generated through graphql-codegen
 
 ### useTypeImports(boolean, defaultValue: false)
 
