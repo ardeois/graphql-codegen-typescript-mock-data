@@ -31,7 +31,7 @@ Changes enums to TypeScript string union types
 When enabled, prevents circular relationships from triggering infinite recursion. After the first resolution of a
 specific type in a particular call stack, subsequent resolutions will return an empty object cast to the correct type.
 
-### prefix (`string`, defaultValue: `a` for constants & `an` for vowels)
+### prefix (`string`, defaultValue: `a` for consonants & `an` for vowels)
 
 The prefix to add to the mock function name. Cannot be empty since it will clash with the associated
 typescript definition from `@graphql-codegen/typescript`
