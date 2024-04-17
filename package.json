@@ -36,13 +36,13 @@
         "graphql": "^14.6.0 || ^15.0.0 || ^16.0.0"
     },
     "devDependencies": {
-        "@auto-it/conventional-commits": "^10.33.0",
+        "@auto-it/conventional-commits": "^11.1.6",
         "@graphql-codegen/testing": "^1.18.0",
         "@graphql-codegen/typescript": "^2.8.3",
         "@types/jest": "^27.0.2",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
-        "auto": "^10.33.0",
+        "auto": "^11.1.6",
         "eslint": "8.0.1",
         "eslint-config-landr": "0.7.0",
         "eslint-config-prettier": "^8.3.0",
