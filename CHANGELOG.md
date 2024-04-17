@@ -1,3 +1,15 @@
+# v3.7.2 (Wed Apr 17 2024)
+
+#### 🐛 Bug Fix
+
+- fix: upgrade auto [#158](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/158) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v3.7.1 (Thu Dec 21 2023)
 
 #### 🐛 Bug Fix
