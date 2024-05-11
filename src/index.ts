@@ -15,6 +15,7 @@ import a from 'indefinite';
 import { setupFunctionTokens, setupMockValueGenerator } from './mockValueGenerator';
 
 type NamingConvention = 'change-case-all#pascalCase' | 'keep' | string;
+type DefinitionName = 'enum' | 'union' | 'objectType' | 'scalar' | 'inputObject' | 'object' | 'interface'
 
 type Options<T = TypeNode> = {
     typeName: string;
@@ -38,6 +39,7 @@ type Options<T = TypeNode> = {
     useImplementingTypes: boolean;
     defaultNullableToNull: boolean;
     nonNull: boolean;
+    filter: TypeDefinitionName[]
 };
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
@@ -612,6 +614,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const types: TypeItem[] = [];
     const typeVisitor: VisitorType = {
         EnumTypeDefinition: (node) => {
+            if (config.filter.includes("enum")) return '';
             const name = node.name.value;
             if (!types.find((enumType: TypeItem) => enumType.name === name)) {
                 types.push({
@@ -622,6 +625,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             }
         },
         UnionTypeDefinition: (node) => {
+            if (config.filter.includes("union")) return '';
             const name = node.name.value;
             if (!types.find((enumType) => enumType.name === name)) {
                 types.push({
@@ -633,6 +637,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         },
         ObjectTypeDefinition: (node) => {
             // This function triggered per each type
+            if (config.filter.includes("objectType")) return '';
             const typeName = node.name.value;
 
             if (config.useImplementingTypes) {
@@ -647,6 +652,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             }
         },
         ScalarTypeDefinition: (node) => {
+            if (config.filter.includes("scalar")) return '';
             const name = node.name.value;
             if (!types.find((scalarType) => scalarType.name === name)) {
                 types.push({
@@ -658,6 +664,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     };
     const visitor: VisitorType = {
         FieldDefinition: (node) => {
+            if (config.filter.includes("field")) return '';
             const fieldName = node.name.value;
 
             return {
@@ -692,6 +699,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             };
         },
         InputObjectTypeDefinition: (node) => {
+            if (config.filter.includes("inputObject")) return '';
             const fieldName = node.name.value;
 
             return {
@@ -744,6 +752,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         },
         ObjectTypeDefinition: (node) => {
             // This function triggered per each type
+            if (config.filter.includes("object")) return '';
             const typeName = node.name.value;
 
             const { fields } = node;
@@ -766,6 +775,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             };
         },
         InterfaceTypeDefinition: (node) => {
+            if (config.filter.includes("interface")) return '';
             const typeName = node.name.value;
             const { fields } = node;
             return {
