@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should support setting terminateCircularRelationships as imediate and not create a new set of relationships 1`] = `
+"
+export const anA = (overrides?: Partial<A>, _relationshipsToOmit: Set<string> = new Set()): A => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('A');
+    return {
+        B: overrides && overrides.hasOwnProperty('B') ? overrides.B! : relationshipsToOmit.has('B') ? {} as B : aB({}, relationshipsToOmit),
+        C: overrides && overrides.hasOwnProperty('C') ? overrides.C! : relationshipsToOmit.has('C') ? {} as C : aC({}, relationshipsToOmit),
+    };
+};
+
+export const aB = (overrides?: Partial<B>, _relationshipsToOmit: Set<string> = new Set()): B => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('B');
+    return {
+        A: overrides && overrides.hasOwnProperty('A') ? overrides.A! : relationshipsToOmit.has('A') ? {} as A : anA({}, relationshipsToOmit),
+    };
+};
+
+export const aC = (overrides?: Partial<C>, _relationshipsToOmit: Set<string> = new Set()): C => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('C');
+    return {
+        aCollection: overrides && overrides.hasOwnProperty('aCollection') ? overrides.aCollection! : [relationshipsToOmit.has('A') ? {} as A : anA({}, relationshipsToOmit)],
+    };
+};
+
+export const aD = (overrides?: Partial<D>, _relationshipsToOmit: Set<string> = new Set()): D => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('D');
+    return {
+        A: overrides && overrides.hasOwnProperty('A') ? overrides.A! : relationshipsToOmit.has('A') ? {} as A : anA({}, relationshipsToOmit),
+        B: overrides && overrides.hasOwnProperty('B') ? overrides.B! : relationshipsToOmit.has('B') ? {} as B : aB({}, relationshipsToOmit),
+    };
+};
+"
+`;

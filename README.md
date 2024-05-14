@@ -26,10 +26,12 @@ Adds `__typename` property to mock data
 
 Changes enums to TypeScript string union types
 
-### terminateCircularRelationships (`boolean`, defaultValue: `false`)
+### terminateCircularRelationships (`boolean | 'immediate'`, defaultValue: `false`)
 
 When enabled, prevents circular relationships from triggering infinite recursion. After the first resolution of a
 specific type in a particular call stack, subsequent resolutions will return an empty object cast to the correct type.
+
+When enabled with `immediate`, it will only resolve the relationship once, independently of the call stack. Use this option if you're experiencing `out of memory` errors while generating mocks.
 
 ### prefix (`string`, defaultValue: `a` for consonants & `an` for vowels)
 
