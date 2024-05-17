@@ -22,7 +22,7 @@ type Options<T = TypeNode> = {
     types: TypeItem[];
     typeNamesConvention: NamingConvention;
     enumValuesConvention: NamingConvention;
-    terminateCircularRelationships: boolean;
+    terminateCircularRelationships: boolean | 'immediate';
     prefix: string | undefined;
     typesPrefix: string;
     enumsPrefix: string;
@@ -39,6 +39,9 @@ type Options<T = TypeNode> = {
     defaultNullableToNull: boolean;
     nonNull: boolean;
 };
+
+const getTerminateCircularRelationshipsConfig = ({ terminateCircularRelationships }: TypescriptMocksPluginConfig) =>
+    terminateCircularRelationships ? terminateCircularRelationships : false;
 
 const convertName = (value: string, fn: (v: string) => string, transformUnderscore: boolean): string => {
     if (transformUnderscore) {
@@ -430,7 +433,7 @@ const getMockString = (
     typeName: string,
     fields: string,
     typeNamesConvention: NamingConvention,
-    terminateCircularRelationships: boolean,
+    terminateCircularRelationships: boolean | 'immediate',
     addTypename = false,
     prefix,
     typesPrefix = '',
@@ -443,13 +446,15 @@ const getMockString = (
     const typenameReturnType = addTypename ? `{ __typename: '${typeName}' } & ` : '';
 
     if (terminateCircularRelationships) {
+        const relationshipsToOmitInit =
+            terminateCircularRelationships === 'immediate' ? '_relationshipsToOmit' : 'new Set(_relationshipsToOmit)';
         return `
 export const ${toMockName(
             typeName,
             casedName,
             prefix,
         )} = (overrides?: Partial<${casedNameWithPrefix}>, _relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${casedNameWithPrefix} => {
-    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    const relationshipsToOmit: Set<string> = ${relationshipsToOmitInit};
     relationshipsToOmit.add('${casedName}');
     return {${typename}
 ${fields}
@@ -541,7 +546,7 @@ export interface TypescriptMocksPluginConfig {
     addTypename?: boolean;
     prefix?: string;
     scalars?: ScalarMap;
-    terminateCircularRelationships?: boolean;
+    terminateCircularRelationships?: boolean | 'immediate';
     typesPrefix?: string;
     enumsPrefix?: string;
     transformUnderscore?: boolean;
@@ -669,7 +674,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         types,
                         typeNamesConvention,
                         enumValuesConvention,
-                        terminateCircularRelationships: !!config.terminateCircularRelationships,
+                        terminateCircularRelationships: getTerminateCircularRelationshipsConfig(config),
                         prefix: config.prefix,
                         typesPrefix: config.typesPrefix,
                         enumsPrefix: config.enumsPrefix,
@@ -706,7 +711,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       types,
                                       typeNamesConvention,
                                       enumValuesConvention,
-                                      terminateCircularRelationships: !!config.terminateCircularRelationships,
+                                      terminateCircularRelationships: getTerminateCircularRelationshipsConfig(config),
                                       prefix: config.prefix,
                                       typesPrefix: config.typesPrefix,
                                       enumsPrefix: config.enumsPrefix,
@@ -733,7 +738,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         fieldName,
                         mockFields,
                         typeNamesConvention,
-                        !!config.terminateCircularRelationships,
+                        getTerminateCircularRelationshipsConfig(config),
                         false,
                         config.prefix,
                         config.typesPrefix,
@@ -756,7 +761,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         typeName,
                         mockFields,
                         typeNamesConvention,
-                        !!config.terminateCircularRelationships,
+                        getTerminateCircularRelationshipsConfig(config),
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,
@@ -777,7 +782,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         typeName,
                         mockFields,
                         typeNamesConvention,
-                        !!config.terminateCircularRelationships,
+                        getTerminateCircularRelationshipsConfig(config),
                         !!config.addTypename,
                         config.prefix,
                         config.typesPrefix,
