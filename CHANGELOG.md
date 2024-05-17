@@ -1,3 +1,15 @@
+# v3.8.0 (Fri May 17 2024)
+
+#### 🚀 Enhancement
+
+- feat(terminateCircularRelationships): Add 'immediate' as a value for the terminateCircularRelationships option [#161](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/161) ([@rpereira-anchor](https://github.com/rpereira-anchor))
+
+#### Authors: 1
+
+- Ricardo Pereira ([@rpereira-anchor](https://github.com/rpereira-anchor))
+
+---
+
 # v3.7.2 (Wed Apr 17 2024)
 
 #### 🐛 Bug Fix
