@@ -23,7 +23,7 @@
     ],
     "dependencies": {
         "@faker-js/faker": "^7.5.0",
-        "@graphql-codegen/plugin-helpers": "^2.7.2",
+        "@graphql-codegen/plugin-helpers": "^5.0.4",
         "casual": "^1.6.2",
         "change-case-all": "^1.0.15",
         "indefinite": "^2.4.1",
@@ -37,8 +37,8 @@
     },
     "devDependencies": {
         "@auto-it/conventional-commits": "^11.1.6",
-        "@graphql-codegen/testing": "^1.18.0",
-        "@graphql-codegen/typescript": "^2.8.3",
+        "@graphql-codegen/testing": "^3.0.3",
+        "@graphql-codegen/typescript": "^4.0.7",
         "@types/jest": "^27.0.2",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
