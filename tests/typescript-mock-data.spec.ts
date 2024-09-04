@@ -94,6 +94,9 @@ it('should generate mock data functions with faker', async () => {
 
     expect(result).toBeDefined();
     expect(result).toMatchSnapshot();
+
+    const defaultResult = await plugin(testSchema, [], {});
+    expect(result).toStrictEqual(defaultResult);
 });
 
 it('should generate mock data functions with casual', async () => {
@@ -101,9 +104,6 @@ it('should generate mock data functions with casual', async () => {
 
     expect(result).toBeDefined();
     expect(result).toMatchSnapshot();
-
-    const defaultResult = await plugin(testSchema, [], {});
-    expect(result).toStrictEqual(defaultResult);
 });
 
 it('should generate mock data functions with scalars', async () => {
@@ -111,7 +111,7 @@ it('should generate mock data functions with scalars', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'neque',",
+        "scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'arx',",
     );
     expect(result).toMatchSnapshot();
 });
@@ -280,49 +280,51 @@ it('should add custom prefix if the `prefix` config option is specified', async 
     expect(result).toMatchSnapshot();
 });
 
-it('should correctly generate the `casual` data for a scalar mapping of type string', async () => {
-    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'email' } });
+it('should correctly generate the `faker` data for a scalar mapping of type string', async () => {
+    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'internet.email' } });
 
     expect(result).toBeDefined();
-    expect(result).toContain('Mohamed.Nader@Kiehn.io');
+    expect(result).toContain('Geovany63@gmail.com');
     expect(result).toMatchSnapshot();
 });
 
-it('should correctly generate the `casual` data for a non-string scalar mapping', async () => {
-    const result = await plugin(testSchema, [], { scalars: { AnyObject: 'rgb_array' } });
+it('should correctly generate the `faker` data for a non-string scalar mapping', async () => {
+    const result = await plugin(testSchema, [], {
+        scalars: { AnyObject: { generator: 'color.rgb', arguments: [{ format: 'decimal' }] } },
+    });
 
     expect(result).toBeDefined();
     expect(result).toContain(JSON.stringify([41, 98, 185]));
     expect(result).toMatchSnapshot();
 });
 
-it('should correctly generate the `casual` data for a function with arguments scalar mapping', async () => {
+it('should correctly generate the `faker` data for a function with arguments scalar mapping', async () => {
     const result = await plugin(testSchema, [], {
         scalars: {
             AnyObject: {
-                generator: 'date',
-                arguments: ['YYYY-MM-DD'],
+                generator: 'date.future',
+                arguments: [{ refDate: '2024-09-01' }],
             },
         },
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain("'1977-06-26'");
+    expect(result).toContain('"2024-10-29T22:31:35.873Z"');
     expect(result).toMatchSnapshot();
 });
 
-it('should correctly generate the `casual` data for a function with one argument scalar mapping', async () => {
+it('should correctly generate the `faker` data for a function with one argument scalar mapping', async () => {
     const result = await plugin(testSchema, [], {
         scalars: {
             AnyObject: {
-                generator: 'date',
-                arguments: 'YYYY-MM-DD',
+                generator: 'date.future',
+                arguments: { refDate: '2024-09-01' },
             },
         },
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain("'1977-06-26'");
+    expect(result).toContain('"2024-10-29T22:31:35.873Z"');
     expect(result).toMatchSnapshot();
 });
 
@@ -498,7 +500,7 @@ it('should generate single list element', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['voluptatem']",
+        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['accusator']",
     );
     expect(result).toMatchSnapshot();
 });
@@ -511,7 +513,7 @@ it('should generate multiple list elements', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['id', 'soluta', 'quis']",
+        "stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['peccatus', 'sponte', 'corpus']",
     );
     expect(result).toMatchSnapshot();
 });
@@ -536,8 +538,8 @@ it('should generate dynamic values in mocks', async () => {
     expect(result).toMatchSnapshot();
 });
 
-it('should generate dynamic values with faker', async () => {
-    const result = await plugin(testSchema, [], { dynamicValues: true, generateLibrary: 'faker' });
+it('should generate dynamic values with `casual`', async () => {
+    const result = await plugin(testSchema, [], { dynamicValues: true, generateLibrary: 'casual' });
 
     expect(result).toBeDefined();
     expect(result).toMatchSnapshot();

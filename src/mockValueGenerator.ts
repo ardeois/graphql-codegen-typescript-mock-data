@@ -1,4 +1,5 @@
-import { faker } from '@faker-js/faker';
+import { Faker } from '@faker-js/faker';
+import * as allFakerLocales from '@faker-js/faker';
 import casual from 'casual';
 
 interface MockValueGenerator {
@@ -14,12 +15,14 @@ interface MockValueGenerator {
 
 type MockValueGeneratorOptions = {
     dynamicValues: boolean;
+    generatorLocale: string;
 };
 
 type FunctionTokens = Record<'import' | 'seed' | 'seedFunction', string>;
 
 type SetupMockValueGeneratorOptions = {
     generateLibrary: 'casual' | 'faker';
+    generatorLocale: string;
     dynamicValues: boolean;
 };
 
@@ -53,52 +56,61 @@ const casualFunctionTokens: FunctionTokens = {
 
 class FakerMockValueGenerator implements MockValueGenerator {
     dynamicValues: boolean;
+    private fakerInstance: Faker;
 
     constructor(opts: MockValueGeneratorOptions) {
         this.dynamicValues = opts.dynamicValues;
+        const fakerImport = `faker${opts.generatorLocale.toUpperCase()}`;
+        if (!(fakerImport in allFakerLocales)) {
+            throw new Error(`Cannot find faker version for locale ${opts.generatorLocale.toUpperCase()}`);
+        }
+        this.fakerInstance = allFakerLocales[`faker${opts.generatorLocale.toUpperCase()}`];
     }
 
-    word = () => (this.dynamicValues ? `faker.lorem.word()` : `'${faker.lorem.word()}'`);
-    uuid = () => (this.dynamicValues ? `faker.datatype.uuid()` : `'${faker.datatype.uuid()}'`);
-    boolean = () => (this.dynamicValues ? `faker.datatype.boolean()` : faker.datatype.boolean());
+    word = () => (this.dynamicValues ? `faker.lorem.word()` : `'${this.fakerInstance.lorem.word()}'`);
+    uuid = () => (this.dynamicValues ? `faker.string.uuid()` : `'${this.fakerInstance.string.uuid()}'`);
+    boolean = () => (this.dynamicValues ? `faker.datatype.boolean()` : this.fakerInstance.datatype.boolean());
     integer = () =>
         this.dynamicValues
-            ? `faker.datatype.number({ min: 0, max: 9999 })`
-            : faker.datatype.number({ min: 0, max: 9999 });
+            ? `faker.number.int({ min: 0, max: 9999 })`
+            : this.fakerInstance.number.int({ min: 0, max: 9999 });
     float = () =>
         this.dynamicValues
-            ? `faker.datatype.float({ min: 0, max: 10, precision: 0.1 })`
-            : faker.datatype.float({ min: 0, max: 10, precision: 0.1 });
+            ? `faker.number.float({ min: 0, max: 10, fractionDigits: 1 })`
+            : this.fakerInstance.number.float({ min: 0, max: 10, fractionDigits: 1 });
     date = () =>
         this.dynamicValues
-            ? `faker.date.past(1, new Date(2022, 0)).toISOString()`
-            : `'${faker.date.past(1, new Date(2022, 0)).toISOString()}'`;
-    seed = (seed: number) => faker.seed(seed);
+            ? `faker.date.past({ years: 1, refDate: new Date(2022, 0) }).toISOString()`
+            : `'${this.fakerInstance.date.past({ years: 1, refDate: new Date(2022, 0) }).toISOString()}'`;
+    seed = (seed: number) => this.fakerInstance.seed(seed);
 }
 
-const fakerFunctionTokens: FunctionTokens = {
-    import: `import { faker } from '@faker-js/faker';`,
-    seed: 'faker.seed(0);',
-    seedFunction: 'export const seedMocks = (seed: number) => faker.seed(seed);',
-};
+function getFakerFunctionTokens(locale = 'en'): FunctionTokens {
+    return {
+        import: `import { faker${locale.toUpperCase()} as faker } from '@faker-js/faker';`,
+        seed: 'faker.seed(0);',
+        seedFunction: 'export const seedMocks = (seed: number) => faker.seed(seed);',
+    };
+}
 
 export const setupMockValueGenerator = ({
     generateLibrary,
     dynamicValues,
+    generatorLocale,
 }: SetupMockValueGeneratorOptions): MockValueGenerator => {
     switch (generateLibrary) {
         case 'casual':
-            return new CasualMockValueGenerator({ dynamicValues });
+            return new CasualMockValueGenerator({ dynamicValues, generatorLocale });
         case 'faker':
-            return new FakerMockValueGenerator({ dynamicValues });
+            return new FakerMockValueGenerator({ dynamicValues, generatorLocale });
     }
 };
 
-export const setupFunctionTokens = (generateLibrary: 'casual' | 'faker'): FunctionTokens => {
+export const setupFunctionTokens = (generateLibrary: 'casual' | 'faker', locale?: string): FunctionTokens => {
     switch (generateLibrary) {
         case 'casual':
             return casualFunctionTokens;
         case 'faker':
-            return fakerFunctionTokens;
+            return getFakerFunctionTokens(locale);
     }
 };

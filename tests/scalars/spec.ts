@@ -3,6 +3,7 @@ import testSchema from './schema';
 
 it('should generate custom scalars for native and custom types using casual', async () => {
     const result = await plugin(testSchema, [], {
+        generateLibrary: 'casual',
         scalars: {
             String: 'string',
             Float: {
@@ -48,6 +49,7 @@ it('should generate custom scalars for native and custom types using casual', as
 
 it('should generate dynamic custom scalars for native and custom types using casual', async () => {
     const result = await plugin(testSchema, [], {
+        generateLibrary: 'casual',
         dynamicValues: true,
         scalars: {
             String: 'string',
@@ -100,16 +102,16 @@ it('should generate custom scalars for native and custom types using faker', asy
         scalars: {
             String: 'lorem.sentence',
             Float: {
-                generator: 'datatype.float',
-                arguments: [{ min: -100, max: 0 }],
+                generator: 'number.float',
+                arguments: [{ min: -100, max: 0, fractionDigits: 2 }],
             },
             ID: {
-                generator: 'datatype.number',
+                generator: 'number.int',
                 arguments: [{ min: 1, max: 100 }],
             },
             Boolean: 'false',
             Int: {
-                generator: 'datatype.number',
+                generator: 'number.int',
                 arguments: [{ min: -100, max: 0 }],
             },
             AnyObject: 'internet.email',
@@ -120,7 +122,7 @@ it('should generate custom scalars for native and custom types using faker', asy
 
     // String
     expect(result).toContain(
-        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Corrupti qui incidunt eius consequatur qui.',",
+        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Depereo nulla calco blanditiis cornu defetiscor.',",
     );
 
     // Float
@@ -145,16 +147,16 @@ it('should generate dynamic custom scalars for native and custom types using fak
         scalars: {
             String: 'lorem.sentence',
             Float: {
-                generator: 'datatype.float',
+                generator: 'number.float',
                 arguments: [{ min: -100, max: 0 }],
             },
             ID: {
-                generator: 'datatype.number',
+                generator: 'number.int',
                 arguments: [{ min: 1, max: 100 }],
             },
             Boolean: 'false',
             Int: {
-                generator: 'datatype.number',
+                generator: 'number.int',
                 arguments: [{ min: -100, max: 0 }],
             },
             AnyObject: 'internet.email',
@@ -170,12 +172,12 @@ it('should generate dynamic custom scalars for native and custom types using fak
 
     // Float
     expect(result).toContain(
-        "flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : faker['datatype']['float'](...[{\"min\":-100,\"max\":0}]),",
+        "flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : faker['number']['float'](...[{\"min\":-100,\"max\":0}]),",
     );
 
     // ID
     expect(result).toContain(
-        "id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['datatype']['number'](...[{\"min\":1,\"max\":100}]),",
+        "id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker['number']['int'](...[{\"min\":1,\"max\":100}]),",
     );
 
     // Boolean
@@ -183,7 +185,7 @@ it('should generate dynamic custom scalars for native and custom types using fak
 
     // Int
     expect(result).toContain(
-        "int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['datatype']['number'](...[{\"min\":-100,\"max\":0}]),",
+        "int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['number']['int'](...[{\"min\":-100,\"max\":0}]),",
     );
 
     expect(result).toMatchSnapshot();
