@@ -1,3 +1,15 @@
+# v4.0.0 (Wed Sep 04 2024)
+
+#### 💥 Breaking Change
+
+- feat: update and use `faker` as default generator [#169](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/169) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v3.8.0 (Fri May 17 2024)
 
 #### 🚀 Enhancement
