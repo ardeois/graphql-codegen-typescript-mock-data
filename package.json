@@ -22,7 +22,7 @@
         "fakes"
     ],
     "dependencies": {
-        "@faker-js/faker": "^7.5.0",
+        "@faker-js/faker": "^8.4.1",
         "@graphql-codegen/plugin-helpers": "^5.0.4",
         "casual": "^1.6.2",
         "change-case-all": "^1.0.15",

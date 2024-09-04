@@ -207,16 +207,78 @@ In the above example all resolvers with the name `email` will use the `internet.
 
 For detailed configuration options, see [GeneratorOptions](#generatoroptions-type) documentation.
 
-### generateLibrary (`'casual' | 'faker'`, defaultValue: `'casual'`)
+### generateLibrary (`'casual' | 'faker'`, defaultValue: `'faker'`)
 
-Select a library to generate mock values. The default is [casual](https://github.com/boo1ean/casual), Other options include [faker](https://github.com/faker-js/faker).
-casual dependents on Node API and cannot be executed in a browser. faker is useful when you want to use a mock function with the dynamicValues option enabled in the browser.
+Select a library to generate mock values. The default is [faker](https://github.com/faker-js/faker), Other options include [casual](https://github.com/boo1ean/casual)
+casual is not maintained and will be remove in future major versions.
+faker is useful when you want to use a mock function with the dynamicValues option enabled in the browser.
 
 ### `GeneratorOptions` type
 
 This type is used in `scalars` and `fieldGeneration` options.
 
-Examples using **casual**
+Examples using **faker**
+
+**With arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: # gets translated to faker.date.past(10)
+          generator: date.past
+          arguments: 10
+```
+
+**With multiple arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Description: # gets translated to faker.lorem.paragraphs(3, '\n')
+          generator: lorem.paragraphs
+          arguments:
+            - 3
+            - '\n'
+```
+
+**Shorthand if you don't have arguments**
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date: date.past # gets translated to faker.date.past()
+```
+
+**With extra function call**
+
+```yaml
+fieldName: # gets translated to faker.date.past().toLocaleDateString()
+  generator: date.past
+  extra:
+    function: toLocaleDateString
+```
+
+**With extra function call arguments**
+
+```yaml
+fieldName: # gets translated to faker.date.past().toLocaleDateString('en_GB)
+  generator: date.past
+  extra:
+    function: toLocaleDateString
+    arguments: 'en_GB'
+```
+
+**Custom value generator**
+
+```yaml
+# gets translated as is
+fieldName: arrayBufferGenerator()
+```
+
+Examples using **casual** (deprecated)
 
 **Shorthand if you don't have arguments**
 
@@ -261,67 +323,6 @@ fieldName: # gets translated to casual.integer.toFixed(3)
     arguments: 3
 ```
 
-Examples using **faker**
-
-**With arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        Date: # gets translated to faker.date.past(10)
-          generator: date.past
-          arguments: 10
-```
-
-**With multiple arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        Description: # gets translated to faker.lorem.paragraphs(3, '\n')
-          generator: lorem.paragraphs
-          arguments:
-            - 3
-            - '\n'
-```
-
-**Shorthand if you don't have arguments**
-
-```yaml
-plugins:
-  - typescript-mock-data:
-      scalars:
-        Date: date.past # gets translated to faker.date.past()
-```
-
-**With extra function call**
-
-```yaml
-fieldName: # gets translated to casual.date().toLocaleDateString()
-  generator: date
-  extra:
-    function: toLocaleDateString
-```
-
-**With extra function call arguments**
-
-```yaml
-fieldName: # gets translated to casual.date().toLocaleDateString('en_GB)
-  generator: date
-  extra:
-    function: toLocaleDateString
-    arguments: 'en_GB'
-```
-
-**Custom value generator**
-
-```yaml
-# gets translated as is
-fieldName: arrayBufferGenerator()
-```
-
 ## Examples of usage
 
 **codegen.yml**
@@ -340,7 +341,7 @@ generates:
           enumValues: upper-case#upperCase
           typeNames: keep
           scalars:
-            AWSTimestamp: unix_time # gets translated to casual.unix_time
+            AWSTimestamp: number.int # gets translated to faker.number.int()
 ```
 
 ### With `eslint-disable` rule
@@ -363,7 +364,7 @@ generates:
           enumValues: upper-case#upperCase
           typeNames: keep
           scalars:
-            AWSTimestamp: unix_time # gets translated to casual.unix_time
+            AWSTimestamp: number.int # gets translated to faker.number.int()
 ```
 
 ## Example of generated code

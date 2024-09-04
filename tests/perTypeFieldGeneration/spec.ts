@@ -2,7 +2,7 @@ import { plugin, TypescriptMocksPluginConfig } from '../../src';
 import testSchema from './schema';
 
 jest.mock('@faker-js/faker', () => ({
-    faker: {
+    fakerEN: {
         date: {
             future: () => new Date('2050-01-01'),
             past: () => new Date('2020-01-01'),
@@ -12,8 +12,29 @@ jest.mock('@faker-js/faker', () => ({
             sentence: () => 'A sentence',
             word: () => 'Word',
         },
-        datatype: {
-            number: () => 1,
+        number: {
+            int: () => 1,
+        },
+        internet: {
+            email: () => 'my@email.com',
+        },
+        helpers: {
+            arrayElement: (arr: unknown[]) => arr[0],
+        },
+        seed: jest.fn(),
+    },
+    fakerFR: {
+        date: {
+            future: () => new Date('2050-01-01'),
+            past: () => new Date('2020-01-01'),
+            recent: () => new Date('2022-01-01'),
+        },
+        lorem: {
+            sentence: () => 'A sentence',
+            word: () => 'Word',
+        },
+        number: {
+            int: () => 1,
         },
         internet: {
             email: () => 'my@email.com',
@@ -32,11 +53,25 @@ describe('per type field generation with faker', () => {
             String: 'lorem.sentence',
             Date: 'date.future',
             ID: {
-                generator: 'datatype.number',
+                generator: 'number.int',
                 arguments: [{ min: 1, max: 100 }],
             },
         },
     } as TypescriptMocksPluginConfig;
+
+    describe('with different locale', () => {
+        it('should update faker import with correct locale', async () => {
+            const result = await plugin(testSchema, [], {
+                ...config,
+                dynamicValues: true,
+                locale: 'fr',
+            });
+            expect(result).toBeDefined();
+
+            expect(result).toContain("import { fakerFR as faker } from '@faker-js/faker';");
+            expect(result).toMatchSnapshot();
+        });
+    });
 
     describe('with dynamic values', () => {
         beforeAll(() => {

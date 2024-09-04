@@ -2,24 +2,24 @@
 
 exports[`should generate dynamic values when dynamicValues is true 1`] = `
 Object {
-  "id": "89bd9d8d-69a6-474e-8f46-7cc8796ed151",
+  "id": "89bd9d8d-69a6-474e-80f4-67cc8796ed15",
   "obj": Object {
-    "bool": true,
+    "bool": false,
     "flt": 3.7,
     "int": 202,
   },
-  "str": "est",
+  "str": "socius",
 }
 `;
 
 exports[`should generate dynamic values when dynamicValues is true 2`] = `
 Object {
-  "id": "fc2ddf7c-c78c-4a1b-a928-fc816742cb73",
+  "id": "fc2ddf7c-c78c-4a1b-8a92-8fc816742cb7",
   "obj": Object {
-    "bool": false,
+    "bool": true,
     "flt": 0.1,
     "int": 1352,
   },
-  "str": "similique",
+  "str": "minus",
 }
 `;

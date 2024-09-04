@@ -7,7 +7,7 @@ import {
     NamedTypeNode,
     ObjectTypeDefinitionNode,
 } from 'graphql';
-import { faker } from '@faker-js/faker';
+import * as allFakerLocales from '@faker-js/faker';
 import casual from 'casual';
 import { oldVisit, PluginFunction, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
 import { sentenceCase } from 'sentence-case';
@@ -32,6 +32,7 @@ type Options<T = TypeNode> = {
     listElementCount: number;
     dynamicValues: boolean;
     generateLibrary: 'casual' | 'faker';
+    generatorLocale: string;
     fieldGeneration?: TypeFieldMap;
     enumsAsTypes?: boolean;
     useTypeImports?: boolean;
@@ -146,8 +147,8 @@ const getCasualCustomValue = (
     return value;
 };
 
-const getFakerGenerators = (generatorName: GeneratorName) => {
-    let embeddedGenerator: unknown = faker;
+const getFakerGenerators = (generatorName: GeneratorName, locale: string) => {
+    let embeddedGenerator: unknown = allFakerLocales[`faker${locale.toUpperCase()}`];
     let dynamicGenerator = 'faker';
 
     if (typeof generatorName === 'string') {
@@ -173,7 +174,10 @@ const getFakerCustomValue = (
     opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>,
 ) => {
     // If there is a mapping to a `faker` type, then use it
-    const { embeddedGenerator, dynamicGenerator } = getFakerGenerators(generatorDefinition.generator);
+    const { embeddedGenerator, dynamicGenerator } = getFakerGenerators(
+        generatorDefinition.generator,
+        opts.generatorLocale,
+    );
     if (!embeddedGenerator && generatorDefinition.generator) {
         return generatorDefinition.generator;
     }
@@ -278,6 +282,7 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
     const mockValueGenerator = setupMockValueGenerator({
         generateLibrary: opts.generateLibrary,
         dynamicValues: opts.dynamicValues,
+        generatorLocale: opts.generatorLocale,
     });
     if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
@@ -603,15 +608,12 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const transformUnderscore = config.transformUnderscore ?? true;
     const listElementCount = Math.max(0, config.listElementCount ?? 1);
     const dynamicValues = !!config.dynamicValues;
-    const generateLibrary = config.generateLibrary || 'casual';
+    const generateLibrary = config.generateLibrary || 'faker';
     const enumsAsTypes = config.enumsAsTypes ?? false;
     const useTypeImports = config.useTypeImports ?? false;
     const useImplementingTypes = config.useImplementingTypes ?? false;
     const defaultNullableToNull = config.defaultNullableToNull ?? false;
-
-    if (generateLibrary === 'faker' && config.locale) {
-        faker.setLocale(config.locale);
-    }
+    const generatorLocale = config.locale || 'en';
 
     // List of types that are enums
     const types: TypeItem[] = [];
@@ -684,6 +686,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         listElementCount,
                         dynamicValues,
                         generateLibrary,
+                        generatorLocale,
                         fieldGeneration: config.fieldGeneration,
                         enumsAsTypes,
                         useTypeImports,
@@ -721,6 +724,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                       listElementCount,
                                       dynamicValues,
                                       generateLibrary,
+                                      generatorLocale,
                                       fieldGeneration: config.fieldGeneration,
                                       enumsAsTypes,
                                       useTypeImports,
@@ -817,7 +821,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         .filter((mockFn: () => string) => !!mockFn)
         .map((mockFn: () => string) => mockFn())
         .join('\n');
-    const functionTokens = setupFunctionTokens(generateLibrary);
+    const functionTokens = setupFunctionTokens(generateLibrary, generatorLocale);
 
     let mockFile = '';
     if (dynamicValues) mockFile += `${functionTokens.import}\n`;
