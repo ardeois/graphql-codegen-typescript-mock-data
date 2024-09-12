@@ -1,3 +1,15 @@
+# v4.0.1 (Thu Sep 12 2024)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump dset from 3.1.3 to 3.1.4 [#170](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/170) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v4.0.0 (Wed Sep 04 2024)
 
 #### 💥 Breaking Change
