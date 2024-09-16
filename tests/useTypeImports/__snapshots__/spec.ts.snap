@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should support useTypeImports 1`] = `
-"import type { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import type { Avatar, User, Partial, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -22,6 +22,12 @@ export const aUser = (overrides?: Partial<User>): User => {
         camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
         unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
         prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
+    };
+};
+
+export const aPartial = (overrides?: Partial<Partial>): Partial => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '262c8866-bf76-4ccf-b606-2a0b4742f81f',
     };
 };
 

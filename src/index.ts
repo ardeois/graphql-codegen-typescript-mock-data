@@ -443,10 +443,12 @@ const getMockString = (
     prefix,
     typesPrefix = '',
     transformUnderscore: boolean,
+    newTypeNames?: Record<string, string>,
 ) => {
     const typeNameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
+    const NewTypeName = newTypeNames[typeName] || typeName;
     const casedName = typeNameConverter(typeName);
-    const casedNameWithPrefix = typeNameConverter(typeName, typesPrefix);
+    const casedNameWithPrefix = typeNameConverter(NewTypeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${typeName}',` : '';
     const typenameReturnType = addTypename ? `{ __typename: '${typeName}' } & ` : '';
 
@@ -489,6 +491,7 @@ const getImportTypes = ({
     transformUnderscore,
     enumsAsTypes,
     useTypeImports,
+    newTypeNames,
 }: {
     typeNamesConvention: NamingConvention;
     definitions: any;
@@ -499,6 +502,7 @@ const getImportTypes = ({
     transformUnderscore: boolean;
     enumsAsTypes: boolean;
     useTypeImports: boolean;
+    newTypeNames?: Record<string, string>;
 }) => {
     const typenameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
     const typeImports = typesPrefix?.endsWith('.')
@@ -506,12 +510,18 @@ const getImportTypes = ({
         : definitions
               .filter(({ typeName }: { typeName: string }) => !!typeName)
               .map(({ typeName }: { typeName: string }) => typenameConverter(typeName, typesPrefix));
+    const renamedTypeImports = typeImports.map((type) => {
+        if (newTypeNames[type]) {
+            return `${type} as ${newTypeNames[type]}`;
+        }
+        return type;
+    });
     const enumTypes = enumsPrefix?.endsWith('.')
         ? [enumsPrefix.slice(0, -1)]
         : types.filter(({ type }) => type === 'enum').map(({ name }) => typenameConverter(name, enumsPrefix));
 
     if (!enumsAsTypes || useTypeImports) {
-        typeImports.push(...enumTypes);
+        renamedTypeImports.push(...enumTypes);
     }
 
     function onlyUnique(value, index, self) {
@@ -520,7 +530,9 @@ const getImportTypes = ({
 
     const importPrefix = `import ${useTypeImports ? 'type ' : ''}`;
 
-    return typesFile ? `${importPrefix}{ ${typeImports.filter(onlyUnique).join(', ')} } from '${typesFile}';\n` : '';
+    return typesFile
+        ? `${importPrefix}{ ${renamedTypeImports.filter(onlyUnique).join(', ')} } from '${typesFile}';\n`
+        : '';
 };
 
 type GeneratorName = keyof Casual.Casual | keyof Casual.functions | string;
@@ -564,6 +576,7 @@ export interface TypescriptMocksPluginConfig {
     useImplementingTypes?: boolean;
     defaultNullableToNull?: boolean;
     useTypeImports?: boolean;
+    newTypeNames?: Record<string, string>;
 }
 
 interface TypeItem {
@@ -614,6 +627,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const useImplementingTypes = config.useImplementingTypes ?? false;
     const defaultNullableToNull = config.defaultNullableToNull ?? false;
     const generatorLocale = config.locale || 'en';
+    const newTypeNames = config.newTypeNames || {};
 
     // List of types that are enums
     const types: TypeItem[] = [];
@@ -747,6 +761,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         config.prefix,
                         config.typesPrefix,
                         transformUnderscore,
+                        newTypeNames,
                     );
                 },
             };
@@ -770,6 +785,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         config.prefix,
                         config.typesPrefix,
                         transformUnderscore,
+                        newTypeNames,
                     );
                 },
             };
@@ -791,6 +807,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         config.prefix,
                         config.typesPrefix,
                         transformUnderscore,
+                        newTypeNames,
                     );
                 },
             };
@@ -813,6 +830,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         transformUnderscore: transformUnderscore,
         useTypeImports: config.useTypeImports,
         enumsAsTypes,
+        newTypeNames,
     });
     // Function that will generate the mocks.
     // We generate it after having visited because we need to distinct types from enums
