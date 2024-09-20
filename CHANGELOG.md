@@ -1,3 +1,16 @@
+# v4.1.0 (Fri Sep 20 2024)
+
+#### 🚀 Enhancement
+
+- feat: rename types in config [#171](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/171) (sander.vanriessen@bettyblocks.com [@SanderVanRiessen](https://github.com/SanderVanRiessen))
+
+#### Authors: 2
+
+- [@SanderVanRiessen](https://github.com/SanderVanRiessen)
+- s.vanriessen (sander.vanriessen@bettyblocks.com)
+
+---
+
 # v4.0.1 (Thu Sep 12 2024)
 
 #### 🐛 Bug Fix
