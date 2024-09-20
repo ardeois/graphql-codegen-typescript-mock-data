@@ -6,7 +6,7 @@ it('should support useTypeImports', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import type { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
+        "import type { Avatar, User, Partial, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });

@@ -22,6 +22,10 @@ export default buildSchema(/* GraphQL */ `
         prefixedEnum: Prefixed_Enum
     }
 
+    type Partial {
+        id: ID!
+    }
+
     interface WithAvatar {
         id: ID!
         avatar: Avatar

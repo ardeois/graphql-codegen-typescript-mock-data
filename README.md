@@ -155,6 +155,26 @@ export const aUser = (overrides?: Partial<User>): User => {
 }
 ```
 
+### typeNamesMapping (`{ [typeName: string]: string }`, defaultValue: `{}`)
+
+Allows you to define mappings to rename the types. This is useful when you want to override the generated type name. For example, if you have a type called `User` and you want to rename it to `RenamedUser` you can do the following:
+
+```
+plugins:
+  - typescript-mock-data:
+      typesFile: '../generated-types.ts'
+      typeNamesMapping:
+        User: RenamedUser
+```
+
+This will generate the following mock function:
+
+```
+export const aUser = (overrides?: Partial<RenamedUser>): RenamedUser => {
+```
+
+**Note:** It is not possible to rename your enums using this option.
+
 ### transformUnderscore (`boolean`, defaultValue: `true`)
 
 When disabled, underscores will be retained for type names when the case is changed. It has no effect if `typeNames` is set to `keep`.
