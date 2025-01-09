@@ -597,3 +597,39 @@ it('overriding works as expected when defaultNullableToNull is true', async () =
 
     expect(result).toMatchSnapshot();
 });
+
+it('should generate mock data only for included types', async () => {
+    const result = await plugin(testSchema, [], {
+        includedTypes: ['User', 'Avatar'],
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toContain('export const aUser');
+    expect(result).toContain('export const anAvatar');
+    expect(result).not.toContain('export const aPrefixedResponse');
+    expect(result).not.toContain('export const aCamelCaseThing');
+});
+
+it('should exclude specified types from mock generation', async () => {
+    const result = await plugin(testSchema, [], {
+        excludedTypes: ['User', 'Avatar'],
+    });
+
+    expect(result).toBeDefined();
+    expect(result).not.toContain('export const aUser');
+    expect(result).not.toContain('export const anAvatar');
+    expect(result).toContain('export const aPrefixedResponse');
+    expect(result).toContain('export const aCamelCaseThing');
+    expect(result).toMatchSnapshot();
+});
+
+it('should prioritize includedTypes over excludedTypes if both are specified', async () => {
+    const result = await plugin(testSchema, [], {
+        includedTypes: ['User'],
+        excludedTypes: ['User', 'Avatar'],
+    });
+    expect(result).toBeDefined();
+    expect(result).toContain('export const aUser');
+    expect(result).not.toContain('export const anAvatar');
+    expect(result).not.toContain('export const aPrefixedResponse');
+});

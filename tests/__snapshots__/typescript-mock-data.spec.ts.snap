@@ -1030,6 +1030,63 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
+exports[`should exclude specified types from mock generation 1`] = `
+"
+export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '99f515e7-21e0-461d-b823-0d4c7f4dafc5',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '245b9cf9-10fa-4974-8100-fbeee5ee7fd4',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>): PrefixedResponse => {
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'nam',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>): AbcType => {
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'accommodo',
+    };
+};
+
+export const aListType = (overrides?: Partial<ListType>): ListType => {
+    return {
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['accusator'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['tricesimus'],
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
 exports[`should generate dynamic values in mocks 1`] = `
 "import { fakerEN as faker } from '@faker-js/faker';
 

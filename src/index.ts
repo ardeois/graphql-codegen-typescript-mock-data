@@ -590,6 +590,8 @@ export interface TypescriptMocksPluginConfig {
     defaultNullableToNull?: boolean;
     useTypeImports?: boolean;
     typeNamesMapping?: Record<string, string>;
+    includedTypes?: string[];
+    excludedTypes?: string[];
 }
 
 interface TypeItem {
@@ -832,7 +834,21 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     // run on the types first
     oldVisit(astNode, { leave: typeVisitor });
     const result = oldVisit(astNode, { leave: visitor });
-    const definitions = result.definitions.filter((definition: any) => !!definition);
+
+    const { includedTypes, excludedTypes } = config;
+    const shouldGenerateMockForType = (typeName: string) => {
+        if (includedTypes && includedTypes.length > 0) {
+            return includedTypes.includes(typeName);
+        }
+        if (excludedTypes && excludedTypes.length > 0) {
+            return !excludedTypes.includes(typeName);
+        }
+        return true;
+    };
+
+    const definitions = result.definitions.filter(
+        (definition: any) => !!definition && shouldGenerateMockForType(definition.typeName),
+    );
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
 
     const typesFileImport = getImportTypes({
