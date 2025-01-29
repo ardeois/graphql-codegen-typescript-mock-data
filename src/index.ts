@@ -1,17 +1,10 @@
-import {
-    parse,
-    printSchema,
-    TypeNode,
-    ASTKindToNode,
-    ListTypeNode,
-    NamedTypeNode,
-    ObjectTypeDefinitionNode,
-} from 'graphql';
+import { parse, TypeNode, ASTKindToNode, ListTypeNode, NamedTypeNode, ObjectTypeDefinitionNode } from 'graphql';
 import * as allFakerLocales from '@faker-js/faker';
 import casual from 'casual';
 import { oldVisit, PluginFunction, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
 import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
+import { printSchemaWithDirectives } from '@graphql-tools/utils';
 import { setupFunctionTokens, setupMockValueGenerator } from './mockValueGenerator';
 
 type NamingConvention = 'change-case-all#pascalCase' | 'keep' | string;
@@ -460,6 +453,7 @@ const getMockString = (
     typesPrefix = '',
     transformUnderscore: boolean,
     typeNamesMapping?: Record<string, string>,
+    hasOneOfDirective = false,
 ) => {
     const typeNameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
     const NewTypeName = typeNamesMapping[typeName] || typeName;
@@ -467,6 +461,10 @@ const getMockString = (
     const casedNameWithPrefix = typeNameConverter(NewTypeName, typesPrefix);
     const typename = addTypename ? `\n        __typename: '${typeName}',` : '';
     const typenameReturnType = addTypename ? `{ __typename: '${typeName}' } & ` : '';
+
+    const overridesArgumentString = !hasOneOfDirective
+        ? `overrides?: Partial<${casedNameWithPrefix}>`
+        : `override?: ${casedNameWithPrefix}`;
 
     if (terminateCircularRelationships) {
         const relationshipsToOmitInit =
@@ -476,7 +474,7 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${casedNameWithPrefix}>, _relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${casedNameWithPrefix} => {
+        )} = (${overridesArgumentString}, _relationshipsToOmit: Set<string> = new Set()): ${typenameReturnType}${casedNameWithPrefix} => {
     const relationshipsToOmit: Set<string> = ${relationshipsToOmitInit};
     relationshipsToOmit.add('${casedName}');
     return {${typename}
@@ -489,7 +487,7 @@ export const ${toMockName(
             typeName,
             casedName,
             prefix,
-        )} = (overrides?: Partial<${casedNameWithPrefix}>): ${typenameReturnType}${casedNameWithPrefix} => {
+        )} = (${overridesArgumentString}): ${typenameReturnType}${casedNameWithPrefix} => {
     return {${typename}
 ${fields}
     };
@@ -622,7 +620,8 @@ type VisitorType = { [K in keyof ASTKindToNode]?: VisitFn<ASTKindToNode[keyof AS
 // https://astexplorer.net
 // Paste your graphql schema in it, and you'll be able to see what the `astNode` will look like
 export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, documents, config) => {
-    const printedSchema = printSchema(schema); // Returns a string representation of the schema
+    const printedSchema = printSchemaWithDirectives(schema); // Returns a string representation of the schema
+
     const astNode = parse(printedSchema); // Transforms the string into ASTNode
 
     if ('typenames' in config) {
@@ -690,6 +689,30 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             }
         },
     };
+
+    const sharedGenerateMockOpts = {
+        customScalars: config.scalars,
+        defaultNullableToNull,
+        dynamicValues,
+        enumsAsTypes,
+        enumsPrefix: config.enumsPrefix,
+        enumValuesConvention,
+        fieldGeneration: config.fieldGeneration,
+        generateLibrary,
+        generatorLocale,
+        listElementCount,
+        nonNull: false,
+        prefix: config.prefix,
+        terminateCircularRelationships: getTerminateCircularRelationshipsConfig(config),
+        transformUnderscore,
+        typeNamesConvention,
+        typeNamesMapping,
+        types,
+        typesPrefix: config.typesPrefix,
+        useImplementingTypes,
+        useTypeImports,
+    };
+
     const visitor: VisitorType = {
         FieldDefinition: (node) => {
             const fieldName = node.name.value;
@@ -700,27 +723,8 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     const value = generateMockValue({
                         typeName,
                         fieldName,
-                        types,
-                        typeNamesConvention,
-                        enumValuesConvention,
-                        terminateCircularRelationships: getTerminateCircularRelationshipsConfig(config),
-                        prefix: config.prefix,
-                        typesPrefix: config.typesPrefix,
-                        enumsPrefix: config.enumsPrefix,
                         currentType: node.type,
-                        customScalars: config.scalars,
-                        transformUnderscore,
-                        listElementCount,
-                        dynamicValues,
-                        generateLibrary,
-                        generatorLocale,
-                        fieldGeneration: config.fieldGeneration,
-                        enumsAsTypes,
-                        useTypeImports,
-                        useImplementingTypes,
-                        defaultNullableToNull,
-                        nonNull: false,
-                        typeNamesMapping: config.typeNamesMapping,
+                        ...sharedGenerateMockOpts,
                     });
 
                     return `        ${fieldName}: overrides && overrides.hasOwnProperty('${fieldName}') ? overrides.${fieldName}! : ${value},`;
@@ -733,43 +737,45 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             return {
                 typeName: fieldName,
                 mockFn: () => {
-                    const mockFields = node.fields
-                        ? node.fields
-                              .map((field) => {
-                                  const value = generateMockValue({
-                                      typeName: fieldName,
-                                      fieldName: field.name.value,
-                                      types,
-                                      typeNamesConvention,
-                                      enumValuesConvention,
-                                      terminateCircularRelationships: getTerminateCircularRelationshipsConfig(config),
-                                      prefix: config.prefix,
-                                      typesPrefix: config.typesPrefix,
-                                      enumsPrefix: config.enumsPrefix,
-                                      currentType: field.type,
-                                      customScalars: config.scalars,
-                                      transformUnderscore,
-                                      listElementCount,
-                                      dynamicValues,
-                                      generateLibrary,
-                                      generatorLocale,
-                                      fieldGeneration: config.fieldGeneration,
-                                      enumsAsTypes,
-                                      useTypeImports,
-                                      useImplementingTypes,
-                                      defaultNullableToNull,
-                                      nonNull: false,
-                                      typeNamesMapping: config.typeNamesMapping,
-                                  });
+                    let mockFieldsString = '';
 
-                                  return `        ${field.name.value}: overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value},`;
-                              })
-                              .join('\n')
-                        : '';
+                    const { directives } = node;
+                    const hasOneOfDirective = directives.some((directive) => directive.name.value === 'oneOf');
+
+                    if (node.fields && hasOneOfDirective) {
+                        const field = node.fields[0];
+                        const value = generateMockValue({
+                            typeName: fieldName,
+                            fieldName: field.name.value,
+                            currentType: field.type,
+                            ...sharedGenerateMockOpts,
+                        });
+
+                        mockFieldsString = `        ...(override ? override : {${field.name.value} : ${value}}),`;
+                    } else if (node.fields) {
+                        mockFieldsString = node.fields
+                            .map((field, index) => {
+                                const value = generateMockValue({
+                                    typeName: fieldName,
+                                    fieldName: field.name.value,
+                                    currentType: field.type,
+                                    ...sharedGenerateMockOpts,
+                                });
+
+                                const valueWithOverride = `overrides && overrides.hasOwnProperty('${
+                                    field.name.value
+                                }') ? overrides.${field.name.value}! : ${
+                                    !hasOneOfDirective || index === 0 ? value : 'undefined'
+                                }`;
+
+                                return `        ${field.name.value}: ${valueWithOverride},`;
+                            })
+                            .join('\n');
+                    }
 
                     return getMockString(
                         fieldName,
-                        mockFields,
+                        mockFieldsString,
                         typeNamesConvention,
                         getTerminateCircularRelationshipsConfig(config),
                         false,
@@ -777,6 +783,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         config.typesPrefix,
                         transformUnderscore,
                         typeNamesMapping,
+                        hasOneOfDirective,
                     );
                 },
             };
