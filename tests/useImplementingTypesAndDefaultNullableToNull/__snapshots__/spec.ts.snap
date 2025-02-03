@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should support useImplementingTypes 1`] = `
+"
+export const mockRoot = (overrides?: Partial<Root>): Root => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : null,
+    };
+};
+
+export const mockA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : null,
+    };
+};
+
+export const mockB = (overrides?: Partial<B>): B => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : null,
+    };
+};
+
+export const mockC = (overrides?: Partial<C>): C => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : null,
+    };
+};
+
+export const mockD = (overrides?: Partial<D>): D => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : null,
+    };
+};
+
+export const mockTest = (overrides?: Partial<Test>): Test => {
+    return {
+        field1: overrides && overrides.hasOwnProperty('field1') ? overrides.field1! : mockA() || mockB() || mockC() || mockD(),
+        field2: overrides && overrides.hasOwnProperty('field2') ? overrides.field2! : null,
+    };
+};
+"
+`;
