@@ -742,7 +742,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     const { directives } = node;
                     const hasOneOfDirective = directives.some((directive) => directive.name.value === 'oneOf');
 
-                    if (node.fields && hasOneOfDirective) {
+                    if (node.fields && node.fields.length > 0 && hasOneOfDirective) {
                         const field = node.fields[0];
                         const value = generateMockValue({
                             typeName: fieldName,
@@ -754,7 +754,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                         mockFieldsString = `        ...(override ? override : {${field.name.value} : ${value}}),`;
                     } else if (node.fields) {
                         mockFieldsString = node.fields
-                            .map((field, index) => {
+                            .map((field) => {
                                 const value = generateMockValue({
                                     typeName: fieldName,
                                     fieldName: field.name.value,
@@ -762,11 +762,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                     ...sharedGenerateMockOpts,
                                 });
 
-                                const valueWithOverride = `overrides && overrides.hasOwnProperty('${
-                                    field.name.value
-                                }') ? overrides.${field.name.value}! : ${
-                                    !hasOneOfDirective || index === 0 ? value : 'undefined'
-                                }`;
+                                const valueWithOverride = `overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value}`;
 
                                 return `        ${field.name.value}: ${valueWithOverride},`;
                             })
