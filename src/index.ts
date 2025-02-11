@@ -364,14 +364,17 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
                         )
                             break;
 
-                        return foundTypes
-                            .map((implementType: TypeItem) =>
-                                getNamedImplementType({
-                                    ...opts,
-                                    currentType: implementType.types,
-                                }),
-                            )
-                            .join(' || ');
+                        return (
+                            foundTypes
+                                .map((implementType: TypeItem) =>
+                                    getNamedImplementType({
+                                        ...opts,
+                                        currentType: implementType.types,
+                                    }),
+                                )
+                                .filter((value) => value !== null)
+                                .join(' || ') || null
+                        );
                     default:
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
