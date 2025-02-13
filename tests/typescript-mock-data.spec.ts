@@ -603,6 +603,7 @@ it('should generate mock data only for included types', async () => {
         includedTypes: ['User', 'Avatar'],
     });
 
+    expect(result).toMatchSnapshot();
     expect(result).toBeDefined();
     expect(result).toContain('export const aUser');
     expect(result).toContain('export const anAvatar');

@@ -837,6 +837,9 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
 
     const { includedTypes, excludedTypes } = config;
     const shouldGenerateMockForType = (typeName: string) => {
+        if (!typeName) {
+            return true;
+        }
         if (includedTypes && includedTypes.length > 0) {
             return includedTypes.includes(typeName);
         }
