@@ -1,3 +1,15 @@
+# v4.2.0 (Thu Feb 06 2025)
+
+#### 🚀 Enhancement
+
+- Add support for oneOf directive [#180](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/180) ([@thomasobrien99](https://github.com/thomasobrien99))
+
+#### Authors: 1
+
+- [@thomasobrien99](https://github.com/thomasobrien99)
+
+---
+
 # v4.1.0 (Fri Sep 20 2024)
 
 #### 🚀 Enhancement
