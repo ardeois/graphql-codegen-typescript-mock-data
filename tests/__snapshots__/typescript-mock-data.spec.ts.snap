@@ -1714,6 +1714,32 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 "
 `;
 
+exports[`should generate mock data only for included types 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1550ff93-cd31-49b4-a3c3-8ef1cb68bdc3',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'consectetur',
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b5756f00-51a6-422a-81a7-dc13ee6a6375',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '2021-06-27T14:29:24.774Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'sordeo',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'arx',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
+    };
+};
+"
+`;
+
 exports[`should generate mock data with PascalCase enum values by default 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
