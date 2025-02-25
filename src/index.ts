@@ -839,7 +839,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     const result = oldVisit(astNode, { leave: visitor });
 
     const { includedTypes, excludedTypes } = config;
-    const shouldGenerateMockForType = (typeName: string) => {
+    const shouldGenerateMockForType = (typeName?: string) => {
         if (!typeName) {
             return true;
         }
