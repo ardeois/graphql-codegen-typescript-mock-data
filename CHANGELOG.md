@@ -1,3 +1,16 @@
+# v4.3.2 (Wed Feb 26 2025)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump cross-spawn from 7.0.3 to 7.0.6 [#177](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/177) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v4.3.1 (Wed Feb 26 2025)
 
 #### 🐛 Bug Fix
