@@ -1,6 +1,6 @@
 {
     "name": "graphql-codegen-typescript-mock-data",
-    "version": "4.1.0",
+    "version": "4.3.0",
     "description": "GraphQL Codegen plugin for building mock data",
     "main": "dist/commonjs/index.js",
     "module": "dist/esnext/index.js",
@@ -24,6 +24,7 @@
     "dependencies": {
         "@faker-js/faker": "^8.4.1",
         "@graphql-codegen/plugin-helpers": "^5.0.4",
+        "@graphql-tools/utils": "^10.7.2",
         "casual": "^1.6.2",
         "change-case-all": "^1.0.15",
         "indefinite": "^2.4.1",
@@ -39,6 +40,7 @@
         "@auto-it/conventional-commits": "^11.1.6",
         "@graphql-codegen/testing": "^3.0.3",
         "@graphql-codegen/typescript": "^4.0.7",
+        "@types/indefinite": "^2.3.4",
         "@types/jest": "^27.0.2",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
@@ -57,7 +59,7 @@
         "prettier": "^2.4.1",
         "prettier-config-landr": "^0.2.0",
         "ts-jest": "^27.0.7",
-        "typescript": "^4.4.4"
+        "typescript": "^5.7.3"
     },
     "sideEffects": false,
     "scripts": {

@@ -64,6 +64,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : null}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : null,
@@ -140,6 +146,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : null,
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : null,
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : null}),
     };
 };
 
@@ -222,6 +234,12 @@ export const mockUpdateUserInput = (overrides?: Partial<UpdateUserInput>): Updat
     };
 };
 
+export const mockOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const mockMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : mockUser(),
@@ -301,6 +319,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -317,7 +341,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should add enumsPrefix to imports 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, Api } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -378,6 +402,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -461,6 +491,12 @@ export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api
     };
 };
 
+export const aOneOfInput = (override?: Api.OneOfInput): Api.OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -537,6 +573,12 @@ export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: Api.OneOfInput): Api.OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -620,6 +662,12 @@ export const anUpdateUserInput = (overrides?: Partial<Api.UpdateUserInput>): Api
     };
 };
 
+export const aOneOfInput = (override?: Api.OneOfInput): Api.OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Api.Mutation>): Api.Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -696,6 +744,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -778,6 +832,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -854,6 +914,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -936,6 +1002,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1012,6 +1084,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -1094,6 +1172,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : faker.string.uuid(),
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : faker.lorem.word(),
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : faker.lorem.word()}),
     };
 };
 
@@ -1181,6 +1265,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : casual.word}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1259,6 +1349,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -1341,6 +1437,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'aut'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1357,7 +1459,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate mock data functions with external types file import 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -1418,6 +1520,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -1500,6 +1608,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1579,6 +1693,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1589,6 +1709,32 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
         prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : aPrefixedResponse(),
+    };
+};
+"
+`;
+
+exports[`should generate mock data only for included types 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1550ff93-cd31-49b4-a3c3-8ef1cb68bdc3',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'consectetur',
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b5756f00-51a6-422a-81a7-dc13ee6a6375',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '2021-06-27T14:29:24.774Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'sordeo',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'arx',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : aCamelCaseThing(),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : anAvatar(),
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
     };
 };
 "
@@ -1655,6 +1801,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -1737,6 +1889,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1816,6 +1974,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -1832,7 +1996,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate mock data with PascalCase types and enums by default 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -1893,6 +2057,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -1975,6 +2145,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2051,6 +2227,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -2133,6 +2315,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2212,6 +2400,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2288,6 +2482,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -2377,6 +2577,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): { __typename: 'Mutation' } & Mutation => {
     return {
         __typename: 'Mutation',
@@ -2455,6 +2661,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -2537,6 +2749,12 @@ export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEU
     };
 };
 
+export const aONEOFINPUT = (override?: ONEOFINPUT): ONEOFINPUT => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
@@ -2553,7 +2771,7 @@ export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
 `;
 
 exports[`should generate mock data with upperCase types and imports if typeNames is "upper-case#upperCase" 1`] = `
-"import { AVATAR, USER, WITHAVATAR, CAMELCASETHING, PREFIXED_RESPONSE, ABCTYPE, LISTTYPE, UPDATEUSERINPUT, MUTATION, QUERY, ABCSTATUS, STATUS, PREFIXED_ENUM } from './types/graphql';
+"import { AVATAR, USER, WITHAVATAR, CAMELCASETHING, PREFIXED_RESPONSE, ABCTYPE, LISTTYPE, UPDATEUSERINPUT, ONEOFINPUT, MUTATION, QUERY, ABCSTATUS, STATUS, PREFIXED_ENUM } from './types/graphql';
 
 export const anAVATAR = (overrides?: Partial<AVATAR>): AVATAR => {
     return {
@@ -2617,6 +2835,12 @@ export const anUPDATEUSERINPUT = (overrides?: Partial<UPDATEUSERINPUT>): UPDATEU
     };
 };
 
+export const aONEOFINPUT = (override?: ONEOFINPUT): ONEOFINPUT => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMUTATION = (overrides?: Partial<MUTATION>): MUTATION => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUSER(),
@@ -2633,7 +2857,7 @@ export const aQUERY = (overrides?: Partial<QUERY>): QUERY => {
 `;
 
 exports[`should generate multiple list elements 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -2697,6 +2921,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2713,7 +2943,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate no list elements when listElementCount is 0 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -2777,6 +3007,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2793,7 +3029,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should generate single list element 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -2857,6 +3093,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2873,7 +3115,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should not merge imports into one if enumsPrefix does not contain dots 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -2937,6 +3179,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -2953,7 +3201,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should not merge imports into one if typesPrefix does not contain dots 1`] = `
-"import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiListType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';
+"import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiListType, ApiUpdateUserInput, ApiOneOfInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<ApiAvatar>): ApiAvatar => {
     return {
@@ -3017,6 +3265,12 @@ export const anUpdateUserInput = (overrides?: Partial<ApiUpdateUserInput>): ApiU
     };
 };
 
+export const aOneOfInput = (override?: ApiOneOfInput): ApiOneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<ApiMutation>): ApiMutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -3033,7 +3287,7 @@ export const aQuery = (overrides?: Partial<ApiQuery>): ApiQuery => {
 `;
 
 exports[`should preserve underscores if transformUnderscore is false 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -3097,6 +3351,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -3113,7 +3373,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should preserve underscores if transformUnderscore is false and enumsAsTypes is true 1`] = `
-"import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query } from './types/graphql';
+"import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -3177,6 +3437,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
     };
 };
 
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : aUser(),
@@ -3193,7 +3459,7 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
 `;
 
 exports[`should preserve underscores if transformUnderscore is false and enumsAsTypes is true as cast the enum type if useTypeImports is true 1`] = `
-"import type { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';
+"import type { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
@@ -3254,6 +3520,12 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateU
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput): OneOfInput => {
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 
@@ -3349,6 +3621,14 @@ export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, _relatio
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput, _relationshipsToOmit: Set<string> = new Set()): OneOfInput => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('OneOfInput');
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
     };
 };
 

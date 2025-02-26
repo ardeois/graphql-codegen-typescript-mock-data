@@ -7,6 +7,8 @@ const testSchema = buildSchema(/* GraphQL */ `
     scalar Date
     scalar AnyObject
 
+    directive @oneOf on INPUT_OBJECT
+
     type Avatar {
         id: ID!
         url: String!
@@ -51,6 +53,11 @@ const testSchema = buildSchema(/* GraphQL */ `
         id: ID!
         login: String
         avatar: Avatar
+    }
+
+    input OneOfInput @oneOf {
+        oneOfFieldA: String
+        oneOfFieldB: String
     }
 
     enum ABCStatus {
@@ -116,12 +123,20 @@ it('should generate mock data functions with scalars', async () => {
     expect(result).toMatchSnapshot();
 });
 
+it('should generate mock data for an input type with a oneOf directive', async () => {
+    const result = await plugin(testSchema, [], {});
+
+    expect(result).toBeDefined();
+    expect(result).toContain(`const aOneOfInput = (override?: OneOfInput): OneOfInput`);
+    expect(result).toContain(`...(override ? override : {oneOfFieldA : 'tibi'}),`);
+});
+
 it('should generate mock data functions with external types file import', async () => {
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -379,7 +394,7 @@ it('should add enumsPrefix to imports', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, Api } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, Api } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -404,7 +419,7 @@ it('should not merge imports into one if typesPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiListType, ApiUpdateUserInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
+        "import { ApiAvatar, ApiUser, ApiWithAvatar, ApiCamelCaseThing, ApiPrefixedResponse, ApiAbcType, ApiListType, ApiUpdateUserInput, ApiOneOfInput, ApiMutation, ApiQuery, AbcStatus, Status, PrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -417,7 +432,7 @@ it('should not merge imports into one if enumsPrefix does not contain dots', asy
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, PrefixedResponse, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, ApiAbcStatus, ApiStatus, ApiPrefixedEnum } from './types/graphql';",
     );
     expect(result).toMatchSnapshot();
 });
@@ -441,7 +456,7 @@ it('should preserve underscores if transformUnderscore is false', async () => {
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
     );
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
@@ -461,7 +476,7 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query } from './types/graphql';",
+        "import { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query } from './types/graphql';",
     );
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
@@ -482,7 +497,7 @@ it('should preserve underscores if transformUnderscore is false and enumsAsTypes
 
     expect(result).toBeDefined();
     expect(result).toContain(
-        "import type { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
+        "import type { Avatar, User, WithAvatar, CamelCaseThing, Prefixed_Response, AbcType, ListType, UpdateUserInput, OneOfInput, Mutation, Query, AbcStatus, Status, Prefixed_Enum } from './types/graphql';",
     );
     expect(result).toContain(
         'export const aPrefixed_Response = (overrides?: Partial<Prefixed_Response>): Prefixed_Response => {',
@@ -596,4 +611,40 @@ it('overriding works as expected when defaultNullableToNull is true', async () =
     );
 
     expect(result).toMatchSnapshot();
+});
+
+it('should generate mock data only for included types', async () => {
+    const result = await plugin(testSchema, [], {
+        includedTypes: ['User', 'Avatar'],
+    });
+
+    expect(result).toMatchSnapshot();
+    expect(result).toBeDefined();
+    expect(result).toContain('export const aUser');
+    expect(result).toContain('export const anAvatar');
+    expect(result).not.toContain('export const aPrefixedResponse');
+    expect(result).not.toContain('export const aCamelCaseThing');
+});
+
+it('should exclude specified types from mock generation', async () => {
+    const result = await plugin(testSchema, [], {
+        excludedTypes: ['User', 'Avatar'],
+    });
+
+    expect(result).toBeDefined();
+    expect(result).not.toContain('export const aUser');
+    expect(result).not.toContain('export const anAvatar');
+    expect(result).toContain('export const aPrefixedResponse');
+    expect(result).toContain('export const aCamelCaseThing');
+});
+
+it('should prioritize includedTypes over excludedTypes if both are specified', async () => {
+    const result = await plugin(testSchema, [], {
+        includedTypes: ['User'],
+        excludedTypes: ['User', 'Avatar'],
+    });
+    expect(result).toBeDefined();
+    expect(result).toContain('export const aUser');
+    expect(result).not.toContain('export const anAvatar');
+    expect(result).not.toContain('export const aPrefixedResponse');
 });
