@@ -1,3 +1,16 @@
+# v4.3.1 (Wed Feb 26 2025)
+
+#### 🐛 Bug Fix
+
+- Fix: handling useImplementingTypes and defaultNullableToNull [#181](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/181) ([@mateusz-slab](https://github.com/mateusz-slab) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Mateusz Zieliński ([@mateusz-slab](https://github.com/mateusz-slab))
+
+---
+
 # v4.3.0 (Wed Feb 26 2025)
 
 #### 🚀 Enhancement
