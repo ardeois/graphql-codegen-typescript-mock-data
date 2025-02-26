@@ -1,3 +1,16 @@
+# v4.3.0 (Wed Feb 26 2025)
+
+#### 🚀 Enhancement
+
+- feat: add includedTypes and excludedTypes options for selective mock generation [#179](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/179) ([@huseyinbuyukdere](https://github.com/huseyinbuyukdere) huseyin_buyukdere@epam.com)
+
+#### Authors: 2
+
+- Hüseyin Büyükdere ([@huseyinbuyukdere](https://github.com/huseyinbuyukdere))
+- huseyinbuyukdere (huseyin_buyukdere@epam.com)
+
+---
+
 # v4.2.0 (Thu Feb 06 2025)
 
 #### 🚀 Enhancement
