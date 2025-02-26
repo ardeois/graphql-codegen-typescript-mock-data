@@ -26,6 +26,34 @@ Adds `__typename` property to mock data
 
 Changes enums to TypeScript string union types
 
+### includedTypes (`string[]`, defaultValue: `undefined`)
+
+Specifies an array of types to **include** in the mock generation. When provided, only the types listed in this array will have mock data generated.
+
+Example:
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      includedTypes:
+        - User
+        - Avatar
+```
+
+### excludedTypes (`string[]`, defaultValue: `undefined`)
+
+Specifies an array of types to **exclude** in the mock generation. When provided, the types listed in this array will not have mock data generated.
+
+Example:
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      excludedTypes:
+        - User
+        - Avatar
+```
+
 ### terminateCircularRelationships (`boolean | 'immediate'`, defaultValue: `false`)
 
 When enabled, prevents circular relationships from triggering infinite recursion. After the first resolution of a
