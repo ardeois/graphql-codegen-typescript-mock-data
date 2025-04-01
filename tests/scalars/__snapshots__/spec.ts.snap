@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`custom scalar generation for native and custom types using casual should generate custom scalars for native and custom types using casual 1`] = `
+exports[`Custom scalar generation using casual should generate custom scalars for native and custom types 1`] = `
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
@@ -27,7 +27,7 @@ export const aC = (overrides?: Partial<C>): C => {
 "
 `;
 
-exports[`custom scalar generation for native and custom types using casual should generate dynamic custom scalars for native and custom types using casual 1`] = `
+exports[`Custom scalar generation using casual should generate dynamic custom scalars for native and custom types 1`] = `
 "import casual from 'casual';
 
 casual.seed(0);
@@ -59,7 +59,66 @@ export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
 
-exports[`custom scalar generation for native and custom types using faker should generate custom scalars for native and custom types using faker 1`] = `
+exports[`Custom scalar generation using casual with different input/output configurations should generate distinct custom scalars for native and custom input/output types 1`] = `
+"
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 82,
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'ea corrupti qui incidunt eius consequatur blanditiis',
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Kelly_Cremin@Turcotte.biz',
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.509902694262564,
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'itaque distinctio iure molestias voluptas reprehenderit quos',
+    };
+};
+"
+`;
+
+exports[`Custom scalar generation using casual with different input/output configurations should generate distinct dynamic custom scalars for native and custom types 1`] = `
+"import casual from 'casual';
+
+casual.seed(0);
+
+export const anA = (overrides?: Partial<A>): A => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : casual['integer'](...[1,100]),
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : casual['string'],
+        obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : casual['email'],
+    };
+};
+
+export const aB = (overrides?: Partial<B>): B => {
+    return {
+        int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : casual['integer'](...[-100,0]),
+        flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : casual['double'](...[-100,0]),
+        bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : casual['string'],
+    };
+};
+
+export const seedMocks = (seed: number) => casual.seed(seed);
+"
+`;
+
+exports[`custom scalar generation using faker should generate custom scalars for native and custom types 1`] = `
 "
 export const anA = (overrides?: Partial<A>): A => {
     return {
@@ -86,7 +145,7 @@ export const aC = (overrides?: Partial<C>): C => {
 "
 `;
 
-exports[`custom scalar generation for native and custom types using faker should generate dynamic custom scalars for native and custom types using faker 1`] = `
+exports[`custom scalar generation using faker should generate dynamic custom scalars for native and custom types 1`] = `
 "import { fakerEN as faker } from '@faker-js/faker';
 
 faker.seed(0);
