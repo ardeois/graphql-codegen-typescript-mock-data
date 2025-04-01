@@ -102,11 +102,11 @@ const getGeneratorDefinition = (
         };
     }
 
-    if ('input' in value && 'output' in value) {
+    if (value !== undefined && 'input' in value && 'output' in value) {
         return getGeneratorDefinition(value[generatorMode], generatorMode);
     }
 
-    return value;
+    return value as GeneratorDefinition;
 };
 
 const getCasualCustomValue = (
