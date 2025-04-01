@@ -86,7 +86,7 @@ keep all GraphQL names as-is. Available case functions in `change-case-all` are 
 `localeLowerCase`, `lowerCaseFirst`, `spongeCase`, `titleCase`, `upperCase`, `localeUpperCase` and `upperCaseFirst`
 [See more](https://github.com/btxtiger/change-case-all)
 
-### scalars (`{ [Scalar: string]: GeneratorOptions }`, defaultValue: `undefined`)
+### scalars (`{ [Scalar: string]: GeneratorOptions | InputOutputGeneratorOptions }`, defaultValue: `undefined`)
 
 Allows you to define mappings for your custom scalars. Allows you to map any GraphQL Scalar to a
 [casual](https://github.com/boo1ean/casual#embedded-generators) embedded generator (string or
@@ -369,6 +369,24 @@ fieldName: # gets translated to casual.integer.toFixed(3)
   extra:
     function: toFixed
     arguments: 3
+```
+
+### `InputOutputGeneratorOptions` type
+
+This type is used in the `scalars` option. It allows you to specify different `GeneratorOptions` for `input` and `output` types for
+your scalars, in the same way the [typescript-operations](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-operations#scalars) plugin does.
+
+So, using the first example of the previous section, you can specify a `string` for your input and a `Date` for your `output`:
+
+```yaml
+plugins:
+  - typescript-mock-data:
+      scalars:
+        Date:
+          input: date.weekday # Date fields in input objects will be mocked as strings
+          output:
+            generator: date.past # Date fields in other GraphQL types will be mocked as JS Dates
+            arguments: 10
 ```
 
 ## Examples of usage
