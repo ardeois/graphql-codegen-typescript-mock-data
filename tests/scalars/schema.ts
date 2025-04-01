@@ -15,4 +15,8 @@ export default buildSchema(/* GraphQL */ `
         flt: Float!
         bool: Boolean!
     }
+
+    input C {
+        anyObject: AnyObject!
+    }
 `);

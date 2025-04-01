@@ -18,6 +18,12 @@ export const aB = (overrides?: Partial<B>): B => {
         bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
     };
 };
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Gianni_Kutch@hotmail.com',
+    };
+};
 "
 `;
 
@@ -37,6 +43,12 @@ export const aB = (overrides?: Partial<B>): B => {
         int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : -93,
         flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : -24.51,
         bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Maia49@hotmail.com',
     };
 };
 "
@@ -64,6 +76,12 @@ export const aB = (overrides?: Partial<B>): B => {
     };
 };
 
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : casual['email'],
+    };
+};
+
 export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
@@ -87,6 +105,12 @@ export const aB = (overrides?: Partial<B>): B => {
         int: overrides && overrides.hasOwnProperty('int') ? overrides.int! : faker['number']['int'](...[{\\"min\\":-100,\\"max\\":0}]),
         flt: overrides && overrides.hasOwnProperty('flt') ? overrides.flt! : faker['number']['float'](...[{\\"min\\":-100,\\"max\\":0}]),
         bool: overrides && overrides.hasOwnProperty('bool') ? overrides.bool! : false,
+    };
+};
+
+export const aC = (overrides?: Partial<C>): C => {
+    return {
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : faker['internet']['email'](),
     };
 };
 
