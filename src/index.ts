@@ -92,21 +92,25 @@ const hashedString = (value: string) => {
 };
 
 const getGeneratorDefinition = (
-    value: GeneratorOptions | InputOutputGeneratorOptions,
+    opts: GeneratorOptions | InputOutputGeneratorOptions,
     generatorMode: Options['generatorMode'],
 ): GeneratorDefinition => {
-    if (typeof value === 'string') {
+    if (isAnInputOutputGeneratorOptions(opts)) {
+        return buildGeneratorDefinition(opts[generatorMode]);
+    }
+
+    return buildGeneratorDefinition(opts);
+};
+
+const buildGeneratorDefinition = (opts: GeneratorOptions) => {
+    if (typeof opts === 'string') {
         return {
-            generator: value,
+            generator: opts,
             arguments: [],
         };
     }
 
-    if (value !== undefined && 'input' in value && 'output' in value) {
-        return getGeneratorDefinition(value[generatorMode], generatorMode);
-    }
-
-    return value as GeneratorDefinition;
+    return opts;
 };
 
 const getCasualCustomValue = (
@@ -589,6 +593,11 @@ type InputOutputGeneratorOptions = {
     input: GeneratorOptions;
     output: GeneratorOptions;
 };
+
+const isAnInputOutputGeneratorOptions = (
+    opts: GeneratorOptions | InputOutputGeneratorOptions,
+): opts is InputOutputGeneratorOptions =>
+    opts !== undefined && typeof opts !== 'string' && 'input' in opts && 'output' in opts;
 
 type ScalarMap = {
     [name: string]: GeneratorOptions | InputOutputGeneratorOptions;
