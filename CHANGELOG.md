@@ -1,3 +1,15 @@
+# v4.4.0 (Thu Apr 03 2025)
+
+#### 🚀 Enhancement
+
+- feature(scalars): support distinction between input and output generator configs [#182](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/182) ([@argvniyx-enroute](https://github.com/argvniyx-enroute))
+
+#### Authors: 1
+
+- Ricardo Vela ([@argvniyx-enroute](https://github.com/argvniyx-enroute))
+
+---
+
 # v4.3.2 (Wed Feb 26 2025)
 
 #### 🐛 Bug Fix
