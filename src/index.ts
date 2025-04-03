@@ -12,6 +12,7 @@ type NamingConvention = 'change-case-all#pascalCase' | 'keep' | string;
 type Options<T = TypeNode> = {
     typeName: string;
     fieldName: string;
+    generatorMode: 'input' | 'output';
     types: TypeItem[];
     typeNamesConvention: NamingConvention;
     enumValuesConvention: NamingConvention;
@@ -90,14 +91,26 @@ const hashedString = (value: string) => {
     return hash;
 };
 
-const getGeneratorDefinition = (value: GeneratorDefinition | GeneratorName): GeneratorDefinition => {
-    if (typeof value === 'string') {
+const getGeneratorDefinition = (
+    opts: GeneratorOptions | InputOutputGeneratorOptions,
+    generatorMode: Options['generatorMode'],
+): GeneratorDefinition => {
+    if (isAnInputOutputGeneratorOptions(opts)) {
+        return buildGeneratorDefinition(opts[generatorMode]);
+    }
+
+    return buildGeneratorDefinition(opts);
+};
+
+const buildGeneratorDefinition = (opts: GeneratorOptions) => {
+    if (typeof opts === 'string') {
         return {
-            generator: value,
+            generator: opts,
             arguments: [],
         };
     }
-    return value;
+
+    return opts;
 };
 
 const getCasualCustomValue = (
@@ -246,12 +259,18 @@ const handleValueGeneration = (
     if (opts.fieldGeneration) {
         // Check for a specific generation for the type & field
         if (opts.typeName in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration[opts.typeName]) {
-            const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration[opts.typeName][opts.fieldName]);
+            const generatorDefinition = getGeneratorDefinition(
+                opts.fieldGeneration[opts.typeName][opts.fieldName],
+                opts.generatorMode,
+            );
             return getCustomValue(generatorDefinition, opts);
         }
         // Check for a general field generation definition
         if ('_all' in opts.fieldGeneration && opts.fieldName in opts.fieldGeneration['_all']) {
-            const generatorDefinition = getGeneratorDefinition(opts.fieldGeneration['_all'][opts.fieldName]);
+            const generatorDefinition = getGeneratorDefinition(
+                opts.fieldGeneration['_all'][opts.fieldName],
+                opts.generatorMode,
+            );
             return getCustomValue(generatorDefinition, opts);
         }
     }
@@ -290,25 +309,36 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
     if (!opts.dynamicValues) mockValueGenerator.seed(hashedString(opts.typeName + opts.fieldName));
     const name = opts.currentType.name.value;
     const casedName = createNameConverter(opts.typeNamesConvention, opts.transformUnderscore)(name);
+
     switch (name) {
         case 'String': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['String']) : null;
+            const customScalar = opts.customScalars
+                ? getGeneratorDefinition(opts.customScalars['String'], opts.generatorMode)
+                : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.word);
         }
         case 'Float': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Float']) : null;
+            const customScalar = opts.customScalars
+                ? getGeneratorDefinition(opts.customScalars['Float'], opts.generatorMode)
+                : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.float);
         }
         case 'ID': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['ID']) : null;
+            const customScalar = opts.customScalars
+                ? getGeneratorDefinition(opts.customScalars['ID'], opts.generatorMode)
+                : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.uuid);
         }
         case 'Boolean': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Boolean']) : null;
+            const customScalar = opts.customScalars
+                ? getGeneratorDefinition(opts.customScalars['Boolean'], opts.generatorMode)
+                : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.boolean);
         }
         case 'Int': {
-            const customScalar = opts.customScalars ? getGeneratorDefinition(opts.customScalars['Int']) : null;
+            const customScalar = opts.customScalars
+                ? getGeneratorDefinition(opts.customScalars['Int'], opts.generatorMode)
+                : null;
             return handleValueGeneration(opts, customScalar, mockValueGenerator.integer);
         }
         default: {
@@ -345,7 +375,7 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
                         });
                     case 'scalar': {
                         const customScalar = opts.customScalars
-                            ? getGeneratorDefinition(opts.customScalars[foundType.name])
+                            ? getGeneratorDefinition(opts.customScalars[foundType.name], opts.generatorMode)
                             : null;
 
                         // it's a scalar, let's use a string as a value if there is no custom
@@ -559,9 +589,18 @@ type GeneratorDefinition = {
     };
 };
 type GeneratorOptions = GeneratorName | GeneratorDefinition;
+type InputOutputGeneratorOptions = {
+    input: GeneratorOptions;
+    output: GeneratorOptions;
+};
+
+const isAnInputOutputGeneratorOptions = (
+    opts: GeneratorOptions | InputOutputGeneratorOptions,
+): opts is InputOutputGeneratorOptions =>
+    opts !== undefined && typeof opts !== 'string' && 'input' in opts && 'output' in opts;
 
 type ScalarMap = {
-    [name: string]: GeneratorOptions;
+    [name: string]: GeneratorOptions | InputOutputGeneratorOptions;
 };
 
 type TypeFieldMap = {
@@ -728,6 +767,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     const value = generateMockValue({
                         typeName,
                         fieldName,
+                        generatorMode: 'output',
                         currentType: node.type,
                         ...sharedGenerateMockOpts,
                     });
@@ -753,6 +793,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                             typeName: fieldName,
                             fieldName: field.name.value,
                             currentType: field.type,
+                            generatorMode: 'input',
                             ...sharedGenerateMockOpts,
                         });
 
@@ -764,6 +805,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                                     typeName: fieldName,
                                     fieldName: field.name.value,
                                     currentType: field.type,
+                                    generatorMode: 'input',
                                     ...sharedGenerateMockOpts,
                                 });
 
