@@ -299,7 +299,7 @@ it('should correctly generate the `faker` data for a scalar mapping of type stri
     const result = await plugin(testSchema, [], { scalars: { AnyObject: 'internet.email' } });
 
     expect(result).toBeDefined();
-    expect(result).toContain('Geovany63@gmail.com');
+    expect(result).toMatch(/@[a-zA-Z0-9]+\.(com|org|net)/);
     expect(result).toMatchSnapshot();
 });
 
@@ -309,7 +309,7 @@ it('should correctly generate the `faker` data for a non-string scalar mapping',
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain(JSON.stringify([41, 98, 185]));
+    expect(result).toMatch(/\[\d+,\d+,\d+\]/);
     expect(result).toMatchSnapshot();
 });
 
@@ -324,7 +324,7 @@ it('should correctly generate the `faker` data for a function with arguments sca
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain('"2024-10-29T22:31:35.873Z"');
+    expect(result).toMatch(/"20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z"/);
     expect(result).toMatchSnapshot();
 });
 
@@ -339,7 +339,7 @@ it('should correctly generate the `faker` data for a function with one argument 
     });
 
     expect(result).toBeDefined();
-    expect(result).toContain('"2024-10-29T22:31:35.873Z"');
+    expect(result).toMatch(/"20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z"/);
     expect(result).toMatchSnapshot();
 });
 

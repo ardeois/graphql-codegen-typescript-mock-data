@@ -530,7 +530,7 @@ Feel free to open issues and pull requests. We always welcome support from the c
 
 To run this project locally:
 
-- Use Node >= 16
+- Use Node >= 18
 - Make sure that you have the latest Yarn version (https://yarnpkg.com/lang/en/docs/install/)
 - Clone this repo using `git clone`
 - Run `yarn`

@@ -22,7 +22,7 @@ export const mockAction = (overrides?: Partial<Action>): Action => {
 
 export const mockA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'dae147b0-0c04-459e-912d-b724dd87433b',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'de4b005e-2b2d-4843-94d1-d356d75d933b',
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'cuius',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
         config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),
@@ -85,7 +85,7 @@ export const mockAction = (overrides?: Partial<Action>): Action => {
 
 export const mockA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'dae147b0-0c04-459e-912d-b724dd87433b',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'de4b005e-2b2d-4843-94d1-d356d75d933b',
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'cuius',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
         config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockAConfig(),
@@ -148,10 +148,10 @@ export const mockAction = (overrides?: Partial<Action>): Action => {
 
 export const mockA = (overrides?: Partial<A>): A => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'dae147b0-0c04-459e-912d-b724dd87433b',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'de4b005e-2b2d-4843-94d1-d356d75d933b',
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'cuius',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
-        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Kian.Keeling70@gmail.com',
+        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Karen.Prosacco@gmail.com',
         configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockTestAConfig() || mockTestTwoAConfig()],
         field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockTestTwoAConfig(),
         action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockTestAction(),
