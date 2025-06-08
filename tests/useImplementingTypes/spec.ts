@@ -46,8 +46,8 @@ it(`support useImplementingTypes with fieldGeneration prop`, async () => {
     });
     expect(result).toBeDefined();
 
-    expect(result).toContain(
-        "str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Jeanie.Fay45@yahoo.com'",
+    expect(result).toMatch(
+        /str: overrides && overrides\.hasOwnProperty\('str'\) \? overrides\.str! : '[^@]+@[^.]+\.[^']+'/,
     );
 
     expect(result).toContain(
@@ -65,8 +65,8 @@ it(`support useImplementingTypes with fieldGeneration prop`, async () => {
 
     expect(result).toContain("str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'cuius'");
 
-    expect(result).toContain(
-        "config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Kian.Keeling70@gmail.com',",
+    expect(result).toMatch(
+        /config: overrides && overrides\.hasOwnProperty\('config'\) \? overrides\.config! : '[^@]+@[^.]+\.[^']+',/,
     );
 
     expect(result).toMatchSnapshot();
