@@ -5,15 +5,15 @@ exports[`should support useTypeImports 1`] = `
 
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '1550ff93-cd31-49b4-a3c3-8ef1cb68bdc3',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '15f9c394-c8fc-46bc-a882-b3b853f28c03',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'consectetur',
     };
 };
 
 export const aUser = (overrides?: Partial<User>): User => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b5756f00-51a6-422a-81a7-dc13ee6a6375',
-        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '2021-06-27T14:29:24.774Z',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '2021-07-07T09:30:34.236Z',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'sordeo',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
         status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
@@ -27,20 +27,20 @@ export const aUser = (overrides?: Partial<User>): User => {
 
 export const aPartial = (overrides?: Partial<Partial>): Partial => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '262c8866-bf76-4ccf-b606-2a0b4742f81f',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2286b7cf-0204-44f1-bc80-c295b5723a4b',
     };
 };
 
 export const aWithAvatar = (overrides?: Partial<WithAvatar>): WithAvatar => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '99f515e7-21e0-461d-b823-0d4c7f4dafc5',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '9f1e2e6d-2047-44ac-ac43-58f18eff5255',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
 };
 
 export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>): CamelCaseThing => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '245b9cf9-10fa-4974-8100-fbeee5ee7fd4',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '259f1f94-0fee-4e7d-8280-96dd5d8d9177',
     };
 };
 
@@ -65,7 +65,7 @@ export const aListType = (overrides?: Partial<ListType>): ListType => {
 
 export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>): UpdateUserInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0d6a9360-d92b-4660-b1e5-f14155047bdd',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0696d260-ef45-407d-ac64-e375cbd7e441',
         login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
     };
