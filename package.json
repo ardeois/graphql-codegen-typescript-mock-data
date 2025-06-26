@@ -22,7 +22,7 @@
         "fakes"
     ],
     "dependencies": {
-        "@faker-js/faker": "^8.4.1",
+        "@faker-js/faker": "^9.8.0",
         "@graphql-codegen/plugin-helpers": "^5.0.4",
         "@graphql-tools/utils": "^10.7.2",
         "casual": "^1.6.2",
@@ -34,7 +34,11 @@
         "upper-case": "^2.0.1"
     },
     "peerDependencies": {
-        "graphql": "^14.6.0 || ^15.0.0 || ^16.0.0"
+        "graphql": "^14.6.0 || ^15.0.0 || ^16.0.0",
+        "typescript": ">=5.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
     },
     "devDependencies": {
         "@auto-it/conventional-commits": "^11.1.6",

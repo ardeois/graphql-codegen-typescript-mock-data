@@ -123,9 +123,9 @@ exports[`custom scalar generation using faker should generate custom scalars for
 export const anA = (overrides?: Partial<A>): A => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 83,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Depereo nulla calco blanditiis cornu defetiscor.',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Nulla blanditiis defetiscor usque adduco eveniet.',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Orlando_Cremin@gmail.com',
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Kelly60@gmail.com',
     };
 };
 
@@ -139,7 +139,7 @@ export const aB = (overrides?: Partial<B>): B => {
 
 export const aC = (overrides?: Partial<C>): C => {
     return {
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Maia49@hotmail.com',
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Gianni_Kulas29@yahoo.com',
     };
 };
 "
@@ -182,9 +182,9 @@ exports[`custom scalar generation using faker with different input/output config
 export const anA = (overrides?: Partial<A>): A => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 83,
-        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Depereo nulla calco blanditiis cornu defetiscor.',
+        str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'Nulla blanditiis defetiscor usque adduco eveniet.',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : aB(),
-        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Orlando_Cremin@gmail.com',
+        anyObject: overrides && overrides.hasOwnProperty('anyObject') ? overrides.anyObject! : 'Kelly60@gmail.com',
     };
 };
 
