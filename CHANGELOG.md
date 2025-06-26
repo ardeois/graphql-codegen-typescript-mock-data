@@ -1,3 +1,15 @@
+# v5.0.0 (Thu Jun 26 2025)
+
+#### 💥 Breaking Change
+
+- feat: upgrade to @faker-js/faker v9 [#187](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/187) ([@bmulholland](https://github.com/bmulholland))
+
+#### Authors: 1
+
+- Brendan Mulholland ([@bmulholland](https://github.com/bmulholland))
+
+---
+
 # v4.4.0 (Thu Apr 03 2025)
 
 #### 🚀 Enhancement
