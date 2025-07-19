@@ -1,3 +1,15 @@
+# v5.0.1 (Sat Jul 19 2025)
+
+#### 🐛 Bug Fix
+
+- fix: add issue templates [#191](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/191) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v5.0.0 (Thu Jun 26 2025)
 
 #### 💥 Breaking Change
