@@ -135,6 +135,16 @@ it('should generate mock data for an input type with a oneOf directive', async (
     expect(result).toContain(`...(override ? override : {oneOfFieldA : 'tibi'}),`);
 });
 
+it('should generate mock data for an input type containing a field with a oneOf directive', async () => {
+    const result = await plugin(testSchema, [], {
+        terminateCircularRelationships: 'immediate',
+    });
+
+    expect(result).toBeDefined();
+
+    expect(result).toMatchSnapshot();
+});
+
 it('should generate mock data functions with external types file import', async () => {
     const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts' });
 

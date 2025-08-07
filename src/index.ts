@@ -1,4 +1,4 @@
-import { parse, TypeNode, ASTKindToNode, ListTypeNode, NamedTypeNode, ObjectTypeDefinitionNode } from 'graphql';
+import { parse, TypeNode, ASTKindToNode, ListTypeNode, NamedTypeNode, ObjectTypeDefinitionNode, Kind } from 'graphql';
 import * as allFakerLocales from '@faker-js/faker';
 import casual from 'casual';
 import { oldVisit, PluginFunction, resolveExternalModuleAndFn } from '@graphql-codegen/plugin-helpers';
@@ -409,6 +409,7 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
                         throw `foundType is unknown: ${foundType.name}: ${foundType.type}`;
                 }
             }
+
             if (opts.terminateCircularRelationships) {
                 return handleValueGeneration(opts, null, () => {
                     if (opts.typesPrefix) {
@@ -801,12 +802,28 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     } else if (node.fields) {
                         mockFieldsString = node.fields
                             .map((field) => {
+                                const typeName = field.type.kind === Kind.NAMED_TYPE ? field.type.name.value : null;
+                                const fieldIsOneOfType = Boolean(
+                                    typeName &&
+                                        astNode.definitions.find(
+                                            (definition) =>
+                                                definition.kind === Kind.INPUT_OBJECT_TYPE_DEFINITION &&
+                                                definition.name.value === typeName &&
+                                                definition.directives.some(
+                                                    (directive) => directive.name.value === 'oneOf',
+                                                ),
+                                        ),
+                                );
+
                                 const value = generateMockValue({
                                     typeName: fieldName,
                                     fieldName: field.name.value,
                                     currentType: field.type,
                                     generatorMode: 'input',
                                     ...sharedGenerateMockOpts,
+                                    terminateCircularRelationships: fieldIsOneOfType
+                                        ? false
+                                        : sharedGenerateMockOpts.terminateCircularRelationships,
                                 });
 
                                 const valueWithOverride = `overrides && overrides.hasOwnProperty('${field.name.value}') ? overrides.${field.name.value}! : ${value}`;

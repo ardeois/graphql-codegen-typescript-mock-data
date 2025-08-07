@@ -1378,6 +1378,121 @@ export const seedMocks = (seed: number) => casual.seed(seed);
 "
 `;
 
+exports[`should generate mock data for an input type containing a field with a oneOf directive 1`] = `
+"
+export const anAvatar = (overrides?: Partial<Avatar>, _relationshipsToOmit: Set<string> = new Set()): Avatar => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('Avatar');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '15f9c394-c8fc-46bc-a882-b3b853f28c03',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'consectetur',
+    };
+};
+
+export const aUser = (overrides?: Partial<User>, _relationshipsToOmit: Set<string> = new Set()): User => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('User');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+        creationDate: overrides && overrides.hasOwnProperty('creationDate') ? overrides.creationDate! : '2021-07-07T09:30:34.236Z',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'sordeo',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Online,
+        customStatus: overrides && overrides.hasOwnProperty('customStatus') ? overrides.customStatus! : AbcStatus.HasXyzStatus,
+        scalarValue: overrides && overrides.hasOwnProperty('scalarValue') ? overrides.scalarValue! : 'arx',
+        camelCaseThing: overrides && overrides.hasOwnProperty('camelCaseThing') ? overrides.camelCaseThing! : relationshipsToOmit.has('CamelCaseThing') ? {} as CamelCaseThing : aCamelCaseThing({}, relationshipsToOmit),
+        unionThing: overrides && overrides.hasOwnProperty('unionThing') ? overrides.unionThing! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+        prefixedEnum: overrides && overrides.hasOwnProperty('prefixedEnum') ? overrides.prefixedEnum! : PrefixedEnum.PrefixedValue,
+    };
+};
+
+export const aWithAvatar = (overrides?: Partial<WithAvatar>, _relationshipsToOmit: Set<string> = new Set()): WithAvatar => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('WithAvatar');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '9f1e2e6d-2047-44ac-ac43-58f18eff5255',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aCamelCaseThing = (overrides?: Partial<CamelCaseThing>, _relationshipsToOmit: Set<string> = new Set()): CamelCaseThing => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('CamelCaseThing');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '259f1f94-0fee-4e7d-8280-96dd5d8d9177',
+    };
+};
+
+export const aPrefixedResponse = (overrides?: Partial<PrefixedResponse>, _relationshipsToOmit: Set<string> = new Set()): PrefixedResponse => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('PrefixedResponse');
+    return {
+        ping: overrides && overrides.hasOwnProperty('ping') ? overrides.ping! : 'nam',
+    };
+};
+
+export const anAbcType = (overrides?: Partial<AbcType>, _relationshipsToOmit: Set<string> = new Set()): AbcType => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('AbcType');
+    return {
+        abc: overrides && overrides.hasOwnProperty('abc') ? overrides.abc! : 'accommodo',
+    };
+};
+
+export const aListType = (overrides?: Partial<ListType>, _relationshipsToOmit: Set<string> = new Set()): ListType => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('ListType');
+    return {
+        stringList: overrides && overrides.hasOwnProperty('stringList') ? overrides.stringList! : ['accusator'],
+        nullableStringList: overrides && overrides.hasOwnProperty('nullableStringList') ? overrides.nullableStringList! : ['tricesimus'],
+    };
+};
+
+export const anUpdateUserInput = (overrides?: Partial<UpdateUserInput>, _relationshipsToOmit: Set<string> = new Set()): UpdateUserInput => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('UpdateUserInput');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0696d260-ef45-407d-ac64-e375cbd7e441',
+        login: overrides && overrides.hasOwnProperty('login') ? overrides.login! : 'apud',
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : relationshipsToOmit.has('Avatar') ? {} as Avatar : anAvatar({}, relationshipsToOmit),
+    };
+};
+
+export const aOneOfInput = (override?: OneOfInput, _relationshipsToOmit: Set<string> = new Set()): OneOfInput => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('OneOfInput');
+    return {
+        ...(override ? override : {oneOfFieldA : 'tibi'}),
+    };
+};
+
+export const aContainsOneOfInput = (overrides?: Partial<ContainsOneOfInput>, _relationshipsToOmit: Set<string> = new Set()): ContainsOneOfInput => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('ContainsOneOfInput');
+    return {
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : aOneOfInput(),
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>, _relationshipsToOmit: Set<string> = new Set()): Mutation => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('Mutation');
+    return {
+        updateUser: overrides && overrides.hasOwnProperty('updateUser') ? overrides.updateUser! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Set<string> = new Set()): Query => {
+    const relationshipsToOmit: Set<string> = _relationshipsToOmit;
+    relationshipsToOmit.add('Query');
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : relationshipsToOmit.has('User') ? {} as User : aUser({}, relationshipsToOmit),
+        prefixed_query: overrides && overrides.hasOwnProperty('prefixed_query') ? overrides.prefixed_query! : relationshipsToOmit.has('PrefixedResponse') ? {} as PrefixedResponse : aPrefixedResponse({}, relationshipsToOmit),
+    };
+};
+"
+`;
+
 exports[`should generate mock data functions 1`] = `
 "
 export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
@@ -3882,7 +3997,7 @@ export const aContainsOneOfInput = (overrides?: Partial<ContainsOneOfInput>, _re
     const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
     relationshipsToOmit.add('ContainsOneOfInput');
     return {
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : relationshipsToOmit.has('OneOfInput') ? {} as OneOfInput : aOneOfInput({}, relationshipsToOmit),
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : aOneOfInput(),
     };
 };
 
