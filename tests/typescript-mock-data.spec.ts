@@ -141,7 +141,9 @@ it('should generate mock data for an input type containing a field with a oneOf 
     });
 
     expect(result).toBeDefined();
-
+    expect(result).toContain(
+        `field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : aOneOfInput(),`,
+    );
     expect(result).toMatchSnapshot();
 });
 
