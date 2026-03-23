@@ -25,10 +25,10 @@ export const mockA = (overrides?: Partial<A>): A => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'de4b005e-2b2d-4843-94d1-d356d75d933b',
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'cuius',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
-        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : mockTestAConfig() || mockTestTwoAConfig(),
-        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockTestAConfig() || mockTestTwoAConfig()],
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockTestTwoAConfig(),
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockTestAction(),
+        config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : (mockTestAConfig()) || (mockTestTwoAConfig()),
+        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [(mockTestAConfig()) || (mockTestTwoAConfig())],
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : (mockTestTwoAConfig()),
+        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : (mockTestAction()),
     };
 };
 
@@ -152,9 +152,9 @@ export const mockA = (overrides?: Partial<A>): A => {
         str: overrides && overrides.hasOwnProperty('str') ? overrides.str! : 'cuius',
         obj: overrides && overrides.hasOwnProperty('obj') ? overrides.obj! : mockB(),
         config: overrides && overrides.hasOwnProperty('config') ? overrides.config! : 'Karen.Prosacco@gmail.com',
-        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [mockTestAConfig() || mockTestTwoAConfig()],
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : mockTestTwoAConfig(),
-        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : mockTestAction(),
+        configArray: overrides && overrides.hasOwnProperty('configArray') ? overrides.configArray! : [(mockTestAConfig()) || (mockTestTwoAConfig())],
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : (mockTestTwoAConfig()),
+        action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : (mockTestAction()),
     };
 };
 

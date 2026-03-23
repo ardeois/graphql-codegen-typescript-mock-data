@@ -1,5 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should parenthesize implementing types with 3+ implementations 1`] = `
+"
+export const mockQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Set<string> = new Set()): Query => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Query');
+    return {
+        getData: overrides && overrides.hasOwnProperty('getData') ? overrides.getData! : relationshipsToOmit.has('Container') ? {} as Container : mockContainer({}, relationshipsToOmit),
+    };
+};
+
+export const mockContainer = (overrides?: Partial<Container>, _relationshipsToOmit: Set<string> = new Set()): Container => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('Container');
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'vindico',
+        dataItem: overrides && overrides.hasOwnProperty('dataItem') ? overrides.dataItem! : (relationshipsToOmit.has('TypeA') ? {} as TypeA : mockTypeA({}, relationshipsToOmit)) || (relationshipsToOmit.has('TypeB') ? {} as TypeB : mockTypeB({}, relationshipsToOmit)) || (relationshipsToOmit.has('TypeC') ? {} as TypeC : mockTypeC({}, relationshipsToOmit)),
+    };
+};
+
+export const mockDataItem = (overrides?: Partial<DataItem>, _relationshipsToOmit: Set<string> = new Set()): DataItem => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('DataItem');
+    return {
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'vitiosus',
+    };
+};
+
+export const mockTypeA = (overrides?: Partial<TypeA>, _relationshipsToOmit: Set<string> = new Set()): TypeA => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('TypeA');
+    return {
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'demens',
+        fieldA: overrides && overrides.hasOwnProperty('fieldA') ? overrides.fieldA! : 'occaecati',
+    };
+};
+
+export const mockTypeB = (overrides?: Partial<TypeB>, _relationshipsToOmit: Set<string> = new Set()): TypeB => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('TypeB');
+    return {
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'vitiosus',
+        fieldB: overrides && overrides.hasOwnProperty('fieldB') ? overrides.fieldB! : 'deputo',
+    };
+};
+
+export const mockTypeC = (overrides?: Partial<TypeC>, _relationshipsToOmit: Set<string> = new Set()): TypeC => {
+    const relationshipsToOmit: Set<string> = new Set(_relationshipsToOmit);
+    relationshipsToOmit.add('TypeC');
+    return {
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'colo',
+        fieldC: overrides && overrides.hasOwnProperty('fieldC') ? overrides.fieldC! : 'claustrum',
+    };
+};
+"
+`;
+
 exports[`should support useImplementingTypes and terminateCircularRelationships at the same time 1`] = `
 "
 export const mockQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Set<string> = new Set()): Query => {
@@ -15,7 +71,7 @@ export const mockUser = (overrides?: Partial<User>, _relationshipsToOmit: Set<st
     relationshipsToOmit.add('User');
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'suscipio',
-        events: overrides && overrides.hasOwnProperty('events') ? overrides.events! : [relationshipsToOmit.has('MeetingEvent') ? {} as MeetingEvent : mockMeetingEvent({}, relationshipsToOmit) || relationshipsToOmit.has('OtherEvent') ? {} as OtherEvent : mockOtherEvent({}, relationshipsToOmit)],
+        events: overrides && overrides.hasOwnProperty('events') ? overrides.events! : [(relationshipsToOmit.has('MeetingEvent') ? {} as MeetingEvent : mockMeetingEvent({}, relationshipsToOmit)) || (relationshipsToOmit.has('OtherEvent') ? {} as OtherEvent : mockOtherEvent({}, relationshipsToOmit))],
     };
 };
 
@@ -36,7 +92,7 @@ export const mockMeetingEvent = (overrides?: Partial<MeetingEvent>, _relationshi
         endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'adicio',
         startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'altus',
         timeZone: overrides && overrides.hasOwnProperty('timeZone') ? overrides.timeZone! : 'deprimo',
-        event: overrides && overrides.hasOwnProperty('event') ? overrides.event! : relationshipsToOmit.has('MeetingEvent') ? {} as MeetingEvent : mockMeetingEvent({}, relationshipsToOmit) || relationshipsToOmit.has('OtherEvent') ? {} as OtherEvent : mockOtherEvent({}, relationshipsToOmit),
+        event: overrides && overrides.hasOwnProperty('event') ? overrides.event! : (relationshipsToOmit.has('MeetingEvent') ? {} as MeetingEvent : mockMeetingEvent({}, relationshipsToOmit)) || (relationshipsToOmit.has('OtherEvent') ? {} as OtherEvent : mockOtherEvent({}, relationshipsToOmit)),
     };
 };
 

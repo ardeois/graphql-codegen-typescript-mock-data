@@ -404,6 +404,7 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
                                     }),
                                 )
                                 .filter((value) => value !== null)
+                                .map((v) => `(${v})`)
                                 .join(' || ') || null
                         );
                     default:
