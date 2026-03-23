@@ -11,7 +11,7 @@ it('should support useImplementingTypes', async () => {
     expect(result).toBeDefined();
 
     expect(result).toContain(
-        "field1: overrides && overrides.hasOwnProperty('field1') ? overrides.field1! : mockA() || mockB() || mockC() || mockD(),",
+        "field1: overrides && overrides.hasOwnProperty('field1') ? overrides.field1! : (mockA()) || (mockB()) || (mockC()) || (mockD()),",
     );
 
     expect(result).toContain("field2: overrides && overrides.hasOwnProperty('field2') ? overrides.field2! : null,");

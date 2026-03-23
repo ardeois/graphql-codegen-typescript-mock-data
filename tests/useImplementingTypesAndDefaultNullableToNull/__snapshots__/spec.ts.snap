@@ -34,7 +34,7 @@ export const mockD = (overrides?: Partial<D>): D => {
 
 export const mockTest = (overrides?: Partial<Test>): Test => {
     return {
-        field1: overrides && overrides.hasOwnProperty('field1') ? overrides.field1! : mockA() || mockB() || mockC() || mockD(),
+        field1: overrides && overrides.hasOwnProperty('field1') ? overrides.field1! : (mockA()) || (mockB()) || (mockC()) || (mockD()),
         field2: overrides && overrides.hasOwnProperty('field2') ? overrides.field2! : null,
     };
 };
