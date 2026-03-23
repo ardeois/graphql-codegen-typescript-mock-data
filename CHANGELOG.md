@@ -1,3 +1,15 @@
+# v5.1.0 (Mon Mar 23 2026)
+
+#### 🚀 Enhancement
+
+- build(deps): bump flatted from 3.2.2 to 3.4.2 [#202](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/202) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v5.0.4 (Mon Mar 23 2026)
 
 #### 🐛 Bug Fix
