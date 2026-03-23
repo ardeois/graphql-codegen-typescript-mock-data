@@ -1,3 +1,16 @@
+# v5.0.4 (Mon Mar 23 2026)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump minimatch from 3.1.2 to 3.1.5 [#199](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/199) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v5.0.3 (Mon Mar 23 2026)
 
 #### 🐛 Bug Fix
