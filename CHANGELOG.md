@@ -1,3 +1,16 @@
+# v5.0.3 (Mon Mar 23 2026)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump lodash from 4.17.21 to 4.17.23 [#198](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/198) ([@dependabot[bot]](https://github.com/dependabot[bot]) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v5.0.2 (Wed Aug 13 2025)
 
 #### 🐛 Bug Fix
