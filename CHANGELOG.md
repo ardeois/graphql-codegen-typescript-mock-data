@@ -1,3 +1,15 @@
+# v5.1.1 (Thu Mar 26 2026)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump picomatch from 2.3.1 to 2.3.2 [#203](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/203) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v5.1.0 (Mon Mar 23 2026)
 
 #### 🚀 Enhancement
