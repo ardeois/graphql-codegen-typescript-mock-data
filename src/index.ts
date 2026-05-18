@@ -6,6 +6,7 @@ import { sentenceCase } from 'sentence-case';
 import a from 'indefinite';
 import { printSchemaWithDirectives } from '@graphql-tools/utils';
 import { setupFunctionTokens, setupMockValueGenerator } from './mockValueGenerator';
+import { buildOperationFactories } from './operationFactories';
 
 type NamingConvention = 'change-case-all#pascalCase' | 'keep' | string;
 
@@ -446,7 +447,7 @@ const getNamedType = (opts: Options<NamedTypeNode | ObjectTypeDefinitionNode>): 
     }
 };
 
-const generateMockValue = (opts: Options): string | number | boolean => {
+export const generateMockValue = (opts: Options): string | number | boolean => {
     switch (opts.currentType.kind) {
         case 'NamedType':
             return getNamedType({
@@ -542,6 +543,7 @@ const getImportTypes = ({
     enumsAsTypes,
     useTypeImports,
     typeNamesMapping,
+    extraTypeImports,
 }: {
     typeNamesConvention: NamingConvention;
     definitions: any;
@@ -553,6 +555,7 @@ const getImportTypes = ({
     enumsAsTypes: boolean;
     useTypeImports: boolean;
     typeNamesMapping?: Record<string, string>;
+    extraTypeImports?: string[];
 }) => {
     const typenameConverter = createNameConverter(typeNamesConvention, transformUnderscore);
     const typeImports = typesPrefix?.endsWith('.')
@@ -569,6 +572,10 @@ const getImportTypes = ({
 
     if (!enumsAsTypes || useTypeImports) {
         renamedTypeImports.push(...enumTypes);
+    }
+
+    if (extraTypeImports && extraTypeImports.length > 0) {
+        renamedTypeImports.push(...extraTypeImports);
     }
 
     function onlyUnique(value, index, self) {
@@ -635,6 +642,7 @@ export interface TypescriptMocksPluginConfig {
     typeNamesMapping?: Record<string, string>;
     includedTypes?: string[];
     excludedTypes?: string[];
+    generateOperationFactories?: boolean;
 }
 
 interface TypeItem {
@@ -912,6 +920,29 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     );
     const typesFile = config.typesFile ? config.typesFile.replace(/\.[\w]+$/, '') : null;
 
+    // Generate operation factories first to collect operation type imports
+    let operationOutput = '';
+    let operationTypeImports: string[] = [];
+    const generateOps = config.generateOperationFactories !== false && documents && documents.length > 0;
+    if (generateOps) {
+        if (!config.typesFile) {
+            throw new Error(
+                'Plugin "typescript-mock-data" requires `typesFile` to be set when generating operation factories. ' +
+                    'Either set `typesFile: <path>` or `generateOperationFactories: false`.',
+            );
+        }
+        const { output, operationTypeImports: opTypeImports } = buildOperationFactories({
+            schema,
+            documents,
+            typesFile: config.typesFile,
+            listElementCount,
+            prefix: config.prefix,
+            sharedGenerateMockOpts,
+        });
+        operationOutput = output;
+        operationTypeImports = opTypeImports;
+    }
+
     const typesFileImport = getImportTypes({
         typeNamesConvention,
         definitions,
@@ -923,6 +954,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
         useTypeImports: config.useTypeImports,
         enumsAsTypes,
         typeNamesMapping,
+        extraTypeImports: operationTypeImports,
     });
     // Function that will generate the mocks.
     // We generate it after having visited because we need to distinct types from enums
@@ -940,5 +972,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
     mockFile += mockFns;
     if (dynamicValues) mockFile += `\n\n${functionTokens.seedFunction}`;
     mockFile += '\n';
+    mockFile += operationOutput;
+
     return mockFile;
 };

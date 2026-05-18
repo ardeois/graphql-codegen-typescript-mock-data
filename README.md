@@ -26,6 +26,145 @@ Adds `__typename` property to mock data
 
 Changes enums to TypeScript string union types
 
+### generateOperationFactories (`boolean`, default: `true`)
+
+When the codegen `documents` config is non-empty, the plugin emits one factory per named operation, shaped to that operation's selection-set type. This is useful with [msw](https://mswjs.io/) or any tooling that needs operation-shaped data without hand-rolling the response literal.
+
+Requires `typesFile` to be set. Set `generateOperationFactories: false` to disable the feature.
+
+Assume the schema and operations below for the rest of this section:
+
+```graphql
+interface Node {
+  id: ID!
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  friends: [User!]!
+}
+
+type Document implements Node {
+  id: ID!
+  title: String!
+}
+
+union SearchHit = User | Document
+
+type Query {
+  user(id: ID!): User
+  node(id: ID!): Node
+  search(q: String!): [SearchHit!]!
+}
+```
+
+```graphql
+query GetUser($id: ID!) {
+  user(id: $id) {
+    id
+    name
+    friends {
+      id
+      name
+    }
+  }
+}
+
+query GetNode($id: ID!) {
+  node(id: $id) {
+    __typename
+    ... on User {
+      id
+      name
+    }
+    ... on Document {
+      id
+      title
+    }
+  }
+}
+
+query Search($q: String!) {
+  search(q: $q) {
+    __typename
+    ... on User {
+      id
+      name
+    }
+    ... on Document {
+      id
+      title
+    }
+  }
+}
+```
+
+#### Basic usage
+
+The factory returns a fully-populated response shaped to the operation's selection set. Pass a partial override to customize specific fields:
+
+```ts
+import { aGetUserQueryResponse } from './mocks.generated';
+
+const response = aGetUserQueryResponse({
+  user: { name: 'Alice' },
+});
+// response.user.id is auto-generated; response.user.name is 'Alice'
+// response.user.friends is populated with default-shaped User entries
+```
+
+#### Lists
+
+Arrays of object/scalar elements take either a literal array or a `(make) => Element[]` callback. The callback's `make` argument produces one default-populated element per call, and accepts a partial override:
+
+```ts
+aGetUserQueryResponse({
+  user: {
+    friends: (make) => [
+      make(), // default User
+      make({ name: 'Bob' }), // overridden name
+      make({ id: 'pinned-friend' }),
+    ],
+  },
+});
+```
+
+A literal array replaces the defaults entirely. Use this form when you already have fully-built objects.
+
+#### Union and interface fields
+
+When an operation's union/interface field selects `__typename` and two or more concrete branches via inline fragments, the override slot accepts a branch-keyed callback. Each key is a concrete type name; each value is a factory for that branch's operation-shaped subset:
+
+```ts
+import { aGetNodeQueryResponse } from './mocks.generated';
+
+// Default branch: alphabetically-first concrete type (Document here).
+aGetNodeQueryResponse();
+
+// Object override targets the default branch.
+aGetNodeQueryResponse({
+  node: { title: 'Quarterly Report' },
+});
+
+// Branch callback picks a non-default branch with full type inference.
+aGetNodeQueryResponse({
+  node: ({ User }) => User({ name: 'Alice' }),
+});
+```
+
+For lists of a union/interface, the array slot likewise accepts a branch-keyed callback. Build the array directly by calling the per-branch factories:
+
+```ts
+import { aSearchQueryResponse } from './mocks.generated';
+
+aSearchQueryResponse({
+  search: ({ User, Document }) => [User({ name: 'Alice' }), Document({ title: 'Q3 Report' }), User()],
+});
+```
+
+If the operation does **not** select `__typename`, branch dispatch isn't generated for that field. The override slot falls back to a partial of the alphabetically-first branch. Add `__typename` to the operation if you want callback-style branch overrides.
+
 ### includedTypes (`string[]`, defaultValue: `undefined`)
 
 Specifies an array of types to **include** in the mock generation. When provided, only the types listed in this array will have mock data generated.
