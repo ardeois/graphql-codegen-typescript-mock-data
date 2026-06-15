@@ -6,6 +6,10 @@
     "module": "dist/esnext/index.js",
     "typings": "dist/esnext/index.d.ts",
     "repository": "ardeois/graphql-codegen-typescript-mock-data",
+    "bugs": {
+        "url": "https://github.com/ardeois/graphql-codegen-typescript-mock-data/issues"
+    },
+    "homepage": "https://github.com/ardeois/graphql-codegen-typescript-mock-data#readme",
     "author": {
         "name": "Corentin Ardeois",
         "email": "corentin.ardeois@gmail.com",
