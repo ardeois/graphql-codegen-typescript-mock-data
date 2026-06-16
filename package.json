@@ -45,9 +45,6 @@
         "node": ">=24"
     },
     "packageManager": "pnpm@11.7.0",
-    "pnpm": {
-        "overrides": {}
-    },
     "devDependencies": {
         "@auto-it/conventional-commits": "^11.1.6",
         "@graphql-codegen/testing": "^3.0.3",
