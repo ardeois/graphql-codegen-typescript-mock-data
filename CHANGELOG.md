@@ -1,3 +1,15 @@
+# v5.1.2 (Tue Jun 16 2026)
+
+#### 🐛 Bug Fix
+
+- build: migrate to pnpm, Node 24, supply-chain hardening & npm trusted publishing [#211](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/211) ([@ardeois](https://github.com/ardeois))
+
+#### Authors: 1
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+
+---
+
 # v5.1.1 (Thu Mar 26 2026)
 
 #### 🐛 Bug Fix
