@@ -51,6 +51,7 @@
         "@graphql-codegen/typescript": "^4.0.7",
         "@types/indefinite": "^2.3.4",
         "@types/jest": "^27.0.2",
+        "@types/node": "^24.0.0",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
         "auto": "^11.1.6",
