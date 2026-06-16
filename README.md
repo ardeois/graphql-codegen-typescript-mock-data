@@ -530,7 +530,7 @@ Feel free to open issues and pull requests. We always welcome support from the c
 
 To run this project locally:
 
-- Use Node >= 18
+- Use Node >= 24 (see `.nvmrc`)
 - Enable corepack so the pinned pnpm version is used: `corepack enable`
 - Clone this repo using `git clone`
 - Run `pnpm install`
