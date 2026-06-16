@@ -1,0 +1,25 @@
+# Supply-chain hardening (pnpm 11).
+# Only install dependency versions published more than 2 days ago.
+minimumReleaseAge: 2880 # minutes (2 days)
+
+# Dependency build/postinstall scripts are blocked by default in pnpm 11.
+# Add `<package>: true` here only for a dependency that genuinely needs to build.
+allowBuilds: {}
+
+# Security audit overrides for transitive dependencies (pnpm 11).
+# Each entry resolves a `pnpm audit` advisory by forcing a patched version.
+overrides:
+  # GHSA-r5fr-rjxr-66jc (high) + GHSA-f23m-r3pf-42rh (moderate)
+  # via @graphql-codegen/plugin-helpers. Advisory says >=4.17.24, but the
+  # 4.17.x line stops at 4.17.23; the fix ships in 4.18.x.
+  lodash: '>=4.18.0'
+  # GHSA-h67p-54hq-rp68 (moderate) via jest toolchain
+  js-yaml: '>=4.1.2'
+  # GHSA-vpq2-c234-7xj6 (low) via jest/jsdom
+  '@tootallnate/once': '>=2.0.1'
+  # GHSA-xx4v-prfh-6cgc (moderate) via auto
+  '@octokit/request-error': '>=5.1.1'
+  # GHSA-rmvr-2pp2-xj38 (moderate) via auto
+  '@octokit/request': '>=8.4.1'
+  # GHSA-h5c3-5r3r-rr8q (moderate) via auto
+  '@octokit/plugin-paginate-rest': '>=9.2.2'

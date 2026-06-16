@@ -6,7 +6,7 @@
 
 ## Installation
 
-`yarn add -D graphql-codegen-typescript-mock-data`
+`pnpm add -D graphql-codegen-typescript-mock-data`
 
 ## Configuration
 
@@ -530,12 +530,12 @@ Feel free to open issues and pull requests. We always welcome support from the c
 
 To run this project locally:
 
-- Use Node >= 18
-- Make sure that you have the latest Yarn version (https://yarnpkg.com/lang/en/docs/install/)
+- Use Node >= 24 (see `.nvmrc`)
+- Enable corepack so the pinned pnpm version is used: `corepack enable`
 - Clone this repo using `git clone`
-- Run `yarn`
-- Run `yarn build` to build the package
-- Run `yarn test` to make sure everything works
+- Run `pnpm install`
+- Run `pnpm run build` to build the package
+- Run `pnpm test` to make sure everything works
 
 ### License
 

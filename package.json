@@ -42,14 +42,16 @@
         "typescript": ">=5.0.0"
     },
     "engines": {
-        "node": ">=18.0.0"
+        "node": ">=24"
     },
+    "packageManager": "pnpm@11.7.0",
     "devDependencies": {
         "@auto-it/conventional-commits": "^11.1.6",
         "@graphql-codegen/testing": "^3.0.3",
         "@graphql-codegen/typescript": "^4.0.7",
         "@types/indefinite": "^2.3.4",
         "@types/jest": "^27.0.2",
+        "@types/node": "^24.0.0",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
         "auto": "^11.1.6",
@@ -75,9 +77,9 @@
         "test": "TZ=UTC LANG=en_US.UTF8 jest",
         "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit",
         "prettify": "prettier --config ./.prettierrc.js --write",
-        "auto:version": "yarn version --`auto version` --message 'Bump version to: %s [skip ci]'",
-        "auto:publish": "yarn publish && git push --follow-tags --set-upstream origin $CIRCLE_BRANCH",
-        "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release",
+        "auto:version": "pnpm version $(auto version) -m 'Bump version to: %s [skip ci]'",
+        "auto:publish": "pnpm publish --no-git-checks && git push --follow-tags --set-upstream origin \"$GITHUB_REF_NAME\"",
+        "release": "auto changelog && pnpm auto:version && pnpm auto:publish && auto release",
         "prepare": "husky install"
     },
     "lint-staged": {
