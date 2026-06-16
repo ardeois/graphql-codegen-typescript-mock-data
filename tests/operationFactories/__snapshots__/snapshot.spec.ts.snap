@@ -122,7 +122,7 @@ function mergeOverrides<T>(defaults: T, overrides: _NoInfer<DeepPartial<T>> | un
 
 function applyArrayOverride<T>(
     makeDefault: (o?: DeepPartial<T>) => T,
-    override: T[] | ((m: (o?: DeepPartial<T>) => T) => T[]) | null | undefined,
+    override: Array<DeepPartial<T>> | ((m: (o?: DeepPartial<T>) => T) => T[]) | null | undefined,
     count: number,
 ): T[] {
     if (override === null || override === undefined) {
