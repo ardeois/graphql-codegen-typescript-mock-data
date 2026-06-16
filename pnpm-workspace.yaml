@@ -1,0 +1,7 @@
+# Supply-chain hardening (pnpm 11).
+# Only install dependency versions published more than 2 days ago.
+minimumReleaseAge: 2880 # minutes (2 days)
+
+# Dependency build/postinstall scripts are blocked by default in pnpm 11.
+# Add `<package>: true` here only for a dependency that genuinely needs to build.
+allowBuilds: {}
