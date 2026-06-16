@@ -27,7 +27,7 @@ type DeepPartial<T> = [T] extends [never]
     : [T] extends [Array<infer U>]
         ? _HasMultipleBranches<NonNullable<U>> extends true
             ? T | ((b: Branches<NonNullable<U>>) => U[])
-            : T | ((make: (o?: DeepPartial<U>) => U) => U[])
+            : Array<DeepPartial<U>> | ((make: (o?: DeepPartial<U>) => U) => U[])
         : T extends object ? { [K in keyof T]?: _Field<T[K]> } : T;
 
 // NoInfer-like helper for TS <5.4. Prevents the second parameter of mergeOverrides
