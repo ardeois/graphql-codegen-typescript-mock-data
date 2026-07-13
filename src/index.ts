@@ -728,7 +728,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
             }
         },
         InputObjectTypeDefinition: (node) => {
-            if (node.directives.some((directive) => directive.name.value === 'oneOf')) {
+            if (node.directives?.some((directive) => directive.name.value === 'oneOf')) {
                 inputOneOfTypes.add(node.name.value);
             }
         },
@@ -795,7 +795,7 @@ export const plugin: PluginFunction<TypescriptMocksPluginConfig> = (schema, docu
                     let mockFieldsString = '';
 
                     const { directives } = node;
-                    const hasOneOfDirective = directives.some((directive) => directive.name.value === 'oneOf');
+                    const hasOneOfDirective = directives?.some((directive) => directive.name.value === 'oneOf');
 
                     if (node.fields && node.fields.length > 0 && hasOneOfDirective) {
                         const field = node.fields[0];
