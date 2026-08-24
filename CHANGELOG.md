@@ -1,3 +1,16 @@
+# v5.2.0 (Mon Aug 24 2026)
+
+#### 🚀 Enhancement
+
+- fix: support graphql v17 (directives can be undefined) [#214](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/214) ([@jarkko](https://github.com/jarkko) [@ardeois](https://github.com/ardeois))
+
+#### Authors: 2
+
+- Corentin Ardeois ([@ardeois](https://github.com/ardeois))
+- Jarkko Laine ([@jarkko](https://github.com/jarkko))
+
+---
+
 # v5.1.3 (Mon Aug 24 2026)
 
 #### 🐛 Bug Fix
