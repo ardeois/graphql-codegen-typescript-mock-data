@@ -27,7 +27,7 @@
     ],
     "dependencies": {
         "@faker-js/faker": "^9.8.0",
-        "@graphql-codegen/plugin-helpers": "^5.0.4",
+        "@graphql-codegen/plugin-helpers": "^6.3.0",
         "@graphql-tools/utils": "^10.7.2",
         "casual": "^1.6.2",
         "change-case-all": "^1.0.15",
