@@ -1,3 +1,15 @@
+# v5.1.3 (Mon Aug 24 2026)
+
+#### 🐛 Bug Fix
+
+- build(deps): bump @graphql-codegen/plugin-helpers from ^5.0.4 to ^6.3.0 [#215](https://github.com/ardeois/graphql-codegen-typescript-mock-data/pull/215) ([@Martyniuk](https://github.com/Martyniuk))
+
+#### Authors: 1
+
+- Volodymyr Martyniuk ([@Martyniuk](https://github.com/Martyniuk))
+
+---
+
 # v5.1.2 (Tue Jun 16 2026)
 
 #### 🐛 Bug Fix
