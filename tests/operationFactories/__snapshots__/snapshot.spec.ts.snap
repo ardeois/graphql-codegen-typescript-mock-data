@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot matches snapshot for a representative operation set 1`] = `
+"import { Node, User, Avatar, Document, Query, Mutation, Subscription, Status, GetUserQuery, AllUsersQuery, RenameMutation, SearchQuery } from './types';
+
+export const aNode = (overrides?: Partial<Node>): Node => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8b23789f-fc2b-42cb-a56c-665574fdcbfe',
+    };
+};
+
+export const aUser = (overrides?: Partial<User>): User => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'supellex',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'natus',
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : Status.Active,
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anAvatar(),
+        friends: overrides && overrides.hasOwnProperty('friends') ? overrides.friends! : [aUser(), aUser()],
+    };
+};
+
+export const anAvatar = (overrides?: Partial<Avatar>): Avatar => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '15f9c394-c8fc-46bc-a882-b3b853f28c03',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'consectetur',
+    };
+};
+
+export const aDocument = (overrides?: Partial<Document>): Document => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'ab777987-09a3-448f-a2b6-4c0ecc3b45da',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'suasoria',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'tutamen',
+    };
+};
+
+export const aQuery = (overrides?: Partial<Query>): Query => {
+    return {
+        user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : aUser(),
+        node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : aNode(),
+        search: overrides && overrides.hasOwnProperty('search') ? overrides.search! : [aUser(), aUser()],
+        users: overrides && overrides.hasOwnProperty('users') ? overrides.users! : [aUser(), aUser()],
+    };
+};
+
+export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
+    return {
+        renameUser: overrides && overrides.hasOwnProperty('renameUser') ? overrides.renameUser! : aUser(),
+    };
+};
+
+export const aSubscription = (overrides?: Partial<Subscription>): Subscription => {
+    return {
+        userUpdated: overrides && overrides.hasOwnProperty('userUpdated') ? overrides.userUpdated! : aUser(),
+    };
+};
+
+
+type _BranchKeys<T> = T extends { __typename: infer K extends string } ? K : never;
+// True when the union has two or more distinct __typename values. Distributive
+// instead of recursive so it scales to large interface unions.
+type _HasMultipleBranches<T, K = _BranchKeys<T>> =
+    [K] extends [never] ? false :
+    K extends K
+        ? [Exclude<_BranchKeys<T>, K>] extends [never] ? false : true
+        : false;
+type Branches<T> = {
+    [P in _BranchKeys<T>]: (o?: DeepPartial<Extract<T, { __typename: P }>>) => Extract<T, { __typename: P }>;
+};
+
+// Distribute over union members so each branch's keys are preserved. Taking keyof
+// on the union directly would only yield the keys common to every branch.
+type _PerBranchPartial<T> = T extends object ? { [K in keyof T]?: _Field<T[K]> } : T;
+
+type _Field<T> = [T] extends [never]
+    ? T
+    : _HasMultipleBranches<NonNullable<T>> extends true
+        ? _PerBranchPartial<NonNullable<T>> | ((b: Branches<NonNullable<T>>) => NonNullable<T>)
+        : DeepPartial<T>;
+
+type DeepPartial<T> = [T] extends [never]
+    ? T
+    : [T] extends [Array<infer U>]
+        ? _HasMultipleBranches<NonNullable<U>> extends true
+            ? T | ((b: Branches<NonNullable<U>>) => U[])
+            : Array<DeepPartial<U>> | ((make: (o?: DeepPartial<U>) => U) => U[])
+        : T extends object ? { [K in keyof T]?: _Field<T[K]> } : T;
+
+// NoInfer-like helper for TS <5.4. Prevents the second parameter of mergeOverrides
+// from being used to infer T, so T is anchored to the defaults parameter only.
+type _NoInfer<T> = [T][T extends any ? 0 : never];
+
+function mergeOverrides<T>(defaults: T, overrides: _NoInfer<DeepPartial<T>> | undefined): T {
+    if (overrides === undefined) return defaults;
+    if (overrides === null) return overrides as unknown as T;
+    // Callback overrides are consumed at the callsite that knows how to dispatch them;
+    // by the time we get here, the dispatched value is already in defaults. Skip.
+    if (typeof overrides === 'function') return defaults;
+    // Arrays were already constructed by applyArrayOverride, which consumes function-typed
+    // and per-element overrides. The outer mergeOverrides shouldn't replace them.
+    if (Array.isArray(defaults) && Array.isArray(overrides)) {
+        return defaults;
+    }
+    if (Array.isArray(defaults) || Array.isArray(overrides)) {
+        return overrides as unknown as T;
+    }
+    if (typeof defaults !== 'object' || defaults === null) {
+        return overrides as unknown as T;
+    }
+    if (typeof overrides !== 'object') {
+        return overrides as unknown as T;
+    }
+    const out: any = { ...defaults };
+    for (const key of Object.keys(overrides)) {
+        const ov = (overrides as any)[key];
+        if (ov === undefined) continue;
+        out[key] = mergeOverrides((defaults as any)[key], ov);
+    }
+    return out;
+}
+
+function applyArrayOverride<T>(
+    makeDefault: (o?: DeepPartial<T>) => T,
+    override: Array<DeepPartial<T>> | ((m: (o?: DeepPartial<T>) => T) => T[]) | null | undefined,
+    count: number,
+): T[] {
+    if (override === null || override === undefined) {
+        const arr: T[] = [];
+        for (let i = 0; i < count; i++) arr.push(makeDefault());
+        return arr;
+    }
+    if (typeof override === 'function') {
+        return (override as (m: (o?: DeepPartial<T>) => T) => T[])(makeDefault);
+    }
+    return (override as any[]).map((el) => makeDefault(el));
+}
+
+function pickByCallback<T>(
+    branches: Record<string, (o?: any) => T>,
+    defaultBranch: string,
+    override: T | ((b: Record<string, (o?: any) => T>) => T) | undefined | null,
+): T {
+    if (typeof override === 'function') {
+        return (override as (b: Record<string, (o?: any) => T>) => T)(branches);
+    }
+    return branches[defaultBranch](override ?? undefined);
+}
+
+function applyBranchedArrayOverride<T>(
+    branches: Record<string, (o?: any) => T>,
+    defaultBranch: string,
+    override: T[] | ((b: Record<string, (o?: any) => T>) => T[]) | null | undefined,
+    count: number,
+): T[] {
+    if (override === null || override === undefined) {
+        const arr: T[] = [];
+        for (let i = 0; i < count; i++) arr.push(branches[defaultBranch]());
+        return arr;
+    }
+    if (typeof override === 'function') {
+        return (override as (b: Record<string, (o?: any) => T>) => T[])(branches);
+    }
+    return override;
+}
+
+
+export const aGetUserQueryResponse = (
+    overrides?: DeepPartial<GetUserQuery>,
+): GetUserQuery => {
+    const defaults: GetUserQuery = {
+            user: {
+            id: 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+            name: 'supellex',
+            email: 'natus',
+            avatar: {
+            id: '15f9c394-c8fc-46bc-a882-b3b853f28c03',
+            url: 'consectetur',
+        },
+        },
+        };
+    return mergeOverrides(defaults, overrides);
+};
+
+
+export const anAllUsersQueryResponse = (
+    overrides?: DeepPartial<AllUsersQuery>,
+): AllUsersQuery => {
+    const makeFriends_2 = (_o?: any): any => {
+        const _defaults = {
+            id: 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+            name: 'supellex',
+        };
+        return mergeOverrides(_defaults, _o);
+    };
+
+    const makeUsers_1 = (_o?: any): any => {
+        const _defaults = {
+            id: 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+            friends: applyArrayOverride(makeFriends_2, _o?.friends, 2),
+        };
+        return mergeOverrides(_defaults, _o);
+    };
+    const defaults: AllUsersQuery = {
+            users: applyArrayOverride(makeUsers_1, overrides?.users, 2),
+        };
+    return mergeOverrides(defaults, overrides);
+};
+
+
+export const aRenameMutationResponse = (
+    overrides?: DeepPartial<RenameMutation>,
+): RenameMutation => {
+    const defaults: RenameMutation = {
+            renameUser: {
+            id: 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+            name: 'supellex',
+        },
+        };
+    return mergeOverrides(defaults, overrides);
+};
+
+
+export const aSearchQueryResponse = (
+    overrides?: DeepPartial<SearchQuery>,
+): SearchQuery => {
+    const makeDocument_2 = (_o?: any): any => {
+        const _defaults = {
+            __typename: 'Document' as const,
+            id: 'ab777987-09a3-448f-a2b6-4c0ecc3b45da',
+            title: 'suasoria',
+        };
+        return mergeOverrides(_defaults, _o);
+    };
+
+    const makeUser_3 = (_o?: any): any => {
+        const _defaults = {
+            __typename: 'User' as const,
+            id: 'b7605a2a-ad1e-4667-801e-5e47e5de933b',
+        };
+        return mergeOverrides(_defaults, _o);
+    };
+    const defaults: SearchQuery = {
+            search: applyBranchedArrayOverride({ 'Document': makeDocument_2, 'User': makeUser_3 }, 'Document', overrides?.search, 2),
+        };
+    return mergeOverrides(defaults, overrides);
+};
+"
+`;
